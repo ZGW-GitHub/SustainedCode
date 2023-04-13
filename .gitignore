@@ -41,3 +41,4 @@ rebel.xml
 .shardingsphere
 temp.*
 .flattened-pom.xml
+x-properties/**
