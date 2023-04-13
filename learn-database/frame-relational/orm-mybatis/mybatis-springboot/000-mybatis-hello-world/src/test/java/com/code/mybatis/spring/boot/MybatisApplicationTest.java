@@ -27,7 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Slf4j
 @SpringBootTest
-public class MybatisSpringBootApplicationTest {
+public class MybatisApplicationTest {
 
 	@Test
 	void contextTest() {

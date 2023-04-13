@@ -17,7 +17,7 @@
 
 package com.code.mybatis.spring.boot.mapper;
 
-import com.code.mybatis.spring.boot.MybatisSpringBootApplicationTest;
+import com.code.mybatis.spring.boot.MybatisApplicationTest;
 import com.code.mybatis.spring.boot.dal.dos.User;
 import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2022/7/4 23:30
  */
 @Slf4j
-class SaveTest extends MybatisSpringBootApplicationTest {
+class SaveTest extends MybatisApplicationTest {
 
 	@Resource
 	private UserMapper userMapper;

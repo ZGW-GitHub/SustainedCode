@@ -25,10 +25,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2020/7/31 11:49 上午
  */
 @SpringBootApplication
-public class MybatisSpringBootApplication {
+public class MybatisApplication {
 	public static void main(String[] args) {
 
-		new SpringApplicationBuilder(MybatisSpringBootApplication.class).run(args);
+		new SpringApplicationBuilder(MybatisApplication.class).run(args);
 
 	}
 }
