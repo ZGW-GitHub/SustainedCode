@@ -1,0 +1,16 @@
+### 参数完整
+POST http://localhost:8080/demo
+Content-Type: application/json
+
+{
+  "name": "test",
+  "age": 10
+}
+
+### name 为空
+POST http://localhost:8080/demo
+Content-Type: application/json
+
+{
+  "age": 10
+}

@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      # TODO Nacos 配置中心相关配置必须写在 bootstrap.yml 里，不然不起作用
+      config:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace.dev}
+        extension-configs:
+          - data-id: CommonConfig
+            group: COMMON
+            refresh: true

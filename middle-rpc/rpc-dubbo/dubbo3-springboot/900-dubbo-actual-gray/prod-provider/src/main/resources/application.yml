@@ -1,0 +1,12 @@
+server:
+  port: ${random.int[65002,65100]}
+
+spring:
+  application:
+    name: DUBBO-GRAY-PROVIDER
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-log.yml
+      - application-dubbo.yml

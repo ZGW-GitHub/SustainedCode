@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: NaocsApplication
+nacos:
+  config:
+    server-addr: ${nacos.server-addr}
+    namespace: ${nacos.namespace.dev}

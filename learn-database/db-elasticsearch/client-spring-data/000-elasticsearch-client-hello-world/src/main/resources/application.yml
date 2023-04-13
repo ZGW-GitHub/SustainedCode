@@ -1,0 +1,6 @@
+server:
+  port: 65001
+
+spring:
+  elasticsearch:
+    uris: http://${elasticsearch.addr}

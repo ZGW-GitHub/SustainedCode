@@ -1,0 +1,12 @@
+server:
+  port: ${random.int[65001,65100]}
+
+spring:
+  application:
+    name: DUBBO-SPRING-BOOT-PROVIDER
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-dubbo.yml
+      - application-log.yml

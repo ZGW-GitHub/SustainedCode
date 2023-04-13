@@ -1,0 +1,51 @@
+/*
+ * Copyright (C) <2023> <Snow>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package collection.deque_basis.un_blocking.array_deque;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayDeque;
+
+/**
+ * @author Snow
+ * @date 2021/4/22 22:13
+ */
+@Slf4j
+class DemoTest {
+
+	final ArrayDeque<Integer> deque = new ArrayDeque<>();
+
+	@BeforeEach
+	void before() {
+		deque.addFirst(9);
+		deque.addFirst(9);
+	}
+
+	@Test
+	void test() {
+	}
+
+	@AfterEach
+	void after() {
+		System.err.println(deque);
+	}
+
+}

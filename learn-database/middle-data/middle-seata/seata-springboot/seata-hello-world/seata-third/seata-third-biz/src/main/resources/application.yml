@@ -1,0 +1,11 @@
+server:
+  port: ${random.int[65001,65100]}
+spring:
+  config:
+    import:
+      - application-datasource.yml
+      - application-mybatis-plus.yml
+      - application-nacos.yml
+      - application-dubbo.yml
+  application:
+    name: MIDDLE_SEATA_THIRD

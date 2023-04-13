@@ -1,0 +1,12 @@
+server:
+  port: 65000
+
+spring:
+  application:
+    name: DUBBO-SPRING-BOOT-CONSUMER
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-dubbo.yml
+      - application-log.yml

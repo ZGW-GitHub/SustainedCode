@@ -1,0 +1,27 @@
+### 事务
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+}
+
+### 批量操作 - MyBatis Plus 提供的操作 1
+POST http://localhost:8080/batchA
+Content-Type: application/json
+
+{
+}
+
+### 批量操作 - MyBatis Plus 提供的操作 2
+POST http://localhost:8080/batchB
+Content-Type: application/json
+
+{
+}
+
+### 批量操作 - MyBatis 原生操作
+POST http://localhost:8080/batchC
+Content-Type: application/json
+
+{
+}

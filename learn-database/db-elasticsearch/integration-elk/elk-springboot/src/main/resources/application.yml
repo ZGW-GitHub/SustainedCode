@@ -1,0 +1,11 @@
+server:
+  port: 65001
+spring:
+  application:
+    name: ELK
+custom:
+  logstash:
+    inputs:
+    log: linux.little:39001
+  log:
+    appender: TCP_Logstash

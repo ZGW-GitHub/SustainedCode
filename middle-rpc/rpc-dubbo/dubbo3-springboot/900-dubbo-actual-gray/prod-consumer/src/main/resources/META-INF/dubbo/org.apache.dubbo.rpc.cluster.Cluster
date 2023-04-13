@@ -1,0 +1,1 @@
+snowFailover=com.code.dubbo.cluster.SnowFailoverCluster

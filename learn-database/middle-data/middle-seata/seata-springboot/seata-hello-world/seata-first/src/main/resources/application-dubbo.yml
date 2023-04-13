@@ -1,0 +1,24 @@
+dubbo:
+  application:
+    name: ${spring.application.name}
+    register-mode: instance
+  config:
+    multiple: true
+  registry:
+    address: nacos://${nacos.server-addr}?namespace=${nacos.namespace.dev}
+    group: MIDDLE_SEATA
+  metadata-report:
+    address: nacos://${nacos.server-addr}?namespace=${nacos.namespace.dev.metadata-report}
+    group: MIDDLE_SEATA
+  config-center:
+    address: ${dubbo.registry.address}
+  protocol:
+    name: dubbo
+    port: -1
+  provider:
+    group: CITY_HZ
+    scope: remote
+  consumer:
+    check: false
+    group: CITY_HZ
+    scope: remote

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) <2023> <Snow>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<aop:config expose-proxy="true">
+		<!-- 定义切点 -->
+		<aop:pointcut id="checkParams" expression="@annotation(com.code.spring.aop.auto.by.file.anno.CheckParams)"/>
+		<aop:pointcut id="logPrint" expression="@annotation(com.code.spring.aop.auto.by.file.anno.LogPrint)"/>
+
+		<!-- 定义切面 -->
+		<aop:aspect id="checkParamsAdvise" ref="checkParamsAdvise">
+			<!-- 定义通知，引入切点 -->
+			<aop:before method="before" pointcut-ref="checkParams"/>
+		</aop:aspect>
+
+		<!-- 定义切面 -->
+		<aop:aspect id="logPrintAdvise" ref="logPrintAdvise">
+			<!-- 定义通知，引入切点 -->
+			<aop:before method="before" pointcut-ref="logPrint"/>
+			<!-- TODO 报错，arg-names 、args() -->
+			<aop:after-returning method="afterReturning" pointcut-ref="logPrint" returning="result"/>
+			<aop:after method="after" pointcut-ref="logPrint"/>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="logPrint" throwing="throwable"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

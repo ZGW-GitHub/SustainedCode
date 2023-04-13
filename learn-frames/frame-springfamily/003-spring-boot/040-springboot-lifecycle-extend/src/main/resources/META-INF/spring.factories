@@ -1,0 +1,9 @@
+# Application Context Initializers
+org.springframework.context.ApplicationContextInitializer=\
+com.code.springboot.lifecycle.extend.factories.DemoApplicationContextInitializer
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+com.code.springboot.lifecycle.extend.factories.DemoApplicationListener
+# Run Listeners
+org.springframework.boot.SpringApplicationRunListener=\
+com.code.springboot.lifecycle.extend.factories.DemoSpringApplicationRunListener

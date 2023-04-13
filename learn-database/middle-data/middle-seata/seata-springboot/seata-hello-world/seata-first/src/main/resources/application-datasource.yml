@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: ${mysql.url}/middle_seata_first?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource

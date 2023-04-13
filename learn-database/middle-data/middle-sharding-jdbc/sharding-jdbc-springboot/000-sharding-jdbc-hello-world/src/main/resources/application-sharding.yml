@@ -1,0 +1,50 @@
+dataSources:
+  ds0:
+    jdbcUrl: ${mysql.url}/sharding_db0?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+  ds1:
+    jdbcUrl: ${mysql.url}/sharding_db1?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+rules:
+  - !SHARDING
+    # 默认分片列
+    defaultShardingColumn: record_id
+    # 默认"库分片策略"
+    defaultDatabaseStrategy:
+      standard:
+        shardingColumn: record_id
+        shardingAlgorithmName: snowRangeShardingAlgorithm
+    # 默认"表分片策略"
+    defaultTableStrategy:
+      standard:
+        shardingColumn: record_id
+        shardingAlgorithmName: snowRangeShardingAlgorithm
+    # 自动分片表配置（必须使用自动分片算法）
+    tables:
+      user:
+        actualDataNodes: ds${0..1}.user_${0..1}
+        databaseStrategy:
+          standard:
+            shardingColumn: record_id
+            shardingAlgorithmName: snowRangeShardingAlgorithm
+        tableStrategy:
+          standard:
+            shardingColumn: record_id
+            shardingAlgorithmName: snowRangeShardingAlgorithm
+    # 分片算法
+    shardingAlgorithms:
+      snowRangeShardingAlgorithm:
+        type: standard
+        props:
+          algorithmClassName: com.code.sharding.jdbc.component.SnowRangeShardingAlgorithm
+  - !TRANSACTION
+    defaultType: XA
+    providerType: Atomikos
+props:
+  sql-show: true

@@ -1,0 +1,19 @@
+server:
+  port: ${random.int[65001,65100]}
+
+spring:
+  application:
+    name: DUBBO-SPRING-CLOUD
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-nacos.yml
+      - application-dubbo.yml
+    
+
+
+
+
+
+

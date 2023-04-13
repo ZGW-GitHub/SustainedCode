@@ -1,0 +1,9 @@
+server:
+  port: 65000
+spring:
+  config:
+    import:
+      - application-datasource.yml
+      - application-mybatis.yml
+      - application-mapper.yml
+      - application-log.yml

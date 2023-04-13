@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) <2023> <Snow>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.spring.mybatis.dal.mapper.UserMapper">
+
+	<insert id="save">
+		INSERT INTO user (name, age, create_time, update_time)
+		VALUES (#{name}, #{age}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+	</insert>
+
+	<update id="updateName">
+		UPDATE user
+		set name        = #{name},
+			update_time = CURRENT_TIMESTAMP
+		WHERE id = #{id}
+	</update>
+
+	<select id="listAll" resultType="com.code.spring.mybatis.dal.dos.User">
+		SELECT *
+		FROM user
+	</select>
+
+	<select id="findById" resultType="com.code.spring.mybatis.dal.dos.User">
+		SELECT *
+		FROM user
+		WHERE id = #{id}
+	</select>
+
+	<select id="selectByLock" resultType="com.code.spring.mybatis.dal.dos.User">
+		SELECT *
+		FROM user
+		WHERE id = #{id} FOR
+			UPDATE
+	</select>
+
+</mapper>

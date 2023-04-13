@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) <2023> <Snow>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.code</groupId>
+	<artifactId>SustainedCode</artifactId>
+	<version>${revision}</version>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>dependencies/spring-common</module>
+		<module>dependencies/utils-common</module>
+
+		<!-- RPC -->
+		<module>middle-rpc/rpc-dubbo</module>
+
+		<!-- MQ -->
+		<module>middle-mq/mq-kafka</module>
+		<module>middle-mq/mq-rocketmq</module>
+
+		<!-- Center -->
+		<module>middle-center/middle-nacos</module>
+		<module>middle-center/middle-zookeeper</module>
+
+		<!-- 限流/熔断/降级 -->
+		<module>middle-guard/middle-sentinel</module>
+
+		<!-- Job -->
+		<module>middle-job/middle-xxljob</module>
+
+		<!-- DB -->
+		<module>learn-database/frame-relational</module>
+		<module>learn-database/db-elasticsearch</module>
+		<module>learn-database/middle-data</module>
+
+		<!-- Frames -->
+		<module>learn-frames/frame-springfamily</module>
+	</modules>
+
+	<properties>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.dir>/Users/official/Code/MyCode/SustainedCode</project.dir>
+		<maven.test.skip>true</maven.test.skip>
+
+		<revision>0.0.1-SNAPSHOT</revision>
+
+		<!-- 框架 -->
+		<spring-boot.version>3.0.0</spring-boot.version>
+		<spring-cloud.version>2022.0.0</spring-cloud.version>
+		<spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
+		<spring-boot-admin.version>3.0.0</spring-boot-admin.version>
+
+		<!-- 工具 -->
+		<guava.version>31.1-jre</guava.version>
+		<lombok.version>1.18.26</lombok.version>
+		<hutool.version>5.8.12</hutool.version>
+		<mapstruct.version>1.5.1.Final</mapstruct.version>
+
+		<!-- 默认插件 ( Maven 有 7 个默认插件 ) -->
+		<plugin.maven-resources.version>3.3.0</plugin.maven-resources.version>
+		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
+		<plugin.maven-compiler.version>3.9.0</plugin.maven-compiler.version>
+		<!-- 其它插件 -->
+		<plugin.maven_flatten.version>1.1.0</plugin.maven_flatten.version>
+		<xxx.version>xxx</xxx.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Boot -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Spring Cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Spring Cloud Alibaba -->
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+				<version>${spring-cloud-alibaba.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Spring Admin -->
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-client</artifactId>
+				<version>${spring-boot-admin.version}</version>
+			</dependency>
+
+			<!-- 工具 -->
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>utils-common</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>spring-common</artifactId>
+				<version>${revision}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>${project.dir}/x-properties/dev.properties</filter>
+				</filters>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>${pom.basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.yml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+					<include>META-INF/**/**</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<directory>${pom.basedir}/src/test/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.yml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+					<include>META-INF/**/**</include>
+				</includes>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${plugin.maven-resources.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${plugin.maven-compiler.version}</version>
+					<configuration>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+							<!-- 生成映射，实现 bean 之间属性拷贝 -->
+							<path>
+								<groupId>org.mapstruct</groupId>
+								<artifactId>mapstruct-processor</artifactId>
+								<version>${mapstruct.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${plugin.maven-deploy.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>${plugin.maven_flatten.version}</version>
+					<executions>
+						<execution>
+							<id>flatten</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>flatten.clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<updatePomFile>true</updatePomFile>
+						<flattenMode>resolveCiFriendliesOnly</flattenMode>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- <repositories> -->
+	<!-- 	&lt;!&ndash; Central &ndash;&gt; -->
+	<!-- 	<repository> -->
+	<!-- 		<id>central</id> -->
+	<!-- 		<url>https://repo.maven.apache.org/maven2/</url> -->
+	<!-- 		<releases> -->
+	<!-- 			<enabled>true</enabled> -->
+	<!-- 			<updatePolicy>daily</updatePolicy> -->
+	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
+	<!-- 		</releases> -->
+	<!-- 		<snapshots> -->
+	<!-- 			<enabled>false</enabled> -->
+	<!-- 		</snapshots> -->
+	<!-- 	</repository> -->
+	<!-- 	&lt;!&ndash; Spring &ndash;&gt; -->
+	<!-- 	<repository> -->
+	<!-- 		<id>spring-releases</id> -->
+	<!-- 		<url>https://repo.spring.io/artifactory/libs-release/</url> -->
+	<!-- 		<releases> -->
+	<!-- 			<enabled>true</enabled> -->
+	<!-- 			<updatePolicy>daily</updatePolicy> -->
+	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
+	<!-- 		</releases> -->
+	<!-- 		<snapshots> -->
+	<!-- 			<enabled>false</enabled> -->
+	<!-- 		</snapshots> -->
+	<!-- 	</repository> -->
+	<!-- 	<repository> -->
+	<!-- 		<id>spring-milestones</id> -->
+	<!-- 		<url>https://repo.spring.io/artifactory/libs-milestone/</url> -->
+	<!-- 		<releases> -->
+	<!-- 			<enabled>true</enabled> -->
+	<!-- 			<updatePolicy>interval:60</updatePolicy> -->
+	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
+	<!-- 		</releases> -->
+	<!-- 		<snapshots> -->
+	<!-- 			<enabled>false</enabled> -->
+	<!-- 		</snapshots> -->
+	<!-- 	</repository> -->
+	<!-- 	<repository> -->
+	<!-- 		<id>spring-snapshots</id> -->
+	<!-- 		<url>https://repo.spring.io/artifactory/libs-snapshot/</url> -->
+	<!-- 		<releases> -->
+	<!-- 			<enabled>false</enabled> -->
+	<!-- 		</releases> -->
+	<!-- 		<snapshots> -->
+	<!-- 			<enabled>true</enabled> -->
+	<!-- 			<updatePolicy>interval:10</updatePolicy> -->
+	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
+	<!-- 		</snapshots> -->
+	<!-- 	</repository> -->
+	<!-- </repositories> -->
+
+	<pluginRepositories>
+		<!-- Central -->
+		<pluginRepository>
+			<id>central</id>
+			<url>https://repo.maven.apache.org/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<!-- Spring -->
+		<pluginRepository>
+			<id>spring-releases</id>
+			<url>https://repo.spring.io/artifactory/plugins-release/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<url>https://repo.spring.io/artifactory/plugins-milestone/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>interval:60</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<url>https://repo.spring.io/artifactory/plugins-snapshot/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>interval:10</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

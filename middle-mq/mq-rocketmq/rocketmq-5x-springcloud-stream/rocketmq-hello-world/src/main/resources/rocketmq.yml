@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: ${rocketmq.namesrv}
+      bindings:
+        test-in-0:
+          destination: TEST # 要发送到的 Topic
+          group: ${spring.cloud.stream.bindings.test-in-0.destination}-client
+#          content-type: text/plain

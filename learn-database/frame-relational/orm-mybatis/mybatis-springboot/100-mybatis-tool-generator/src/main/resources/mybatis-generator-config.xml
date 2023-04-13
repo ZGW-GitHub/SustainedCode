@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (C) <2023> <Snow>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<!-- 引入配置文件 -->
+	<properties resource="application-datasource.yml"/>
+
+	<!-- 一个数据库一个 context 。context 子元素的顺序有规定，详见笔记。-->
+	<context id="myContext" targetRuntime="MyBatis3" defaultModelType="flat">
+
+
+		<!-- 这个插件给生成的 Java 对象增加了 equals 、hashCode 方法 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+		<!-- 生成时覆盖原有的 mapper.xml 文件。注意：该插件仅支持 1.3.7 及以上版本的 MyBatis Generator -->
+		<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+
+		<!-- 注释 -->
+		<commentGenerator>
+			<!-- 是否移除注释 -->
+			<property name="suppressAllComments" value="true"/>
+			<!-- 不希望生成的注释中包含时间戳 -->
+			<!--<property name="suppressDate" value="true"/>-->
+			<!-- 生成的注释中添加 db 表中字段的注释-->
+			<!--<property name="addRemarkComments" value="true"/>-->
+		</commentGenerator>
+
+
+		<!-- JDBC 连接 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+						connectionURL="jdbc:mysql://linux.little:63307/frame_orm" userId="username" password="password">
+			<!-- 高版本的 mysql-connector-java 需要设置 nullCatalogMeansCurrent=true -->
+			<property name="nullCatalogMeansCurrent" value="true"/>
+		</jdbcConnection>
+
+
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用 BigDecimal ，默认 false 。
+				false ：把 JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+				true  ：把 JDBC DECIMAL 和 NUMERIC 类型解析为 BigDecimal -->
+			<property name="forceBigDecimals" value="true"/>
+			<!-- 默认：false 。
+				false ：将所有 JDBC 的时间类型解析为 java.util.Date
+				true  ：将 JDBC 的时间类型按如下规则解析
+					DATE	                -> java.time.LocalDate
+					TIME	                -> java.time.LocalTime
+					TIMESTAMP               -> java.time.LocalDateTime
+					TIME_WITH_TIMEZONE  	-> java.time.OffsetTime
+					TIMESTAMP_WITH_TIMEZONE	-> java.time.OffsetDateTime -->
+			<property name="useJSR310Types" value="false"/>
+		</javaTypeResolver>
+
+
+		<!-- 生成实体类 -->
+		<javaModelGenerator targetPackage="com.code.mybatis.tool.generator.entity" targetProject="src/main/java">
+			<!-- 是否让 schema 作为包的后缀，默认为：false -->
+			<property name="enableSubPackages" value="false"/>
+			<!-- 是否针对 string 类型的字段在 set 方法中进行修剪，默认：false -->
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+
+
+		<!-- 生成 Mapper.xml 文件 -->
+		<sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+			<!-- 是否让 schema 作为包的后缀，默认为：false -->
+			<property name="enableSubPackages" value="false"/>
+		</sqlMapGenerator>
+
+
+		<!-- 生成 XxxMapper.java 接口 -->
+		<javaClientGenerator targetPackage="com.code.mybatis.tool.generator.mapper" targetProject="src/main/java"
+							 type="XMLMAPPER">
+			<!-- 是否让 schema 作为包的后缀，默认为：false -->
+			<property name="enableSubPackages" value="false"/>
+		</javaClientGenerator>
+
+
+		<!-- 一个 table 元素对应一张表，如果想同时生成多张表，需要配置多个 table 元素 -->
+		<!-- schema 为数据库名，oracle 需要配置，mysql 不需要配置。
+			 tableName 为对应的数据库表名
+			 domainObjectName 是要生成的实体类名(可以不指定，默认按帕斯卡命名法将表名转换成类名)
+			 enableXxxByExample 默认为 true ，此时会多生成一个 XxxExample.java -->
+		<table schema="" tableName="user" domainObjectName="User" enableCountByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="true" enableUpdateByExample="true"
+			   selectByExampleQueryId="false">
+			<!-- 是否使用实际列名，默认为：false -->
+			<!--<property name="useActualColumnNames" value="false" />-->
+		</table>
+	</context>
+</generatorConfiguration>

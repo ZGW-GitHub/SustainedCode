@@ -1,0 +1,26 @@
+dubbo:
+  application:
+    name: ${spring.application.name}
+    register-mode: instance
+    qos-enable: false
+  config:
+    multiple: true
+  registry:
+    address: nacos://${nacos.server-addr}?namespace=${nacos.namespace.dev}
+    group: SUSTAINED_CODE
+  metadata-report:
+    address: nacos://${nacos.server-addr}?namespace=${nacos.namespace.dev.metadata-report}
+    group: SUSTAINED_CODE
+  config-center:
+    address: ${dubbo.registry.address}
+  protocol:
+    name: dubbo
+    port: -1
+  provider:
+    group: CITY_HZ
+    scope: remote
+    filter: demoFilter
+  consumer:
+    check: false
+    group: CITY_HZ
+    scope: remote

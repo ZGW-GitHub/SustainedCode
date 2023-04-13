@@ -1,0 +1,20 @@
+### Demo
+POST http://localhost:65000/demo
+Content-Type: application/json
+
+{
+}
+
+### 自定义保存
+POST http://localhost:65000/saveCustom
+Content-Type: application/json
+
+{
+}
+
+### 事务测试
+POST http://localhost:65000/transaction
+Content-Type: application/json
+
+{
+}

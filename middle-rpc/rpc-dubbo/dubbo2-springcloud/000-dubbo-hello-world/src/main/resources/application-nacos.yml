@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: ${nacos.server-addr}
+      discovery:
+        namespace: ${nacos.namespace.dev}

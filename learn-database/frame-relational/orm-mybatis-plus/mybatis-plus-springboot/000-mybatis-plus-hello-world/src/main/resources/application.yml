@@ -1,0 +1,6 @@
+spring:
+  config:
+    import:
+      - application-datasource.yml
+      - application-mybatis-plus.yml
+      - application-log.yml

@@ -1,0 +1,3 @@
+mq:
+  rocketmq:
+    name-server: ${rocketmq.namesrv}

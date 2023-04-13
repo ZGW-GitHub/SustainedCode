@@ -1,0 +1,20 @@
+### 简单保存
+POST http://localhost:8080/simple
+Content-Type: application/json
+
+{
+}
+
+### 分表分库
+POST http://localhost:8080/sharding
+Content-Type: application/json
+
+{
+}
+
+### 分表分库列表
+POST http://localhost:8080/shardingList/1000
+Content-Type: application/json
+
+{
+}

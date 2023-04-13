@@ -1,0 +1,7 @@
+spring:
+  elasticsearch:
+    bboss:
+      elasticsearch:
+        rest:
+          hostNames: linux.big:63001
+          dataFormat: yyyy.MM.dd

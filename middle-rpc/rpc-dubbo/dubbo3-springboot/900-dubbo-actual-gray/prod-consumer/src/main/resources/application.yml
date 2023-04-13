@@ -1,0 +1,12 @@
+server:
+  port: 65001
+
+spring:
+  application:
+    name: DUBBO-GRAY-CONSUMER
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-log.yml
+      - application-dubbo.yml

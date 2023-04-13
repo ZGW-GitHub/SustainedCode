@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) <2023> <Snow>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:beans="http://www.springframework.org/schema/beans"
+			xmlns="http://www.code.com/schema/app"
+			targetNamespace="http://www.code.com/schema/app">
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans"/>
+
+	<!-- 定义复合类型 -->
+	<xsd:complexType name="AppConfig">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="name" type="xsd:string" use="required"/>
+				<xsd:attribute name="address" type="xsd:string"/>
+				<xsd:attribute name="port" type="xsd:int"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- 定义 XML 元素 -->
+	<xsd:element name="app" type="AppConfig"/>
+
+	<!-- 定义复合类型 -->
+	<xsd:complexType name="ProviderConfig">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="serviceId" type="xsd:int" use="required"/>
+				<xsd:attribute name="protocol" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- 定义 XML 元素 -->
+	<xsd:element name="provider" type="ProviderConfig"/>
+
+	<!-- 定义复合类型 -->
+	<xsd:complexType name="ConsumerConfig">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="serviceId" type="xsd:int" use="required"/>
+				<xsd:attribute name="protocol" type="xsd:string"/>
+				<xsd:attribute name="checkProvider" type="xsd:boolean"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- 定义 XML 元素 -->
+	<xsd:element name="consumer" type="ConsumerConfig"/>
+
+</xsd:schema>

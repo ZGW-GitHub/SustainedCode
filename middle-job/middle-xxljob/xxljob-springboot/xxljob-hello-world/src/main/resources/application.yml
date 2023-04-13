@@ -1,0 +1,14 @@
+server:
+  port: 65001
+spring:
+  application:
+    name: XXL-JOB-SPRINGBOOT
+xxl:
+  job:
+    admin:
+      addresses: http://${xxl.job.admin.addr}/
+    executor:
+      appname: ${spring.application.name}
+      port: 65031
+      logpath: /home/xxl-job/logs/
+      logretentiondays: 30

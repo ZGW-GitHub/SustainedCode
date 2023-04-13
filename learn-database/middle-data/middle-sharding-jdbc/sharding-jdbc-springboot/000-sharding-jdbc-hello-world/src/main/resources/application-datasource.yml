@@ -1,0 +1,9 @@
+jdbc:
+  simple:
+    url: ${mysql.url}/frame_orm?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver: com.mysql.cj.jdbc.Driver
+  sharding:
+    url: jdbc:shardingsphere:classpath:application-sharding.yml
+    driver: org.apache.shardingsphere.driver.ShardingSphereDriver

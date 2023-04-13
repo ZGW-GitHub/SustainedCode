@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (C) <2023> <Snow>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<configuration scan="true" scanPeriod="1 seconds">
+
+	<!-- 彩色日志依赖的渲染类 -->
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx"
+					converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+	<!-- 自定义属性   -->
+	<property name="CONSOLE_LOG_PATTERN"
+			  value="[%clr(%X{traceId:-}){yellow}] %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+	<!-- 获取 Spring 上下文属性 -->
+	<springProperty name="AppName" source="spring.application.name" defaultValue="default-application"/>
+	<springProperty name="AppLogAppender" source="custom.log.appender" defaultValue="Console"/>
+	<springProperty name="LogstashInput_log" source="custom.logstash.inputs.log" defaultValue="linux.little:39001"/>
+
+	<!-- 控制台 appender  -->
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!-- Logstash appender -->
+	<appender name="TCP_Logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<keepAliveDuration>5 minutes</keepAliveDuration>
+		<!-- Logstash 地址 -->
+		<destination>${LogstashInput_log}</destination>
+		<!-- encoder 必须配置 -->
+		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+			<!-- 定义时间戳格式 -->
+			<timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+			<!-- 设置默认字段及其名字 -->
+			<fieldNames>
+				<timestamp>time</timestamp>
+				<message>msg</message>
+				<logger>class</logger>
+				<!-- 设置要忽略的字段 -->
+				<version>[ignore]</version>
+				<thread>[ignore]</thread>
+				<levelValue>[ignore]</levelValue>
+			</fieldNames>
+			<!-- 设置 mdc 字段名 -->
+			<includeMdcKeyName>traceId</includeMdcKeyName>
+			<!-- 自定义字段 -->
+			<customFields>{"appName": "${AppName}"}</customFields>
+			<!-- 设置 logger name 的长度 -->
+			<shortenedLoggerNameLength>40</shortenedLoggerNameLength>
+		</encoder>
+	</appender>
+
+	<!-- 控制框架输出日志 -->
+	<logger name="org.slf4j" level="INFO"/>
+	<logger name="springfox" level="INFO"/>
+	<logger name="io.swagger" level="INFO"/>
+	<logger name="org.springframework" level="INFO"/>
+	<logger name="org.hibernate.validator" level="DEBUG"/>
+
+	<!-- 测试环境：上述 appender 的日志输出级别 -->
+	<springProfile name="dev">
+		<root level="DEBUG">
+			<appender-ref ref="Console"/>
+		</root>
+	</springProfile>
+
+	<!-- 线上环境：上述 appender 的日志输出级别 -->
+	<springProfile name="prod">
+		<root level="INFO">
+			<appender-ref ref="${AppLogAppender}"/>
+		</root>
+		<root level="DEBUG">
+			<appender-ref ref="Console"/>
+		</root>
+	</springProfile>
+
+</configuration>
