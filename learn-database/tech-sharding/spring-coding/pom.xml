@@ -27,13 +27,9 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>coding-by-spring</artifactId>
+	<artifactId>spring-coding</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
-
-	<modules>
-		<module>00-coding-by-spring-simple</module>
-	</modules>
 
 </project>
