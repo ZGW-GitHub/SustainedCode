@@ -33,7 +33,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>middle-sharding-jdbc</module>
+		<module>coding-by-spring</module>
+		<module>middle-sharding-jdbc/sharding-jdbc-springboot</module>
 	</modules>
 
 </project>

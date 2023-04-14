@@ -27,13 +27,13 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>middle-sharding-jdbc</artifactId>
+	<artifactId>coding-by-spring</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>sharding-jdbc-springboot</module>
+		<module>00-coding-by-spring-simple</module>
 	</modules>
 
 </project>
