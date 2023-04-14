@@ -23,18 +23,17 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>SustainedCode</artifactId>
+		<artifactId>tech-sharding</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>middle-data</artifactId>
+	<artifactId>middle-sharding-jdbc</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>middle-canal</module>
-		<module>middle-seata</module>
+		<module>sharding-jdbc-springboot</module>
 	</modules>
 
 </project>

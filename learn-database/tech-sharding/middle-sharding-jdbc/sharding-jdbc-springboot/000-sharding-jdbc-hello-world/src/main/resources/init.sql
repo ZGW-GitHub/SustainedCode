@@ -1,18 +1,18 @@
 /******************************************************** 库 1 ********************************************************/
 -- db1
 CREATE
-DATABASE IF NOT EXISTS sharding_db0 CHARSET utf8;
+    DATABASE IF NOT EXISTS sharding_db0 CHARSET utf8;
 USE
-sharding_db0;
+    sharding_db0;
 
 -- table1
 DROP TABLE IF EXISTS user_0;
 CREATE TABLE user_0
 (
-    id          INT(5) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    id          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     record_id   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
     name        VARCHAR(10) DEFAULT NULL COMMENT '姓名',
-    age         INT(5) DEFAULT NULL COMMENT '年龄',
+    age         INT(5)      DEFAULT NULL COMMENT '年龄',
     create_time DATETIME    DEFAULT NOW() COMMENT '创建时间',
     update_time DATETIME    DEFAULT NOW() COMMENT '更新时间',
     PRIMARY KEY (id),
@@ -24,10 +24,10 @@ CREATE TABLE user_0
 DROP TABLE IF EXISTS user_1;
 CREATE TABLE user_1
 (
-    id          INT(5) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    id          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     record_id   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
     name        VARCHAR(10) DEFAULT NULL COMMENT '姓名',
-    age         INT(5) DEFAULT NULL COMMENT '年龄',
+    age         INT(5)      DEFAULT NULL COMMENT '年龄',
     create_time DATETIME    DEFAULT NOW() COMMENT '创建时间',
     update_time DATETIME    DEFAULT NOW() COMMENT '更新时间',
     PRIMARY KEY (id),
@@ -39,18 +39,18 @@ CREATE TABLE user_1
 
 -- db2
 CREATE
-DATABASE IF NOT EXISTS sharding_db1 CHARSET utf8;
+    DATABASE IF NOT EXISTS sharding_db1 CHARSET utf8;
 USE
-sharding_db1;
+    sharding_db1;
 
 -- table1
 DROP TABLE IF EXISTS user_0;
 CREATE TABLE user_0
 (
-    id          INT(5) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    id          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     record_id   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
     name        VARCHAR(10) DEFAULT NULL COMMENT '姓名',
-    age         INT(5) DEFAULT NULL COMMENT '年龄',
+    age         INT(5)      DEFAULT NULL COMMENT '年龄',
     create_time DATETIME    DEFAULT NOW() COMMENT '创建时间',
     update_time DATETIME    DEFAULT NOW() COMMENT '更新时间',
     PRIMARY KEY (id),
@@ -79,10 +79,10 @@ CREATE TABLE user_0
 DROP TABLE IF EXISTS user_1;
 CREATE TABLE user_1
 (
-    id          INT(5) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    id          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     record_id   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
     name        VARCHAR(10) DEFAULT NULL COMMENT '姓名',
-    age         INT(5) DEFAULT NULL COMMENT '年龄',
+    age         INT(5)      DEFAULT NULL COMMENT '年龄',
     create_time DATETIME    DEFAULT NOW() COMMENT '创建时间',
     update_time DATETIME    DEFAULT NOW() COMMENT '更新时间',
     PRIMARY KEY (id),

@@ -32,7 +32,8 @@
 		SELECT *
 		FROM user
 		WHERE record_id BETWEEN 0 AND #{recordId}
-		ORDER BY age LIMIT 3,3
+		ORDER BY age
+		LIMIT 3,3
 	</select>
 
 </mapper>
