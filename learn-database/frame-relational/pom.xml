@@ -34,8 +34,9 @@
 
 	<modules>
 		<module>basis-jdbc</module>
-		<module>orm-mybatis</module>
-		<module>orm-mybatis-plus</module>
+		<module>orm-mybatis/mybatis-spring</module>
+		<module>orm-mybatis/mybatis-springboot</module>
+		<module>orm-mybatis-plus/mybatis-plus-springboot</module>
 		<module>orm-spring-data-jpa</module>
 	</modules>
 
