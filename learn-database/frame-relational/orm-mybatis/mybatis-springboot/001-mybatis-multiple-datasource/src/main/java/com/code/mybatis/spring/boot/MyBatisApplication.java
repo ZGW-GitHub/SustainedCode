@@ -17,21 +17,14 @@
 
 package com.code.mybatis.spring.boot;
 
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
-/**
- * @author Snow
- * @date 2022/7/4 23:32
- */
-@Slf4j
-@SpringBootTest
-public class MybatisSpringBootApplicationTest {
+@SpringBootApplication
+public class MyBatisApplication {
+	public static void main(String[] args) {
 
-	@Test
-	void contextTest() {
+		new SpringApplicationBuilder(MyBatisApplication.class).run(args);
 
 	}
-
 }
