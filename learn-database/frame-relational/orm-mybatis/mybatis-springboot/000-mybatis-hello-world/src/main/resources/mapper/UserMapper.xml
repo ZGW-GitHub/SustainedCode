@@ -17,14 +17,14 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.code.mybatis.spring.boot.dal.mapper.UserMapper">
+<mapper namespace="com.code.mybatis.dal.mapper.UserMapper">
 
 	<insert id="save">
 		INSERT INTO user (name, record_id, age, create_time, update_time)
 		VALUES (#{name}, #{recordId}, #{age}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
 	</insert>
 
-	<select id="listAll" resultType="com.code.mybatis.spring.boot.dal.dos.User">
+	<select id="listAll" resultType="com.code.mybatis.dal.dos.User">
 		SELECT *
 		FROM user
 	</select>

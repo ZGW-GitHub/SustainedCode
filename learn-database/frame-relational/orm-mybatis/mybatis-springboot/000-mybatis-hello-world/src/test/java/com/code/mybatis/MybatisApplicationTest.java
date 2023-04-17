@@ -15,35 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.mapper;
+package com.code.mybatis;
 
-import com.code.mybatis.spring.boot.MybatisApplicationTest;
-import com.code.mybatis.spring.boot.dal.dos.User;
-import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author Snow
- * @date 2023/4/7 11:09
+ * @date 2022/7/4 23:32
  */
 @Slf4j
-public class SelectTest extends MybatisApplicationTest {
-
-	@Resource
-	private UserMapper userMapper;
+@SpringBootTest
+public class MybatisApplicationTest {
 
 	@Test
-	void demo() {
-		List<User> userList = userMapper.listAll();
-		userList = Optional.ofNullable(userList).orElse(Collections.emptyList());
+	void contextTest() {
 
-		userList.forEach(System.err::println);
 	}
 
 }

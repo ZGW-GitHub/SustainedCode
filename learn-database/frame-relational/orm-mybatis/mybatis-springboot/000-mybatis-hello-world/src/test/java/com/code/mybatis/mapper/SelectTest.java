@@ -15,34 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.mapper;
+package com.code.mybatis.mapper;
 
-import com.code.mybatis.spring.boot.MybatisApplicationTest;
-import com.code.mybatis.spring.boot.dal.dos.User;
-import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
+import com.code.mybatis.MybatisApplicationTest;
+import com.code.mybatis.dal.dos.User;
+import com.code.mybatis.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Snow
- * @date 2022/7/4 23:30
+ * @date 2023/4/7 11:09
  */
 @Slf4j
-class SaveTest extends MybatisApplicationTest {
+public class SelectTest extends MybatisApplicationTest {
 
 	@Resource
 	private UserMapper userMapper;
 
 	@Test
-	@Transactional
-	@Rollback(value = false)
-	void simpleTest() {
-		User user = new User().setRecordId(10086L).setName("test").setAge(10);
+	void demo() {
+		List<User> userList = userMapper.listAll();
+		userList = Optional.ofNullable(userList).orElse(Collections.emptyList());
 
-		userMapper.save(user);
+		userList.forEach(System.err::println);
 	}
 
 }

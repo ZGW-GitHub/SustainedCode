@@ -15,31 +15,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.dal.dos;
+package com.code.mybatis.service;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
+import com.code.mybatis.dal.dos.User;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2022/10/17 09:58
  */
-@Data
-@Accessors(chain = true)
-public class User implements Serializable {
+public interface UserService {
 
-	@Serial
-	private static final long serialVersionUID = -5625175115874392926L;
+	void demo(User user);
 
-	private Integer id;
-	private Long    recordId;
-	private String  name;
-	private Integer age;
-	private Date    createTime;
-	private Date    updateTime;
+	void transaction(User user);
+
+	void batchSave();
+
+	void batchSave2();
 
 }

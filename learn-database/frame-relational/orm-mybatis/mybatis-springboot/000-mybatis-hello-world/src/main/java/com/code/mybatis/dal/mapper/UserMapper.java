@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.dal.mapper;
+package com.code.mybatis.dal.mapper;
 
-import com.code.mybatis.spring.boot.dal.dos.User;
+import com.code.mybatis.dal.dos.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
