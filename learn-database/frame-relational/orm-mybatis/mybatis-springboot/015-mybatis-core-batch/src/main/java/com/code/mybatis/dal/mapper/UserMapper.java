@@ -15,32 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.service;
+package com.code.mybatis.dal.mapper;
 
-import com.code.mybatis.spring.boot.dal.dos.User;
-import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Service;
+import com.code.mybatis.dal.dos.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2022/10/17 09:59
+ * @date 2020/8/14 11:49 上午
  */
-@Slf4j
-@Service
-public class UserServiceImpl implements UserService {
+@Mapper
+@Component
+public interface UserMapper {
 
-    @Resource
-    private UserMapper userMapper;
+	/**
+	 * 保存实体
+	 *
+	 * @param user 实体
+	 * @return 影响行数
+	 */
+	int save(User user);
 
-    @Resource
-    private SqlSessionFactory sqlSessionFactory;
-
-    @Override
-    public void demo(User user) {
-        userMapper.save(user);
-    }
+	List<User> listAll();
 
 }

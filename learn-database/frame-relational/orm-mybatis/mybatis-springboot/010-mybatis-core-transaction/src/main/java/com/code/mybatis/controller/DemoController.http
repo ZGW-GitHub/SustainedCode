@@ -1,0 +1,6 @@
+### 事务测试
+POST http://localhost:65000/transaction
+Content-Type: application/json
+
+{
+}

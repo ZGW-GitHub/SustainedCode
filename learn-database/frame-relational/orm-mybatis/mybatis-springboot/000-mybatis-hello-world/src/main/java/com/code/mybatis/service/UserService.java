@@ -27,10 +27,4 @@ public interface UserService {
 
 	void demo(User user);
 
-	void transaction(User user);
-
-	void batchSave();
-
-	void batchSave2();
-
 }

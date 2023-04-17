@@ -1,0 +1,6 @@
+### 批量操作测试
+POST http://localhost:65000/batch
+Content-Type: application/json
+
+{
+}

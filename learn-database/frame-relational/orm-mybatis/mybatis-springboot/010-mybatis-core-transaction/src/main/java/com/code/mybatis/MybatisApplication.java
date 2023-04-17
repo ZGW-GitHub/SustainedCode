@@ -15,32 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.service;
+package com.code.mybatis;
 
-import com.code.mybatis.spring.boot.dal.dos.User;
-import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
  * @author Snow
- * @date 2022/10/17 09:59
+ * @date 2020/7/31 11:49 上午
  */
-@Slf4j
-@Service
-public class UserServiceImpl implements UserService {
+@SpringBootApplication
+public class MybatisApplication {
+	public static void main(String[] args) {
 
-    @Resource
-    private UserMapper userMapper;
+		new SpringApplicationBuilder(MybatisApplication.class).run(args);
 
-    @Resource
-    private SqlSessionFactory sqlSessionFactory;
-
-    @Override
-    public void demo(User user) {
-        userMapper.save(user);
-    }
-
+	}
 }

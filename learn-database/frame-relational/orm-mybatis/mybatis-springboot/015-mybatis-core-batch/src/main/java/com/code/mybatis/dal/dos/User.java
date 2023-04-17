@@ -15,32 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.service;
+package com.code.mybatis.dal.dos;
 
-import com.code.mybatis.spring.boot.dal.dos.User;
-import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Service;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Snow
- * @date 2022/10/17 09:59
+ * @date 2020/8/14 11:49 上午
  */
-@Slf4j
-@Service
-public class UserServiceImpl implements UserService {
+@Data
+@Accessors(chain = true)
+public class User implements Serializable {
 
-    @Resource
-    private UserMapper userMapper;
+	@Serial
+	private static final long serialVersionUID = -5625175115874392926L;
 
-    @Resource
-    private SqlSessionFactory sqlSessionFactory;
-
-    @Override
-    public void demo(User user) {
-        userMapper.save(user);
-    }
+	private Integer id;
+	private Long    recordId;
+	private String  name;
+	private Integer age;
+	private Date    createTime;
+	private Date    updateTime;
 
 }

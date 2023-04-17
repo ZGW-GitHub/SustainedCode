@@ -15,14 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.service;
+package com.code.mybatis.service;
 
-import com.code.mybatis.spring.boot.dal.dos.User;
-import com.code.mybatis.spring.boot.dal.mapper.UserMapper;
+import com.code.mybatis.dal.dos.User;
+import com.code.mybatis.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.LongStream;
 
 /**
  * @author Snow
@@ -32,15 +38,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Resource
-    private UserMapper userMapper;
+	@Resource
+	private UserMapper userMapper;
 
-    @Resource
-    private SqlSessionFactory sqlSessionFactory;
+	@Override
+	@Transactional
+	public void transaction(User user) {
+		userMapper.save(user);
 
-    @Override
-    public void demo(User user) {
-        userMapper.save(user);
-    }
+		// throw new ArithmeticException();
+	}
 
 }

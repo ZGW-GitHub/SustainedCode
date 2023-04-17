@@ -43,18 +43,4 @@ public class DemoController {
 		return "SUCCESS";
 	}
 
-	@PostMapping("transaction")
-	public String transaction() {
-		userService.transaction(new User().setName("test").setAge(18));
-
-		return "SUCCESS";
-	}
-
-	@PostMapping("batch")
-	public String batch() {
-		userService.batchSave2();
-
-		return "SUCCESS";
-	}
-
 }
