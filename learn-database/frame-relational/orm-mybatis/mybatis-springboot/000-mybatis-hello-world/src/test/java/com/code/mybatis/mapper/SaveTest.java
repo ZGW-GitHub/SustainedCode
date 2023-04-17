@@ -17,6 +17,7 @@
 
 package com.code.mybatis.mapper;
 
+import cn.hutool.core.util.RandomUtil;
 import com.code.mybatis.MybatisApplicationTest;
 import com.code.mybatis.dal.dos.User;
 import com.code.mybatis.dal.mapper.UserMapper;
@@ -40,7 +41,10 @@ class SaveTest extends MybatisApplicationTest {
 	@Transactional
 	@Rollback(value = false)
 	void simpleTest() {
-		User user = new User().setRecordId(10086L).setName("test").setAge(10);
+		User user = new User()
+				.setRecordId(RandomUtil.randomLong(999999))
+				.setName(RandomUtil.randomString(10))
+				.setAge(18);
 
 		userMapper.save(user);
 	}
