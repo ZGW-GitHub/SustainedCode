@@ -20,11 +20,11 @@ package com.code.jpa.dal.entity;
 import com.code.jpa.dal.entity.base.AbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serial;
 
 /**
  * @author Snow
@@ -32,15 +32,16 @@ import javax.persistence.Table;
  */
 @Data
 @Accessors(chain = true)
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "user")
 public class User extends AbstractEntity {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+	private static final long serialVersionUID = 1936799964515648011L;
 
-	private String  name;
+	private Long recordId;
+	private String name;
 	private Integer age;
 
 }

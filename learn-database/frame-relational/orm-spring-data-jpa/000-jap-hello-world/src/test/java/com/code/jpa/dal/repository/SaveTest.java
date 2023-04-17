@@ -17,6 +17,7 @@
 
 package com.code.jpa.dal.repository;
 
+import cn.hutool.core.util.RandomUtil;
 import com.code.jpa.JpaApplicationTest;
 import com.code.jpa.dal.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -48,10 +49,10 @@ class SaveTest extends JpaApplicationTest {
 	@Transactional
 	@Rollback(value = false)
 	void repositoryTest() {
-		List<User> users = LongStream.rangeClosed(1, 10)
-									 .boxed()
-									 .map(i -> new User().setName("test" + i).setAge(i.intValue()))
-									 .collect(Collectors.toList());
+		List<User> users = LongStream.rangeClosed(1, 1)
+				.boxed()
+				.map(i -> new User().setRecordId(RandomUtil.randomLong(1000)).setName("test" + i).setAge(i.intValue()))
+				.collect(Collectors.toList());
 
 		userRepository.saveAll(users);
 	}
@@ -61,8 +62,8 @@ class SaveTest extends JpaApplicationTest {
 	@Rollback(value = false)
 	void entityManagerTest() {
 		List<User> users = LongStream.rangeClosed(1, 10)
-									.boxed()
-									.map(i -> new User().setName("test" + i).setAge(i.intValue()))
+				.boxed()
+				.map(i -> new User().setRecordId(RandomUtil.randomLong(1000)).setName("test" + i).setAge(i.intValue()))
 									.toList();
 
 		int i = 0;
