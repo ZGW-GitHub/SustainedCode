@@ -15,11 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jpa.repository;
+package com.code.jpa.dal.repository;
 
-import com.code.jpa.basic.JpaApplicationTest;
+import com.code.jpa.JpaApplicationTest;
 import com.code.jpa.dal.entity.User;
-import com.code.jpa.dal.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;

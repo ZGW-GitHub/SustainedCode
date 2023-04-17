@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jpa.repository;
+package com.code.jpa.dal.repository;
 
-import com.code.jpa.basic.JpaApplicationTest;
-import com.code.jpa.dal.repository.UserRepository;
+import com.code.jpa.JpaApplicationTest;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -30,12 +30,17 @@ import javax.persistence.PersistenceContext;
  * @date 2020/8/7 10:58 上午
  */
 @Slf4j
-public class AlterTest extends JpaApplicationTest {
+class DeleteTest extends JpaApplicationTest {
 
 	@Resource
 	private UserRepository userRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Test
+	void deleteAllTest() {
+		userRepository.deleteAll();
+	}
 
 }
