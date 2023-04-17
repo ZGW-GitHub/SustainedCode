@@ -1,0 +1,10 @@
+server:
+  port: 65000
+spring:
+  config:
+    import:
+      - application-datasource.yml
+      - application-datasource-druid.yml
+      - application-mybatis.yml
+      - application-log.yml
+

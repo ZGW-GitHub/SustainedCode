@@ -1,0 +1,5 @@
+logging:
+  level:
+    com.code: debug
+    com.alibaba.druid: debug
+    com.code.mybatis.spring.boot.dal.mapper: trace
