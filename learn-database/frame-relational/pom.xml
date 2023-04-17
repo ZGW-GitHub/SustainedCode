@@ -32,6 +32,14 @@
 
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>basis-jdbc</module>
+		<module>orm-mybatis/mybatis-spring</module>
+		<module>orm-mybatis/mybatis-springboot</module>
+		<module>orm-mybatis-plus/mybatis-plus-springboot</module>
+		<module>orm-spring-data-jpa</module>
+	</modules>
+
 	<properties>
 		<druid-starter.version>1.2.11</druid-starter.version>
 	</properties>
@@ -45,13 +53,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<modules>
-		<module>basis-jdbc</module>
-		<module>orm-mybatis/mybatis-spring</module>
-		<module>orm-mybatis/mybatis-springboot</module>
-		<module>orm-mybatis-plus/mybatis-plus-springboot</module>
-		<module>orm-spring-data-jpa</module>
-	</modules>
 
 </project>
