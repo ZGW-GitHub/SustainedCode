@@ -15,26 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.dal.second.mapper;
-
-import com.code.mybatis.spring.boot.dal.second.dos.SecondUser;
-
-import java.util.List;
+package com.code.mybatis.service;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2022/10/17 09:58
  */
-public interface SecondUserMapper {
+public interface UserService {
 
-	/**
-	 * 保存实体
-	 *
-	 * @param secondUser 实体
-	 * @return 影响行数
-	 */
-	int save(SecondUser secondUser);
+	void demo();
 
-	List<SecondUser> listAll();
+	void transactionByCode();
+
+	void transactionByAnno();
 
 }

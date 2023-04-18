@@ -15,13 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.service;
+package com.code.mybatis.service;
 
 import cn.hutool.core.util.RandomUtil;
-import com.code.mybatis.spring.boot.dal.first.dos.FirstUser;
-import com.code.mybatis.spring.boot.dal.first.mapper.FirstUserMapper;
-import com.code.mybatis.spring.boot.dal.second.dos.SecondUser;
-import com.code.mybatis.spring.boot.dal.second.mapper.SecondUserMapper;
+import com.code.mybatis.dal.first.dos.FirstUser;
+import com.code.mybatis.dal.first.mapper.FirstUserMapper;
+import com.code.mybatis.dal.second.dos.SecondUser;
+import com.code.mybatis.dal.second.mapper.SecondUserMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopContext;

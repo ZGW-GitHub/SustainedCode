@@ -15,26 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.dal.first.mapper;
+package com.code.mybatis.mapper;
 
-import com.code.mybatis.spring.boot.dal.first.dos.FirstUser;
+import com.code.mybatis.MybatisApplicationTest;
+import com.code.mybatis.dal.first.dos.FirstUser;
+import com.code.mybatis.dal.first.mapper.FirstUserMapper;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2023/4/7 11:09
  */
-public interface FirstUserMapper {
+@Slf4j
+public class SelectTest extends MybatisApplicationTest {
 
-	/**
-	 * 保存实体
-	 *
-	 * @param firstUser 实体
-	 * @return 影响行数
-	 */
-	int save(FirstUser firstUser);
+	@Resource
+	private FirstUserMapper firstUserMapper;
 
-	List<FirstUser> listAll();
+	@Test
+	void demo() {
+		List<FirstUser> userList = firstUserMapper.listAll();
+		userList = Optional.ofNullable(userList).orElse(Collections.emptyList());
+
+		userList.forEach(System.err::println);
+	}
 
 }

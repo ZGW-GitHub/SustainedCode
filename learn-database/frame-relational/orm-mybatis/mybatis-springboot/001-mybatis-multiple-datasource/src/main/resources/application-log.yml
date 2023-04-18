@@ -1,4 +1,4 @@
 logging:
   level:
     com.code: debug
-    com.code.mybatis.spring.boot.dal.mapper: trace
+    com.code.mybatis.dal.mapper: trace

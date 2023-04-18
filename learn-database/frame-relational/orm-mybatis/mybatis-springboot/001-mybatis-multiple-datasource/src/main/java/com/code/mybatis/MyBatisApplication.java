@@ -15,31 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.dal.second.dos;
+package com.code.mybatis;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
+@SpringBootApplication
+public class MyBatisApplication {
+	public static void main(String[] args) {
 
-/**
- * @author Snow
- * @date 2020/8/14 11:49 上午
- */
-@Data
-@Accessors(chain = true)
-public class SecondUser implements Serializable {
+		new SpringApplicationBuilder(MyBatisApplication.class).run(args);
 
-	@Serial
-	private static final long serialVersionUID = 1L;
-
-	private Integer id;
-	private Long    recordId;
-	private String  name;
-	private Integer age;
-	private Date    createTime;
-	private Date    updateTime;
-
+	}
 }

@@ -15,25 +15,36 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.configuration;
+package com.code.mybatis.configuration;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2023/4/7 13:32
+ * @date 2023/2/15 23:14
  */
-@Slf4j
-@Configuration
-public class MybatisCommonConfiguration {
+@Data
+@ConfigurationProperties("jdbc")
+public class MultipleDataSourceProperties {
 
-	@Bean
-	@ConfigurationProperties("mybatis.configuration")
-	public org.apache.ibatis.session.Configuration configuration() {
-		return new org.apache.ibatis.session.Configuration();
-	}
+    @Value("${jdbc.first.url}")
+    private String firstUrl;
+    @Value("${jdbc.first.username}")
+    private String firstUsername;
+    @Value("${jdbc.first.password}")
+    private String firstPassword;
+    @Value("${jdbc.first.driver}")
+    private String firstDriver;
+
+    @Value("${jdbc.second.url}")
+    private String secondUrl;
+    @Value("${jdbc.second.username}")
+    private String secondUsername;
+    @Value("${jdbc.second.password}")
+    private String secondPassword;
+    @Value("${jdbc.second.driver}")
+    private String secondDriver;
 
 }

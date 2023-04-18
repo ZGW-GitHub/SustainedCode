@@ -15,23 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot;
+package com.code.mybatis.dal.first.mapper;
 
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.code.mybatis.dal.first.dos.FirstUser;
+
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2022/7/4 23:32
+ * @date 2020/8/14 11:49 上午
  */
-@Slf4j
-@SpringBootTest
-public class MybatisApplicationTest {
+public interface FirstUserMapper {
 
-	@Test
-	void contextTest() {
+	/**
+	 * 保存实体
+	 *
+	 * @param firstUser 实体
+	 * @return 影响行数
+	 */
+	int save(FirstUser firstUser);
 
-	}
+	List<FirstUser> listAll();
 
 }

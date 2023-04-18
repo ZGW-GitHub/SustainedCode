@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.configuration;
+package com.code.mybatis.configuration;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.zaxxer.hikari.HikariDataSource;
@@ -37,7 +37,7 @@ import java.io.IOException;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MultipleDataSourceProperties.class)
-@MapperScan(basePackages = "com.code.mybatis.spring.boot.dal.first.mapper", sqlSessionFactoryRef = "firstSqlSessionFactory")
+@MapperScan(basePackages = "com.code.mybatis.dal.first.mapper", sqlSessionFactoryRef = "firstSqlSessionFactory")
 public class FirstMybatisConfiguration {
 
     @Bean

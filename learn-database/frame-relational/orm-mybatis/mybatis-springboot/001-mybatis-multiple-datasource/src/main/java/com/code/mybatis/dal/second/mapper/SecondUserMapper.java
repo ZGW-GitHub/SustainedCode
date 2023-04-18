@@ -15,16 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot;
+package com.code.mybatis.dal.second.mapper;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.code.mybatis.dal.second.dos.SecondUser;
 
-@SpringBootApplication
-public class MyBatisApplication {
-	public static void main(String[] args) {
+import java.util.List;
 
-		new SpringApplicationBuilder(MyBatisApplication.class).run(args);
+/**
+ * @author Snow
+ * @date 2020/8/14 11:49 上午
+ */
+public interface SecondUserMapper {
 
-	}
+	/**
+	 * 保存实体
+	 *
+	 * @param secondUser 实体
+	 * @return 影响行数
+	 */
+	int save(SecondUser secondUser);
+
+	List<SecondUser> listAll();
+
 }

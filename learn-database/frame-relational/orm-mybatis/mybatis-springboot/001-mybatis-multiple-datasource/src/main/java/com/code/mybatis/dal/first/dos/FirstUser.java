@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.dal.first.dos;
+package com.code.mybatis.dal.first.dos;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

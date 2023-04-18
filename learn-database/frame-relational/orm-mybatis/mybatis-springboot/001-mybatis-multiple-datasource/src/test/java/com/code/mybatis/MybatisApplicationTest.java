@@ -15,18 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.configuration;
+package com.code.mybatis;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author Snow
- * @date 2023/4/5 15:43
+ * @date 2022/7/4 23:32
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
-@EnableAspectJAutoProxy(exposeProxy = true)
-public class AopConfiguration {
+@SpringBootTest
+public class MybatisApplicationTest {
+
+	@Test
+	void contextTest() {
+
+	}
+
 }

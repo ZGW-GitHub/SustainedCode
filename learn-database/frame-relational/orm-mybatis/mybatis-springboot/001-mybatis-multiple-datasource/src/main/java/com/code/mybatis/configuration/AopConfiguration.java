@@ -15,35 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.mybatis.spring.boot.mapper;
+package com.code.mybatis.configuration;
 
-import com.code.mybatis.spring.boot.MybatisApplicationTest;
-import com.code.mybatis.spring.boot.dal.first.dos.FirstUser;
-import com.code.mybatis.spring.boot.dal.first.mapper.FirstUserMapper;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author Snow
- * @date 2023/4/7 11:09
+ * @date 2023/4/5 15:43
  */
 @Slf4j
-public class SelectTest extends MybatisApplicationTest {
-
-	@Resource
-	private FirstUserMapper firstUserMapper;
-
-	@Test
-	void demo() {
-		List<FirstUser> userList = firstUserMapper.listAll();
-		userList = Optional.ofNullable(userList).orElse(Collections.emptyList());
-
-		userList.forEach(System.err::println);
-	}
-
+@Configuration(proxyBeanMethods = false)
+@EnableAspectJAutoProxy(exposeProxy = true)
+public class AopConfiguration {
 }
