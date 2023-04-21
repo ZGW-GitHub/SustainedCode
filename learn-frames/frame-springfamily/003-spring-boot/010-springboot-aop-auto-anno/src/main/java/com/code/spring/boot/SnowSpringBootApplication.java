@@ -15,16 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.service;
+package com.code.spring.boot;
+
+import com.code.spring.boot.entity.User;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import java.util.Map;
 
 /**
  * @author Snow
- * @date 2022/9/26 17:00
+ * @date 2022/5/30 20:32
  */
-public interface DemoService {
+@Slf4j
+@SpringBootApplication
+public class SnowSpringBootApplication {
+	public static void main(String[] args) {
 
-	String login(String loginName);
+		ConfigurableApplicationContext context = new SpringApplication(SnowSpringBootApplication.class).run(args);
 
-	String findUser(String loginName);
+		Map<String, User> beans = context.getBeansOfType(User.class);
+		System.err.println(beans);
 
+	}
 }

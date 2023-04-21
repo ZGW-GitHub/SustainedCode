@@ -15,32 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.aop.component.pointcut;
+package com.code.spring.boot.aop.component.advise;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 /**
- * 所有的切入点定义在这里
+ * checkParams 用到的通知都定义在这里
+ * <li>{@link Aspect} ：标识该类是一个定义通知的配置类</li>
  *
  * @author Snow
- * @date 2021/7/23 10:08
+ * @date 2021/6/29 10:07
  */
 @Slf4j
+@Aspect
 @Component
-public class AllPointcut {
+public class CheckParamsAdvise {
 
-	/**
-	 * {@link Pointcut} 匹配哪些方法需要被拦截增强
-	 */
-	@Pointcut("@annotation(com.code.spring.aop.auto.by.anno.anno.CheckParams)")
-	public void checkParams() {}
+	@Before("com.code.spring.boot.aop.component.pointcut.AllPointcut.checkParams()")
+	public void before(JoinPoint joinPoint) {
+		Object[] args = joinPoint.getArgs();
 
-	/**
-	 * {@link Pointcut} 匹配哪些方法需要被拦截增强
-	 */
-	@Pointcut("@annotation(com.code.spring.aop.auto.by.anno.anno.LogPrint)")
-	public void logPrint() {}
+		for (Object arg : args) {
+			if (arg == null) {
+				System.err.println("入参非法");
+				throw new RuntimeException("入参非法");
+			}
+		}
+		System.err.println("入参正常");
+	}
 
 }

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.anno;
+package com.code.spring.boot.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

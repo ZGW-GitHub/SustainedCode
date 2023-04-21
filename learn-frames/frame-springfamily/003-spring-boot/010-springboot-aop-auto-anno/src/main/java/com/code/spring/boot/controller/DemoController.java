@@ -15,38 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.service;
+package com.code.spring.boot.controller;
 
-import com.code.spring.aop.auto.by.anno.anno.LogPrint;
-import lombok.Setter;
+import com.code.spring.boot.anno.CheckParams;
+import com.code.spring.boot.service.DemoService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.framework.AopContext;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2021/11/5 18:52
+ * @date 2021/7/23 09:57
  */
 @Slf4j
-@Setter
-@Service
-public class DemoServiceImpl implements DemoService {
+@RestController
+public class DemoController {
 
-	@LogPrint
-	@Override
-	public String login(String loginName) {
-		System.err.printf("用户[%s]登录系统\n", loginName);
+	@Resource
+	private DemoService demoService;
 
-		// 这里必须使用 AopContext.currentProxy() ，否则 findUser 方法不会被 AOP 拦截
-		return ((DemoService) AopContext.currentProxy()).findUser(loginName);
-	}
-
-	@LogPrint
-	@Override
-	public String findUser(String loginName) {
-		System.err.println("查询用户");
-
-		return "查询到-" + loginName;
+	@CheckParams
+	@GetMapping("/login/{params}")
+	public String login(@PathVariable("params") String loginName) {
+		return demoService.login(loginName);
 	}
 
 }

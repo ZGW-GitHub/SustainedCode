@@ -15,31 +15,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.aop;
+package com.code.spring.boot.service;
 
-import com.code.spring.aop.auto.by.anno.entity.User;
+import com.code.spring.boot.anno.LogPrint;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Snow
- * @date 2022/11/29 19:35
+ * @date 2021/11/5 18:52
  */
 @Slf4j
-@Configuration(proxyBeanMethods = true)
-public class TestFullConfig {
+@Setter
+@Service
+public class DemoServiceImpl implements DemoService {
 
-	@Bean("fullTest")
-	public User test() {
-		return new User().setId(1).setName("test");
+	@LogPrint
+	@Override
+	public String login(String loginName) {
+		System.err.printf("用户[%s]登录系统\n", loginName);
+
+		// 这里必须使用 AopContext.currentProxy() ，否则 findUser 方法不会被 AOP 拦截
+		return ((DemoService) AopContext.currentProxy()).findUser(loginName);
 	}
 
-	@Bean("fullDemo")
-	public User demo() {
-		User test = test();
-		test.setName("demo");
-		return test;
+	@LogPrint
+	@Override
+	public String findUser(String loginName) {
+		System.err.println("查询用户");
+
+		return "查询到-" + loginName;
 	}
 
 }

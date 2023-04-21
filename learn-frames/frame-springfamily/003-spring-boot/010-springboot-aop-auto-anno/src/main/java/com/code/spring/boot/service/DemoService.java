@@ -15,31 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.controller;
-
-import com.code.spring.aop.auto.by.anno.anno.CheckParams;
-import com.code.spring.aop.auto.by.anno.service.DemoService;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+package com.code.spring.boot.service;
 
 /**
  * @author Snow
- * @date 2021/7/23 09:57
+ * @date 2022/9/26 17:00
  */
-@Slf4j
-@RestController
-public class DemoController {
+public interface DemoService {
 
-	@Resource
-	private DemoService demoService;
+	String login(String loginName);
 
-	@CheckParams
-	@GetMapping("/login/{params}")
-	public String login(@PathVariable("params") String loginName) {
-		return demoService.login(loginName);
-	}
+	String findUser(String loginName);
 
 }

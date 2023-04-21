@@ -15,23 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.entity;
+package com.code.spring.boot.aop;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
+ * {@link EnableAspectJAutoProxy#exposeProxy()} 需要设置为 true ，否则使用 {@link AopContext#currentProxy()} 会报错
+ *
  * @author Snow
- * @date 2022/11/29 18:04
+ * @date 2022/6/30 10:33
  */
 @Slf4j
-@Data
-@Accessors(chain = true)
-public class User {
-
-	private Integer id;
-
-	private String name;
-
+@Configuration
+//@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
+public class SpringAopConfig {
 }

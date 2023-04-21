@@ -15,29 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno;
+package com.code.spring.boot.aop;
 
-import com.code.spring.aop.auto.by.anno.entity.User;
+import com.code.spring.boot.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import java.util.Map;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2022/5/30 20:32
+ * @date 2022/11/29 19:35
  */
 @Slf4j
-@SpringBootApplication
-public class AutoAopByAnnoApplication {
-	public static void main(String[] args) {
+@Configuration(proxyBeanMethods = false)
+public class TestLiteConfig {
 
-		ConfigurableApplicationContext context = new SpringApplication(AutoAopByAnnoApplication.class).run(args);
-
-		Map<String, User> beans = context.getBeansOfType(User.class);
-		System.err.println(beans);
-
+	@Bean("liteTest")
+	public User test() {
+		return new User().setId(1).setName("test");
 	}
+
+	@Bean("liteDemo")
+	public User demo() {
+		User test = test();
+		test.setName("demo");
+		return test;
+	}
+
 }

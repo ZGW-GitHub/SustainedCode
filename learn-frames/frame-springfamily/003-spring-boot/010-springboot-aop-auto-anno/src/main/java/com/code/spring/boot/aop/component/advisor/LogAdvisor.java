@@ -15,10 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.aop.component.advisor;
+package com.code.spring.boot.aop.component.advisor;
 
-import com.code.spring.aop.auto.by.anno.controller.DemoController;
-import com.code.spring.aop.auto.by.anno.service.DemoService;
+import com.code.spring.boot.controller.DemoController;
+import com.code.spring.boot.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.*;

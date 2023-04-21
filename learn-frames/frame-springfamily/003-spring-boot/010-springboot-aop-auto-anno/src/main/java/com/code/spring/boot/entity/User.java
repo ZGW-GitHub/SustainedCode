@@ -15,31 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.aop.auto.by.anno.aop;
+package com.code.spring.boot.entity;
 
-import com.code.spring.aop.auto.by.anno.entity.User;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2022/11/29 19:35
+ * @date 2022/11/29 18:04
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
-public class TestLiteConfig {
+@Data
+@Accessors(chain = true)
+public class User {
 
-	@Bean("liteTest")
-	public User test() {
-		return new User().setId(1).setName("test");
-	}
+	private Integer id;
 
-	@Bean("liteDemo")
-	public User demo() {
-		User test = test();
-		test.setName("demo");
-		return test;
-	}
+	private String name;
 
 }
