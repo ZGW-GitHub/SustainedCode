@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>dubbo3-springboot</artifactId>
+		<artifactId>dubbo-springboot</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../dubbo-dependencies/dubbo-springboot/pom.xml</relativePath>
 	</parent>
 	<artifactId>100-dubbo-register-mode</artifactId>
 	<version>${revision}</version>

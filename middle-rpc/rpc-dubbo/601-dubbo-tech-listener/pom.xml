@@ -23,23 +23,19 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>dubbo3-springboot</artifactId>
+		<artifactId>dubbo-springboot</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../dubbo-dependencies/dubbo-springboot/pom.xml</relativePath>
 	</parent>
-	<artifactId>900-dubbo-actual-gray</artifactId>
+	<artifactId>601-dubbo-tech-listener</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>common-module</module>
-		<module>beta-consumer</module>
-		<module>beta-provider</module>
-		<module>beta-provider-next</module>
-		<module>prod-consumer</module>
-		<module>prod-provider</module>
-		<module>prod-provider-next</module>
+		<module>demo-interface</module>
+		<module>demo-provider</module>
+		<module>demo-consumer</module>
 	</modules>
 
 </project>
