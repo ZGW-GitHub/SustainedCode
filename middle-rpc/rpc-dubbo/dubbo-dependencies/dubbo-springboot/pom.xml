@@ -23,19 +23,52 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>dubbo3-springboot</artifactId>
+		<artifactId>dubbo-dependencies</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>000-dubbo-hello-world</artifactId>
+	<artifactId>dubbo-springboot</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>demo-interface</module>
-		<module>demo-provider</module>
-		<module>demo-consumer</module>
-	</modules>
+	<properties>
+		<dubbo.version>3.1.7</dubbo.version>
+		<spring-boot.version>2.7.9</spring-boot.version>
+
+		<nacos.version>2.1.0</nacos.version>
+	</properties>
+
+	<dependencies>
+		<!-- Dubbo -->
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Dubbo 注册中心：Nacos -->
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-registry-nacos</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.dubbo</groupId>
+					<artifactId>dubbo-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.dubbo</groupId>
+					<artifactId>dubbo-remoting-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.nacos</groupId>
+			<artifactId>nacos-client</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

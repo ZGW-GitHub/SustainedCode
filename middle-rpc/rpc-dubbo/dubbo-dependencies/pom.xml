@@ -27,49 +27,65 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>dubbo2-springboot</artifactId>
+	<artifactId>dubbo-dependencies</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>dubbo-springboot</module>
+		<module>dubbo-springcloud</module>
+	</modules>
+
 	<properties>
-		<dubbo.version>2.7.22</dubbo.version>
-		<spring-boot.version>2.7.0</spring-boot.version>
+		<dubbo.version>3.1.7</dubbo.version>
+		<spring-boot.version>2.7.9</spring-boot.version>
 
 		<nacos.version>2.1.0</nacos.version>
+		<sentinel-dubbo2.version>1.8.5</sentinel-dubbo2.version>
+		<sentinel-dubbo3.version>1.8.5</sentinel-dubbo3.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-bom</artifactId>
+				<version>${dubbo.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Nacos -->
+			<dependency>
+				<groupId>com.alibaba.nacos</groupId>
+				<artifactId>nacos-client</artifactId>
+				<version>${nacos.version}</version>
+			</dependency>
+
+			<!-- Sentinel -->
+			<dependency>
+				<groupId>com.alibaba.csp</groupId>
+				<artifactId>sentinel-apache-dubbo-adapter</artifactId>
+				<version>${sentinel-dubbo2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.csp</groupId>
+				<artifactId>sentinel-apache-dubbo3-adapter</artifactId>
+				<version>${sentinel-dubbo3.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
-		<!-- Dubbo -->
-		<dependency>
-			<groupId>org.apache.dubbo</groupId>
-			<artifactId>dubbo-spring-boot-starter</artifactId>
-		</dependency>
-
-		<!-- Dubbo 注册中心：Nacos -->
-		<dependency>
-			<groupId>org.apache.dubbo</groupId>
-			<artifactId>dubbo-registry-nacos</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.dubbo</groupId>
-					<artifactId>dubbo-common</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.dubbo</groupId>
-					<artifactId>dubbo-remoting-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba.nacos</groupId>
-			<artifactId>nacos-client</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>spring-common</artifactId>

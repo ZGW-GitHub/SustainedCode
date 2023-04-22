@@ -23,30 +23,13 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>000-dubbo-hello-world</artifactId>
+		<artifactId>001-dubbo3-hello-world-springboot</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>demo-consumer</artifactId>
+	<artifactId>demo-interface</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>demo-interface</artifactId>
-			<version>${revision}</version>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
