@@ -1,8 +1,0 @@
-server:
-  port: ${random.int[65001,65100]}
-
-spring:
-  application:
-    name: FEIGN-SPRING-CLOUD
-  main:
-    allow-circular-references: true
