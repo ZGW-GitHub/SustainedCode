@@ -1,0 +1,8 @@
+server:
+  port: 65000
+
+spring:
+  application:
+    name: FEIGN-CONSUMER
+  main:
+    allow-circular-references: true

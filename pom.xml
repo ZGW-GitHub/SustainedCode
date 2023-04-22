@@ -33,6 +33,7 @@
 
 		<!-- RPC -->
 		<module>middle-rpc/rpc-dubbo</module>
+		<module>middle-rpc/rpc-feign</module>
 
 		<!-- MQ -->
 		<module>middle-mq/mq-kafka</module>

@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: ${nacos.server-addr}
+      config:
+        namespace: ${nacos.namespace.dev}
+      discovery:
+        namespace: ${nacos.namespace.dev}
+        group: SUSTAINED_CODE
