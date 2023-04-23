@@ -23,11 +23,11 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>000-dubbo2-hello-world-springboot</artifactId>
+		<artifactId>001-dubbo2-hello-world-springboot</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>demo-consumer</artifactId>
+	<artifactId>demo-provider</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>

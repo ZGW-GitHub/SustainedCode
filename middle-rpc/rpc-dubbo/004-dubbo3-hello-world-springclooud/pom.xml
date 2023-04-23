@@ -23,13 +23,22 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>000-dubbo2-hello-world-springboot</artifactId>
+		<artifactId>dubbo3-springcloud</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>demo-interface</artifactId>
+	<artifactId>004-dubbo3-hello-world-springclooud</artifactId>
 	<version>${revision}</version>
 
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
+
+	<properties>
+		<spring-boot.version>2.7.0</spring-boot.version>
+		<spring-cloud.version>2021.0.1</spring-cloud.version>
+		<spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+
+		<dubbo.version>3.0.8</dubbo.version>
+		<nacos.version>2.1.0</nacos.version>
+	</properties>
 
 </project>
