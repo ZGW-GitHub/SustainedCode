@@ -27,7 +27,7 @@
         <version>${revision}</version>
         <relativePath>../dubbo-dependencies/dubbo-springcloud/pom.xml</relativePath>
     </parent>
-    <artifactId>003-dubbo2-hello-world-springclooud</artifactId>
+    <artifactId>003-dubbo2-integration-springclooud</artifactId>
     <version>${revision}</version>
 
     <packaging>pom</packaging>

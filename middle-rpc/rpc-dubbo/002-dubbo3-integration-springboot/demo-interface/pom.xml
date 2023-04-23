@@ -23,7 +23,7 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>001-dubbo2-hello-world-springboot</artifactId>
+		<artifactId>002-dubbo3-integration-springboot</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>

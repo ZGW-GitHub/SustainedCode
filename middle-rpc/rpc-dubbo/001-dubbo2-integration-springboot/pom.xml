@@ -27,7 +27,7 @@
         <version>${revision}</version>
         <relativePath>../dubbo-dependencies/dubbo-springboot/pom.xml</relativePath>
     </parent>
-    <artifactId>002-dubbo3-hello-world-springboot</artifactId>
+    <artifactId>001-dubbo2-integration-springboot</artifactId>
     <version>${revision}</version>
 
     <packaging>pom</packaging>
@@ -39,8 +39,8 @@
     </modules>
 
     <properties>
-        <dubbo.version>3.1.7</dubbo.version>
-        <spring-boot.version>2.7.9</spring-boot.version>
+        <dubbo.version>2.7.22</dubbo.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
 
         <nacos.version>2.1.0</nacos.version>
     </properties>
