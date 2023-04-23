@@ -25,7 +25,7 @@
         <groupId>com.code</groupId>
         <artifactId>dubbo-springcloud</artifactId>
         <version>${revision}</version>
-        <relativePath>../dubbo-dependencies/dubbo-springcloud/pom.xml</relativePath>
+        <relativePath>../000-dubbo-dependencies/dubbo-springcloud/pom.xml</relativePath>
     </parent>
     <artifactId>003-dubbo2-integration-springclooud</artifactId>
     <version>${revision}</version>

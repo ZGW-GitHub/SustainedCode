@@ -25,7 +25,7 @@
 		<groupId>com.code</groupId>
 		<artifactId>dubbo-springboot</artifactId>
 		<version>${revision}</version>
-		<relativePath>../dubbo-dependencies/dubbo-springboot/pom.xml</relativePath>
+		<relativePath>../000-dubbo-dependencies/dubbo-springboot/pom.xml</relativePath>
 	</parent>
 	<artifactId>900-dubbo-actual-gray</artifactId>
 	<version>${revision}</version>

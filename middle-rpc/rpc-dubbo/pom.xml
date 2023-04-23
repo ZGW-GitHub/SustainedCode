@@ -33,7 +33,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>dubbo-dependencies</module>
+        <module>000-dubbo-dependencies</module>
     </modules>
 
 </project>
