@@ -34,6 +34,34 @@
 
     <modules>
         <module>snow-spring-common</module>
+        <module>../../dependencies/snow-common-parent</module>
+
+        <!-- RPC -->
+        <module>../../middle-rpc/rpc-dubbo</module>
+        <module>../../middle-rpc/rpc-feign</module>
+
+        <!-- MQ -->
+        <module>../../middle-mq/mq-kafka</module>
+        <module>../../middle-mq/mq-rocketmq</module>
+
+        <!-- Center -->
+        <module>../../middle-center/middle-nacos</module>
+        <module>../../middle-center/middle-zookeeper</module>
+
+        <!-- 限流/熔断/降级 -->
+        <module>../../middle-guard/middle-sentinel</module>
+
+        <!-- Job -->
+        <module>../../middle-job/middle-xxljob</module>
+
+        <!-- DB -->
+        <module>../../learn-database/frame-relational</module>
+        <module>../../learn-database/db-elasticsearch</module>
+        <module>../../learn-database/middle-data</module>
+        <module>../../learn-database/tech-sharding</module>
+
+        <!-- Frames -->
+        <module>../../learn-frames/frame-springfamily</module>
     </modules>
 
     <properties>
@@ -81,7 +109,7 @@
 
             <dependency>
                 <groupId>com.code</groupId>
-                <artifactId>snow-common</artifactId>
+                <artifactId>snow-spring-common</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

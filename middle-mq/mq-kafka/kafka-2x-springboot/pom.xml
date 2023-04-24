@@ -56,7 +56,7 @@
 
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>spring-common</artifactId>
+			<artifactId>snow-spring-common</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>

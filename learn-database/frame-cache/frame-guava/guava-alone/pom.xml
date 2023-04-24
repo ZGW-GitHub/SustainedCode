@@ -39,7 +39,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>utils-common</artifactId>
+			<artifactId>snow-common</artifactId>
 		</dependency>
 	</dependencies>
 

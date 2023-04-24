@@ -28,36 +28,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>dependencies/spring-common</module>
-		<module>dependencies/utils-common</module>
 		<module>dependencies/snow-common-parent</module>
-
-		<!-- RPC -->
-		<module>middle-rpc/rpc-dubbo</module>
-		<module>middle-rpc/rpc-feign</module>
-
-		<!-- MQ -->
-		<module>middle-mq/mq-kafka</module>
-		<module>middle-mq/mq-rocketmq</module>
-
-		<!-- Center -->
-		<module>middle-center/middle-nacos</module>
-		<module>middle-center/middle-zookeeper</module>
-
-		<!-- 限流/熔断/降级 -->
-		<module>middle-guard/middle-sentinel</module>
-
-		<!-- Job -->
-		<module>middle-job/middle-xxljob</module>
-
-		<!-- DB -->
-		<module>learn-database/frame-relational</module>
-		<module>learn-database/db-elasticsearch</module>
-		<module>learn-database/middle-data</module>
-		<module>learn-database/tech-sharding</module>
-
-		<!-- Frames -->
-		<module>learn-frames/frame-springfamily</module>
 	</modules>
 
 	<properties>
@@ -68,99 +39,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.dir>/Users/official/Code/MyCode/SustainedCode</project.dir>
 		<maven.test.skip>true</maven.test.skip>
-
-		<revision>0.0.1-SNAPSHOT</revision>
-
-		<!-- 框架 -->
-		<spring-boot.version>3.0.0</spring-boot.version>
-		<spring-cloud.version>2022.0.0</spring-cloud.version>
-		<spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
-		<spring-boot-admin.version>3.0.0</spring-boot-admin.version>
-
-		<!-- 工具 -->
-		<guava.version>31.1-jre</guava.version>
-		<lombok.version>1.18.26</lombok.version>
-		<hutool.version>5.8.12</hutool.version>
-		<mapstruct.version>1.5.1.Final</mapstruct.version>
-
-		<!-- 默认插件 ( Maven 有 7 个默认插件 ) -->
-		<plugin.maven-resources.version>3.3.0</plugin.maven-resources.version>
-		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
-		<plugin.maven-compiler.version>3.9.0</plugin.maven-compiler.version>
-		<!-- 其它插件 -->
-		<plugin.maven_flatten.version>1.1.0</plugin.maven_flatten.version>
-		<xxx.version>xxx</xxx.version>
 	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-			<!-- Spring Boot -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<!-- Spring Cloud -->
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<!-- Spring Cloud Alibaba -->
-			<dependency>
-				<groupId>com.alibaba.cloud</groupId>
-				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
-				<version>${spring-cloud-alibaba.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<!-- Spring Admin -->
-			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-starter-client</artifactId>
-				<version>${spring-boot-admin.version}</version>
-			</dependency>
-
-			<!-- 工具 -->
-			<dependency>
-				<groupId>org.mapstruct</groupId>
-				<artifactId>mapstruct</artifactId>
-				<version>${mapstruct.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>${lombok.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>cn.hutool</groupId>
-				<artifactId>hutool-all</artifactId>
-				<version>${hutool.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.code</groupId>
-				<artifactId>utils-common</artifactId>
-				<version>${revision}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.code</groupId>
-				<artifactId>spring-common</artifactId>
-				<version>${revision}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<profiles>
 		<profile>
@@ -205,89 +84,6 @@
 			</testResource>
 		</testResources>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>${plugin.maven-resources.version}</version>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${plugin.maven-compiler.version}</version>
-					<configuration>
-						<annotationProcessorPaths>
-							<path>
-								<groupId>org.projectlombok</groupId>
-								<artifactId>lombok</artifactId>
-								<version>${lombok.version}</version>
-							</path>
-							<!-- 生成映射，实现 bean 之间属性拷贝 -->
-							<path>
-								<groupId>org.mapstruct</groupId>
-								<artifactId>mapstruct-processor</artifactId>
-								<version>${mapstruct.version}</version>
-							</path>
-						</annotationProcessorPaths>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>${plugin.maven-deploy.version}</version>
-				</plugin>
-
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>${spring-boot.version}</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>repackage</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>flatten-maven-plugin</artifactId>
-					<version>${plugin.maven_flatten.version}</version>
-					<executions>
-						<execution>
-							<id>flatten</id>
-							<phase>process-resources</phase>
-							<goals>
-								<goal>flatten</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>flatten.clean</id>
-							<phase>clean</phase>
-							<goals>
-								<goal>clean</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<updatePomFile>true</updatePomFile>
-						<flattenMode>resolveCiFriendliesOnly</flattenMode>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 
 	<!-- <repositories> -->

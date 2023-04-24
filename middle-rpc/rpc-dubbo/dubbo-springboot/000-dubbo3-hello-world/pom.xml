@@ -25,9 +25,9 @@
         <groupId>com.code</groupId>
         <artifactId>dubbo-springboot</artifactId>
         <version>${revision}</version>
-        <relativePath>../000-dubbo-dependencies/dubbo-springboot/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>001-dubbo2-integration-springboot</artifactId>
+    <artifactId>000-dubbo3-hello-world</artifactId>
     <version>${revision}</version>
 
     <packaging>pom</packaging>
@@ -37,12 +37,5 @@
         <module>demo-provider</module>
         <module>demo-consumer</module>
     </modules>
-
-    <properties>
-        <dubbo.version>2.7.22</dubbo.version>
-        <spring-boot.version>2.7.0</spring-boot.version>
-
-        <nacos.version>2.1.0</nacos.version>
-    </properties>
 
 </project>

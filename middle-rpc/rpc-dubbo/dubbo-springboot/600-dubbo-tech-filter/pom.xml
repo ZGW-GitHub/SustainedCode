@@ -23,22 +23,19 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>dubbo3-springcloud</artifactId>
+		<artifactId>dubbo-springboot</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>004-dubbo3-integration-springclooud</artifactId>
+	<artifactId>600-dubbo-tech-filter</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
-	<properties>
-		<spring-boot.version>2.7.0</spring-boot.version>
-		<spring-cloud.version>2021.0.1</spring-cloud.version>
-		<spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
-
-		<dubbo.version>3.0.8</dubbo.version>
-		<nacos.version>2.1.0</nacos.version>
-	</properties>
+	<modules>
+		<module>demo-interface</module>
+		<module>demo-provider</module>
+		<module>demo-consumer</module>
+	</modules>
 
 </project>

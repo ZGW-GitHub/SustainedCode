@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>SustainedCode</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../pom.xml</relativePath>
+        <relativePath>../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>middle-zookeeper</artifactId>
 	<version>${revision}</version>

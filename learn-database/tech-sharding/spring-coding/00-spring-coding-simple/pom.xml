@@ -83,7 +83,7 @@
 
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>spring-common</artifactId>
+			<artifactId>snow-spring-common</artifactId>
 		</dependency>
 	</dependencies>
 
