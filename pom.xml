@@ -30,6 +30,7 @@
 	<modules>
 		<module>dependencies/spring-common</module>
 		<module>dependencies/utils-common</module>
+		<module>dependencies/snow-common-parent</module>
 
 		<!-- RPC -->
 		<module>middle-rpc/rpc-dubbo</module>
