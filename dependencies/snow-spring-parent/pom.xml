@@ -37,7 +37,8 @@
         <module>../../dependencies/snow-common-parent</module>
 
         <!-- RPC -->
-        <module>../../middle-rpc/rpc-dubbo</module>
+        <module>../../middle-rpc/rpc-dubbo/dubbo-springboot</module>
+        <module>../../middle-rpc/rpc-dubbo/dubbo-springcloud</module>
         <module>../../middle-rpc/rpc-feign</module>
 
         <!-- MQ -->
