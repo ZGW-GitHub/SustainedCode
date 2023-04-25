@@ -23,9 +23,9 @@
 
     <parent>
         <groupId>com.code</groupId>
-        <artifactId>frame-relational</artifactId>
+        <artifactId>snow-spring-parent</artifactId>
         <version>${revision}</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
     </parent>
     <artifactId>mybatis-springboot</artifactId>
     <version>${revision}</version>

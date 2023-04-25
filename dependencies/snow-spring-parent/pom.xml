@@ -56,7 +56,6 @@
         <module>../../middle-job/middle-xxljob</module>
 
         <!-- DB -->
-        <module>../../learn-database/frame-relational</module>
         <module>../../learn-database/db-elasticsearch</module>
         <module>../../learn-database/middle-data</module>
         <module>../../learn-database/tech-sharding</module>
