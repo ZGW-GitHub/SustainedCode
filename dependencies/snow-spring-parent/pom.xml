@@ -59,6 +59,11 @@
         <module>../../learn-database/db-elasticsearch</module>
         <module>../../learn-database/middle-data</module>
         <module>../../learn-database/tech-sharding</module>
+        <module>../../learn-database/frame-relational/orm-mybatis/mybatis-spring</module>
+        <module>../../learn-database/frame-relational/orm-mybatis/mybatis-springboot</module>
+        <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-spring</module>
+        <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-springboot</module>
+        <module>../../learn-database/frame-relational/orm-spring-data-jpa</module>
 
         <!-- Frames -->
         <module>../../learn-frames/frame-springfamily</module>
