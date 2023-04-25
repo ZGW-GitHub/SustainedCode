@@ -86,110 +86,110 @@
 
 	</build>
 
-	<!-- <repositories> -->
-	<!-- 	&lt;!&ndash; Central &ndash;&gt; -->
-	<!-- 	<repository> -->
-	<!-- 		<id>central</id> -->
-	<!-- 		<url>https://repo.maven.apache.org/maven2/</url> -->
-	<!-- 		<releases> -->
-	<!-- 			<enabled>true</enabled> -->
-	<!-- 			<updatePolicy>daily</updatePolicy> -->
-	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
-	<!-- 		</releases> -->
-	<!-- 		<snapshots> -->
-	<!-- 			<enabled>false</enabled> -->
-	<!-- 		</snapshots> -->
-	<!-- 	</repository> -->
-	<!-- 	&lt;!&ndash; Spring &ndash;&gt; -->
-	<!-- 	<repository> -->
-	<!-- 		<id>spring-releases</id> -->
-	<!-- 		<url>https://repo.spring.io/artifactory/libs-release/</url> -->
-	<!-- 		<releases> -->
-	<!-- 			<enabled>true</enabled> -->
-	<!-- 			<updatePolicy>daily</updatePolicy> -->
-	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
-	<!-- 		</releases> -->
-	<!-- 		<snapshots> -->
-	<!-- 			<enabled>false</enabled> -->
-	<!-- 		</snapshots> -->
-	<!-- 	</repository> -->
-	<!-- 	<repository> -->
-	<!-- 		<id>spring-milestones</id> -->
-	<!-- 		<url>https://repo.spring.io/artifactory/libs-milestone/</url> -->
-	<!-- 		<releases> -->
-	<!-- 			<enabled>true</enabled> -->
-	<!-- 			<updatePolicy>interval:60</updatePolicy> -->
-	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
-	<!-- 		</releases> -->
-	<!-- 		<snapshots> -->
-	<!-- 			<enabled>false</enabled> -->
-	<!-- 		</snapshots> -->
-	<!-- 	</repository> -->
-	<!-- 	<repository> -->
-	<!-- 		<id>spring-snapshots</id> -->
-	<!-- 		<url>https://repo.spring.io/artifactory/libs-snapshot/</url> -->
-	<!-- 		<releases> -->
-	<!-- 			<enabled>false</enabled> -->
-	<!-- 		</releases> -->
-	<!-- 		<snapshots> -->
-	<!-- 			<enabled>true</enabled> -->
-	<!-- 			<updatePolicy>interval:10</updatePolicy> -->
-	<!-- 			<checksumPolicy>fail</checksumPolicy> -->
-	<!-- 		</snapshots> -->
-	<!-- 	</repository> -->
-	<!-- </repositories> -->
+	<!--<repositories>
+        &lt;!&ndash; Central &ndash;&gt;
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        &lt;!&ndash; Spring &ndash;&gt;
+        <repository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/artifactory/libs-release/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>https://repo.spring.io/artifactory/libs-milestone/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>interval:60</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <url>https://repo.spring.io/artifactory/libs-snapshot/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>interval:10</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
-	<pluginRepositories>
-		<!-- Central -->
-		<pluginRepository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<!-- Spring -->
-		<pluginRepository>
-			<id>spring-releases</id>
-			<url>https://repo.spring.io/artifactory/plugins-release/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<url>https://repo.spring.io/artifactory/plugins-milestone/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>interval:60</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<url>https://repo.spring.io/artifactory/plugins-snapshot/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>interval:10</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+   <pluginRepositories>
+       &lt;!&ndash; Central &ndash;&gt;
+       <pluginRepository>
+           <id>central</id>
+           <url>https://repo.maven.apache.org/maven2/</url>
+           <releases>
+               <enabled>true</enabled>
+               <updatePolicy>daily</updatePolicy>
+               <checksumPolicy>fail</checksumPolicy>
+           </releases>
+           <snapshots>
+               <enabled>false</enabled>
+           </snapshots>
+       </pluginRepository>
+       &lt;!&ndash; Spring &ndash;&gt;
+       <pluginRepository>
+           <id>spring-releases</id>
+           <url>https://repo.spring.io/artifactory/plugins-release/</url>
+           <releases>
+               <enabled>true</enabled>
+               <updatePolicy>daily</updatePolicy>
+               <checksumPolicy>fail</checksumPolicy>
+           </releases>
+           <snapshots>
+               <enabled>false</enabled>
+           </snapshots>
+       </pluginRepository>
+       <pluginRepository>
+           <id>spring-milestones</id>
+           <url>https://repo.spring.io/artifactory/plugins-milestone/</url>
+           <releases>
+               <enabled>true</enabled>
+               <updatePolicy>interval:60</updatePolicy>
+               <checksumPolicy>fail</checksumPolicy>
+           </releases>
+           <snapshots>
+               <enabled>false</enabled>
+           </snapshots>
+       </pluginRepository>
+       <pluginRepository>
+           <id>spring-snapshots</id>
+           <url>https://repo.spring.io/artifactory/plugins-snapshot/</url>
+           <releases>
+               <enabled>false</enabled>
+           </releases>
+           <snapshots>
+               <enabled>true</enabled>
+               <updatePolicy>interval:10</updatePolicy>
+               <checksumPolicy>fail</checksumPolicy>
+           </snapshots>
+       </pluginRepository>
+   </pluginRepositories>-->
 
 </project>
