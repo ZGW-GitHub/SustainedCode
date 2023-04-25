@@ -41,9 +41,11 @@ public class DemoController {
 	private DemoService demoService;
 
 	@PostMapping("demo")
-	public String demo(@RequestBody @Valid @NotNull DemoReqVO reqVO) {
+	public String demo(@RequestBody @NotNull @Valid DemoReqVO reqVO) {
+		log.debug("service 调用前 ...");
 		demoService.demo(new DemoReqDTO().setAge(reqVO.getAge()).setName(reqVO.getName()));
 		// demoService.demo(null);
+		log.debug("service 调用后 ...");
 
 		return "SUCCESS";
 	}

@@ -32,6 +32,7 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public void demo(DemoReqDTO demoReqDTO) {
+        log.debug("service 执行中 ...");
         System.err.println(demoReqDTO);
     }
 
