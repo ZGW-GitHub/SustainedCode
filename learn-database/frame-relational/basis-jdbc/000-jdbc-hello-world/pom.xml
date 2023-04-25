@@ -23,13 +23,26 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>basis-jdbc</artifactId>
+		<artifactId>snow-common-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>000-jdbc-hello-world</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-common</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

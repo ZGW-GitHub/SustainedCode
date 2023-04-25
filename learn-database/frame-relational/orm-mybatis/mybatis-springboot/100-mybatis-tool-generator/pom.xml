@@ -45,6 +45,7 @@
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>${mybatis-generator.version}</version>
 
 				<configuration>
 					<!-- 代码生成器的配置文件位置 -->

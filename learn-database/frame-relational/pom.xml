@@ -33,7 +33,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>basis-jdbc</module>
 		<module>orm-mybatis/mybatis-spring</module>
 		<module>orm-mybatis/mybatis-springboot</module>
 		<module>orm-mybatis-plus/mybatis-plus-spring</module>
