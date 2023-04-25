@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.validation.service;
+package com.code.spring.service;
 
-import com.code.spring.validation.service.dto.DemoReqDTO;
+import com.code.spring.service.dto.DemoReqDTO;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -30,6 +30,6 @@ import javax.validation.constraints.NotNull;
 @Validated
 public interface DemoService {
 
-	void demo(@Valid @NotNull DemoReqDTO demoReqDTO);
+    void demo(@Valid @NotNull DemoReqDTO demoReqDTO);
 
 }

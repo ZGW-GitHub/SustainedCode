@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.validation.service.dto;
+package com.code.spring.controller.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -26,17 +26,17 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @author Snow
- * @date 2022/7/31 16:17
+ * @date 2022/7/31 16:14
  */
 @Slf4j
 @Data
 @Accessors(chain = true)
-public class DemoReqDTO {
+public class DemoReqVO {
 
-	@NotNull(message = "name 不能为空")
-	private String name;
+    @NotNull(message = "name 不能为空")
+    private String name;
 
-	@Max(value = 200, message = "age 不能超过 200")
-	private Integer age;
+    @Max(value = 200, message = "age 不能超过 200")
+    private Integer age;
 
 }

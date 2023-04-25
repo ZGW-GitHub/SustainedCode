@@ -15,10 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.validation.service.impl;
+package com.code.spring.service.impl;
 
-import com.code.spring.validation.service.DemoService;
-import com.code.spring.validation.service.dto.DemoReqDTO;
+import com.code.spring.service.DemoService;
+import com.code.spring.service.dto.DemoReqDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +30,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoServiceImpl implements DemoService {
 
-	@Override
-	public void demo(DemoReqDTO demoReqDTO) {
-		System.err.println(demoReqDTO);
-	}
+    @Override
+    public void demo(DemoReqDTO demoReqDTO) {
+        System.err.println(demoReqDTO);
+    }
 
 }

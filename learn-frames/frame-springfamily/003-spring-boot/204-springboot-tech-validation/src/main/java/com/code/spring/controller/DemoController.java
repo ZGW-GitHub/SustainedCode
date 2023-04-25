@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.validation.controller;
+package com.code.spring.controller;
 
-import com.code.spring.validation.controller.vo.DemoReqVO;
-import com.code.spring.validation.service.DemoService;
-import com.code.spring.validation.service.dto.DemoReqDTO;
+import com.code.spring.controller.vo.DemoReqVO;
+import com.code.spring.service.DemoService;
+import com.code.spring.service.dto.DemoReqDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
