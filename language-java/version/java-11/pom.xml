@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>SustainedCode</artifactId>
+		<artifactId>language-java</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../../pom.xml</relativePath>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<artifactId>java-11</artifactId>
 	<version>${revision}</version>
@@ -37,12 +37,5 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>snow-common</artifactId>
-		</dependency>
-	</dependencies>
 
 </project>

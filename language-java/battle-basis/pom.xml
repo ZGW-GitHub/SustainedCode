@@ -23,26 +23,13 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>SustainedCode</artifactId>
+		<artifactId>language-java</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>battle-basis</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
-
-	<properties>
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>snow-common</artifactId>
-		</dependency>
-	</dependencies>
 
 </project>

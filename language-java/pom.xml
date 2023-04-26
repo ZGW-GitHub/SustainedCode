@@ -16,31 +16,43 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>language-java</artifactId>
+		<artifactId>snow-common-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>battle-io</artifactId>
-	<version>${revision}</version>
+	<artifactId>language-java</artifactId>
 
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>battle-basis</module>
+		<module>battle-collection</module>
+		<module>battle-io</module>
+		<module>battle-net</module>
+		<module>battle-proxy</module>
+		<module>battle-thread</module>
+		<module>version/java-8</module>
+		<module>version/java-11</module>
+		<module>version/java-17</module>
+	</modules>
 
 	<properties>
-		<netty.version>4.1.86.Final</netty.version>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>${netty.version}</version>
+			<groupId>com.code</groupId>
+			<artifactId>snow-common</artifactId>
 		</dependency>
 	</dependencies>
 
