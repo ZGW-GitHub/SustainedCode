@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>SustainedCode</artifactId>
+		<artifactId>snow-common-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../../pom.xml</relativePath>
+		<relativePath>../../../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>xa-mysql</artifactId>
 	<version>${revision}</version>
