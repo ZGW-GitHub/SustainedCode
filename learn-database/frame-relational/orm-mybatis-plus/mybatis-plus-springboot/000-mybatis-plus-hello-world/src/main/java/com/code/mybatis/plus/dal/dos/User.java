@@ -44,15 +44,14 @@ import static com.baomidou.mybatisplus.annotation.FieldFill.INSERT_UPDATE;
 public class User extends Model<User> implements Serializable {
 
 	@Serial
-	private static final long serialVersionUID = 581250510740483483L;
-
-	private Integer    id;
-	private Long  recordId;
-	private String  name;
-	private Integer age;
+	private static final long    serialVersionUID = 581250510740483483L;
+	private              Integer id;
+	private              Long    recordId;
+	private              String  name;
+	private              Integer age;
 	@TableField(fill = INSERT)
-	private Date    createTime;
+	private              Date    createTime;
 	@TableField(fill = INSERT_UPDATE)
-	private Date    updateTime;
+	private              Date    updateTime;
 
 }

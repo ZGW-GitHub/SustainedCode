@@ -25,8 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.LongStream;
 
 /**
  * @author Snow
@@ -48,31 +46,16 @@ public class DemoController {
 		return "SUCCESS";
 	}
 
-	@PostMapping("batchA")
-	public String batch_a() {
-		List<User> userList = LongStream.rangeClosed(1, 20).boxed()
-				.map(i -> {
-					if (i == 17) {
-						return new User().setName("这里名字超出限制，在保存时会发生异常").setAge(i.intValue());
-					}
-					return new User().setName("test" + i).setAge(i.intValue());
-				}).toList();
-
-		userService.saveBatch(userList, 6);
+	@PostMapping("batchSaveByMybatis")
+	public String batchSaveByMybatis() {
+		userService.batchSaveByMybatis();
 
 		return "SUCCESS";
 	}
 
-	@PostMapping("batchB")
-	public String batch_b() {
-		userService.batch_b();
-
-		return "SUCCESS";
-	}
-
-	@PostMapping("batchC")
-	public String batch_c() {
-		userService.batch_c();
+	@PostMapping("batchSaveByCustom")
+	public String batchSaveByCustom() {
+		userService.batchSaveByCustom();
 
 		return "SUCCESS";
 	}

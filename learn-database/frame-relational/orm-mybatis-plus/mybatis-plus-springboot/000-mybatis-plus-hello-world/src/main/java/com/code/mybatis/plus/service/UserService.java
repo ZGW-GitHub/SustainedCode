@@ -27,8 +27,8 @@ public interface UserService extends IService<User> {
 
 	void transaction(User user);
 
-	void batch_b();
+	void batchSaveByMybatis();
 
-	void batch_c();
+	void batchSaveByCustom();
 
 }

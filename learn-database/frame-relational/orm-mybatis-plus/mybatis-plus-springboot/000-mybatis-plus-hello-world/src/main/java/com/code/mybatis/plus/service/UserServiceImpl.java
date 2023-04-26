@@ -53,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	}
 
 	/**
-	 * batch_b 方法上是否使用 {@link Transactional @Transactional} 注解，不同的选择要使用不同的代码：
+	 * batchSaveByMybatis 方法上是否使用 {@link Transactional @Transactional} 注解，不同的选择要使用不同的代码：
 	 * <p>1、使用 {@link Transactional @Transactional} 注解：
 	 * <p>- 既可以通过 this 调用 saveBatch()
 	 * <p>- 也可以通过 AopContext.currentProxy() 获取代理对象，再利用代理对象调用 saveBatch()
@@ -62,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	 */
 	@Override
 	@Transactional
-	public void batch_b() {
+	public void batchSaveByMybatis() {
 		List<User> userList = LongStream.rangeClosed(1, 20).boxed()
 				.map(i -> {
 					if (i == 17) {
@@ -79,7 +79,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	 */
 	@Override
 	@Transactional
-	public void batch_c() {
+	public void batchSaveByCustom() {
 		List<User> userList = LongStream.rangeClosed(1, 20).boxed()
 				.map(i -> {
 					if (i == 17) {
