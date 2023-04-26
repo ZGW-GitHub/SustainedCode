@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../../../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>xa-mysql</artifactId>
+	<artifactId>java-jta-by-atomiks-mysql</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
