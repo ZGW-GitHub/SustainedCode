@@ -58,7 +58,6 @@
         <!-- DB -->
         <module>../../learn-database/db-elasticsearch</module>
         <module>../../learn-database/middle-data</module>
-        <module>../../learn-database/tech-sharding</module>
         <module>../../learn-database/db-redis/redis-springboot</module>
         <module>../../learn-database/frame-relational/basis-jdbc</module>
         <module>../../learn-database/frame-relational/orm-mybatis/mybatis-spring</module>
@@ -66,6 +65,8 @@
         <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-spring</module>
         <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-springboot</module>
         <module>../../learn-database/frame-relational/orm-spring-data-jpa</module>
+        <module>../../learn-database/tech-sharding/spring-coding</module>
+        <module>../../learn-database/tech-sharding/middle-sharding-jdbc/sharding-jdbc-springboot</module>
 
         <!-- Frames -->
         <module>../../learn-frames/frame-springfamily</module>

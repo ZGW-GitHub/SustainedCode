@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>tech-sharding</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>sharding-jdbc-springboot</artifactId>
 	<version>${revision}</version>
@@ -40,63 +40,39 @@
 		<mybatis-tool-mapper-starter.version>4.2.2</mybatis-tool-mapper-starter.version>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.apache.shardingsphere</groupId>
-				<artifactId>shardingsphere-jdbc-core</artifactId>
-				<version>${shardingsphere.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.shardingsphere</groupId>
-				<artifactId>shardingsphere-transaction-xa-core</artifactId>
-				<version>${shardingsphere.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.mybatis.spring.boot</groupId>
-				<artifactId>mybatis-spring-boot-starter</artifactId>
-				<version>${mybatis-starter.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>tk.mybatis</groupId>
-				<artifactId>mapper-spring-boot-starter</artifactId>
-				<version>${mybatis-tool-mapper-starter.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.mybatis</groupId>
-						<artifactId>mybatis</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.mybatis</groupId>
-						<artifactId>mybatis-spring</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.shardingsphere</groupId>
 			<artifactId>shardingsphere-jdbc-core</artifactId>
+			<version>${shardingsphere.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.shardingsphere</groupId>
 			<artifactId>shardingsphere-transaction-xa-core</artifactId>
+			<version>${shardingsphere.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-starter.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tk.mybatis</groupId>
 			<artifactId>mapper-spring-boot-starter</artifactId>
+			<version>${mybatis-tool-mapper-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mybatis</groupId>
+					<artifactId>mybatis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mybatis</groupId>
+					<artifactId>mybatis-spring</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>

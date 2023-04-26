@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>tech-sharding</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>spring-coding</artifactId>
 	<version>${revision}</version>
