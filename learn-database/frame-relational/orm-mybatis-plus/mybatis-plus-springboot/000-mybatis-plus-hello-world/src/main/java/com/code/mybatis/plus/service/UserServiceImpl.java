@@ -52,16 +52,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 		throw new ArithmeticException();
 	}
 
-	/**
-	 * batchSaveByMybatis 方法上是否使用 {@link Transactional @Transactional} 注解，不同的选择要使用不同的代码：
-	 * <p>1、使用 {@link Transactional @Transactional} 注解：
-	 * <p>- 既可以通过 this 调用 saveBatch()
-	 * <p>- 也可以通过 AopContext.currentProxy() 获取代理对象，再利用代理对象调用 saveBatch()
-	 * <p>2、不使用 {@link Transactional @Transactional} 注解：
-	 * <p>- 必须通过 AopContext.currentProxy() 获取代理对象，再利用代理对象调用 saveBatch() 。否则 saveBatch() 方法上的 @Transactional 注解将失效。（查看：自调用导致 Spring 事务失效）
-	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void batchSaveByMybatis() {
 		List<User> userList = LongStream.rangeClosed(1, 20).boxed()
 				.map(i -> {
@@ -78,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	 * 摘抄自 MyBatis 批量操作
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void batchSaveByCustom() {
 		List<User> userList = LongStream.rangeClosed(1, 20).boxed()
 				.map(i -> {
