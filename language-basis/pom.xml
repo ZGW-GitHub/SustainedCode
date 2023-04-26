@@ -16,26 +16,37 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>language-basis</artifactId>
+		<artifactId>snow-common-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>design-pattern</artifactId>
-	<version>${revision}</version>
+	<artifactId>language-basis</artifactId>
 
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>data-structure</module>
+		<module>design-pattern</module>
+	</modules>
 
 	<properties>
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-common</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>
