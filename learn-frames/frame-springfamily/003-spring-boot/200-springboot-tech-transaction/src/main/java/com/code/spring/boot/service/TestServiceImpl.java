@@ -20,12 +20,14 @@ package com.code.spring.boot.service;
 import cn.hutool.core.util.RandomUtil;
 import com.code.spring.boot.dal.dos.User;
 import com.code.spring.boot.dal.repository.UserRepository;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Snow
@@ -39,12 +41,16 @@ public class TestServiceImpl implements TestService {
 	private UserRepository userRepository;
 
 	@Override
-	@Transactional
+	@SneakyThrows
+	@Transactional(rollbackFor = Exception.class)
 	public String test1() {
-		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-test-1").setAge(16));
+		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-1").setAge(16));
 
-		this.test2();
-		// ((TestService) AopContext.currentProxy()).test2();
+		TimeUnit.SECONDS.sleep(1);
+
+		// 通过下面两种不同的调用可以发现只有 ② 的调用方式 test2 方法的 @Transaction 才会生效
+		this.test2(); // ①
+		// ((TestService) AopContext.currentProxy()).test2(); // ②
 
 		int i = 10 / 0;
 
@@ -52,14 +58,15 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
+	@SneakyThrows
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public String test2() {
 		log.info("test2 run ...");
-		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-test-2").setAge(16));
+		TimeUnit.SECONDS.sleep(1);
 
-		// int i = 10 / 0;
+		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-2").setAge(16));
 
-		return "Test2";
+		return "SUCCESS";
 	}
 
 }

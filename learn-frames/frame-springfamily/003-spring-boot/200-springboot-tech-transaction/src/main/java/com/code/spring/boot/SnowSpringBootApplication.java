@@ -25,10 +25,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2020/7/31 11:48 上午
  */
 @SpringBootApplication
-public class TransactionApplication {
+public class SnowSpringBootApplication {
 	public static void main(String[] args) {
 
-		new SpringApplicationBuilder(TransactionApplication.class).run(args);
+		new SpringApplicationBuilder(SnowSpringBootApplication.class).run(args);
 
 	}
 }
