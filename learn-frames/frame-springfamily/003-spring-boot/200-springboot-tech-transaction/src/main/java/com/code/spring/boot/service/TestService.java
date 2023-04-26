@@ -15,36 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction.dal.dos;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.io.Serial;
-import java.io.Serializable;
+package com.code.spring.boot.service;
 
 /**
  * @author Snow
- * @date 2020/7/31 2:07 下午
+ * @date 2022/7/1 10:50
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "user")
-public class User implements Serializable {
+public interface TestService {
 
-	@Serial
-	private static final long serialVersionUID = -4551732265088598447L;
+	String test1();
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String  name;
-	private Integer age;
+	String test2();
 
 }

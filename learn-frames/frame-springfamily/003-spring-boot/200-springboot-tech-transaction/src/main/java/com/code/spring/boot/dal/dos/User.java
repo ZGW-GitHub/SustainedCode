@@ -15,16 +15,36 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction.configuration;
+package com.code.spring.boot.dal.dos;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Snow
- * @date 2022/9/28 11:24
+ * @date 2020/7/31 2:07 下午
  */
-@Configuration
-@EnableAspectJAutoProxy(exposeProxy = true)
-public class AopConfiguration {
+@Data
+@Accessors(chain = true)
+@Entity
+@Table(name = "user")
+public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -4551732265088598447L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Long    recordId;
+    private String  name;
+    private Integer age;
+    private Date    createTime;
+    private Date    updateTime;
+
 }

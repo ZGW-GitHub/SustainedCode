@@ -15,29 +15,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction.controller;
+package com.code.spring.boot.dal.repository;
 
-import com.code.spring.transaction.service.TestService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
+import com.code.spring.boot.dal.dos.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Snow
- * @date 2022/5/5 21:32
+ * @date 2020/7/31 2:08 下午
  */
-@Slf4j
-@RestController
-public class TestController {
-
-	@Resource
-	private TestService testService;
-
-	@PostMapping("test")
-	public String test() {
-		return testService.test1();
-	}
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }

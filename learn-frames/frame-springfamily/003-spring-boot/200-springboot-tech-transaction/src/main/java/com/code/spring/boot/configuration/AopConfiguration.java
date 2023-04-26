@@ -15,16 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction.service;
+package com.code.spring.boot.configuration;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author Snow
- * @date 2022/7/1 10:50
+ * @date 2022/9/28 11:24
  */
-public interface TestService {
-
-	String test1();
-
-	String test2();
-
+@Configuration
+@EnableAspectJAutoProxy(exposeProxy = true)
+public class AopConfiguration {
 }

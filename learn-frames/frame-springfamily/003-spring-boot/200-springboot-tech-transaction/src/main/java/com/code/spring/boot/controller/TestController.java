@@ -15,20 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction;
+package com.code.spring.boot.controller;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.code.spring.boot.service.TestService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @author Snow
- * @date 2020/7/31 11:48 上午
+ * @date 2022/5/5 21:32
  */
-@SpringBootApplication
-public class TransactionApplication {
-	public static void main(String[] args) {
+@Slf4j
+@RestController
+public class TestController {
 
-		new SpringApplicationBuilder(TransactionApplication.class).run(args);
+	@Resource
+	private TestService testService;
 
+	@PostMapping("test")
+	public String test() {
+		return testService.test1();
 	}
+
 }

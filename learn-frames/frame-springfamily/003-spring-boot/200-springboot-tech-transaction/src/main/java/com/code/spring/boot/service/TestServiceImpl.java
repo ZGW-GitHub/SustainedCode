@@ -15,13 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction.service;
+package com.code.spring.boot.service;
 
-import com.code.spring.transaction.dal.dos.User;
-import com.code.spring.transaction.dal.repository.UserRepository;
+import cn.hutool.core.util.RandomUtil;
+import com.code.spring.boot.dal.dos.User;
+import com.code.spring.boot.dal.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -40,16 +41,23 @@ public class TestServiceImpl implements TestService {
 	@Override
 	@Transactional
 	public String test1() {
-		userRepository.save(User.builder().name("test").age(16).build());
+		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-test-1").setAge(16));
 
-		// int i = 10 / 0;
-		return ((TestService) AopContext.currentProxy()).test2();
+		this.test2();
+		// ((TestService) AopContext.currentProxy()).test2();
+
+		int i = 10 / 0;
+
+		return "SUCCESS";
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public String test2() {
 		log.info("test2 run ...");
+		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-test-2").setAge(16));
+
+		// int i = 10 / 0;
 
 		return "Test2";
 	}

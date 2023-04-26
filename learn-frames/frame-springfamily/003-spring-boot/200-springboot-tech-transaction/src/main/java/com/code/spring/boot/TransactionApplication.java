@@ -15,17 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.transaction.dal.repository;
+package com.code.spring.boot;
 
-import com.code.spring.transaction.dal.dos.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
  * @author Snow
- * @date 2020/7/31 2:08 下午
+ * @date 2020/7/31 11:48 上午
  */
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+@SpringBootApplication
+public class TransactionApplication {
+	public static void main(String[] args) {
 
+		new SpringApplicationBuilder(TransactionApplication.class).run(args);
+
+	}
 }
