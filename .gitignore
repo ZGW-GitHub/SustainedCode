@@ -42,3 +42,4 @@ rebel.xml
 temp.*
 .flattened-pom.xml
 x-properties/**
+language-python/check-in.py
