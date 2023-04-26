@@ -40,6 +40,11 @@
     <properties>
         <revision>0.0.1-SNAPSHOT</revision>
 
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.dir>/Users/official/Code/MyCode/SustainedCode</project.dir>
+
         <guava.version>31.1-jre</guava.version>
         <lombok.version>1.18.26</lombok.version>
         <hutool.version>5.8.12</hutool.version>
@@ -83,7 +88,49 @@
         </dependencies>
     </dependencyManagement>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <filters>
+                    <filter>${project.dir}/x-properties/dev.properties</filter>
+                </filters>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
+        <resources>
+            <resource>
+                <directory>${pom.basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.txt</include>
+                    <include>META-INF/**/**</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>${pom.basedir}/src/test/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.txt</include>
+                    <include>META-INF/**/**</include>
+                </includes>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
