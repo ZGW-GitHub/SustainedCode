@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
 		TransactionStatus status1 = transactionManager.getTransaction(new DefaultTransactionDefinition());
 		TransactionStatus status2 = transactionManager.getTransaction(new DefaultTransactionDefinition());
 		try {
-			firstUserMapper.save(new FirstUser().setName("test").setAge(16));
-			secondUserMapper.save(new SecondUser().setName("test").setAge(18));
+			firstUserMapper.save(new FirstUser().setRecordId(RandomUtil.randomLong()).setName("test").setAge(16));
+			secondUserMapper.save(new SecondUser().setRecordId(RandomUtil.randomLong()).setName("test").setAge(18));
 
 			// log.info("触发异常：{}", 1 / 0);
 
@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
 			transactionManager.commit(status2);
 			transactionManager.commit(status1);
 		} catch (Exception e) {
+			log.error("保存发生异常：{}", e.getMessage(), e);
 			// 注意 rollback 顺序：status1 先开启的并且配置的为可传播，则 status1 [必须]在 status2 之后 rollback
 			transactionManager.rollback(status2);
 			transactionManager.rollback(status1);
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	public void transactionByAnnoInner() {
-		secondUserMapper.save(new SecondUser().setName("test").setAge(18));
+		secondUserMapper.save(new SecondUser().setRecordId(RandomUtil.randomLong()).setName("test").setAge(18));
 
 		// log.info("触发异常：{}", 1 / 0);
 	}

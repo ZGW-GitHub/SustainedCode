@@ -5,5 +5,5 @@ spring:
     import:
       - application-datasource.yml
       - application-mybatis.yml
-      #      - application-atomikos.yml
+      - application-atomikos.yml
       - application-log.yml

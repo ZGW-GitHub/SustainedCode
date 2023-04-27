@@ -2,5 +2,6 @@ spring:
   jta:
     atomikos:
       properties:
-        default-jta-timeout: 300000
-        max-timeout: 900000
+        default-jta-timeout: 200000
+        max-timeout: 600000
+        default-max-wait-time-on-shutdown: 60000
