@@ -1,4 +1,4 @@
 logging:
   level:
     com.code: debug
-    com.code.mybatis.dal.mapper: trace
+    com.code.jta.dal: trace
