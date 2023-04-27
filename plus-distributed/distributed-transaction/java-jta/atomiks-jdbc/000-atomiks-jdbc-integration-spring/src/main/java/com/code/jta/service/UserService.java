@@ -15,21 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jta;
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+package com.code.jta.service;
 
 /**
  * @author Snow
- * @date 2023/4/27 15:10
+ * @date 2022/10/17 09:58
  */
-@SpringBootApplication
-public class JtaApplication {
-	public static void main(String[] args) {
+public interface UserService {
 
-		// 参考文章：https://juejin.cn/post/6844904045417594888
-		new SpringApplicationBuilder(JtaApplication.class).run(args);
+	void demo();
 
-	}
+	void transactionByCode();
+
+	void transactionByAnno();
+
 }

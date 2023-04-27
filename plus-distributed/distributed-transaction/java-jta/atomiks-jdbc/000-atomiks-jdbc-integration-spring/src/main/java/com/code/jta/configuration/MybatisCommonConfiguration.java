@@ -15,21 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jta;
+package com.code.jta.configuration;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2023/4/27 15:10
+ * @date 2023/4/7 13:32
  */
-@SpringBootApplication
-public class JtaApplication {
-	public static void main(String[] args) {
+@Slf4j
+@Configuration
+public class MybatisCommonConfiguration {
 
-		// 参考文章：https://juejin.cn/post/6844904045417594888
-		new SpringApplicationBuilder(JtaApplication.class).run(args);
-
+	@Bean
+	@ConfigurationProperties("mybatis.configuration")
+	public org.apache.ibatis.session.Configuration configuration() {
+		return new org.apache.ibatis.session.Configuration();
 	}
+
 }

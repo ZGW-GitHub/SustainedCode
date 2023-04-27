@@ -15,21 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jta;
+package com.code.jta.mapper;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.code.jta.JtaApplicationTest;
+import com.code.jta.dal.first.dos.FirstUser;
+import com.code.jta.dal.first.mapper.FirstUserMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Snow
- * @date 2023/4/27 15:10
+ * @date 2023/4/7 11:09
  */
-@SpringBootApplication
-public class JtaApplication {
-	public static void main(String[] args) {
+@Slf4j
+public class SelectTest extends JtaApplicationTest {
 
-		// 参考文章：https://juejin.cn/post/6844904045417594888
-		new SpringApplicationBuilder(JtaApplication.class).run(args);
+	@Resource
+	private FirstUserMapper firstUserMapper;
 
+	@Test
+	void demo() {
+		List<FirstUser> userList = firstUserMapper.listAll();
+		userList = Optional.ofNullable(userList).orElse(Collections.emptyList());
+
+		userList.forEach(System.err::println);
 	}
+
 }

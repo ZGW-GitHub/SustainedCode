@@ -1,0 +1,20 @@
+### Demo
+POST http://localhost:65000/demo
+Content-Type: application/json
+
+{
+}
+
+### 编程式事务测试
+POST http://localhost:65000/transaction/code
+Content-Type: application/json
+
+{
+}
+
+### 声明式事务测试
+POST http://localhost:65000/transaction/anno
+Content-Type: application/json
+
+{
+}

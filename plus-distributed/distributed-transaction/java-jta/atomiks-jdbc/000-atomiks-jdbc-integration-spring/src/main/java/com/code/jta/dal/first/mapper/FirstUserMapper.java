@@ -15,21 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jta;
+package com.code.jta.dal.first.mapper;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.code.jta.dal.first.dos.FirstUser;
+
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2023/4/27 15:10
+ * @date 2020/8/14 11:49 上午
  */
-@SpringBootApplication
-public class JtaApplication {
-	public static void main(String[] args) {
+public interface FirstUserMapper {
 
-		// 参考文章：https://juejin.cn/post/6844904045417594888
-		new SpringApplicationBuilder(JtaApplication.class).run(args);
+	/**
+	 * 保存实体
+	 *
+	 * @param firstUser 实体
+	 * @return 影响行数
+	 */
+	int save(FirstUser firstUser);
 
-	}
+	List<FirstUser> listAll();
+
 }

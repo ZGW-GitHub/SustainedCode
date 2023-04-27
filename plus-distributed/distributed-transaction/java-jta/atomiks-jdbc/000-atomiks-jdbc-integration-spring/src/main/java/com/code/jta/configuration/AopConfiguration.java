@@ -15,21 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.jta;
+package com.code.jta.configuration;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author Snow
- * @date 2023/4/27 15:10
+ * @date 2023/4/5 15:43
  */
-@SpringBootApplication
-public class JtaApplication {
-	public static void main(String[] args) {
-
-		// 参考文章：https://juejin.cn/post/6844904045417594888
-		new SpringApplicationBuilder(JtaApplication.class).run(args);
-
-	}
+@Slf4j
+@Configuration(proxyBeanMethods = false)
+@EnableAspectJAutoProxy(exposeProxy = true)
+public class AopConfiguration {
 }
