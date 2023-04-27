@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.xa.mysql;
+package com.code.jta;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlXAConnection;
 import com.mysql.jdbc.jdbc2.optional.MysqlXid;

@@ -25,18 +25,31 @@
 		<groupId>com.code</groupId>
 		<artifactId>snow-common-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../../dependencies/snow-common-parent/pom.xml</relativePath>
+		<relativePath>../../../../../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>java-jta-by-atomiks-mysql</artifactId>
+	<artifactId>0-java-native</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
 
 	<properties>
+		<atomikos.version>5.0.9</atomikos.version>
 		<mysql.version>5.1.38</mysql.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions-jdbc</artifactId>
+			<version>${atomikos.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
