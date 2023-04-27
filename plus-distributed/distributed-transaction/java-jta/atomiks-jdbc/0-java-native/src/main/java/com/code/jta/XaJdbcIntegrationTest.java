@@ -39,8 +39,7 @@ public class XaJdbcIntegrationTest {
 	 */
 
 	@BeforeAll
-	public void checkTables()
-			throws Exception {
+	public void checkTables() throws Exception {
 		boolean    error = false;
 		Connection conn  = null;
 		try {
@@ -59,11 +58,9 @@ public class XaJdbcIntegrationTest {
 			} catch (SQLException ex) {
 				// table not there => create it
 				System.err.println("Creating Accounts table...");
-				s.executeUpdate("create table Accounts ( " +
-						" account VARCHAR ( 20 ), owner VARCHAR(300), balance DECIMAL (19,0) )");
+				s.executeUpdate("create table Accounts ( " + " account VARCHAR ( 20 ), owner VARCHAR(300), balance DECIMAL (19,0) )");
 				for (int i = 0; i < 100; i++) {
-					s.executeUpdate("insert into Accounts values ( " +
-							"'account" + i + "' , 'owner" + i + "', 10000 )");
+					s.executeUpdate("insert into Accounts values ( " + "'account" + i + "' , 'owner" + i + "', 10000 )");
 				}
 			}
 			s.close();
@@ -117,8 +114,7 @@ public class XaJdbcIntegrationTest {
 	 * @return Connection The connection.
 	 */
 
-	private static Connection getConnection()
-			throws Exception {
+	private static Connection getConnection() throws Exception {
 		DataSource ds   = getDataSource();
 		Connection conn = null;
 
@@ -148,35 +144,29 @@ public class XaJdbcIntegrationTest {
 	 *              If false, the transaction will be committed.
 	 */
 
-	private static void closeConnection(Connection conn, boolean error)
-			throws Exception {
+	private static void closeConnection(Connection conn, boolean error) throws Exception {
 		if (conn != null) conn.close();
 
 		UserTransaction utx = new UserTransactionImp();
 		if (utx.getStatus() != Status.STATUS_NO_TRANSACTION) {
-			if (error)
-				utx.rollback();
-			else
-				utx.commit();
+			if (error) utx.rollback();
+			else utx.commit();
 		} else System.out.println("WARNING: closeConnection called outside a tx");
 
 	}
 
 
-	public static long getBalance(int account)
-			throws Exception {
+	public static long getBalance(int account) throws Exception {
 		long       res   = -1;
 		boolean    error = false;
 		Connection conn  = null;
 
 		try {
 			conn = getConnection();
-			Statement s = conn.createStatement();
-			String query = "select balance from Accounts where account='"
-					+ "account" + account + "'";
-			ResultSet rs = s.executeQuery(query);
-			if (rs == null || !rs.next())
-				throw new Exception("Account not found: " + account);
+			Statement s     = conn.createStatement();
+			String    query = "select balance from Accounts where account='" + "account" + account + "'";
+			ResultSet rs    = s.executeQuery(query);
+			if (rs == null || !rs.next()) throw new Exception("Account not found: " + account);
 			res = rs.getLong(1);
 			s.close();
 		} catch (Exception e) {
@@ -189,8 +179,7 @@ public class XaJdbcIntegrationTest {
 	}
 
 
-	public static void withdraw(int account, int amount)
-			throws Exception {
+	public static void withdraw(int account, int amount) throws Exception {
 		boolean    error = false;
 		Connection conn  = null;
 
