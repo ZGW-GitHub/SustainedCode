@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../../../../../dependencies/snow-common-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>000-atomiks-jdbc-integration-java-native</artifactId>
+	<artifactId>000-atomikos-jdbc-integration-java-native</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>

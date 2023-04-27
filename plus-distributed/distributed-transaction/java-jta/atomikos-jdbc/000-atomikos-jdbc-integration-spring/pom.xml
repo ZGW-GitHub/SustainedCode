@@ -27,7 +27,7 @@
         <version>${revision}</version>
         <relativePath>../../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>000-atomiks-jdbc-integration-spring</artifactId>
+    <artifactId>000-atomikos-jdbc-integration-spring</artifactId>
     <version>${revision}</version>
 
     <packaging>jar</packaging>
