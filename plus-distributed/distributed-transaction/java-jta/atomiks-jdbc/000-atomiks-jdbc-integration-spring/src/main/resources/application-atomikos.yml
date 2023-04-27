@@ -1,0 +1,6 @@
+spring:
+  jta:
+    atomikos:
+      properties:
+        default-jta-timeout: 300000
+        max-timeout: 900000
