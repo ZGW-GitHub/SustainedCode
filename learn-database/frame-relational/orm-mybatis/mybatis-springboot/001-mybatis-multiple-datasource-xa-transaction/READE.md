@@ -1,2 +1,2 @@
 查看：
-plus-distributed/distributed-transaction/java-jta/atomiks-jdbc/000-atomiks-jdbc-integration-spring
+plus-distributed/distributed-transaction/java-jta/atomikos-jdbc/000-atomikos-jdbc-integration-spring
