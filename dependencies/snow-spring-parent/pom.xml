@@ -47,6 +47,7 @@
         <module>../../middle-mq/mq-rocketmq/rocketmq-4x-springboot</module>
         <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springboot</module>
         <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springcloud-stream</module>
+        <module>../../middle-mq/mq-pulsar/pulsar-2x-springboot</module>
 
         <!-- Center -->
         <module>../../middle-center/middle-nacos</module>
