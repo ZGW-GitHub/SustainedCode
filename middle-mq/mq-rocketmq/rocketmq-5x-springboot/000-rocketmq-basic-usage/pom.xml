@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>rocketmq-hello-world</artifactId>
+	<artifactId>000-rocketmq-basic-usage</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>

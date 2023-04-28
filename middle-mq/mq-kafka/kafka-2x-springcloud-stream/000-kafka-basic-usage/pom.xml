@@ -23,11 +23,11 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>kafka-2x-springboot</artifactId>
+		<artifactId>kafka-2x-springcloud-stream</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>kafka-hello-world</artifactId>
+	<artifactId>000-kafka-basic-usage</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>

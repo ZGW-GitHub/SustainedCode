@@ -23,13 +23,18 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>rocketmq-4x-springboot</artifactId>
+		<artifactId>rocketmq-5x-springcloud-stream</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>rocketmq-hello-world</artifactId>
+	<artifactId>000-rocketmq-basic-usage</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
+
+	<properties>
+		<spring-boot.version>2.6.3</spring-boot.version>
+		<spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+	</properties>
 
 </project>
