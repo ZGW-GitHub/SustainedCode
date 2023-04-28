@@ -20,7 +20,8 @@ package com.code.mybatis.plus.dal.dos;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serial;
@@ -35,9 +36,6 @@ import static com.baomidou.mybatisplus.annotation.FieldFill.INSERT_UPDATE;
  * @date 2020/8/14 11:49 上午
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @TableName("user")

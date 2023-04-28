@@ -39,7 +39,7 @@ class UserEntityTest extends MybatisPlusApplicationTest {
 	 */
 	@Test
 	void testActiveRecordInsert() {
-		User user = new User().setId(2L).selectById();
+		User user = new User().setId(2).selectById();
 
 		user.setName("VIP").setAge(12);
 
@@ -56,7 +56,7 @@ class UserEntityTest extends MybatisPlusApplicationTest {
 	void testActiveRecordUpdate() {
 		// 根据id更新
 		Assertions.assertTrue(
-				new User().setId(2L).setName("管理员-1").updateById()
+				new User().setId(2).setName("管理员-1").updateById()
 		);
 
 		// 根据 eq 函数中的属性值更新
@@ -70,7 +70,7 @@ class UserEntityTest extends MybatisPlusApplicationTest {
 	 */
 	@Test
 	void testActiveRecordSelect() {
-		Assertions.assertEquals("普通用户-1", new User().setId(2L).selectById().getName());
+		Assertions.assertEquals("普通用户-1", new User().setId(2).selectById().getName());
 
 		User user = new User().selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
 		Assertions.assertEquals("普通用户-1", user.getName());
@@ -86,7 +86,7 @@ class UserEntityTest extends MybatisPlusApplicationTest {
 	 */
 	@Test
 	void testActiveRecordDelete() {
-		Assertions.assertTrue(new User().setId(23L).deleteById());
+		Assertions.assertTrue(new User().setId(23).deleteById());
 
 		Assertions.assertTrue(new User().delete(new QueryWrapper<User>().lambda().eq(User::getName, "test")));
 	}

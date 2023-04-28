@@ -17,6 +17,7 @@
 
 package com.code.mybatis.plus.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import com.code.mybatis.plus.dal.dos.User;
 import com.code.mybatis.plus.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * @author Snow
@@ -39,7 +39,7 @@ public class DemoController {
 
 	@PostMapping("transaction")
 	public String transaction() {
-		User user = User.builder().name("test").age(11).createTime(new Date()).build();
+		User user = new User().setRecordId(RandomUtil.randomLong(Long.MAX_VALUE)).setName(RandomUtil.randomString(10)).setAge(10);
 
 		userService.transaction(user);
 

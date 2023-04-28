@@ -18,6 +18,7 @@
 package com.code.mybatis.plus.test;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -30,8 +31,6 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,10 +50,8 @@ class UserServiceTest extends MybatisPlusApplicationTest {
 	 * 测试 Mybatis-Plus 新增
 	 */
 	@Test
-	@Transactional
-	@Rollback(value = false)
 	void saveTest() {
-		User user = User.builder().name("test").age(10).build();
+		User user = new User().setRecordId(RandomUtil.randomLong(Long.MAX_VALUE)).setName(RandomUtil.randomString(10)).setAge(10);
 
 		boolean save = userService.save(user);
 
@@ -71,7 +68,7 @@ class UserServiceTest extends MybatisPlusApplicationTest {
 		List<User> userList = Lists.newArrayList();
 
 		for (int i = 4; i < 14; i++) {
-			User user = User.builder().name("test").age(10).build();
+			User user = new User().setRecordId(RandomUtil.randomLong(Long.MAX_VALUE)).setName(RandomUtil.randomString(10)).setAge(10);
 
 			userList.add(user);
 		}
@@ -79,7 +76,7 @@ class UserServiceTest extends MybatisPlusApplicationTest {
 		boolean batch = userService.saveBatch(userList);
 		Assertions.assertTrue(batch);
 
-		List<Long> ids = userList.stream().map(User::getId).collect(Collectors.toList());
+		List<Integer> ids = userList.stream().map(User::getId).collect(Collectors.toList());
 
 		log.debug("【 userList#ids 】= {}", ids);
 	}
