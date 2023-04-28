@@ -16,8 +16,8 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -25,17 +25,28 @@
 		<groupId>com.code</groupId>
 		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-        <relativePath>../../dependencies/snow-spring-parent/pom.xml</relativePath>
+		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>mq-rocketmq</artifactId>
+	<artifactId>pulsar-2x-springboot</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>rocketmq-4x-springboot</module>
-		<module>rocketmq-5x-springboot</module>
-		<module>rocketmq-5x-springcloud-stream</module>
-	</modules>
+	<properties>
+		<spring-boot.version>2.7.0</spring-boot.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-spring-common</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
 
 </project>

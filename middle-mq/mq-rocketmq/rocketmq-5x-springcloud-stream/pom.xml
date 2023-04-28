@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>mq-rocketmq</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>rocketmq-5x-springcloud-stream</artifactId>
 	<version>${revision}</version>
