@@ -40,6 +40,7 @@
 		<module>005-spring-cloud-k8s</module>
 		<module>006-spring-native</module>
 		<module>060-other-spring-batch</module>
+		<module>065-other-spring-security</module>
 		<module>070-other-spring-integration</module>
 	</modules>
 

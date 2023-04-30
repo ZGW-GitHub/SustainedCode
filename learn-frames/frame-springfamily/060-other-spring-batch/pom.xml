@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>008-other-spring-batch</artifactId>
+	<artifactId>060-other-spring-batch</artifactId>
 
 	<packaging>pom</packaging>
 
