@@ -23,28 +23,12 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>frame-springfamily</artifactId>
+		<artifactId>065-other-spring-security</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>065-other-spring-security</artifactId>
+	<artifactId>000-spring-security-hello-world</artifactId>
 
-	<packaging>pom</packaging>
-
-	<properties>
-		<spring-boot.version>3.0.3</spring-boot.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>snow-spring-common</artifactId>
-		</dependency>
-	</dependencies>
+	<packaging>jar</packaging>
 
 </project>

@@ -32,50 +32,6 @@
 
     <packaging>pom</packaging>
 
-    <modules>
-        <module>snow-spring-common</module>
-        <module>../../dependencies/snow-common-parent</module>
-
-        <!-- RPC -->
-        <module>../../middle-rpc/rpc-dubbo/dubbo-springboot</module>
-        <module>../../middle-rpc/rpc-dubbo/dubbo-springcloud</module>
-        <module>../../middle-rpc/rpc-feign</module>
-
-        <!-- MQ -->
-        <module>../../middle-mq/mq-kafka/kafka-2x-springboot</module>
-        <module>../../middle-mq/mq-kafka/kafka-2x-springcloud-stream</module>
-        <module>../../middle-mq/mq-rocketmq/rocketmq-4x-springboot</module>
-        <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springboot</module>
-        <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springcloud-stream</module>
-        <module>../../middle-mq/mq-pulsar/pulsar-2x-springboot</module>
-
-        <!-- Center -->
-        <module>../../middle-center/middle-nacos</module>
-        <module>../../middle-center/middle-zookeeper</module>
-
-        <!-- 限流/熔断/降级 -->
-        <module>../../middle-guard/middle-sentinel</module>
-
-        <!-- Job -->
-        <module>../../middle-job/middle-xxljob</module>
-
-        <!-- DB -->
-        <module>../../learn-database/db-elasticsearch</module>
-        <module>../../learn-database/middle-data</module>
-        <module>../../learn-database/db-redis/redis-springboot</module>
-        <module>../../learn-database/frame-relational/basis-jdbc</module>
-        <module>../../learn-database/frame-relational/orm-mybatis/mybatis-spring</module>
-        <module>../../learn-database/frame-relational/orm-mybatis/mybatis-springboot</module>
-        <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-spring</module>
-        <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-springboot</module>
-        <module>../../learn-database/frame-relational/orm-spring-data-jpa</module>
-        <module>../../learn-database/tech-sharding/spring-coding</module>
-        <module>../../learn-database/tech-sharding/middle-sharding-jdbc/sharding-jdbc-springboot</module>
-
-        <!-- Frames -->
-        <module>../../learn-frames/frame-springfamily</module>
-    </modules>
-
     <properties>
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
@@ -150,5 +106,49 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <modules>
+        <module>snow-spring-common</module>
+        <module>../../dependencies/snow-common-parent</module>
+
+        <!-- RPC -->
+        <module>../../middle-rpc/rpc-dubbo/dubbo-springboot</module>
+        <module>../../middle-rpc/rpc-dubbo/dubbo-springcloud</module>
+        <module>../../middle-rpc/rpc-feign</module>
+
+        <!-- MQ -->
+        <module>../../middle-mq/mq-kafka/kafka-2x-springboot</module>
+        <module>../../middle-mq/mq-kafka/kafka-2x-springcloud-stream</module>
+        <module>../../middle-mq/mq-rocketmq/rocketmq-4x-springboot</module>
+        <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springboot</module>
+        <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springcloud-stream</module>
+        <module>../../middle-mq/mq-pulsar/pulsar-2x-springboot</module>
+
+        <!-- Center -->
+        <module>../../middle-center/middle-nacos</module>
+        <module>../../middle-center/middle-zookeeper</module>
+
+        <!-- 限流/熔断/降级 -->
+        <module>../../middle-guard/middle-sentinel</module>
+
+        <!-- Job -->
+        <module>../../middle-job/middle-xxljob</module>
+
+        <!-- DB -->
+        <module>../../learn-database/db-elasticsearch</module>
+        <module>../../learn-database/middle-data</module>
+        <module>../../learn-database/db-redis/redis-springboot</module>
+        <module>../../learn-database/frame-relational/basis-jdbc</module>
+        <module>../../learn-database/frame-relational/orm-mybatis/mybatis-spring</module>
+        <module>../../learn-database/frame-relational/orm-mybatis/mybatis-springboot</module>
+        <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-spring</module>
+        <module>../../learn-database/frame-relational/orm-mybatis-plus/mybatis-plus-springboot</module>
+        <module>../../learn-database/frame-relational/orm-spring-data-jpa</module>
+        <module>../../learn-database/tech-sharding/spring-coding</module>
+        <module>../../learn-database/tech-sharding/middle-sharding-jdbc/sharding-jdbc-springboot</module>
+
+        <!-- Frames -->
+        <module>../../learn-frames/frame-springfamily</module>
+    </modules>
 
 </project>
