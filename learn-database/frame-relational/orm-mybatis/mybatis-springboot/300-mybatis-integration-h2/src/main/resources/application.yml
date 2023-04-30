@@ -4,6 +4,6 @@ spring:
   config:
     import:
       - application-datasource.yml
-      - application-datasource-h2.yml
+      - application-h2.yml
       - application-mybatis.yml
       - application-log.yml

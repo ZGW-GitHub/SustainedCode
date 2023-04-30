@@ -15,7 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-CREATE TABLE `user`
+DROP SCHEMA IF EXISTS `frame_relational`;
+CREATE SCHEMA `frame_relational`;
+USE `frame_relational`;
+
+DROP TABLE IF EXISTS `frame_relational`.`user`;
+CREATE TABLE `frame_relational`.`user`
 (
     `id`          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     `record_id`   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
