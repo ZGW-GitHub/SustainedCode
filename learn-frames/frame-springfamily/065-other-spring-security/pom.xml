@@ -23,24 +23,12 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>snow-spring-parent</artifactId>
+		<artifactId>frame-springfamily</artifactId>
 		<version>${revision}</version>
-        <relativePath>../../dependencies/snow-spring-parent/pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>frame-springfamily</artifactId>
+	<artifactId>008-other-spring-security</artifactId>
 
 	<packaging>pom</packaging>
-
-	<modules>
-		<module>000-spring</module>
-		<module>001-spring-web</module>
-		<module>002-spring-data</module>
-		<module>003-spring-boot</module>
-		<module>004-spring-cloud</module>
-		<module>005-spring-cloud-k8s</module>
-		<module>006-spring-native</module>
-		<module>060-other-spring-batch</module>
-		<module>070-other-spring-integration</module>
-	</modules>
 
 </project>
