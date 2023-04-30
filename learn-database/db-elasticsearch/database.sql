@@ -16,14 +16,14 @@
  */
 
 CREATE
-DATABASE IF NOT EXISTS frame_orm CHARSET utf8;
+    DATABASE IF NOT EXISTS frame_relational CHARSET utf8;
 
-DROP TABLE IF EXISTS frame_orm.user;
-CREATE TABLE frame_orm.user
+DROP TABLE IF EXISTS frame_relational.user;
+CREATE TABLE frame_relational.user
 (
     `id`          INT(5) NOT NULL AUTO_INCREMENT COMMENT '主键',
     `name`        VARCHAR(10) DEFAULT NULL COMMENT '姓名',
-    `age`         INT(5) DEFAULT NULL COMMENT '年龄',
+    `age`         INT(5)      DEFAULT NULL COMMENT '年龄',
     `create_time` DATETIME    DEFAULT NOW() COMMENT '创建时间',
     `update_time` DATETIME    DEFAULT NOW() COMMENT '更新时间',
     PRIMARY KEY (id)

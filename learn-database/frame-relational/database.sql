@@ -16,10 +16,10 @@
  */
 
 CREATE
-    DATABASE IF NOT EXISTS frame_orm CHARSET utf8;
+    DATABASE IF NOT EXISTS frame_relational CHARSET utf8;
 
-DROP TABLE IF EXISTS frame_orm.user;
-CREATE TABLE frame_orm.user
+DROP TABLE IF EXISTS frame_relational.user;
+CREATE TABLE frame_relational.user
 (
     `id`          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     `record_id`   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',

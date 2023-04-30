@@ -1,6 +1,6 @@
 jdbc:
   simple:
-    url: ${mysql.url}/frame_orm?${mysql.url.params}
+    url: ${mysql.url}/frame_relational?${mysql.url.params}
     username: ${mysql.username}
     password: ${mysql.password}
     driver: com.mysql.cj.jdbc.Driver

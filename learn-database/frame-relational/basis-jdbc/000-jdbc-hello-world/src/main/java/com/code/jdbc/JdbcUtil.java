@@ -28,7 +28,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class JdbcUtil {
 
-	private static final String URL      = "jdbc:mysql://linux.little:63307/frame_orm";
+	private static final String URL      = "jdbc:mysql://linux.little:63307/frame_relational";
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
 
