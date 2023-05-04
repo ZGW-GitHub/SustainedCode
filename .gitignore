@@ -43,3 +43,4 @@ temp.*
 .flattened-pom.xml
 !**/project-env/**
 language-python/check-in.py
+/project-env/
