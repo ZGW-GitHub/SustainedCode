@@ -41,6 +41,5 @@ rebel.xml
 .shardingsphere
 temp.*
 .flattened-pom.xml
-!**/project-env/**
+project-env/**
 language-python/check-in.py
-/project-env/
