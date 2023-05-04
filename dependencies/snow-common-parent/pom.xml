@@ -98,7 +98,7 @@
             </activation>
             <build>
                 <filters>
-                    <filter>${project.dir}/x-properties/dev.properties</filter>
+                    <filter>${project.dir}/project-env/dev.properties</filter>
                 </filters>
             </build>
         </profile>
