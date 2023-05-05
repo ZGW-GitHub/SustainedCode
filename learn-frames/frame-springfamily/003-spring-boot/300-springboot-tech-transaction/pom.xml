@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>200-springboot-tech-transaction</artifactId>
+	<artifactId>300-springboot-tech-transaction</artifactId>
 
 	<packaging>jar</packaging>
 
