@@ -1,0 +1,4 @@
+logging:
+  level:
+    com.code: debug
+    com.code.spring.boot.dal.mapper: trace
