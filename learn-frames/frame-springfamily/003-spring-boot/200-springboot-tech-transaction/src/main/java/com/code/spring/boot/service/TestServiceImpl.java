@@ -20,13 +20,13 @@ package com.code.spring.boot.service;
 import cn.hutool.core.util.RandomUtil;
 import com.code.spring.boot.dal.dos.User;
 import com.code.spring.boot.dal.repository.UserRepository;
+import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**

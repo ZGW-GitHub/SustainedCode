@@ -1,5 +1,9 @@
-### test
-POST http://localhost:65000/test
+### Transaction test1
+POST http://localhost:65000/test1
+Content-Type: application/json; charset=UTF-8
+
+### Transaction test2
+POST http://localhost:65000/test2
 Content-Type: application/json; charset=UTF-8
 
 ###

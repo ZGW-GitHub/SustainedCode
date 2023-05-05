@@ -18,11 +18,10 @@
 package com.code.spring.boot.controller;
 
 import com.code.spring.boot.service.TestService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @author Snow
@@ -35,9 +34,14 @@ public class TestController {
 	@Resource
 	private TestService testService;
 
-	@PostMapping("test")
-	public String test() {
+	@PostMapping("test1")
+	public String test1() {
 		return testService.test1();
+	}
+
+	@PostMapping("test2")
+	public String test2() {
+		return testService.test2();
 	}
 
 }
