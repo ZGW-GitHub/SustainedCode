@@ -27,25 +27,24 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>200-mybatis-integration-druid</artifactId>
+	<artifactId>502-mybatis-tool-pagehelper</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
 
+	<properties>
+		<mybatis-starter.version>2.2.2</mybatis-starter.version>
+		<mybatis-tool-pagehelper-starter.version>1.4.3</mybatis-tool-pagehelper-starter.version>
+
+		<spring-boot.version>2.7.0</spring-boot.version>
+	</properties>
+
 	<dependencies>
+		<!-- 分页助手 -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
