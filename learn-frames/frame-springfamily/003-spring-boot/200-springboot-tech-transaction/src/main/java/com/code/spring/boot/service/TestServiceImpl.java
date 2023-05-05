@@ -19,7 +19,7 @@ package com.code.spring.boot.service;
 
 import cn.hutool.core.util.RandomUtil;
 import com.code.spring.boot.dal.dos.User;
-import com.code.spring.boot.dal.repository.UserRepository;
+import com.code.spring.boot.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,13 +38,13 @@ import java.util.concurrent.TimeUnit;
 public class TestServiceImpl implements TestService {
 
 	@Resource
-	private UserRepository userRepository;
+	private UserMapper userMapper;
 
 	@Override
 	@SneakyThrows
 	@Transactional(rollbackFor = Exception.class)
-	public String test1() {
-		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-1").setAge(16));
+	public void test1() {
+		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-1").setAge(16));
 
 		TimeUnit.SECONDS.sleep(1);
 
@@ -52,21 +52,17 @@ public class TestServiceImpl implements TestService {
 		this.test2(); // ①
 		// ((TestService) AopContext.currentProxy()).test2(); // ②
 
-		int i = 10 / 0;
-
-		return "SUCCESS";
+		// throw new ArithmeticException();
 	}
 
 	@Override
 	@SneakyThrows
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public String test2() {
+	public void test2() {
 		log.info("test2 run ...");
 		TimeUnit.SECONDS.sleep(1);
 
-		userRepository.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-2").setAge(16));
-
-		return "SUCCESS";
+		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-2").setAge(16));
 	}
 
 }

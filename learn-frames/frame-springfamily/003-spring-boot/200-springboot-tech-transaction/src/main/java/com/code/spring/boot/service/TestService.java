@@ -23,8 +23,8 @@ package com.code.spring.boot.service;
  */
 public interface TestService {
 
-	String test1();
+	void test1();
 
-	String test2();
+	void test2();
 
 }

@@ -15,17 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.dal.repository;
+package com.code.spring.boot.dal.mapper;
 
 import com.code.spring.boot.dal.dos.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2020/7/31 2:08 下午
+ * @date 2020/8/14 11:49 上午
  */
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+@Mapper
+@Component
+public interface UserMapper {
+
+	/**
+	 * 保存实体
+	 *
+	 * @param user 实体
+	 * @return 影响行数
+	 */
+	int save(User user);
+
+	List<User> listAll();
 
 }

@@ -17,7 +17,6 @@
 
 package com.code.spring.boot.dal.dos;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -27,24 +26,20 @@ import java.util.Date;
 
 /**
  * @author Snow
- * @date 2020/7/31 2:07 下午
+ * @date 2020/8/14 11:49 上午
  */
 @Data
 @Accessors(chain = true)
-@Entity
-@Table(name = "user")
 public class User implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = -4551732265088598447L;
+	@Serial
+	private static final long serialVersionUID = -5625175115874392926L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Long    recordId;
-    private String  name;
-    private Integer age;
-    private Date    createTime;
-    private Date    updateTime;
+	private Integer id;
+	private Long    recordId;
+	private String  name;
+	private Integer age;
+	private Date    createTime;
+	private Date    updateTime;
 
 }

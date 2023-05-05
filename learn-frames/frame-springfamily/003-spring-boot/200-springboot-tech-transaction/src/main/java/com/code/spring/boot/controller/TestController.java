@@ -36,12 +36,16 @@ public class TestController {
 
 	@PostMapping("test1")
 	public String test1() {
-		return testService.test1();
+		testService.test1();
+
+		return "SUCCESS";
 	}
 
 	@PostMapping("test2")
 	public String test2() {
-		return testService.test2();
+		testService.test2();
+
+		return "SUCCESS";
 	}
 
 }
