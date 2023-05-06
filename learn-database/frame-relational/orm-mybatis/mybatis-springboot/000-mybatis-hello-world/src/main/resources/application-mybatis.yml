@@ -3,4 +3,4 @@ mybatis:
     # 下划线转驼峰
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.code.mybatis.spring.boot.dal.dos
+  type-aliases-package: com.code.mybatis.dal.dos
