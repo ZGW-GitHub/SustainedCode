@@ -25,6 +25,6 @@ public interface UserService {
 
 	void demo();
 
-	void transactionByAnno();
+	void transaction();
 
 }

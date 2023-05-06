@@ -53,17 +53,17 @@ public class UserServiceImpl implements UserService {
 	@DS("first")
 	@Override
 	@Transactional
-	public void transactionByAnno() {
+	public void transaction() {
 		firstUserMapper.save(new FirstUser().setRecordId(RandomUtil.randomLong(999999)).setName("test").setAge(16));
 
 		if (AopContext.currentProxy() instanceof UserServiceImpl userService) {
-			userService.transactionByAnnoInner();
+			userService.transactionInner();
 		}
 	}
 
 	@DS("second")
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void transactionByAnnoInner() {
+	public void transactionInner() {
 		secondUserMapper.save(new SecondUser().setRecordId(RandomUtil.randomLong(999999)).setName("test").setAge(18));
 
 		// log.info("触发异常：{}", 1 / 0);

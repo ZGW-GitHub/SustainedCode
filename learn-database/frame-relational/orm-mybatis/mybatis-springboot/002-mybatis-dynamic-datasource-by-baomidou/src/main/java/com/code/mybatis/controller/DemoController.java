@@ -41,9 +41,9 @@ public class DemoController {
         return "SUCCESS";
     }
 
-    @PostMapping("transaction/anno")
-    public String transactionByAnno() {
-        userService.transactionByAnno();
+    @PostMapping("transaction")
+    public String transaction() {
+        userService.transaction();
 
         return "SUCCESS";
     }
