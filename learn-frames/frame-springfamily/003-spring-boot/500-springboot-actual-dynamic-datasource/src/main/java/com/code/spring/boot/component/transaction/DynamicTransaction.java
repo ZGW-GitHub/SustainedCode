@@ -17,8 +17,7 @@
 
 package com.code.spring.boot.component.transaction;
 
-import com.code.spring.boot.component.datasource.DataSourceEnum;
-import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.annotation.*;
 
@@ -29,29 +28,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MultiTransaction {
-
-	String transactionManager() default "multiTransactionManager";
-
-	/**
-	 * 隔离级别，默认为数据库本身默认值
-	 *
-	 * @return {@link Isolation}
-	 */
-	Isolation isolationLevel() default Isolation.DEFAULT;
-
-	/**
-	 * 默认主数据源id
-	 *
-	 * @return {@link String}
-	 */
-	DataSourceEnum datasourceId() default DataSourceEnum.DEFAULT;
-
-	/**
-	 * 是否为只读事务
-	 *
-	 * @return boolean
-	 */
-	boolean readOnly() default false;
+@Transactional(transactionManager = "")
+public @interface DynamicTransaction {
 
 }

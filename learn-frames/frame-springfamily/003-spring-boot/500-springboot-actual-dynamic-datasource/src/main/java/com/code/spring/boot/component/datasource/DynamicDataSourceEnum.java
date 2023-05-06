@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 @AllArgsConstructor
-public enum DataSourceEnum {
+public enum DynamicDataSourceEnum {
 
 	FIRST("FIRST", "第一个数据源"),
 	SECOND("SECOND", "第二个数据源"),

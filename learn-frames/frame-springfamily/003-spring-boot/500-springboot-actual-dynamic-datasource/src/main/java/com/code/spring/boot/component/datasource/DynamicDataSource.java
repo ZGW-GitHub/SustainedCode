@@ -15,17 +15,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.component.transaction;
+package com.code.spring.boot.component.datasource;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * @author Snow
- * @date 2023/5/5 22:15
+ * @date 2023/4/16 20:37
  */
-@Slf4j
-public class MultiTransactionManager extends DataSourceTransactionManager {
+public class DynamicDataSource extends AbstractRoutingDataSource {
 
+	@Override
+	protected Object determineCurrentLookupKey() {
+		return DataSourceContextHolder.getDataSourceType();
+	}
 
 }

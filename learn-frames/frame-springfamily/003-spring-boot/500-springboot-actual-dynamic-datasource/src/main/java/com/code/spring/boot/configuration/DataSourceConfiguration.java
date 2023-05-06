@@ -18,8 +18,8 @@
 package com.code.spring.boot.configuration;
 
 import cn.hutool.core.map.MapUtil;
-import com.code.spring.boot.component.datasource.DataSourceEnum;
-import com.code.spring.boot.component.datasource.SnowDataSource;
+import com.code.spring.boot.component.datasource.DynamicDataSource;
+import com.code.spring.boot.component.datasource.DynamicDataSourceEnum;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -62,13 +62,13 @@ public class DataSourceConfiguration {
 	@Bean
 	public DataSource snowDataSource(DataSource firstDataSource, DataSource secondDataSource) {
 		Map<Object, Object> targetDataSources = MapUtil.builder()
-				.put(DataSourceEnum.FIRST.getName(), firstDataSource)
-				.put(DataSourceEnum.SECOND.getName(), secondDataSource)
+				.put(DynamicDataSourceEnum.FIRST.getName(), firstDataSource)
+				.put(DynamicDataSourceEnum.SECOND.getName(), secondDataSource)
 				.build();
 
-		SnowDataSource dataSource = new SnowDataSource();
+		DynamicDataSource dataSource = new DynamicDataSource();
 		dataSource.setTargetDataSources(targetDataSources);
-		dataSource.setDefaultTargetDataSource(targetDataSources.get(DataSourceEnum.DEFAULT.getName()));
+		dataSource.setDefaultTargetDataSource(targetDataSources.get(DynamicDataSourceEnum.DEFAULT.getName()));
 		return dataSource;
 	}
 
