@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    dynamic:
+      primary: first
+      strict: true # 严格匹配数据源，默认：false。true：未匹配到指定数据源时抛异常；false：使用默认数据源
+      datasource:
+        first:
+          url: ${mysql.url}/sharding_db0?${mysql.url.params}
+          username: ${mysql.username}
+          password: ${mysql.password}
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        second:
+          url: ${mysql.url}/sharding_db1?${mysql.url.params}
+          username: ${mysql.username}
+          password: ${mysql.password}
+          driver-class-name: com.mysql.cj.jdbc.Driver

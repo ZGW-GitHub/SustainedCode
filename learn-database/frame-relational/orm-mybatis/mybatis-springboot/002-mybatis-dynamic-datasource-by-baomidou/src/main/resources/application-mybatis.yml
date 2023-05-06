@@ -2,3 +2,7 @@ mybatis:
   configuration:
     # 下划线转驼峰
     map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath:mapper/first/*.xml
+    - classpath:mapper/second/*.xml
+  type-aliases-package: com.code.mybatis.dal.first.dos,com.code.mybatis.dal.second.dos
