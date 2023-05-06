@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>002-mybatis-dynamic-datasource</artifactId>
+	<artifactId>002-mybatis-dynamic-datasource-by-baomidou</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
