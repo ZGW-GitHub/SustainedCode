@@ -34,7 +34,6 @@
 	<modules>
 		<module>000-spring</module>
 		<module>001-spring-web</module>
-		<module>002-spring-data</module>
 		<module>003-spring-boot</module>
 		<module>004-spring-cloud</module>
 		<module>005-spring-cloud-k8s</module>
