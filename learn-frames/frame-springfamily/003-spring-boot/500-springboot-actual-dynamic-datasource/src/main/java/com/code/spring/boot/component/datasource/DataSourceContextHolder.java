@@ -17,35 +17,70 @@
 
 package com.code.spring.boot.component.datasource;
 
+import org.springframework.core.NamedThreadLocal;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * @author Snow
  * @date 2023/5/5 15:35
  */
-public class DataSourceContextHolder {
+public final class DataSourceContextHolder {
 
-	private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();
+	private static final ThreadLocal<Deque<String>> DATA_SOURCE_HOLDER = new NamedThreadLocal<>("dynamic-datasource") {
+		@Override
+		protected Deque<String> initialValue() {
+			return new ArrayDeque<>();
+		}
+	};
 
 	/**
-	 * 设置数据源类型
+	 * 获得当前线程数据源
 	 *
-	 * @param dataSourceType 数据库类型
+	 * @return 数据源名称
 	 */
-	public static void setDataSourceType(String dataSourceType) {
-		CONTEXT_HOLDER.set(dataSourceType);
+	public static String peek() {
+		return DATA_SOURCE_HOLDER.get().peek();
 	}
 
 	/**
-	 * 获取数据源类型
+	 * 设置当前线程数据源
+	 * <p>
+	 * 如非必要不要手动调用，调用后确保最终清除
+	 * </p>
+	 *
+	 * @param ds 数据源名称
 	 */
-	public static String getDataSourceType() {
-		return CONTEXT_HOLDER.get();
+	public static String push(String ds) {
+		String dataSourceStr = StringUtils.isEmpty(ds) ? "" : ds;
+		DATA_SOURCE_HOLDER.get().push(dataSourceStr);
+		return dataSourceStr;
 	}
 
 	/**
-	 * 清除数据源类型
+	 * 清空当前线程数据源
+	 * <p>
+	 * 如果当前线程是连续切换数据源 只会移除掉当前线程的数据源名称
+	 * </p>
 	 */
-	public static void clearDataSourceType() {
-		CONTEXT_HOLDER.remove();
+	public static void poll() {
+		Deque<String> deque = DATA_SOURCE_HOLDER.get();
+		deque.poll();
+		if (deque.isEmpty()) {
+			DATA_SOURCE_HOLDER.remove();
+		}
+	}
+
+	/**
+	 * 强制清空本地线程
+	 * <p>
+	 * 防止内存泄漏，如手动调用了push可调用此方法确保清除
+	 * </p>
+	 */
+	public static void clear() {
+		DATA_SOURCE_HOLDER.remove();
 	}
 
 }

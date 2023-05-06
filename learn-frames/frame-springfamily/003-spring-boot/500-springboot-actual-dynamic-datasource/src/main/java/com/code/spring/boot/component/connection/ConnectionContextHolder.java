@@ -15,34 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.component.datasource;
-
-import cn.hutool.core.util.StrUtil;
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+package com.code.spring.boot.component.connection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Snow
- * @date 2023/4/16 20:37
+ * @date 2023/5/6 17:34
  */
-public class DynamicDataSource extends AbstractRoutingDataSource {
+public class ConnectionContextHolder {
 
-	@Override
-	protected Object determineCurrentLookupKey() {
-		String key = DataSourceContextHolder.peek();
+	private static final ThreadLocal<Map<String, Connection>> CONNECTION_HOLDER = ThreadLocal.withInitial(() -> new ConcurrentHashMap<>(8));
 
-		return StrUtil.isEmpty(key) ? DynamicDataSourceEnum.DEFAULT.getName() : key;
+	public static void putConnection(String ds, Connection connection) {
+		Map<String, Connection> concurrentHashMap = CONNECTION_HOLDER.get();
+		if (!concurrentHashMap.containsKey(ds)) {
+			try {
+				connection.setAutoCommit(false);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			concurrentHashMap.put(ds, connection);
+		}
 	}
 
-	@Override
-	public Connection getConnection() throws SQLException {
-		return super.getConnection();
+	public static Connection getConnection(String ds) {
+		return CONNECTION_HOLDER.get().get(ds);
 	}
 
-	@Override
-	public Connection getConnection(String username, String password) throws SQLException {
-		return super.getConnection(username, password);
-	}
 }
