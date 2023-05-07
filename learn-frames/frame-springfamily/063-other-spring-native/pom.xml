@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>001-spring-web</artifactId>
+	<artifactId>063-other-spring-native</artifactId>
 
 	<packaging>pom</packaging>
 
