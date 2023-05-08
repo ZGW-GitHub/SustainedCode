@@ -38,7 +38,7 @@
         <mybatis-tool-mapper-starter.version>4.2.2</mybatis-tool-mapper-starter.version>
         <mybatis-tool-pagehelper-starter.version>1.4.6</mybatis-tool-pagehelper-starter.version>
 
-        <spring-boot.version>3.0.0</spring-boot.version>
+        <spring-boot.version>3.0.6</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -81,8 +81,8 @@
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
