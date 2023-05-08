@@ -15,26 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.dal.second.mapper;
+package com.code.spring.boot.component.datasource;
 
-import com.code.mybatis.dal.second.dos.SecondUser;
-
-import java.util.List;
+import org.springframework.core.NamedThreadLocal;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2023/5/5 15:35
  */
-public interface SecondUserMapper {
+public final class DynamicDataSourceContextHolder {
 
-	/**
-	 * 保存实体
-	 *
-	 * @param secondUser 实体
-	 * @return 影响行数
-	 */
-	int save(SecondUser secondUser);
+	private static final ThreadLocal<DynamicDataSourceEnum> DATA_SOURCE_HOLDER = new NamedThreadLocal<>("dynamic-datasource");
 
-	List<SecondUser> listAll();
+	public static DynamicDataSourceEnum get() {
+		return DATA_SOURCE_HOLDER.get();
+	}
+
+	public static void set(DynamicDataSourceEnum dynamicDataSourceEnum) {
+		DATA_SOURCE_HOLDER.set(dynamicDataSourceEnum);
+	}
+
+	public static void clear() {
+		DATA_SOURCE_HOLDER.remove();
+	}
 
 }

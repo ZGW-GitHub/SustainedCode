@@ -60,15 +60,16 @@ public class DataSourceConfiguration {
 	}
 
 	@Bean
-	public DataSource snowDataSource(DataSource firstDataSource, DataSource secondDataSource) {
+	public DataSource dynamicDataSource(DataSource firstDataSource, DataSource secondDataSource) {
 		Map<Object, Object> targetDataSources = MapUtil.builder()
-				.put(DynamicDataSourceEnum.FIRST.getName(), firstDataSource)
-				.put(DynamicDataSourceEnum.SECOND.getName(), secondDataSource)
+				.put(DynamicDataSourceEnum.DEFAULT, firstDataSource)
+				.put(DynamicDataSourceEnum.FIRST, firstDataSource)
+				.put(DynamicDataSourceEnum.SECOND, secondDataSource)
 				.build();
 
 		DynamicDataSource dataSource = new DynamicDataSource();
 		dataSource.setTargetDataSources(targetDataSources);
-		dataSource.setDefaultTargetDataSource(targetDataSources.get(DynamicDataSourceEnum.DEFAULT.getName()));
+		dataSource.setDefaultTargetDataSource(targetDataSources.get(DynamicDataSourceEnum.DEFAULT));
 		return dataSource;
 	}
 

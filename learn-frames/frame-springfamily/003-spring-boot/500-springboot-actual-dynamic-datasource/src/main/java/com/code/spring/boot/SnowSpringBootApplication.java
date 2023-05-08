@@ -15,26 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.dal.first.mapper;
+package com.code.spring.boot;
 
-import com.code.mybatis.dal.first.dos.FirstUser;
-
-import java.util.List;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2023/4/15 00:00
  */
-public interface FirstUserMapper {
+@SpringBootApplication
+public class SnowSpringBootApplication {
+	public static void main(String[] args) {
 
-	/**
-	 * 保存实体
-	 *
-	 * @param firstUser 实体
-	 * @return 影响行数
-	 */
-	int save(FirstUser firstUser);
+		new SpringApplicationBuilder(SnowSpringBootApplication.class).run(args);
 
-	List<FirstUser> listAll();
-
+	}
 }

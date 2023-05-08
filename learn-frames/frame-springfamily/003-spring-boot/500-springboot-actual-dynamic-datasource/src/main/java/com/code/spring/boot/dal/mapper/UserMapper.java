@@ -15,31 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.dal.second.dos;
+package com.code.spring.boot.dal.mapper;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import com.code.spring.boot.dal.dos.User;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author Snow
  * @date 2020/8/14 11:49 上午
  */
-@Data
-@Accessors(chain = true)
-public class SecondUser implements Serializable {
+public interface UserMapper {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 保存实体
+	 *
+	 * @param user 实体
+	 * @return 影响行数
+	 */
+	int save(User user);
 
-	private Integer id;
-	private Long    recordId;
-	private String  name;
-	private Integer age;
-	private Date    createTime;
-	private Date    updateTime;
+	List<User> listAll();
 
 }

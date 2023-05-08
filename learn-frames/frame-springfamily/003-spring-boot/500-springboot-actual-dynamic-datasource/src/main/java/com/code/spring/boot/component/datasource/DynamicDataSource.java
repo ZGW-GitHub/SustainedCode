@@ -17,11 +17,9 @@
 
 package com.code.spring.boot.component.datasource;
 
-import cn.hutool.core.util.StrUtil;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  * @author Snow
@@ -31,18 +29,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
 	@Override
 	protected Object determineCurrentLookupKey() {
-		String key = DataSourceContextHolder.peek();
+		DynamicDataSourceEnum dynamicDataSourceEnum = DynamicDataSourceContextHolder.get();
 
-		return StrUtil.isEmpty(key) ? DynamicDataSourceEnum.DEFAULT.getName() : key;
+		return Objects.isNull(dynamicDataSourceEnum) ? DynamicDataSourceEnum.DEFAULT : dynamicDataSourceEnum;
 	}
 
-	@Override
-	public Connection getConnection() throws SQLException {
-		return super.getConnection();
-	}
-
-	@Override
-	public Connection getConnection(String username, String password) throws SQLException {
-		return super.getConnection(username, password);
-	}
 }

@@ -15,14 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.component.annotion;
+package com.code.spring.boot.controller;
+
+import com.code.spring.boot.service.TestService;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2023/5/5 15:47
+ * @date 2022/5/5 21:32
  */
-public @interface DataSource {
+@Slf4j
+@RestController
+public class TestController {
 
-	String name() default "";
+	@Resource
+	private TestService testService;
+
+	@PostMapping("test1")
+	public String test1() {
+		testService.test1();
+
+		return "SUCCESS";
+	}
+
+	@PostMapping("test2")
+	public String test2() {
+		testService.test2();
+
+		return "SUCCESS";
+	}
 
 }

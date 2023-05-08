@@ -15,31 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.dal.first.dos;
-
-import lombok.Data;
-import lombok.experimental.Accessors;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
+package com.code.spring.boot.service;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2022/7/1 10:50
  */
-@Data
-@Accessors(chain = true)
-public class FirstUser implements Serializable {
+public interface TestService {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
+	void test1();
 
-	private Integer id;
-	private Long    recordId;
-	private String  name;
-	private Integer age;
-	private Date    createTime;
-	private Date    updateTime;
+	void test2();
 
 }

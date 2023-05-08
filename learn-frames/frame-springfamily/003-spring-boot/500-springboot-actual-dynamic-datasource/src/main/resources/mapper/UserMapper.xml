@@ -17,14 +17,14 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.code.spring.boot.dal.second.mapper.SecondUserMapper">
+<mapper namespace="com.code.spring.boot.dal.mapper.UserMapper">
 
 	<insert id="save">
 		INSERT INTO user (record_id, name, age, create_time, update_time)
 		VALUES (#{recordId}, #{name}, #{age}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
 	</insert>
 
-	<select id="listAll" resultType="com.code.spring.boot.dal.second.dos.SecondUser">
+	<select id="listAll" resultType="com.code.spring.boot.dal.dos.User">
 		SELECT *
 		FROM user
 	</select>

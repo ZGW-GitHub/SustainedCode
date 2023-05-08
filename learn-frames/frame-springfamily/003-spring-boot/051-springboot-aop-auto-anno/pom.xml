@@ -27,13 +27,9 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>010-springboot-aop-auto-anno</artifactId>
+	<artifactId>051-springboot-aop-auto-anno</artifactId>
 
 	<packaging>jar</packaging>
-
-	<properties>
-		<spring-boot.version>3.0.0</spring-boot.version>
-	</properties>
 
 	<dependencies>
 		<dependency>

@@ -9,4 +9,5 @@ logging:
     com.code: debug
     org.hibernate.SQL: debug
     org.hibernate.type: trace
-    org.springframework: debug
+    org.springframework.jdbc: debug
+    org.springframework.transaction: debug

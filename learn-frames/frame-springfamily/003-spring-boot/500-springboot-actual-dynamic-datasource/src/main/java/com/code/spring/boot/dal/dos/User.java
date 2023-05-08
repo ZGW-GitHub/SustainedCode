@@ -15,20 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.component.transaction;
+package com.code.spring.boot.dal.dos;
 
-import org.springframework.transaction.annotation.Transactional;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.lang.annotation.*;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Snow
- * @date 2023/5/5 22:09
+ * @date 2020/8/14 11:49 上午
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Transactional(transactionManager = "")
-public @interface DynamicTransaction {
+@Data
+@Accessors(chain = true)
+public class User implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -5625175115874392926L;
+
+	private Integer id;
+	private Long    recordId;
+	private String  name;
+	private Integer age;
+	private Date    createTime;
+	private Date    updateTime;
 
 }

@@ -15,20 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot;
+package com.code.spring.boot.component.annotion;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.code.spring.boot.component.datasource.DynamicDataSourceEnum;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Snow
- * @date 2023/4/15 00:00
+ * @date 2023/5/5 15:47
  */
-@SpringBootApplication
-public class MybatisApplication {
-	public static void main(String[] args) {
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface DynamicDataSource {
 
-		new SpringApplicationBuilder(MybatisApplication.class).run(args);
+	DynamicDataSourceEnum value() default DynamicDataSourceEnum.DEFAULT;
 
-	}
 }
