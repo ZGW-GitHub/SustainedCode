@@ -15,9 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.aop.component.advise;
+package com.code.spring.boot.aop;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -25,23 +24,25 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 /**
- * logPrint 用到的通知都定义在这里
- * <li>{@link Aspect} ：标识该类是一个定义通知的配置类</li>
+ * <li>{@link @Aspect} ：标识该类是一个定义通知的配置类，以使该类中定义的通知生效</li>
  *
  * @author Snow
- * @date 2021/6/29 10:07
+ * @date 2023/5/8 17:11
  */
-@Slf4j
 @Aspect
 @Component
-public class LogPrintAdvise {
+public class LogPrintAop {
 
-	@Before("com.code.spring.boot.aop.component.pointcut.AllPointcut.logPrint()")
+	@Pointcut("@annotation(com.code.spring.boot.aop.anno.LogPrint)")
+	public void logPrint() {
+	}
+
+	@Before("logPrint()")
 	public void before(JoinPoint joinPoint) {
 		System.err.printf("【 方法执行前 】入参：%s\n", Arrays.toString(joinPoint.getArgs()));
 	}
 
-	@AfterReturning(returning = "result", pointcut = "com.code.spring.boot.aop.component.pointcut.AllPointcut.logPrint()")
+	@AfterReturning(returning = "result", pointcut = "logPrint()")
 	public void afterReturning(Object result) {
 		System.err.printf("【 方法执行成功 】返回值：%s\n", result);
 	}
@@ -49,7 +50,7 @@ public class LogPrintAdvise {
 	/**
 	 * 注意和 AfterReturning 的区别, after 会拦截正常返回和异常的情况
 	 */
-	@After("com.code.spring.boot.aop.component.pointcut.AllPointcut.logPrint()")
+	@After("logPrint()")
 	public void after() {
 		System.err.println("【 方法执行后 】");
 	}
@@ -57,12 +58,12 @@ public class LogPrintAdvise {
 	/**
 	 * 对异常返回进行处理
 	 */
-	@AfterThrowing(throwing = "throwable", pointcut = "com.code.spring.boot.aop.component.pointcut.AllPointcut.logPrint()")
+	@AfterThrowing(throwing = "throwable", pointcut = "logPrint()")
 	public void afterThrowing(Throwable throwable) {
 		System.err.printf("【 方法执行抛出异常 】异常：%s\n", throwable.getMessage());
 	}
 
-	// @Around("com.code.spring.aop.auto.aop.component.pointcut.AllPointcut.logPrint()")
+	// @Around("logPrint()")
 	// public Object around(ProceedingJoinPoint joinPoint) {
 	// 	// 目标方法执行前
 	// 	System.err.printf("【 方法执行前 around 】入参：%s\n", Arrays.toString(joinPoint.getArgs()));

@@ -17,7 +17,7 @@
 
 package com.code.spring.boot.controller;
 
-import com.code.spring.boot.anno.CheckParams;
+import com.code.spring.boot.aop.anno.CheckParams;
 import com.code.spring.boot.service.DemoService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

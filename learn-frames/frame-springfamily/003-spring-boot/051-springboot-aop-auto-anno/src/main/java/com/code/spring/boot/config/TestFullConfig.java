@@ -15,17 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.anno;
+package com.code.spring.boot.config;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.code.spring.boot.entity.User;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
+ * @date 2022/11/29 19:35
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface CheckParams {
+@Slf4j
+@Configuration(proxyBeanMethods = true)
+public class TestFullConfig {
+
+	@Bean("fullTest")
+	public User test() {
+		return new User().setId(1).setName("test");
+	}
+
+	@Bean("fullDemo")
+	public User demo() {
+		User test = test();
+		test.setName("demo");
+		return test;
+	}
+
 }

@@ -17,7 +17,7 @@
 
 package com.code.spring.boot.service;
 
-import com.code.spring.boot.anno.LogPrint;
+import com.code.spring.boot.aop.anno.LogPrint;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopContext;

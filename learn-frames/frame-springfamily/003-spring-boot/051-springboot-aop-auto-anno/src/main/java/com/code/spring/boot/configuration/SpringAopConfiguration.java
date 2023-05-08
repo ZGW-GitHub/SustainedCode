@@ -15,17 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.anno;
+package com.code.spring.boot.configuration;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
+ * {@link EnableAspectJAutoProxy#exposeProxy()} 需要设置为 true ，否则使用 {@link AopContext#currentProxy()} 会报错
+ *
  * @author Snow
- * @date 2021/11/6 22:51
+ * @date 2022/6/30 10:33
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface LogPrint {}
+@Slf4j
+@Configuration
+//@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
+public class SpringAopConfiguration {
+}

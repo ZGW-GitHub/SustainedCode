@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.aop;
+package com.code.spring.boot.config;
 
 import com.code.spring.boot.entity.User;
 import lombok.extern.slf4j.Slf4j;
