@@ -20,8 +20,7 @@ package com.code.sharding.jdbc.configuration;
 import cn.hutool.core.bean.BeanUtil;
 import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -36,17 +35,13 @@ import java.io.IOException;
  * @date 2023/2/25 22:03
  */
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(MultipleDataSourceProperties.class)
 @MapperScan(basePackages = "com.code.sharding.jdbc.dal.sharding.mapper", sqlSessionFactoryRef = "shardingSqlSessionFactory")
 public class ShardingMybatisConfiguration {
 
 	@Bean
-	public DataSource shardingDataSource(MultipleDataSourceProperties properties) {
-		return DataSourceBuilder.create()
-				.type(HikariDataSource.class)
-				.url(properties.getShardingUrl())
-				.driverClassName(properties.getShardingDriver())
-				.build();
+	@ConfigurationProperties("jdbc.sharding")
+	public DataSource shardingDataSource() {
+		return new HikariDataSource();
 	}
 
 	@Bean

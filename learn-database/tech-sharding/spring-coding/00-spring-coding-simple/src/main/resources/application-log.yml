@@ -1,4 +1,0 @@
-logging:
-  level:
-    com.code: debug
-    com.code.sharding.spring.coding.dal.mapper: trace

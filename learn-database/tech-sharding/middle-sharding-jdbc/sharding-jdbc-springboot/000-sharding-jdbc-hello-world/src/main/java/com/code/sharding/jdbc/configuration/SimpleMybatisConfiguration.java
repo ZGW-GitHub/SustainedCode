@@ -20,8 +20,7 @@ package com.code.sharding.jdbc.configuration;
 import cn.hutool.core.bean.BeanUtil;
 import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -36,39 +35,33 @@ import java.io.IOException;
  * @date 2023/2/15 21:03
  */
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(MultipleDataSourceProperties.class)
 @MapperScan(basePackages = "com.code.sharding.jdbc.dal.simple.mapper", sqlSessionFactoryRef = "simpleSqlSessionFactory")
 public class SimpleMybatisConfiguration {
 
-    @Bean
-    public DataSource simpleDataSource(MultipleDataSourceProperties properties) {
-        return DataSourceBuilder.create()
-                .type(HikariDataSource.class)
-                .url(properties.getSimpleUrl())
-                .username(properties.getSimpleUsername())
-                .password(properties.getSimplePassword())
-                .driverClassName(properties.getSimpleDriver())
-                .build();
-    }
+	@Bean
+	@ConfigurationProperties("jdbc.simple")
+	public DataSource simpleDataSource() {
+		return new HikariDataSource();
+	}
 
-    @Bean
-    public SqlSessionFactoryBean simpleSqlSessionFactory(DataSource simpleDataSource, org.apache.ibatis.session.Configuration configuration) throws IOException {
-        configuration = BeanUtil.copyProperties(configuration, org.apache.ibatis.session.Configuration.class);
+	@Bean
+	public SqlSessionFactoryBean simpleSqlSessionFactory(DataSource simpleDataSource, org.apache.ibatis.session.Configuration configuration) throws IOException {
+		configuration = BeanUtil.copyProperties(configuration, org.apache.ibatis.session.Configuration.class);
 
-        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        factoryBean.setDataSource(simpleDataSource);
-        factoryBean.setConfiguration(configuration);
+		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		factoryBean.setDataSource(simpleDataSource);
+		factoryBean.setConfiguration(configuration);
 
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/simple/*.xml"));
-        return factoryBean;
-    }
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		factoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/simple/*.xml"));
+		return factoryBean;
+	}
 
-    @Bean
-    public DataSourceTransactionManager simpleDsTransactionManager(DataSource simpleDataSource) {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(simpleDataSource);
-        return transactionManager;
-    }
+	@Bean
+	public DataSourceTransactionManager simpleDsTransactionManager(DataSource simpleDataSource) {
+		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+		transactionManager.setDataSource(simpleDataSource);
+		return transactionManager;
+	}
 
 }
