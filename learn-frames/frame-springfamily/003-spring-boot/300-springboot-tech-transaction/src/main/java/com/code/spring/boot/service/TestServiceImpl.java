@@ -23,6 +23,7 @@ import com.code.spring.boot.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,8 +50,8 @@ public class TestServiceImpl implements TestService {
 		TimeUnit.SECONDS.sleep(1);
 
 		// 通过下面两种不同的调用可以发现只有 ② 的调用方式 test2 方法的 @Transaction 才会生效
-		this.test2(); // ①
-		// ((TestService) AopContext.currentProxy()).test2(); // ②
+		// this.test2(); // ①
+		((TestService) AopContext.currentProxy()).test2(); // ②
 
 		// throw new ArithmeticException();
 	}
