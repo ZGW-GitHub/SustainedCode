@@ -36,7 +36,8 @@
 		<nacos.version>2.2.0</nacos.version>
 		<nacos-starter.version>0.2.12</nacos-starter.version>
 
-		<spring-boot.version>2.6.3</spring-boot.version>
+		<!-- <spring-boot.version>2.6.3</spring-boot.version> -->
+		<spring-boot.version>3.0.0</spring-boot.version>
 	</properties>
 
 	<dependencyManagement>

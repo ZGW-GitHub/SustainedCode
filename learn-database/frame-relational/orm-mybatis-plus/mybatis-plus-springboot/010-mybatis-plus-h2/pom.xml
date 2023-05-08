@@ -32,12 +32,6 @@
 
 	<packaging>jar</packaging>
 
-	<properties>
-		<mybatis-plus-starter.version>3.5.2</mybatis-plus-starter.version>
-
-		<spring-boot.version>2.5.3</spring-boot.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.h2database</groupId>
