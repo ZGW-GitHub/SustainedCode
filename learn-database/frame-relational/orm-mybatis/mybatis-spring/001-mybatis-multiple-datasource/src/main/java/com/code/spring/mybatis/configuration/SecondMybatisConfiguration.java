@@ -20,8 +20,7 @@ package com.code.spring.mybatis.configuration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -35,19 +34,13 @@ import java.io.IOException;
  * @date 2023/2/25 22:03
  */
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(MultipleDataSourceProperties.class)
 public class SecondMybatisConfiguration {
 
-    @Bean
-    public DataSource secondDataSource(MultipleDataSourceProperties properties) {
-        return DataSourceBuilder.create()
-                .type(HikariDataSource.class)
-                .url(properties.getSecondUrl())
-                .username(properties.getSecondUsername())
-                .password(properties.getSecondPassword())
-                .driverClassName(properties.getSecondDriver())
-                .build();
-    }
+	@Bean
+	@ConfigurationProperties("jdbc.second")
+	public DataSource secondDataSource() {
+		return new HikariDataSource();
+	}
 
     @Bean
     public SqlSessionFactoryBean secondSqlSessionFactory(DataSource secondDataSource) throws IOException {

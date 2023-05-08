@@ -20,8 +20,7 @@ package com.code.spring.mybatis.configuration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -35,18 +34,12 @@ import java.io.IOException;
  * @date 2023/2/15 21:03
  */
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(MultipleDataSourceProperties.class)
 public class FirstMybatisConfiguration {
 
     @Bean
-    public DataSource firstDataSource(MultipleDataSourceProperties properties) {
-        return DataSourceBuilder.create()
-                .type(HikariDataSource.class)
-                .url(properties.getFirstUrl())
-                .username(properties.getFirstUsername())
-                .password(properties.getFirstPassword())
-                .driverClassName(properties.getFirstDriver())
-                .build();
+    @ConfigurationProperties("jdbc.first")
+    public DataSource firstDataSource() {
+        return new HikariDataSource();
     }
 
     @Bean
