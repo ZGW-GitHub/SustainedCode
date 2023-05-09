@@ -17,12 +17,11 @@
 
 package com.code.spring.controller.vo;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Snow

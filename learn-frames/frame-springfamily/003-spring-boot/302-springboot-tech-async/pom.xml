@@ -32,10 +32,6 @@
 
 	<packaging>jar</packaging>
 
-	<properties>
-		<spring-boot.version>2.7.0</spring-boot.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

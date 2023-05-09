@@ -20,14 +20,14 @@ package com.code.spring.controller;
 import com.code.spring.controller.vo.DemoReqVO;
 import com.code.spring.service.DemoService;
 import com.code.spring.service.dto.DemoReqDTO;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Snow
@@ -35,17 +35,24 @@ import javax.validation.constraints.NotNull;
  */
 @Slf4j
 @RestController
+@RequestMapping("test")
 public class DemoController {
 
 	@Resource
 	private DemoService demoService;
 
-	@PostMapping("demo")
+	@PostMapping("controller")
 	public String demo(@RequestBody @NotNull @Valid DemoReqVO reqVO) {
-		log.debug("service 调用前 ...");
+		log.debug("收到请求，参数：{}", reqVO);
+
+		return "SUCCESS";
+	}
+
+	@PostMapping("service")
+	public String service(@RequestBody DemoReqVO reqVO) {
+		log.debug("收到请求，参数：{}", reqVO);
+
 		demoService.demo(new DemoReqDTO().setAge(reqVO.getAge()).setName(reqVO.getName()));
-		// demoService.demo(null);
-		log.debug("service 调用后 ...");
 
 		return "SUCCESS";
 	}

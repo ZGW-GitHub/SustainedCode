@@ -1,5 +1,5 @@
-### 参数完整
-POST http://localhost:8080/demo
+### controller : 参数完整
+POST http://localhost:8080/test/controller
 Content-Type: application/json
 
 {
@@ -7,8 +7,25 @@ Content-Type: application/json
   "age": 10
 }
 
-### name 为空
-POST http://localhost:8080/demo
+### controller : name 为空
+POST http://localhost:8080/test/controller
+Content-Type: application/json
+
+{
+  "age": 10
+}
+
+### service : 参数完整
+POST http://localhost:8080/test/service
+Content-Type: application/json
+
+{
+  "name": "test",
+  "age": 10
+}
+
+### service : name 为空
+POST http://localhost:8080/test/service
 Content-Type: application/json
 
 {

@@ -18,10 +18,9 @@
 package com.code.spring.service;
 
 import com.code.spring.service.dto.DemoReqDTO;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Snow
@@ -30,6 +29,6 @@ import javax.validation.constraints.NotNull;
 @Validated
 public interface DemoService {
 
-    void demo(@Valid @NotNull DemoReqDTO demoReqDTO);
+	void demo(@Valid @NotNull DemoReqDTO demoReqDTO);
 
 }
