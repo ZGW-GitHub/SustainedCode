@@ -17,12 +17,19 @@
 
 package com.code.nacos.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.config.ConfigService;
+import com.alibaba.nacos.api.config.ConfigType;
 import com.code.nacos.entity.DynamicConfig;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Snow
@@ -35,9 +42,24 @@ public class DemoController {
 	@Resource
 	private DynamicConfig dynamicConfig;
 
+	@NacosInjected
+	private ConfigService configService;
+
 	@PostMapping("demo")
 	public String demo() {
 		return dynamicConfig.getName();
+	}
+
+	@PostMapping("update")
+	@SneakyThrows
+	public String update() {
+		String config = configService.getConfig("TestConfig", "DEFAULT_GROUP", TimeUnit.SECONDS.toMillis(3));
+		System.err.println(config);
+
+		DynamicConfig newConfig = new DynamicConfig().setName("update-" + DateUtil.now());
+		configService.publishConfig("TestConfig", "DEFAULT_GROUP", JSONUtil.toJsonStr(newConfig), ConfigType.JSON.getType());
+
+		return "SUCCESS";
 	}
 
 }

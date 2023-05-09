@@ -1,6 +1,0 @@
-### Demo
-POST http://localhost:8080/config/demo
-Content-Type: application/json
-
-{
-}

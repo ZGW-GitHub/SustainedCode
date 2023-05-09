@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>nacos-hello-world</artifactId>
+	<artifactId>000-nacos-hello-world</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>

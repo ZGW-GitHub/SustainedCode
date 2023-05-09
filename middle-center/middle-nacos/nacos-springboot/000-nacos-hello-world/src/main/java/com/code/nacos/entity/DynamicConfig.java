@@ -20,6 +20,7 @@ package com.code.nacos.entity;
 import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,6 +30,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Data
+@Accessors(chain = true)
 @Configuration
 @NacosPropertySource(dataId = "CommonConfig", groupId = "COMMON", autoRefreshed = true)
 public class DynamicConfig {
