@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>010-mybatis-plus-h2</artifactId>
+	<artifactId>600-mybatis-plus-integration-h2</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
