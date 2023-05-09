@@ -111,10 +111,7 @@
         <module>snow-spring-common</module>
         <module>../../dependencies/snow-common-parent</module>
 
-        <!-- <module>../../middle-rpc/rpc-dubbo/dubbo-springboot</module>
-        <module>../../middle-rpc/rpc-dubbo/dubbo-springcloud</module>
-        <module>../../middle-rpc/rpc-feign</module>
-
+        <!--
         &lt;!&ndash; MQ &ndash;&gt;
         <module>../../middle-mq/mq-kafka/kafka-2x-springboot</module>
         <module>../../middle-mq/mq-kafka/kafka-2x-springcloud-stream</module>

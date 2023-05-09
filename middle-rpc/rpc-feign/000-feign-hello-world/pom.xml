@@ -23,9 +23,9 @@
 
     <parent>
         <groupId>com.code</groupId>
-        <artifactId>rpc-feign</artifactId>
+        <artifactId>snow-spring-parent</artifactId>
         <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
     </parent>
     <artifactId>000-feign-hello-world</artifactId>
     <version>${revision}</version>
@@ -36,5 +36,45 @@
         <module>demo-provider</module>
         <module>demo-consumer</module>
     </modules>
+
+    <properties>
+        <spring-boot.version>2.7.0</spring-boot.version>
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+
+        <nacos.version>2.1.0</nacos.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.code</groupId>
+            <artifactId>snow-spring-common</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

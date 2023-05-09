@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>dubbo-springboot</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>900-dubbo-actual-gray</artifactId>
 	<version>${revision}</version>
@@ -41,5 +41,57 @@
 		<module>prod-provider</module>
 		<module>prod-provider-next</module>
 	</modules>
+
+	<properties>
+		<dubbo.version>3.1.7</dubbo.version>
+		<nacos.version>2.1.0</nacos.version>
+		<spring-boot.version>2.7.9</spring-boot.version>
+	</properties>
+
+	<dependencies>
+		<!-- Dubbo -->
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+			<version>${dubbo.version}</version>
+		</dependency>
+
+		<!-- Dubbo 注册中心：Nacos -->
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-registry-nacos</artifactId>
+			<version>${dubbo.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.dubbo</groupId>
+					<artifactId>dubbo-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.dubbo</groupId>
+					<artifactId>dubbo-remoting-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.nacos</groupId>
+			<artifactId>nacos-client</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-spring-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>
