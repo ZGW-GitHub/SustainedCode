@@ -37,10 +37,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
-        <spring-boot.version>3.0.0</spring-boot.version>
+        <spring-boot.version>3.0.6</spring-boot.version>
         <spring-cloud.version>2022.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
-        <spring-boot-admin.version>3.0.0</spring-boot-admin.version>
+        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <spring-boot-admin.version>3.0.6</spring-boot-admin.version>
     </properties>
 
     <dependencyManagement>
