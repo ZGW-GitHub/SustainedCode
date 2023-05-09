@@ -23,9 +23,9 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>mybatis-springboot</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>503-mybatis-tool-generator</artifactId>
 
