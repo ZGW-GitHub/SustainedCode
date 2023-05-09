@@ -25,7 +25,7 @@
 		<groupId>com.code</groupId>
 		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>pulsar-springboot</artifactId>
 	<version>${revision}</version>

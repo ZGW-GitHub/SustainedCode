@@ -112,14 +112,6 @@
         <module>../../dependencies/snow-common-parent</module>
 
         <!--
-        &lt;!&ndash; MQ &ndash;&gt;
-        <module>../../middle-mq/mq-kafka/kafka-2x-springboot</module>
-        <module>../../middle-mq/mq-kafka/kafka-2x-springcloud-stream</module>
-        <module>../../middle-mq/mq-rocketmq/rocketmq-4x-springboot</module>
-        <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springboot</module>
-        <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springcloud-stream</module>
-        <module>../../middle-mq/mq-pulsar/pulsar-2x-springboot</module>
-
         &lt;!&ndash; Center &ndash;&gt;
         <module>../../middle-center/middle-nacos</module>
         <module>../../middle-center/middle-zookeeper</module>
