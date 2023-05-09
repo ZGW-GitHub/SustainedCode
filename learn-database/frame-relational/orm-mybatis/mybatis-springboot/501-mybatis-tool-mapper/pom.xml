@@ -32,11 +32,51 @@
 
 	<packaging>jar</packaging>
 
+	<properties>
+		<mybatis-starter.version>3.0.1</mybatis-starter.version>
+		<mybatis-tool-mapper-starter.version>4.2.2</mybatis-tool-mapper-starter.version>
+		<druid-starter.version>1.2.11</druid-starter.version>
+		<spring-boot.version>3.0.6</spring-boot.version>
+	</properties>
+
 	<dependencies>
-		<!-- 通用Mapper -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-starter.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>tk.mybatis</groupId>
 			<artifactId>mapper-spring-boot-starter</artifactId>
+			<version>${mybatis-tool-mapper-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mybatis</groupId>
+					<artifactId>mybatis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mybatis</groupId>
+					<artifactId>mybatis-spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid-starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-spring-common</artifactId>
 		</dependency>
 	</dependencies>
 
