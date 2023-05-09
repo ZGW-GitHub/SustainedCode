@@ -23,13 +23,44 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>nacos-springboot</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>nacos-hello-world</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
+
+	<properties>
+		<nacos.version>2.2.0</nacos.version>
+		<nacos-starter.version>0.2.12</nacos-starter.version>
+		<spring-boot.version>2.6.3</spring-boot.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-config-spring-boot-starter</artifactId>
+			<version>${nacos-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba.nacos</groupId>
+					<artifactId>nacos-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.nacos</groupId>
+			<artifactId>nacos-client</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-spring-common</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

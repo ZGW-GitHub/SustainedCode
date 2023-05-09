@@ -23,13 +23,31 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>xxljob-springboot</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>xxljob-hello-world</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
+
+	<properties>
+		<xxl-job.version>2.3.0</xxl-job.version>
+		<spring-boot.version>3.0.0</spring-boot.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.xuxueli</groupId>
+			<artifactId>xxl-job-core</artifactId>
+			<version>${xxl-job.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>snow-spring-common</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

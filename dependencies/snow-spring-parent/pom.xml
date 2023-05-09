@@ -112,15 +112,8 @@
         <module>../../dependencies/snow-common-parent</module>
 
         <!--
-        &lt;!&ndash; Center &ndash;&gt;
-        <module>../../middle-center/middle-nacos</module>
-        <module>../../middle-center/middle-zookeeper</module>
-
         &lt;!&ndash; 限流/熔断/降级 &ndash;&gt;
         <module>../../middle-guard/middle-sentinel</module>
-
-        &lt;!&ndash; Job &ndash;&gt;
-        <module>../../middle-job/middle-xxljob</module>
 
         &lt;!&ndash; DB &ndash;&gt;
         <module>../../learn-database/db-elasticsearch</module>
