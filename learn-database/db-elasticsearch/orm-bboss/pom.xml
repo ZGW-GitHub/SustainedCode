@@ -35,8 +35,6 @@
 	<properties>
 		<elasticsearch.version>7.17.3</elasticsearch.version>
 		<elasticsearch-bboss.version>6.8.5</elasticsearch-bboss.version>
-
-		<spring-boot.version>2.7.0</spring-boot.version>
 	</properties>
 
 	<dependencies>

@@ -37,8 +37,6 @@
 
         <mybatis-tool-mapper-starter.version>4.2.2</mybatis-tool-mapper-starter.version>
         <mybatis-tool-pagehelper-starter.version>1.4.6</mybatis-tool-pagehelper-starter.version>
-
-        <spring-boot.version>3.0.6</spring-boot.version>
     </properties>
 
     <dependencyManagement>
