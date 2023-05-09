@@ -16,8 +16,8 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -25,16 +25,16 @@
 		<groupId>com.code</groupId>
 		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
+		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>rocketmq-5x-springboot</artifactId>
+	<artifactId>000-rocketmq-basic-usage</artifactId>
 	<version>${revision}</version>
 
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<properties>
-		<rocketmq.version>5.1.0</rocketmq.version>
-		<rocketmq-starter.version>2.2.3</rocketmq-starter.version>
+		<rocketmq.version>4.9.4</rocketmq.version>
+		<rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 
 		<spring-boot.version>2.6.1</spring-boot.version>
 	</properties>
@@ -48,12 +48,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
-			<dependency>
-				<groupId>org.apache.rocketmq</groupId>
-				<artifactId>rocketmq-spring-boot-starter</artifactId>
-				<version>${rocketmq-starter.version}</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -62,17 +56,16 @@
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-client</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- 	<groupId>org.apache.rocketmq</groupId> -->
-		<!-- 	<artifactId>rocketmq-client-java</artifactId> -->
-		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-acl</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-spring-boot-starter</artifactId>
+			<version>${rocketmq-starter.version}</version>
 		</dependency>
 
 		<dependency>
