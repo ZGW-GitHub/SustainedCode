@@ -111,12 +111,11 @@
         <module>snow-spring-common</module>
         <module>../../dependencies/snow-common-parent</module>
 
-        <!-- RPC -->
-        <module>../../middle-rpc/rpc-dubbo/dubbo-springboot</module>
+        <!-- <module>../../middle-rpc/rpc-dubbo/dubbo-springboot</module>
         <module>../../middle-rpc/rpc-dubbo/dubbo-springcloud</module>
         <module>../../middle-rpc/rpc-feign</module>
 
-        <!-- MQ -->
+        &lt;!&ndash; MQ &ndash;&gt;
         <module>../../middle-mq/mq-kafka/kafka-2x-springboot</module>
         <module>../../middle-mq/mq-kafka/kafka-2x-springcloud-stream</module>
         <module>../../middle-mq/mq-rocketmq/rocketmq-4x-springboot</module>
@@ -124,22 +123,22 @@
         <module>../../middle-mq/mq-rocketmq/rocketmq-5x-springcloud-stream</module>
         <module>../../middle-mq/mq-pulsar/pulsar-2x-springboot</module>
 
-        <!-- Center -->
+        &lt;!&ndash; Center &ndash;&gt;
         <module>../../middle-center/middle-nacos</module>
         <module>../../middle-center/middle-zookeeper</module>
 
-        <!-- 限流/熔断/降级 -->
+        &lt;!&ndash; 限流/熔断/降级 &ndash;&gt;
         <module>../../middle-guard/middle-sentinel</module>
 
-        <!-- Job -->
+        &lt;!&ndash; Job &ndash;&gt;
         <module>../../middle-job/middle-xxljob</module>
 
-        <!-- DB -->
+        &lt;!&ndash; DB &ndash;&gt;
         <module>../../learn-database/db-elasticsearch</module>
         <module>../../learn-database/middle-data</module>
         <module>../../learn-database/db-redis/redis-springboot</module>
         <module>../../learn-database/tech-sharding/spring-coding</module>
-        <module>../../learn-database/tech-sharding/middle-sharding-jdbc/sharding-jdbc-springboot</module>
+        <module>../../learn-database/tech-sharding/middle-sharding-jdbc/sharding-jdbc-springboot</module> -->
     </modules>
 
 </project>
