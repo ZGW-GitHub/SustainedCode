@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>tech-event</artifactId>
+	<artifactId>301-springboot-tech-event</artifactId>
 
 	<packaging>jar</packaging>
 
