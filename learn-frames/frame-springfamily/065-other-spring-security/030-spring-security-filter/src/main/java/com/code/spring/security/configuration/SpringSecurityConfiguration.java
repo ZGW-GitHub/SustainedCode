@@ -72,8 +72,7 @@ public class SpringSecurityConfiguration {
 				.authorizeHttpRequests()
 				.requestMatchers("/visitor/**").permitAll()
 				.and()
-				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
-				.formLogin();
+				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return httpSecurity.build();
 	}
@@ -87,18 +86,6 @@ public class SpringSecurityConfiguration {
 	 */
 	@Bean
 	SecurityFilterChain sysUserSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.securityMatcher("/sysUser/**")
-				.authorizeHttpRequests()
-				.requestMatchers("/sysUser/**").authenticated()
-				.and()
-				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
-				.formLogin();
-
-		return httpSecurity.build();
-	}
-
-	@Bean
-	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests()
 				.requestMatchers("/**").authenticated()
