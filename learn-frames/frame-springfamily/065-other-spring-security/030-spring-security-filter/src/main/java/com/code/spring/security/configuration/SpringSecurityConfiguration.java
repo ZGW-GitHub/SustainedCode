@@ -17,20 +17,24 @@
 
 package com.code.spring.security.configuration;
 
+import com.code.spring.security.component.filter.DemoFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author Snow
  * @date 2023/5/9 16:27
  */
+@EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class SpringSecurityConfiguration {
 
@@ -64,13 +68,15 @@ public class SpringSecurityConfiguration {
 	 */
 	@Bean
 	SecurityFilterChain visitorSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeHttpRequests()
-				.requestMatchers("/demo/**").authenticated()
+		httpSecurity.securityMatcher("/visitor/**")
+				.authorizeHttpRequests()
+				.requestMatchers("/visitor/**").permitAll()
 				.and()
+				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
 				.formLogin();
+
 		return httpSecurity.build();
 	}
-
 
 	/**
 	 * 系统用户过滤器链
@@ -81,11 +87,26 @@ public class SpringSecurityConfiguration {
 	 */
 	@Bean
 	SecurityFilterChain sysUserSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeHttpRequests()
-				.requestMatchers("/test/**").anonymous().anyRequest().authenticated();
+		httpSecurity.securityMatcher("/sysUser/**")
+				.authorizeHttpRequests()
+				.requestMatchers("/sysUser/**").authenticated()
+				.and()
+				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
+				.formLogin();
 
 		return httpSecurity.build();
 	}
 
+	@Bean
+	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.securityMatcher("/**")
+				.authorizeHttpRequests()
+				.requestMatchers("/**").authenticated()
+				.and()
+				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
+				.formLogin();
+
+		return httpSecurity.build();
+	}
 
 }

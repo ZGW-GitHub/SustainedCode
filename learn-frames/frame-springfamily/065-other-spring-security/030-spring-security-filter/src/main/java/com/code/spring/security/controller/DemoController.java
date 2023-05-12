@@ -27,14 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-	@RequestMapping("demo")
-	public String demo() {
+	@RequestMapping("sysUser")
+	public String sysUser() {
 		return "hello spring security !";
 	}
 
-	@RequestMapping("test")
-	public String test() {
-		return "test !";
+	@RequestMapping("visitor")
+	public String visitor() {
+		return "hello visitor !";
 	}
 
 }
