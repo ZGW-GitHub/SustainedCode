@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.java.thread.xxx.other.completable.future;
+package com.code.java.thread.vvv.task.layout.completable.future;
 
 
 import org.junit.jupiter.api.Test;
