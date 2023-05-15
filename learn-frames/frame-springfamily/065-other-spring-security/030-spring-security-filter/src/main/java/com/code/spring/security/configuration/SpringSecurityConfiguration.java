@@ -20,6 +20,7 @@ package com.code.spring.security.configuration;
 import com.code.spring.security.component.filter.DemoFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -67,10 +68,10 @@ public class SpringSecurityConfiguration {
 	 * @throws Exception 异常
 	 */
 	@Bean
+	@Order(1)
 	SecurityFilterChain visitorSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/visitor/**")
-				.authorizeHttpRequests()
-				.requestMatchers("/visitor/**").permitAll()
+				.authorizeHttpRequests().anyRequest().permitAll()
 				.and()
 				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class);
 
@@ -85,10 +86,10 @@ public class SpringSecurityConfiguration {
 	 * @throws Exception 异常
 	 */
 	@Bean
+	@Order(2)
 	SecurityFilterChain sysUserSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
-				.authorizeHttpRequests()
-				.requestMatchers("/**").authenticated()
+				.authorizeHttpRequests().anyRequest().authenticated()
 				.and()
 				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
 				.formLogin();
