@@ -44,28 +44,17 @@ public class CommitTest extends KafkaApplicationTest {
 
 	@Test
 	@SneakyThrows
-	void asyncTest() {
+	void commitTest() {
 		// 构建 Consumer 客户端
 		KafkaConsumer<String, String> consumer = ConsumerUtil.makeConsumer();
 
 		// 订阅主题
 		consumer.subscribe(Collections.singletonList(ConstantPool.DEFAULT_TOPIC));
 
-		asyncOne(consumer);
-//		asyncTwo(consumer);
-	}
-
-	@Test
-	@SneakyThrows
-	void syncTest() {
-		// 构建 Consumer 客户端
-		KafkaConsumer<String, String> consumer = ConsumerUtil.makeConsumer();
-
-		// 订阅主题
-		consumer.subscribe(Collections.singletonList(ConstantPool.DEFAULT_TOPIC));
-
-		syncOne(consumer);
-//		syncTwo(consumer);
+		syncOne(consumer); // 同步 commit 方式一
+		// syncTwo(consumer); // 同步 commit 方式二
+		// asyncOne(consumer); // 异步 commit 方式一
+		// asyncTwo(consumer); // 异步 commit 方式二
 	}
 
 	@SneakyThrows
