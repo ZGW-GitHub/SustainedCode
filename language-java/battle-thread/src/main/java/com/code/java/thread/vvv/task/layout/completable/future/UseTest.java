@@ -27,11 +27,11 @@ import java.util.concurrent.ExecutionException;
  * @author Snow
  * @date 2020/5/23 10:21 上午
  */
-public class TodoTest {
+public class UseTest {
 
-	public final CompletableFuture<Integer> futureData = CompletableFuture.supplyAsync(RunTest::getData);
-	public final CompletableFuture<String> futureStringData = CompletableFuture.supplyAsync(RunTest::getStringData);
-	public final CompletableFuture<Integer> futureException = CompletableFuture.supplyAsync(RunTest::throwException);
+	public final CompletableFuture<Integer> futureData       = CompletableFuture.supplyAsync(TaskUtil::getData);
+	public final CompletableFuture<String>  futureStringData = CompletableFuture.supplyAsync(TaskUtil::getStringData);
+	public final CompletableFuture<Integer> futureException  = CompletableFuture.supplyAsync(TaskUtil::throwException);
 
 	/**
 	 * {@link CompletableFuture#whenComplete} 对 CompletableFuture 的结果进行消费

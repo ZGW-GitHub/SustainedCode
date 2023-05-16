@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @author Snow
  * @date 2020/4/20 11:56 上午
  */
-public class RunTest {
+public class TaskUtil {
 
 	public static int getData() {
 		System.out.println("begin");
