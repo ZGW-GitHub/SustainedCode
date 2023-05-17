@@ -8,7 +8,6 @@ spring:
     import:
       - application-datasource.yml
       - application-mybatis.yml
-      - application-es.yml
       - application-dubbo.yml
       - application-xxljob.yml
       - application-mq-kafka.yml

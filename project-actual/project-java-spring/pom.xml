@@ -36,4 +36,47 @@
 		<module>service-template</module>
 	</modules>
 
+	<properties>
+		<dubbo.version>3.0.6</dubbo.version>
+		<rocketmq.version>4.9.4</rocketmq.version>
+		<rocketmq-starter.version>2.2.2</rocketmq-starter.version>
+		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
+		<druid-starter.version>1.2.11</druid-starter.version>
+		<xxl-job.version>2.4.0</xxl-job.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-spring-boot-starter</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.rocketmq</groupId>
+				<artifactId>rocketmq-spring-boot-starter</artifactId>
+				<version>${rocketmq-starter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.xuxueli</groupId>
+				<artifactId>xxl-job-core</artifactId>
+				<version>${xxl-job.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-starter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid-starter.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>

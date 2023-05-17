@@ -1,3 +1,0 @@
-spring:
-  elasticsearch:
-    uris: http://${elasticsearch.addr}

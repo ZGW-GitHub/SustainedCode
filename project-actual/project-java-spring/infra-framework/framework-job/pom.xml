@@ -25,7 +25,6 @@
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>
 			<version>${revision}</version>
-			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

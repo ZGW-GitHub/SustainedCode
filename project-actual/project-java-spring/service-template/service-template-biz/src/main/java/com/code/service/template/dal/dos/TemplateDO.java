@@ -3,9 +3,8 @@ package com.code.service.template.dal.dos;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.code.framework.mybatis.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
 @TableName("goods_info")
-public class TemplateDO extends BaseEntity {
+public class TemplateDO {
 
 	@TableField(fill = FieldFill.INSERT)
 	private Long recordNo;

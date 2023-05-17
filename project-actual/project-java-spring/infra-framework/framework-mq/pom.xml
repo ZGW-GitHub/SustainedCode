@@ -30,7 +30,6 @@
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>
 			<version>${revision}</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

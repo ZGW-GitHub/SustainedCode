@@ -1,6 +1,6 @@
 package com.code.service.template.job;
 
-import com.code.framework.job.core.handler.abstracts.AbstractCommonJobHandler;
+import com.code.framework.job.core.handler.abstracts.AbstractSimpleJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class TestJob extends AbstractCommonJobHandler<String> {
+public class TestJob extends AbstractSimpleJob<String> {
 
 	@Override
 	protected List<String> doFetchDataList() {
