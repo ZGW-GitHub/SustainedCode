@@ -1,0 +1,16 @@
+### RPC 连通性
+POST http://127.0.0.1:65001/goodsInfo/rpc
+Content-Type: application/json; charset=UTF-8
+
+{
+}
+
+### 保存
+POST http://127.0.0.1:65001/goodsInfo/save
+Content-Type: application/json; charset=UTF-8
+
+{
+  "name": "测试",
+  "price": 6.67,
+  "coverImgUrl": "https://google.com"
+}

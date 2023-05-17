@@ -1,0 +1,8 @@
+xxl-job:
+  admin:
+    addresses: http://${xxl.job.admin.addr}/
+  executor:
+    appname: service-goods
+    port: ${random.int[60505,60566]}
+    logpath: ${project.dir}/sustained-project/.logs/xxl-job/
+    logretentiondays: 30

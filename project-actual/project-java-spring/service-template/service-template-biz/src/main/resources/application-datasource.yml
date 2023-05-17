@@ -1,0 +1,79 @@
+spring:
+  datasource:
+    url: ${mysql.url}/sustained_project?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 配置初始化大小、最小、最大
+      initial-size: 5
+      minIdle: 10
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 2000
+      # 配置一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 600000
+      max-evictable-idle-time-millis: 900000
+      # 用来测试连接是否可用的 SQL 语句
+      validationQuery: select 1
+      # 当为 true 且  为 testOnBorrow 为 false 时，应用向连接池申请连接时，连接池会判断连接是否处于空闲状态，如果是，则验证这条连接是否可用
+      testWhileIdle: true
+      # 当为 true 时，应用向连接池申请连接时，连接池会判断这条连接是否是可用的
+      testOnBorrow: false
+      # 当为 true 时，应用使用完连接，连接池回收连接的时候会判断该连接是否还可用
+      testOnReturn: false
+      # 是否缓存 preparedStatement ，也就是 PSCache 。PSCache 对支持游标的数据库性能提升巨大，比如：oracle
+      poolPreparedStatements: true
+      # 要启用 PSCache ，必须配置大于 0 ，当大于 0 时， poolPreparedStatements 自动触发修改为 true ，在 Druid 中，不会存在 Oracle 下 PSCache 占用内存过多的问题，可以把这个数值配置大一些，比如 100
+      maxOpenPreparedStatements: 20
+      # 连接池中的 minIdle 数量以内的连接，空闲时间超过 minEvictableIdleTimeMillis ，则会执行 keepAlive 操作
+      keepAlive: true
+      # Spring 监控，利用 aop 对指定接口的执行时间、jdbc数进行记录
+      aop-patterns: "com.code.service.goods.dal.mapper.*"
+      # 启用内置过滤器（第一个 stat 必须，否则监控不到 SQL ）
+      filters: stat,wall,log4j2
+      # 自己配置监控统计拦截的 filter
+      filter:
+        # 开启 druid datasource 的状态监控
+        stat:
+          enabled: true
+          db-type: mysql
+          # 开启慢 sql 监控
+          log-slow-sql: true
+          slow-sql-millis: 2000
+        # 日志监控，使用 slf4j 进行日志输出
+        slf4j:
+          enabled: true
+          statement-log-error-enabled: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+      # 配置 WebStatFilter，用于采集 web 关联监控的数据
+      web-stat-filter:
+        enabled: true
+        # 过滤所有 url
+        url-pattern: /*
+        # 排除一些不必要的 url
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        # 开启 session 统计功能
+        session-stat-enable: true
+        # session 的最大个数
+        session-stat-max-count: 1000
+      # 配置 StatViewServlet（监控页面），用于展示 Druid 的统计信息
+      stat-view-servlet:
+        enabled: true
+        # 访问内置监控页面的路径，内置监控页面的首页是 /druid/index.html
+        url-pattern: /druid/*
+        # 不允许清空统计数据，重新计算
+        reset-enable: false
+        # 配置监控页面访问密码
+        login-username: root
+        login-password: root
+        # 允许访问的地址，如果 allow 没有配置或者为空，则允许所有访问
+        allow:
+        # 拒绝访问的地址，deny 优先于 allow
+        deny:                                        

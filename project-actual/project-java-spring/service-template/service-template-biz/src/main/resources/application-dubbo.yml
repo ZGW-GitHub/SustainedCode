@@ -1,8 +1,7 @@
 dubbo:
   application:
     name: ${spring.application.name}
-    register-mode: instance
-    qos-enable: false
+    register-mode: interface
   config:
     multiple: true
   registry:
@@ -20,6 +19,5 @@ dubbo:
     group: CITY_HZ
     scope: remote
   consumer:
-    check: false
     group: CITY_HZ
-    scope: remote
+    check: false

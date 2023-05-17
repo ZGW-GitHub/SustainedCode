@@ -1,0 +1,19 @@
+server:
+  port: 65001
+
+spring:
+  application:
+    name: SERVICE_GOODS
+  config:
+    import:
+      - application-datasource.yml
+      - application-mybatis.yml
+      - application-es.yml
+      - application-dubbo.yml
+      - application-xxljob.yml
+      - application-mq-kafka.yml
+      - application-mq-rocketmq.yml
+      - application-log.yml
+      - application-management.yml
+  main:
+    allow-circular-references: true
