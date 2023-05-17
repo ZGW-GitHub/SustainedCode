@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>xxljob-hello-world</artifactId>
+	<artifactId>000-xxljob-hello-world</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>
@@ -49,5 +49,14 @@
 			<artifactId>snow-spring-common</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
