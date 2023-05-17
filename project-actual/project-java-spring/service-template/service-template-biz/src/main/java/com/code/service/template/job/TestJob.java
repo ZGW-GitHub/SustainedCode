@@ -1,6 +1,6 @@
 package com.code.service.template.job;
 
-import com.code.framework.job.core.handler.abstracts.AbstractSimpleJob;
+import com.code.framework.job.job.abstracts.AbstractSimpleJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

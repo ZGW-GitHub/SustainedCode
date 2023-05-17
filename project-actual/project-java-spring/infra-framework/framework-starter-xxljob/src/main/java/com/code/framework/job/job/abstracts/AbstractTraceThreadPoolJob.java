@@ -1,4 +1,4 @@
-package com.code.framework.job.core.handler.abstracts;
+package com.code.framework.job.job.abstracts;
 
 import com.code.framework.common.exception.BizException;
 import com.code.framework.common.exception.enums.ExceptionCodeEnum;
@@ -7,7 +7,7 @@ import com.code.framework.common.trace.context.TraceContextHelper;
 import com.code.framework.common.trace.context.TraceContextKeyEnum;
 import com.code.framework.common.trace.thread.TraceFutureTask;
 import com.code.framework.common.trace.thread.TraceThreadPoolExecutor;
-import com.code.framework.job.core.handler.AbstractJob;
+import com.code.framework.job.job.AbstractJob;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

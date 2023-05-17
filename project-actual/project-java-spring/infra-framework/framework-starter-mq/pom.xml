@@ -15,10 +15,16 @@
 
 	<packaging>jar</packaging>
 
+	<properties>
+		<rocketmq.version>4.9.4</rocketmq.version>
+		<rocketmq-starter.version>2.2.2</rocketmq-starter.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-spring-boot-starter</artifactId>
+			<version>${rocketmq-starter.version}</version>
 		</dependency>
 
 		<dependency>
