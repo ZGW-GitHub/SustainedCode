@@ -32,7 +32,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>infra-framework</module>
 		<module>service-template</module>
 	</modules>
 

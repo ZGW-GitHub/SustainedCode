@@ -18,14 +18,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>framework-mq</artifactId>
-			<version>${revision}</version>
+			<artifactId>framework-starter-mq</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>snow-common</artifactId>
-		</dependency>
 	</dependencies>
 
 </project>
