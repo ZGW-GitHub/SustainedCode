@@ -109,7 +109,6 @@
 
     <modules>
         <module>snow-spring-common</module>
-        <module>../../dependencies/snow-common-parent</module>
 
         <!--
         &lt;!&ndash; 限流/熔断/降级 &ndash;&gt;
