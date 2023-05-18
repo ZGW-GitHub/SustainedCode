@@ -15,6 +15,11 @@
 
 	<packaging>jar</packaging>
 
+	<properties>
+		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
+		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.dubbo</groupId>
@@ -53,15 +58,26 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>service-template-api</artifactId>
-			<version>${revision}</version>
+			<version>${template-service-api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-basic</artifactId>
+			<version>${framework-basic.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-starter-xxljob</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${framework-starter-xxljob.version}</version>
 		</dependency>
 	</dependencies>
 
