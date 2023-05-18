@@ -1,7 +1,7 @@
 package com.code.service.template.service;
 
 import com.code.service.template.ServiceTemplateApplicationTest;
-import com.code.service.template.controller.vo.GoodsInfoCreateReqVO;
+import com.code.service.template.controller.vo.TemplateCreateReqVO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,8 @@ class TemplateServiceTest extends ServiceTemplateApplicationTest {
 
 	@Test
 	void saveTest() {
-		Long recordId = templateService.save(GoodsInfoCreateReqVO.builder().name("test").price(1.1).coverImgUrl("test").build());
+		TemplateCreateReqVO templateCreateReqVO = new TemplateCreateReqVO().setName("test").setPrice(1.1).setCoverImgUrl("test");
+		Long recordId = templateService.save(templateCreateReqVO);
 
 		System.err.println(recordId);
 	}

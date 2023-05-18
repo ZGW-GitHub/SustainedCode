@@ -39,6 +39,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.dir>/Users/official/Code/MyCode/SustainedCode</project.dir>
 
 		<project-dependencies.version>1.0.0-SNAPSHOT</project-dependencies.version>
 
@@ -62,7 +63,51 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>${project.dir}/project-env/dev.properties</filter>
+				</filters>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
+		<resources>
+			<resource>
+				<directory>${pom.basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.yml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+					<include>**/*.sql</include>
+					<include>META-INF/**/**</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<directory>${pom.basedir}/src/test/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.yml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+					<include>**/*.sql</include>
+					<include>META-INF/**/**</include>
+				</includes>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>

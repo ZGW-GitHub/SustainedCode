@@ -1,6 +1,6 @@
 package com.code.service.template.service;
 
-import com.code.service.template.controller.vo.GoodsInfoCreateReqVO;
+import com.code.service.template.controller.vo.TemplateCreateReqVO;
 import org.springframework.context.ApplicationContextAware;
 
 /**
@@ -9,6 +9,6 @@ import org.springframework.context.ApplicationContextAware;
  */
 public interface TemplateService extends ApplicationContextAware {
 
-	Long save(GoodsInfoCreateReqVO reqVO);
+	Long save(TemplateCreateReqVO reqVO);
 
 }

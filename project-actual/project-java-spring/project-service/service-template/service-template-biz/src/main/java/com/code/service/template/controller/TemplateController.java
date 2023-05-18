@@ -1,7 +1,7 @@
 package com.code.service.template.controller;
 
 import com.code.framework.basic.result.CommonResult;
-import com.code.service.template.controller.vo.GoodsInfoCreateReqVO;
+import com.code.service.template.controller.vo.TemplateCreateReqVO;
 import com.code.service.template.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("goodsInfo")
+@RequestMapping("template")
 public class TemplateController {
 
 	@Resource
@@ -33,7 +33,7 @@ public class TemplateController {
 	}
 
 	@PostMapping("save")
-	public CommonResult<Long> save(@RequestBody GoodsInfoCreateReqVO reqVO) {
+	public CommonResult<Long> save(@RequestBody TemplateCreateReqVO reqVO) {
 		Long recordNo = templateService.save(reqVO);
 
 		return CommonResult.success(recordNo);

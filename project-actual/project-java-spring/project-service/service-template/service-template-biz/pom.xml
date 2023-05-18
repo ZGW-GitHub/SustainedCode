@@ -58,6 +58,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 		</dependency>
@@ -74,11 +79,11 @@
 			<version>${framework-basic.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>framework-starter-xxljob</artifactId>
-			<version>${framework-starter-xxljob.version}</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- 	<groupId>com.code</groupId> -->
+		<!-- 	<artifactId>framework-starter-xxljob</artifactId> -->
+		<!-- 	<version>${framework-starter-xxljob.version}</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 
 	<build>

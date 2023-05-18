@@ -1,6 +1,6 @@
 package com.code.service.template.service;
 
-import com.code.service.template.controller.vo.GoodsInfoCreateReqVO;
+import com.code.service.template.controller.vo.TemplateCreateReqVO;
 import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.dal.dos.TemplateDO;
 import com.code.service.template.dal.mapper.TemplateMapper;
@@ -27,7 +27,7 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	@Transactional
-	public Long save(GoodsInfoCreateReqVO reqVO) {
+	public Long save(TemplateCreateReqVO reqVO) {
 		TemplateDO templateDO = TemplateConvert.INSTANCE.convert(reqVO);
 		templateMapper.insert(templateDO);
 

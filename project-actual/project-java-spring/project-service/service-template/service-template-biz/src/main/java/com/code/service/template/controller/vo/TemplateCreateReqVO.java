@@ -1,8 +1,7 @@
 package com.code.service.template.controller.vo;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -11,9 +10,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-@Builder
-@Jacksonized
-public class GoodsInfoCreateReqVO {
+@Accessors(chain = true)
+public class TemplateCreateReqVO {
 
 	private Long recordNo;
 

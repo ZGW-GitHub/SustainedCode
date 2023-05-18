@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @Accessors(chain = true)
-@TableName("goods_info")
+@TableName("template")
 public class TemplateDO {
 
 	@TableField(fill = FieldFill.INSERT)
