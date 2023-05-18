@@ -35,14 +35,14 @@ public class PostTest extends SpringRestTemplateApplicationTest {
 	void checkInTest() {
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "https://glados.rocks/api/user/checkin";
+		String url = "";
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("cookie", "__stripe_mid=ac58181c-00d1-48d5-96c7-59275156e9f907d321; koa:sess=eyJ1c2VySWQiOjIxMDc1OCwiX2V4cGlyZSI6MTcwMzQ2NTcwMjk5MywiX21heEFnZSI6MjU5MjAwMDAwMDB9; koa:sess.sig=PyxyswyJSfVH_4IpUYdwXi4be5E");
+		headers.set("cookie", "");
 
 		JSONObject data = new JSONObject();
-		data.set("token", "glados.network");
+		data.set("token", "");
 
 		// 创建请求参数
 		HttpEntity<String> httpEntity = new HttpEntity<>(data.toString(), headers);
