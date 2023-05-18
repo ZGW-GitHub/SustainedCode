@@ -15,26 +15,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.xxljob;
+package com.code.xxljob.job;
 
-import com.code.xxljob.job.TestJob;
-import com.xxl.job.core.executor.XxlJobExecutor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.xxl.job.core.handler.IJobHandler;
 
 /**
  * @author Snow
- * @date 2022/4/21 11:05
+ * @date 2023/5/18 17:58
  */
-@Slf4j
-@SpringBootApplication
-public class XxlJobApplication {
-	public static void main(String[] args) {
+public class TestJob extends IJobHandler {
 
-		new SpringApplicationBuilder(XxlJobApplication.class).run(args);
-
-		XxlJobExecutor.registJobHandler("testJob", new TestJob());
-
+	@Override
+	public void execute() throws Exception {
+		System.err.println("任务执行了一次 ！！！");
 	}
+
 }
