@@ -50,14 +50,9 @@
 
 		<!-- 工具 -->
 		<guava.version>31.1-jre</guava.version>
-		<lombok.version>1.18.26</lombok.version>
 		<hutool.version>5.8.12</hutool.version>
+		<lombok.version>1.18.26</lombok.version>
 		<mapstruct.version>1.5.1.Final</mapstruct.version>
-
-		<!-- 默认插件 ( Maven 有 7 个默认插件 ) -->
-		<plugin.maven-resources.version>3.3.0</plugin.maven-resources.version>
-		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
-		<plugin.maven-compiler.version>3.9.0</plugin.maven-compiler.version>
 	</properties>
 
 	<dependencyManagement>
@@ -141,58 +136,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>${spring-boot.version}</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>repackage</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>${plugin.maven-resources.version}</version>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${plugin.maven-compiler.version}</version>
-					<configuration>
-						<annotationProcessorPaths>
-							<path>
-								<groupId>org.projectlombok</groupId>
-								<artifactId>lombok</artifactId>
-								<version>${lombok.version}</version>
-							</path>
-							<!-- 生成映射，实现 bean 之间属性拷贝 -->
-							<path>
-								<groupId>org.mapstruct</groupId>
-								<artifactId>mapstruct-processor</artifactId>
-								<version>${mapstruct.version}</version>
-							</path>
-						</annotationProcessorPaths>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>${plugin.maven-deploy.version}</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
 </project>

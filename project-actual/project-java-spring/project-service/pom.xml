@@ -34,6 +34,13 @@
 	<properties>
 		<revision>1.0.0-SNAPSHOT</revision>
 		<project-dependencies.version>1.0.0-SNAPSHOT</project-dependencies.version>
+
+		<!-- 默认插件 ( Maven 有 7 个默认插件 ) -->
+		<plugin.maven-resources.version>3.3.0</plugin.maven-resources.version>
+		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
+		<plugin.maven-compiler.version>3.9.0</plugin.maven-compiler.version>
+		<!-- 其它插件 -->
+		<plugin.spring-boot.version>3.0.6</plugin.spring-boot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -47,5 +54,58 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${plugin.spring-boot.version}</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${plugin.maven-resources.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${plugin.maven-compiler.version}</version>
+					<configuration>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>RELEASE</version>
+							</path>
+							<!-- 生成映射，实现 bean 之间属性拷贝 -->
+							<path>
+								<groupId>org.mapstruct</groupId>
+								<artifactId>mapstruct-processor</artifactId>
+								<version>RELEASE</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${plugin.maven-deploy.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 </project>
