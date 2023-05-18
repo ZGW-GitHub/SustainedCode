@@ -1,0 +1,6 @@
+server:
+  port: 36366
+spring:
+  config:
+    import:
+      - classpath:application-mail.yml

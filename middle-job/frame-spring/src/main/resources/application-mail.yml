@@ -1,0 +1,8 @@
+spring:
+  mail:
+    host: smtp.qq.com
+    port: 587
+    protocol: smtp
+    username: ${mail.qq.from}
+    password: ${mail.qq.password}
+    test-connection: true
