@@ -9,10 +9,11 @@
 
 ```
 /**
- * Api           XxxReqDTO / XxxRespDTO
  * Controller    XxxReqVO / XxxRespVO
- * Client        XxxParam / XxxResult
  * Service       XxxReqModel / XxxRespModel
  * Mapper        XxxDO or XxxPOJO
+ * 
+ * Api           XxxReqDTO / XxxRespDTO
+ * Client        XxxParam / XxxResult
  */
 ```

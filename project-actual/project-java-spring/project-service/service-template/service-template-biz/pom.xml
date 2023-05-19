@@ -77,6 +77,11 @@
 			<artifactId>service-template-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>service-template-integration</artifactId>
+		</dependency>
+
 		<!-- <dependency> -->
 		<!-- 	<groupId>com.code</groupId> -->
 		<!-- 	<artifactId>framework-starter-xxljob</artifactId> -->
