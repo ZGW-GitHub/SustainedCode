@@ -11,7 +11,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>service-test-biz</artifactId>
-	<version>${test-service-biz.version}</version>
+	<version>${service-test.version}</version>
 
 	<packaging>jar</packaging>
 
@@ -70,12 +70,6 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>service-test-api</artifactId>
-			<version>${test-service-api.version}</version>
 		</dependency>
 
 		<dependency>
