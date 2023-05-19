@@ -11,7 +11,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>service-template</artifactId>
-	<version>${revisionn}</version>
+	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
@@ -31,6 +31,12 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.code</groupId>
+				<artifactId>service-template-common</artifactId>
+				<version>${service-template.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
 				<artifactId>service-template-api</artifactId>
 				<version>${service-template-api.version}</version>
 			</dependency>
@@ -38,12 +44,6 @@
 			<dependency>
 				<groupId>com.code</groupId>
 				<artifactId>service-template-biz</artifactId>
-				<version>${service-template.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.code</groupId>
-				<artifactId>service-template-common</artifactId>
 				<version>${service-template.version}</version>
 			</dependency>
 

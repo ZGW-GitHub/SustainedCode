@@ -49,6 +49,7 @@
 		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
 		<plugin.maven-compiler.version>3.9.0</plugin.maven-compiler.version>
 		<!-- 其它插件 -->
+		<plugin.maven_flatten.version>1.1.0</plugin.maven_flatten.version>
 		<plugin.spring-boot.version>3.0.6</plugin.spring-boot.version>
 	</properties>
 
@@ -82,14 +83,9 @@
 		<resources>
 			<resource>
 				<directory>${pom.basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.yml</include>
-					<include>**/*.properties</include>
-					<include>**/*.txt</include>
-					<include>**/*.sql</include>
-					<include>META-INF/**/**</include>
-				</includes>
+				<excludes>
+					<exclude>**/*.log</exclude>
+				</excludes>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
@@ -97,14 +93,9 @@
 		<testResources>
 			<testResource>
 				<directory>${pom.basedir}/src/test/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.yml</include>
-					<include>**/*.properties</include>
-					<include>**/*.txt</include>
-					<include>**/*.sql</include>
-					<include>META-INF/**/**</include>
-				</includes>
+				<excludes>
+					<exclude>**/*.log</exclude>
+				</excludes>
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
@@ -159,6 +150,34 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${plugin.maven_flatten.version}</version>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>

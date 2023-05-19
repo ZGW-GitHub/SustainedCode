@@ -33,7 +33,7 @@ class TemplateControllerTest {
 
 	@Test
 	void save() throws Exception {
-		TemplateCreateReqVO reqVO = TemplateCreateReqVO.builder().name("testSave").price(1.1).coverImgUrl("url").build();
+		TemplateCreateReqVO reqVO = new TemplateCreateReqVO();
 
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders
 						.post("/goodsInfo/save")
