@@ -17,13 +17,16 @@
 	</modules>
 
 	<properties>
-		<revision>1.0.0-SNAPSHOT</revision>
-
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<revision>1.0.0-SNAPSHOT</revision>
+		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
+		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
+		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
 
 		<project-dependencies.version>1.0.0-SNAPSHOT</project-dependencies.version>
 	</properties>
@@ -36,6 +39,12 @@
 				<version>${project-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>framework-basic</artifactId>
+				<version>${framework-basic.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

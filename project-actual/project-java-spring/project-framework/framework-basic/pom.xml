@@ -15,10 +15,6 @@
 
 	<packaging>jar</packaging>
 
-	<properties>
-		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -15,12 +15,6 @@
 
 	<packaging>jar</packaging>
 
-	<properties>
-		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
-
-		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.xuxueli</groupId>
@@ -35,7 +29,6 @@
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>
-			<version>${framework-basic.version}</version>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>

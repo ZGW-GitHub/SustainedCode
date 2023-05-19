@@ -16,9 +16,6 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
-		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
-
 		<rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 	</properties>
 
@@ -36,7 +33,6 @@
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>
-			<version>${framework-basic.version}</version>
 		</dependency>
 	</dependencies>
 
