@@ -10,26 +10,21 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>service-template-api</artifactId>
-	<version>${service-template-api.version}</version>
+	<artifactId>service-template-common</artifactId>
+	<version>${service-template.version}</version>
 
 	<packaging>jar</packaging>
 
 	<properties>
-		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
+		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>service-template-common</artifactId>
+			<artifactId>framework-basic</artifactId>
+			<version>${framework-basic.version}</version>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- 	<groupId>com.code</groupId> -->
-		<!-- 	<artifactId>framework-starter-mq</artifactId> -->
-		<!-- 	<version>${framework-mq.version}</version> -->
-		<!-- </dependency> -->
 	</dependencies>
 
 </project>

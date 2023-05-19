@@ -10,8 +10,8 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>service-template-api</artifactId>
-	<version>${service-template-api.version}</version>
+	<artifactId>service-template-integration</artifactId>
+	<version>${service-template.version}</version>
 
 	<packaging>jar</packaging>
 
@@ -24,12 +24,6 @@
 			<groupId>com.code</groupId>
 			<artifactId>service-template-common</artifactId>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- 	<groupId>com.code</groupId> -->
-		<!-- 	<artifactId>framework-starter-mq</artifactId> -->
-		<!-- 	<version>${framework-mq.version}</version> -->
-		<!-- </dependency> -->
 	</dependencies>
 
 </project>

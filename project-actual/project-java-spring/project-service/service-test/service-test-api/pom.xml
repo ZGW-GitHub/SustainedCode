@@ -5,24 +5,26 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>service-template</artifactId>
+		<artifactId>service-test</artifactId>
 		<groupId>com.code</groupId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>service-template-api</artifactId>
-	<version>${service-template-api.version}</version>
+	<artifactId>service-test-api</artifactId>
+	<version>${test-service-api.version}</version>
 
 	<packaging>jar</packaging>
 
 	<properties>
+		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
 		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>service-template-common</artifactId>
+			<artifactId>framework-basic</artifactId>
+			<version>${framework-basic.version}</version>
 		</dependency>
 
 		<!-- <dependency> -->

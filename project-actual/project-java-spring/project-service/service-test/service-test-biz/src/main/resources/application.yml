@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: SERVICE_TEMPLATE
+    name: SERVICE_TEST
   config:
     import:
       - classpath:application-datasource.yml
@@ -11,9 +11,5 @@ spring:
       - classpath:application-mybatis.yml
       - classpath:application-dubbo.yml
       - classpath:application-log.yml
-      - classpath:application-management.yml
-      # - classpath:application-xxljob.yml
-      # - classpath:application-mq-kafka.yml
-      # - classpath:application-mq-rocketmq.yml
   main:
     allow-circular-references: true

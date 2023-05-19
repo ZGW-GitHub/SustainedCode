@@ -11,19 +11,48 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>service-template</artifactId>
-	<version>${revision}</version>
+	<version>${revisionn}</version>
 
 	<packaging>pom</packaging>
 
 	<modules>
 		<module>service-template-api</module>
 		<module>service-template-biz</module>
+		<module>service-template-common</module>
+		<module>service-template-integration</module>
 	</modules>
 
 	<properties>
-		<revision>1.0.0-SNAPSHOT</revision>
-		<template-service-api.version>1.0.0-SNAPSHOT</template-service-api.version>
-		<template-service-biz.version>1.0.0-SNAPSHOT</template-service-biz.version>
+		<service-template.version>2.0.0-SNAPSHOT</service-template.version>
+		<service-template-api.version>3.2.1-SNAPSHOT</service-template-api.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>service-template-api</artifactId>
+				<version>${service-template-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>service-template-biz</artifactId>
+				<version>${service-template.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>service-template-common</artifactId>
+				<version>${service-template.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>service-template-integration</artifactId>
+				<version>${service-template.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

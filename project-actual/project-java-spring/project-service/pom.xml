@@ -29,6 +29,7 @@
 
 	<modules>
 		<module>service-template</module>
+		<module>service-test</module>
 	</modules>
 
 	<properties>
