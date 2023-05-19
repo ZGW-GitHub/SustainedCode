@@ -1,6 +1,6 @@
 mybatis-plus:
-  mapper-locations: classpath:mappers/*.xml
-  typeAliasesPackage: com.code.service.goods.dal.dos
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: com.code.service.template.dal.dos
   global-config:
     # 数据库相关配置
     db-config:
@@ -8,9 +8,6 @@ mybatis-plus:
       id-type: auto
       # 驼峰下划线转换
       table-underline: true
-      # 逻辑删除配置
-      logic-delete-value: 1
-      logic-not-delete-value: 0
   # 原生配置
   configuration:
     map-underscore-to-camel-case: true

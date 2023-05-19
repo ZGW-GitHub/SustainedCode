@@ -1,7 +1,7 @@
 dubbo:
   application:
     name: ${spring.application.name}
-    register-mode: interface
+    register-mode: instance
   config:
     multiple: true
   registry:

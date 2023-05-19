@@ -27,7 +27,7 @@ spring:
       # 连接池中的 minIdle 数量以内的连接，空闲时间超过 minEvictableIdleTimeMillis ，则会执行 keepAlive 操作
       keepAlive: true
       # Spring 监控，利用 aop 对指定接口的执行时间、jdbc数进行记录
-      aop-patterns: "com.code.service.goods.dal.mapper.*"
+      aop-patterns: "com.code.service.template.dal.mapper.*"
       # 启用内置过滤器（第一个 stat 必须，否则监控不到 SQL ）
       filters: stat,wall,log4j2
       # 自己配置监控统计拦截的 filter

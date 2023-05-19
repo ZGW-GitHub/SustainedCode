@@ -3,4 +3,3 @@ logging:
     root: info
     com.code: debug
     org.apache.dubbo: debug
-    com.code.data.mybatis.plus.mapper: trace
