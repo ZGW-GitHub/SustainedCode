@@ -17,11 +17,11 @@
 
 package com.code.service.test.controller.vo;
 
-import com.code.framework.basic.result.page.PageReq;
+import com.code.framework.basic.result.page.Page;
 
 /**
  * @author Snow
  * @date 2023/5/19 11:37
  */
-public class UserPageReqVO extends PageReq {
+public class UserPageReqVO extends Page {
 }

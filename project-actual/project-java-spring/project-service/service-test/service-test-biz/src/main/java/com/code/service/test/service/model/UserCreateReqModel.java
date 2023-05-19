@@ -15,36 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.page;
+package com.code.service.test.service.model;
 
-import jakarta.validation.constraints.Min;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:40
+ * @date 2023/5/19 21:52
  */
+@Slf4j
 @Data
-public class PageReq {
+public class UserCreateReqModel {
 
-	/**
-	 * 当前页
-	 */
-	@Min(value = 1, message = "当前页不合法，应大于等于 1")
-	private long current = 1;
-
-	/**
-	 * 每页显示条数，默认 10
-	 */
-	@Min(value = 1, message = "每页显示条数不合法，应大于等于 1")
-	private long size = 10;
-
-	public long offset() {
-		long current = this.current;
-		if (current <= 1L) {
-			return 0L;
-		}
-		return Math.max((current - 1) * this.size, 0L);
-	}
+	private String  name;
+	private Integer age;
 
 }

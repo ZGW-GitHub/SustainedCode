@@ -15,18 +15,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.test.controller.vo;
+package com.code.service.test.service.model;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Date;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:16
+ * @date 2023/5/19 22:07
  */
+@Slf4j
 @Data
-public class UserCreateReqVO {
+public class UserPageRespModel {
 
+	private Long    recordNo;
 	private String  name;
 	private Integer age;
+	private Date    createTime;
 
 }

@@ -1,6 +1,9 @@
 package com.code.service.test.service;
 
-import com.code.service.test.controller.vo.UserCreateReqVO;
+import com.code.framework.basic.result.page.PageData;
+import com.code.service.test.service.model.UserCreateReqModel;
+import com.code.service.test.service.model.UserPageReqModel;
+import com.code.service.test.service.model.UserPageRespModel;
 
 /**
  * @author 愆凡
@@ -8,6 +11,8 @@ import com.code.service.test.controller.vo.UserCreateReqVO;
  */
 public interface TestService {
 
-	Long save(UserCreateReqVO reqVO);
+	Long save(UserCreateReqModel reqModel);
+
+	PageData<UserPageRespModel> page(UserPageReqModel userPageReqModel);
 
 }

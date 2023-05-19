@@ -17,9 +17,21 @@
 
 package com.code.service.test.controller.vo;
 
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * @author Snow
  * @date 2023/5/19 11:36
  */
-public class UserPageRespVO {
+@Data
+public class UserPageRespVO implements Serializable {
+
+	private Long    recordNo;
+	private String  name;
+	private Integer age;
+	private Date    createTime;
+
 }

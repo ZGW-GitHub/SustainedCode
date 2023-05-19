@@ -15,18 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.test.controller.vo;
+package com.code.service.test.api;
 
-import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:16
+ * @date 2023/5/19 21:50
  */
-@Data
-public class UserCreateReqVO {
-
-	private String  name;
-	private Integer age;
-
+@Slf4j
+public class XxxApi {
 }

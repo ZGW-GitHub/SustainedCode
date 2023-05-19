@@ -1,16 +1,17 @@
-### RPC 连通性
-POST http://127.0.0.1:65001/goodsInfo/rpc
-Content-Type: application/json; charset=UTF-8
-
-{
-}
-
-### 保存
-POST http://127.0.0.1:65001/goodsInfo/save
+### 新增用户
+POST http://127.0.0.1:65001/test/save
 Content-Type: application/json; charset=UTF-8
 
 {
   "name": "测试",
-  "price": 6.67,
-  "coverImgUrl": "https://google.com"
+  "age": 16
+}
+
+### 分页查询
+POST http://127.0.0.1:65001/test/page
+Content-Type: application/json; charset=UTF-8
+
+{
+  "currentPage": 2,
+  "pageSize": 3
 }

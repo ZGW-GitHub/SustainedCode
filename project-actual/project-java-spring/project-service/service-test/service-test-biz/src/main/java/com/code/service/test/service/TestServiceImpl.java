@@ -1,14 +1,19 @@
 package com.code.service.test.service;
 
-import com.code.service.test.controller.vo.UserCreateReqVO;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.code.framework.basic.result.page.PageData;
 import com.code.service.test.convert.UserConvert;
 import com.code.service.test.dal.dos.UserDO;
 import com.code.service.test.dal.mapper.UserMapper;
+import com.code.service.test.service.model.UserCreateReqModel;
+import com.code.service.test.service.model.UserPageReqModel;
+import com.code.service.test.service.model.UserPageRespModel;
 import jakarta.annotation.Resource;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 愆凡
@@ -23,12 +28,22 @@ public class TestServiceImpl implements TestService {
 	private UserMapper userMapper;
 
 	@Override
-	@Transactional
-	public Long save(UserCreateReqVO reqVO) {
-		UserDO userDO = UserConvert.INSTANCE.convert(reqVO);
+	public Long save(UserCreateReqModel reqModel) {
+		UserDO userDO = UserConvert.INSTANCE.modelToDo(reqModel);
+		userDO.setRecordNo(RandomUtil.randomLong(Long.MAX_VALUE));
+		userDO.setCreateTime(DateUtil.date());
 		userMapper.insert(userDO);
 
 		return userDO.getRecordNo();
+	}
+
+	@Override
+	public PageData<UserPageRespModel> page(UserPageReqModel userPageReqModel) {
+		UserDO userDO = UserConvert.INSTANCE.modelToDo(userPageReqModel);
+
+		Page<UserDO> userDOPage = userMapper.page(userDO, userPageReqModel.currentPage(), userPageReqModel.pageSize());
+
+		return PageData.of(userDOPage.getTotal(), UserConvert.INSTANCE.doToModel(userDOPage.getRecords()));
 	}
 
 }
