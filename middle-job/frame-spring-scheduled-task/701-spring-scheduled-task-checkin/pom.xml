@@ -25,9 +25,9 @@
 		<groupId>com.code</groupId>
 		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../../dependencies/snow-spring-parent/pom.xml</relativePath>
+		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>frame-spring</artifactId>
+	<artifactId>701-spring-scheduled-task-checkin</artifactId>
 	<version>${revision}</version>
 
 	<packaging>jar</packaging>

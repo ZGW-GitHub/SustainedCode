@@ -15,21 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.scheduled.task.task;
+package com.code.spring.boot;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author Snow
- * @date 2022/7/25 15:08
+ * @date 2021/12/12 9:17 PM
  */
 @Slf4j
-public class DemoTask {
+@EnableScheduling
+@SpringBootApplication
+public class SnowSpringBootApplication {
+	public static void main(String[] args) throws InterruptedException {
 
-	@Scheduled
-	public void demo() {
+		new SpringApplicationBuilder(SnowSpringBootApplication.class).run(args);
+
+		Thread.currentThread().join();
 
 	}
-
 }

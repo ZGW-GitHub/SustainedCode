@@ -23,11 +23,11 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>003-spring-boot</artifactId>
+		<artifactId>snow-spring-parent</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../dependencies/snow-spring-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>tech-scheduled-task</artifactId>
+	<artifactId>000-spring-scheduled-task-hello-world</artifactId>
 
 	<packaging>jar</packaging>
 
