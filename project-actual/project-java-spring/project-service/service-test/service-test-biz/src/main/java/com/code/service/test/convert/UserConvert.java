@@ -33,7 +33,7 @@ public interface UserConvert {
 
 	List<UserPageRespModel> doToModel(List<UserDO> userDOList);
 
-	UserPageRespVO modelToVo(UserPageRespModel userPageRespModelList);
+	UserPageRespVO modelToVo(UserPageRespModel userPageRespMode);
 
 	List<UserPageRespVO> modelToVo(List<UserPageRespModel> userPageRespModelList);
 
