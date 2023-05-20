@@ -74,7 +74,7 @@
 
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>service-template-api</artifactId>
+			<artifactId>service-template-facade</artifactId>
 		</dependency>
 
 		<dependency>

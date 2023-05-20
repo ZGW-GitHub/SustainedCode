@@ -1,7 +1,7 @@
 package com.code.service.template.convert;
 
-import com.code.service.template.controller.vo.TemplateCreateReqVO;
-import com.code.service.template.dal.dos.TemplateDO;
+import com.code.service.template.api.domain.request.TemplateCreateReqVO;
+import com.code.service.template.dal.domain.dos.TemplateDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,7 +1,7 @@
 package com.code.service.template.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.code.service.template.dal.dos.TemplateDO;
+import com.code.service.template.dal.domain.dos.TemplateDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

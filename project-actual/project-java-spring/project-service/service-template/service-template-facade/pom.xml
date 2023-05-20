@@ -10,8 +10,8 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>service-template-api</artifactId>
-	<version>${service-template-api.version}</version>
+	<artifactId>service-template-facade</artifactId>
+	<version>${service-template-facade.version}</version>
 
 	<packaging>jar</packaging>
 

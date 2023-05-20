@@ -15,31 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api.impl;
+package com.code.service.template.dal.domain.pojo;
 
-import com.code.service.template.api.TemplateApi;
-import com.code.service.template.api.domain.request.TemplateCreateReqVO;
-import com.code.service.template.service.TemplateService;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:36
+ * @date 2023/5/19 21:38
  */
 @Slf4j
-public class TemplateApiImpl implements TemplateApi {
-
-	@Resource
-	private TemplateService templateService;
-
-	public String test() {
-		return "test";
-	}
-
-	public Long save(@RequestBody TemplateCreateReqVO reqVO) {
-		return templateService.save(reqVO);
-	}
-
+public class XxxPOJO {
 }

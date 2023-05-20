@@ -15,31 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api.impl;
+package com.code.service.template.dal.domain.dos;
 
-import com.code.service.template.api.TemplateApi;
-import com.code.service.template.api.domain.request.TemplateCreateReqVO;
-import com.code.service.template.service.TemplateService;
-import jakarta.annotation.Resource;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * @author Snow
- * @date 2023/5/20 19:36
+ * @author 愆凡
+ * @date 2022/6/12 17:43
  */
 @Slf4j
-public class TemplateApiImpl implements TemplateApi {
+@Data
+@Accessors(chain = true)
+@TableName("template")
+public class TemplateDO {
 
-	@Resource
-	private TemplateService templateService;
+	@TableField(fill = FieldFill.INSERT)
+	private Long recordNo;
 
-	public String test() {
-		return "test";
-	}
+	private String name;
 
-	public Long save(@RequestBody TemplateCreateReqVO reqVO) {
-		return templateService.save(reqVO);
-	}
+	private Double price;
+
+	private String coverImgUrl;
 
 }

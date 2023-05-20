@@ -16,15 +16,15 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>service-template-api</module>
-		<module>service-template-biz</module>
 		<module>service-template-common</module>
+		<module>service-template-facade</module>
+		<module>service-template-biz</module>
 		<module>service-template-integration</module>
 	</modules>
 
 	<properties>
 		<service-template.version>2.0.0-SNAPSHOT</service-template.version>
-		<service-template-api.version>3.2.1-SNAPSHOT</service-template-api.version>
+		<service-template-facade.version>3.2.1-SNAPSHOT</service-template-facade.version>
 	</properties>
 
 	<dependencyManagement>
@@ -37,8 +37,8 @@
 
 			<dependency>
 				<groupId>com.code</groupId>
-				<artifactId>service-template-api</artifactId>
-				<version>${service-template-api.version}</version>
+				<artifactId>service-template-facade</artifactId>
+				<version>${service-template-facade.version}</version>
 			</dependency>
 
 			<dependency>

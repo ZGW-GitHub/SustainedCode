@@ -1,8 +1,8 @@
 package com.code.service.template.service;
 
-import com.code.service.template.controller.vo.TemplateCreateReqVO;
+import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import com.code.service.template.convert.TemplateConvert;
-import com.code.service.template.dal.dos.TemplateDO;
+import com.code.service.template.dal.domain.dos.TemplateDO;
 import com.code.service.template.dal.mapper.TemplateMapper;
 import jakarta.annotation.Resource;
 import lombok.Setter;

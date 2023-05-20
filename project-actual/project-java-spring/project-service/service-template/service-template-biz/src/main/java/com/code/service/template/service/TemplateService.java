@@ -1,6 +1,6 @@
 package com.code.service.template.service;
 
-import com.code.service.template.controller.vo.TemplateCreateReqVO;
+import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import org.springframework.context.ApplicationContextAware;
 
 /**

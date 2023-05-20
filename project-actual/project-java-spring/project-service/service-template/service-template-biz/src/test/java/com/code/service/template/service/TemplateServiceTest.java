@@ -1,7 +1,7 @@
 package com.code.service.template.service;
 
 import com.code.service.template.ServiceTemplateApplicationTest;
-import com.code.service.template.controller.vo.TemplateCreateReqVO;
+import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

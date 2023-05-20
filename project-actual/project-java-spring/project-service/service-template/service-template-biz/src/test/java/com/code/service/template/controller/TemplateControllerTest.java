@@ -1,7 +1,7 @@
 package com.code.service.template.controller;
 
 import cn.hutool.json.JSONUtil;
-import com.code.service.template.controller.vo.TemplateCreateReqVO;
+import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import com.code.service.template.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
