@@ -17,47 +17,46 @@
 
 package com.code.framework.basic.result.page;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import jakarta.validation.constraints.Min;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collections;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:28
+ * @date 2023/5/19 11:40
  */
-@Data
-@Accessors(chain = true)
-public class PageData<T> {
-
-	private static final PageData EMPTY = new PageData();
+@Setter
+@Getter
+public class PageReq implements Serializable {
 
 	/**
-	 * 总数
+	 * 当前页
 	 */
-	private long total = 0;
+	@Min(value = 1, message = "当前页不合法，应大于等于 1")
+	private long currentPage = 1;
 
 	/**
-	 * 查询数据列表
+	 * 每页显示条数，默认 10
 	 */
-	private List<T> records = Collections.emptyList();
+	@Min(value = 1, message = "每页显示条数不合法，应大于等于 1")
+	private long pageSize = 10;
 
-	private PageData() {
+	public long currentPage() {
+		return currentPage;
 	}
 
-	private PageData(long total, List<T> records) {
-		this.total = total;
-		this.records = records;
+	public long pageSize() {
+		return pageSize;
 	}
 
-	public static <T> PageData<T> of(long total, List<T> records) {
-		return new PageData<>(total, records);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> PageData<T> empty() {
-		return (PageData<T>) EMPTY;
+	public long offset() {
+		long current = this.currentPage;
+		if (current <= 1L) {
+			return 0L;
+		}
+		return Math.max((current - 1) * this.pageSize, 0L);
 	}
 
 }

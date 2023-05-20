@@ -3,7 +3,6 @@ package com.code.framework.basic.exception;
 import com.code.framework.basic.result.code.ResultCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class BizException extends RuntimeException {
 

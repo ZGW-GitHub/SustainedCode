@@ -1,6 +1,6 @@
 package com.code.service.test.service;
 
-import com.code.framework.basic.result.page.PageData;
+import com.code.framework.basic.result.page.PageResp;
 import com.code.service.test.service.model.UserCreateReqModel;
 import com.code.service.test.service.model.UserPageReqModel;
 import com.code.service.test.service.model.UserPageRespModel;
@@ -13,6 +13,6 @@ public interface TestService {
 
 	Long save(UserCreateReqModel reqModel);
 
-	PageData<UserPageRespModel> page(UserPageReqModel userPageReqModel);
+	PageResp<UserPageRespModel> page(UserPageReqModel userPageReqModel);
 
 }

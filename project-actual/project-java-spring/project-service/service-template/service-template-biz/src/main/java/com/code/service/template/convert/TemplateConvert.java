@@ -14,6 +14,6 @@ public interface TemplateConvert {
 
 	TemplateConvert INSTANCE = Mappers.getMapper(TemplateConvert.class);
 
-	TemplateDO convert(TemplateCreateReqVO bean);
+	TemplateDO voToDo(TemplateCreateReqVO templateCreateReqVO);
 
 }

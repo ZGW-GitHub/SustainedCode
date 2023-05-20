@@ -17,7 +17,7 @@
 
 package com.code.service.test.service.model;
 
-import com.code.framework.basic.result.page.Page;
+import com.code.framework.basic.result.page.PageReq;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2023/5/19 22:05
  */
 @Slf4j
-public class UserPageReqModel extends Page {
+public class UserPageReqModel extends PageReq {
 
 
 }

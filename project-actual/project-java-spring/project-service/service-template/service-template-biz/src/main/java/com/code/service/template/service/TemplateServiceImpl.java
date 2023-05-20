@@ -28,7 +28,7 @@ public class TemplateServiceImpl implements TemplateService {
 	@Override
 	@Transactional
 	public Long save(TemplateCreateReqVO reqVO) {
-		TemplateDO templateDO = TemplateConvert.INSTANCE.convert(reqVO);
+		TemplateDO templateDO = TemplateConvert.INSTANCE.voToDo(reqVO);
 		templateMapper.insert(templateDO);
 
 		// applicationContext.publishEvent(new RocketSendEvent(new TestMessage()));

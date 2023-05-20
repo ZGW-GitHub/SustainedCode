@@ -31,7 +31,10 @@ public class CommonResult<T> implements Serializable {
 	 */
 	private String message;
 
-	public static <T> CommonResult<T> success(T data) {
+	private CommonResult() {
+	}
+
+	static <T> CommonResult<T> success(T data) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = ResultCodeEnum.SUCCESS.getCode();
 		result.message = ResultCodeEnum.SUCCESS.getMessage();
@@ -39,22 +42,22 @@ public class CommonResult<T> implements Serializable {
 		return result;
 	}
 
-	public static <T> CommonResult<T> error(ResultCode resultCode) {
+	static <T> CommonResult<T> error(ResultCode resultCode) {
 		return error(resultCode, resultCode.getMessage());
 	}
 
-	public static <T> CommonResult<T> error(BizException bizException) {
-		return error(bizException, bizException.getMessage());
-	}
-
-	public static <T> CommonResult<T> error(ResultCode resultCode, String message) {
+	static <T> CommonResult<T> error(ResultCode resultCode, String message) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = resultCode.getCode();
 		result.message = message;
 		return result;
 	}
 
-	public static <T> CommonResult<T> error(BizException bizException, String message) {
+	static <T> CommonResult<T> error(BizException bizException) {
+		return error(bizException, bizException.getMessage());
+	}
+
+	static <T> CommonResult<T> error(BizException bizException, String message) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = bizException.getCode();
 		result.message = message;

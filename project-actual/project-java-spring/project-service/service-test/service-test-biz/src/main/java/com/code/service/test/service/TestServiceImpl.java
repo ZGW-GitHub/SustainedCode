@@ -3,7 +3,7 @@ package com.code.service.test.service;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.code.framework.basic.result.page.PageData;
+import com.code.framework.basic.result.page.PageResp;
 import com.code.service.test.convert.UserConvert;
 import com.code.service.test.dal.dos.UserDO;
 import com.code.service.test.dal.mapper.UserMapper;
@@ -38,12 +38,12 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
-	public PageData<UserPageRespModel> page(UserPageReqModel userPageReqModel) {
+	public PageResp<UserPageRespModel> page(UserPageReqModel userPageReqModel) {
 		UserDO userDO = UserConvert.INSTANCE.modelToDo(userPageReqModel);
 
 		Page<UserDO> userDOPage = userMapper.page(userDO, userPageReqModel.currentPage(), userPageReqModel.pageSize());
 
-		return PageData.of(userDOPage.getTotal(), UserConvert.INSTANCE.doToModel(userDOPage.getRecords()));
+		return PageResp.of(userDOPage.getTotal(), UserConvert.INSTANCE.doToModel(userDOPage.getRecords()));
 	}
 
 }

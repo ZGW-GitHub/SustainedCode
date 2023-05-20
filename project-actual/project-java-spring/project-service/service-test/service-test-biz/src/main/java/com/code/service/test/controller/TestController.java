@@ -1,7 +1,8 @@
 package com.code.service.test.controller;
 
 import com.code.framework.basic.result.CommonResult;
-import com.code.framework.basic.result.page.PageData;
+import com.code.framework.basic.result.ResultAccessor;
+import com.code.framework.basic.result.page.PageResp;
 import com.code.service.test.controller.vo.UserCreateReqVO;
 import com.code.service.test.controller.vo.UserPageReqVO;
 import com.code.service.test.controller.vo.UserPageRespVO;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("test")
-public class TestController {
+public class TestController implements ResultAccessor {
 
 	@Resource
 	private TestService testService;
@@ -35,15 +36,15 @@ public class TestController {
 		UserCreateReqModel userCreateReqModel = UserConvert.INSTANCE.voToModel(reqVO);
 		Long               recordNo           = testService.save(userCreateReqModel);
 
-		return CommonResult.success(recordNo);
+		return success(recordNo);
 	}
 
 	@PostMapping("page")
-	public CommonResult<PageData<UserPageRespVO>> page(@RequestBody @Valid UserPageReqVO userPageReqVO) {
+	public CommonResult<PageResp<UserPageRespVO>> page(@RequestBody @Valid UserPageReqVO userPageReqVO) {
 		UserPageReqModel            userPageReqModel = UserConvert.INSTANCE.voToModel(userPageReqVO);
-		PageData<UserPageRespModel> pageData         = testService.page(userPageReqModel);
+		PageResp<UserPageRespModel> pageResp         = testService.page(userPageReqModel);
 
-		return CommonResult.success(PageData.of(pageData.getTotal(), UserConvert.INSTANCE.modelToVo(pageData.getRecords())));
+		return success(PageResp.of(pageResp.getTotal(), UserConvert.INSTANCE.modelToVo(pageResp.getRecords())));
 	}
 
 }

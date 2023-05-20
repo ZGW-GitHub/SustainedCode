@@ -15,23 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.code;
+package com.code.framework.basic.result;
+
+import com.code.framework.basic.result.code.ResultCode;
 
 /**
- * Code 规范：<br/>
- * <ul>
- *     <li>均为 6 位数字</li>
- *     <li>ResultCodeEnum 		: 1xxxxx</li>
- *     <li>XxxResultCodeEnum 	: 2xxxxx</li>
- * </ul>
- *
  * @author Snow
- * @date 2023/5/18 10:16
+ * @date 2023/5/20 12:35
  */
-public interface ResultCode {
+public interface ResultAccessor {
 
-	int getCode();
+	default <T> CommonResult<T> success(T data) {
+		return CommonResult.success(data);
+	}
 
-	String getMessage();
+	default <T> CommonResult<T> error(ResultCode resultCode) {
+		return CommonResult.error(resultCode);
+	}
+
+	default <T> CommonResult<T> error(ResultCode resultCode, String message) {
+		return CommonResult.error(resultCode, message);
+	}
 
 }

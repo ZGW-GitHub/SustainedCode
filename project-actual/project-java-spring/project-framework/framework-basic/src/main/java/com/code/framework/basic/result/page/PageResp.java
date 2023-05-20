@@ -17,46 +17,47 @@
 
 package com.code.framework.basic.result.page;
 
-import jakarta.validation.constraints.Min;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:40
+ * @date 2023/5/19 11:28
  */
-@Setter
-@Getter
-public class Page implements Serializable {
+@Data
+@Accessors(chain = true)
+public class PageResp<T> {
+
+	private static final PageResp EMPTY = new PageResp();
 
 	/**
-	 * 当前页
+	 * 总数
 	 */
-	@Min(value = 1, message = "当前页不合法，应大于等于 1")
-	private long currentPage = 1;
+	private long total = 0;
 
 	/**
-	 * 每页显示条数，默认 10
+	 * 查询数据列表
 	 */
-	@Min(value = 1, message = "每页显示条数不合法，应大于等于 1")
-	private long pageSize = 10;
+	private List<T> records = Collections.emptyList();
 
-	public long currentPage() {
-		return currentPage;
+	private PageResp() {
 	}
 
-	public long pageSize() {
-		return pageSize;
+	private PageResp(long total, List<T> records) {
+		this.total = total;
+		this.records = records;
 	}
 
-	public long offset() {
-		long current = this.currentPage;
-		if (current <= 1L) {
-			return 0L;
-		}
-		return Math.max((current - 1) * this.pageSize, 0L);
+	public static <T> PageResp<T> of(long total, List<T> records) {
+		return new PageResp<>(total, records);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> PageResp<T> empty() {
+		return (PageResp<T>) EMPTY;
 	}
 
 }
