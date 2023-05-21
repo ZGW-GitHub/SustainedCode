@@ -15,26 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result;
-
-import com.code.framework.basic.result.code.ExceptionResultCode;
+package com.code.framework.basic.result.code;
 
 /**
  * @author Snow
- * @date 2023/5/20 12:35
+ * @date 2023/5/21 15:11
  */
-public interface ResultAccessor {
-
-	default <T> CommonResult<T> success(T data) {
-		return CommonResult.success(data);
-	}
-
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode) {
-		return CommonResult.error(resultCode);
-	}
-
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
-		return CommonResult.error(resultCode, message);
-	}
-
+public interface SuccessResultCode extends ResultCode {
 }

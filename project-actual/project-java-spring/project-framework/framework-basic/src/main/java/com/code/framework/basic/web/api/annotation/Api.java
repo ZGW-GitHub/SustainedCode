@@ -15,26 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result;
+package com.code.framework.basic.web.api.annotation;
 
-import com.code.framework.basic.result.code.ExceptionResultCode;
+import java.lang.annotation.*;
 
 /**
  * @author Snow
- * @date 2023/5/20 12:35
+ * @date 2023/5/21 14:31
  */
-public interface ResultAccessor {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Api {
 
-	default <T> CommonResult<T> success(T data) {
-		return CommonResult.success(data);
-	}
+	String code() default "";
 
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode) {
-		return CommonResult.error(resultCode);
-	}
-
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
-		return CommonResult.error(resultCode, message);
-	}
+	String version() default "1.0.0";
 
 }

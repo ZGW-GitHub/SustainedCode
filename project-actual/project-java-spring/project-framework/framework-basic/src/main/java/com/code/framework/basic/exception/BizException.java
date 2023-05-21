@@ -1,6 +1,6 @@
 package com.code.framework.basic.exception;
 
-import com.code.framework.basic.result.code.ResultCode;
+import com.code.framework.basic.result.code.ExceptionResultCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -17,25 +17,25 @@ public class BizException extends RuntimeException {
 	/**
 	 * 业务错误码
 	 *
-	 * @see ResultCode#getCode()
+	 * @see ExceptionResultCode#getCode()
 	 */
 	private Integer code;
 
 	/**
 	 * 错误提示
 	 *
-	 * @see ResultCode#getMessage()
+	 * @see ExceptionResultCode#getMessage()
 	 */
 	private String message;
 
-	public BizException(ResultCode resultCode) {
+	public BizException(ExceptionResultCode resultCode) {
 		this.code = resultCode.getCode();
 		this.message = resultCode.getMessage();
 	}
 
-	public BizException(ResultCode resultCode, String message) {
+	public BizException(ExceptionResultCode resultCode, String msgFormat, Object... args) {
 		this.code = resultCode.getCode();
-		this.message = message;
+		this.message = String.format(msgFormat, args);
 	}
 
 }

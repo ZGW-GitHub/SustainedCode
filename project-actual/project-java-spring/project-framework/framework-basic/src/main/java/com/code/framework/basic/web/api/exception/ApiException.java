@@ -15,26 +15,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result;
+package com.code.framework.basic.web.api.exception;
 
-import com.code.framework.basic.result.code.ExceptionResultCode;
+import com.code.framework.basic.exception.BizException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/20 12:35
+ * @date 2023/5/21 15:02
  */
-public interface ResultAccessor {
+@Slf4j
+public class ApiException extends BizException {
 
-	default <T> CommonResult<T> success(T data) {
-		return CommonResult.success(data);
+	public ApiException(ApiExceptionCode resultCode) {
+		super(resultCode);
 	}
 
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode) {
-		return CommonResult.error(resultCode);
-	}
-
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
-		return CommonResult.error(resultCode, message);
+	public ApiException(ApiExceptionCode resultCode, String message) {
+		super(resultCode, message);
 	}
 
 }

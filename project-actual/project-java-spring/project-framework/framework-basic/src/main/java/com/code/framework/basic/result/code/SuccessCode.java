@@ -15,26 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result;
+package com.code.framework.basic.result.code;
 
-import com.code.framework.basic.result.code.ExceptionResultCode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/20 12:35
+ * @date 2023/5/21 15:15
  */
-public interface ResultAccessor {
+@Slf4j
+@Getter
+@AllArgsConstructor
+public enum SuccessCode {
 
-	default <T> CommonResult<T> success(T data) {
-		return CommonResult.success(data);
-	}
+	/**
+	 * 处理成功
+	 */
+	SUCCESS(200, "成功"),
+	;
 
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode) {
-		return CommonResult.error(resultCode);
-	}
-
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
-		return CommonResult.error(resultCode, message);
-	}
+	private final int    code;
+	private final String message;
 
 }

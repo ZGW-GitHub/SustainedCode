@@ -1,8 +1,8 @@
 package com.code.framework.basic.result;
 
 import com.code.framework.basic.exception.BizException;
-import com.code.framework.basic.result.code.ResultCode;
-import com.code.framework.basic.result.code.ResultCodeEnum;
+import com.code.framework.basic.result.code.ExceptionResultCode;
+import com.code.framework.basic.result.code.SuccessCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,17 +36,17 @@ public class CommonResult<T> implements Serializable {
 
 	static <T> CommonResult<T> success(T data) {
 		CommonResult<T> result = new CommonResult<>();
-		result.code = ResultCodeEnum.SUCCESS.getCode();
-		result.message = ResultCodeEnum.SUCCESS.getMessage();
+		result.code = SuccessCode.SUCCESS.getCode();
+		result.message = SuccessCode.SUCCESS.getMessage();
 		result.data = data;
 		return result;
 	}
 
-	static <T> CommonResult<T> error(ResultCode resultCode) {
+	static <T> CommonResult<T> error(ExceptionResultCode resultCode) {
 		return error(resultCode, resultCode.getMessage());
 	}
 
-	static <T> CommonResult<T> error(ResultCode resultCode, String message) {
+	static <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = resultCode.getCode();
 		result.message = message;
