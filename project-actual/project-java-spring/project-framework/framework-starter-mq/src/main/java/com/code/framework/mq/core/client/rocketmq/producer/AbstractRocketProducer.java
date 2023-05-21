@@ -1,7 +1,7 @@
 package com.code.framework.mq.core.client.rocketmq.producer;
 
 import com.code.framework.basic.exception.BizException;
-import com.code.framework.basic.result.code.ExceptionCode;
+import com.code.framework.basic.exception.BizExceptionCode;
 import com.code.framework.mq.core.client.MqClientBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -25,7 +25,7 @@ public abstract class AbstractRocketProducer implements MqClientBuilder<DefaultM
 			log.debug("------ RocketMQ ------ RocketMQ Producer 启动成功");
 		} catch (MQClientException e) {
 			log.error("------ RocketMQ ------ RocketMQ Producer 启动失败 ！！！", e);
-			throw new BizException(ExceptionCode.COMMON_ERROR);
+			throw new BizException(BizExceptionCode.COMMON_ERROR);
 		}
 	}
 

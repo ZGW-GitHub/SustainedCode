@@ -18,6 +18,7 @@
 package com.code.framework.basic.web.api.exception;
 
 import com.code.framework.basic.exception.BizException;
+import com.code.framework.basic.result.code.ExceptionResultCode;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -27,12 +28,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApiException extends BizException {
 
-	public ApiException(ApiExceptionCode resultCode) {
+	public ApiException(ExceptionResultCode resultCode) {
 		super(resultCode);
 	}
 
-	public ApiException(ApiExceptionCode resultCode, String message) {
-		super(resultCode, message);
+	public ApiException(ExceptionResultCode resultCode, String msgFormat, Object... args) {
+		super(resultCode, msgFormat, args);
 	}
 
 }

@@ -2,7 +2,7 @@ package com.code.framework.basic.result;
 
 import com.code.framework.basic.exception.BizException;
 import com.code.framework.basic.result.code.ExceptionResultCode;
-import com.code.framework.basic.result.code.SuccessCode;
+import com.code.framework.basic.result.code.SuccessResultCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,8 +36,8 @@ public class CommonResult<T> implements Serializable {
 
 	static <T> CommonResult<T> success(T data) {
 		CommonResult<T> result = new CommonResult<>();
-		result.code = SuccessCode.SUCCESS.getCode();
-		result.message = SuccessCode.SUCCESS.getMessage();
+		result.code = SuccessResultCode.SUCCESS.getCode();
+		result.message = SuccessResultCode.SUCCESS.getMessage();
 		result.data = data;
 		return result;
 	}

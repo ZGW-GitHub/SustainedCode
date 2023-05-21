@@ -18,7 +18,7 @@
 package com.code.framework.basic.result;
 
 import com.code.framework.basic.exception.BizException;
-import com.code.framework.basic.result.code.ExceptionCode;
+import com.code.framework.basic.exception.BizExceptionCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class ResultExceptionHandler implements ResultAccessor {
 	public CommonResult<?> bottomExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
 		log.error("[异常拦截 : RuntimeException]", exception);
 
-		return error(ExceptionCode.COMMON_ERROR);
+		return error(BizExceptionCode.COMMON_ERROR);
 	}
 
 	@ExceptionHandler(BizException.class)

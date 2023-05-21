@@ -21,7 +21,7 @@ package com.code.framework.basic.result.code;
  * Code 规范：<br/>
  * <ul>
  *     <li>均为 6 位数字</li>
- *     <li>ExceptionCode 		: 1xxxxx</li>
+ *     <li>BizExceptionCode 	: 1xxxxx</li>
  *     <li>XxxExceptionCode 	: 2xxxxx</li>
  * </ul>
  *

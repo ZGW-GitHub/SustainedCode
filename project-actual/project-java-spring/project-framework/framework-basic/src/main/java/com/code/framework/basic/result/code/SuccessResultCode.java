@@ -17,9 +17,26 @@
 
 package com.code.framework.basic.result.code;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Snow
- * @date 2023/5/21 15:11
+ * @date 2023/5/21 15:15
  */
-public interface SuccessResultCode extends ResultCode {
+@Slf4j
+@Getter
+@AllArgsConstructor
+public enum SuccessResultCode implements ResultCode {
+
+	/**
+	 * 处理成功
+	 */
+	SUCCESS(200, "成功"),
+	;
+
+	private final int    code;
+	private final String message;
+
 }

@@ -35,7 +35,11 @@ public class BizException extends RuntimeException {
 
 	public BizException(ExceptionResultCode resultCode, String msgFormat, Object... args) {
 		this.code = resultCode.getCode();
-		this.message = String.format(msgFormat, args);
+		if (args.length == 0) {
+			this.message = msgFormat;
+		} else {
+			this.message = String.format(msgFormat, args);
+		}
 	}
 
 }
