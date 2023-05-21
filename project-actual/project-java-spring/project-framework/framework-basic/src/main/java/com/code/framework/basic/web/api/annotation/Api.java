@@ -28,7 +28,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface Api {
 
-	String code() default "";
+	String value() default "";
 
 	String version() default "1.0.0";
 

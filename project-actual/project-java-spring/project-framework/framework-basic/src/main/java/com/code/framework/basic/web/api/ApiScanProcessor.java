@@ -62,7 +62,7 @@ public class ApiScanProcessor implements BeanPostProcessor {
 				throw new ApiException(ApiExceptionCode.API_PARAM_VALIDATE_EXCEPTION);
 			}
 
-			String apiCode = api.code();
+			String apiCode = api.value();
 			ApiDescriptor apiDescriptor = new ApiDescriptor(apiCode, method, beanName);
 			apiContainer.put(apiCode, apiDescriptor);
 			log.info("【 API 加载 】API[${}]，加载成功，apiDescriptor=${}", apiCode, apiDescriptor);

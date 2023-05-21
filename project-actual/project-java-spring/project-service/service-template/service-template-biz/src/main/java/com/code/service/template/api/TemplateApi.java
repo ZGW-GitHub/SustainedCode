@@ -17,6 +17,7 @@
 
 package com.code.service.template.api;
 
+import com.code.framework.basic.web.api.annotation.Api;
 import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 public interface TemplateApi {
 
+	@Api("template.test")
 	String test();
 
+	@Api("template.save")
 	Long save(@RequestBody TemplateCreateReqVO reqVO);
 
 }
