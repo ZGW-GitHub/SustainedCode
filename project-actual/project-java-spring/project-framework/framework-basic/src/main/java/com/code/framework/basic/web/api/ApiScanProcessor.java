@@ -58,14 +58,14 @@ public class ApiScanProcessor implements BeanPostProcessor {
 
 			int parameterCount = method.getParameterCount();
 			if (ApiDescriptor.API_PARAM_COUNT != parameterCount) {
-				log.error("【 API 加载 】发生异常：方法[${}], 参数个数不等于 1", method.toGenericString());
+				log.error("【 API 加载 】发生异常：方法[ {} ], 参数个数不等于 1", method.toGenericString());
 				throw new ApiException(ApiExceptionCode.API_PARAM_VALIDATE_EXCEPTION);
 			}
 
 			String api = apiAnno.value();
 			ApiDescriptor apiDescriptor = new ApiDescriptor(api, method, beanName);
 			apiContainer.put(api, apiDescriptor);
-			log.info("【 API 加载 】API[${}]，加载成功，apiDescriptor=${}", api, apiDescriptor);
+			log.info("【 API 加载 】API[ {} ]，加载成功，apiDescriptor : {}", api, apiDescriptor);
 		}
 		return bean;
 	}

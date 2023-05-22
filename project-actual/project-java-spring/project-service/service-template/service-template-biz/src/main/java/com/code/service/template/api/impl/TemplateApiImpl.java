@@ -22,6 +22,7 @@ import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import com.code.service.template.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -29,12 +30,13 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @date 2023/5/20 19:36
  */
 @Slf4j
+@Component
 public class TemplateApiImpl implements TemplateApi {
 
 	@Resource
 	private TemplateService templateService;
 
-	public String test() {
+	public String test(Object o) {
 		return "test";
 	}
 

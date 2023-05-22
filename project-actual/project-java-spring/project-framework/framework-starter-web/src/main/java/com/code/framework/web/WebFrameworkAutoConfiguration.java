@@ -15,22 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api;
-
-import com.code.framework.basic.web.api.annotation.Api;
-import com.code.service.template.api.domain.request.TemplateCreateReqVO;
-import org.springframework.web.bind.annotation.RequestBody;
+package com.code.framework.web;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:34
+ * @date 2023/5/22 10:25
  */
-public interface TemplateApi {
-
-	@Api("template.test")
-	String test(Object o);
-
-	@Api("template.save")
-	Long save(@RequestBody TemplateCreateReqVO reqVO);
-
+public class WebFrameworkAutoConfiguration {
 }
