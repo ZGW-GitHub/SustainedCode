@@ -18,6 +18,7 @@
 package com.code.framework.basic.web.api;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
@@ -26,5 +27,6 @@ import java.util.HashMap;
  * @date 2023/5/21 14:53
  */
 @Slf4j
+@Component
 public class ApiContainer extends HashMap<String, ApiDescriptor> {
 }

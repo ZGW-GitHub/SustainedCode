@@ -10,32 +10,26 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>framework-starter-xxljob</artifactId>
-	<version>${framework-starter-xxljob.version}</version>
+	<artifactId>framework-starter-web</artifactId>
+	<version>${framework-starter-web.version}</version>
 
 	<packaging>jar</packaging>
 
 	<properties>
+		<framework-starter-web.version>1.0.0-SNAPSHOT</framework-starter-web.version>
 		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
-		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.xuxueli</groupId>
-			<artifactId>xxl-job-core</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>
 			<version>${framework-basic.version}</version>
-			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

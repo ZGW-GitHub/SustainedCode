@@ -12,8 +12,9 @@
 
 	<modules>
 		<module>framework-basic</module>
-		<module>framework-starter-xxljob</module>
 		<module>framework-starter-mq</module>
+		<module>framework-starter-web</module>
+		<module>framework-starter-xxljob</module>
 	</modules>
 
 	<properties>
@@ -24,10 +25,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<revision>1.0.0-SNAPSHOT</revision>
-		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
-		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
-		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
-
 		<project-dependencies.version>1.0.0-SNAPSHOT</project-dependencies.version>
 
 		<!-- 插件 -->
@@ -42,12 +39,6 @@
 				<version>${project-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>com.code</groupId>
-				<artifactId>framework-basic</artifactId>
-				<version>${framework-basic.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

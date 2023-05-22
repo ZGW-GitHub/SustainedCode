@@ -18,11 +18,20 @@
 package com.code.framework.basic.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
  * @date 2023/5/20 20:00
  */
 @Slf4j
+@RestController
 public class GatewayController {
+
+	@PostMapping("gateway")
+	public void gateway() {
+		System.err.println("gateway ...");
+	}
+
 }

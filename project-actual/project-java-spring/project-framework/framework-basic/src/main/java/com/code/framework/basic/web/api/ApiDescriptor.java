@@ -19,7 +19,6 @@ package com.code.framework.basic.web.api;
 
 import cn.hutool.core.util.StrUtil;
 import com.code.framework.basic.web.api.annotation.Api;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -37,7 +36,6 @@ import java.util.stream.IntStream;
  * @date 2023/5/21 14:33
  */
 @Slf4j
-@Getter
 public record ApiDescriptor(String api, Method method, String beanName) {
 
 	/**
