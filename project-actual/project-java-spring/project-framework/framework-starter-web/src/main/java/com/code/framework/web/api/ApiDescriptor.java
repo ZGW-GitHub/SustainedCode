@@ -15,10 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.web.api;
+package com.code.framework.web.api;
 
 import cn.hutool.core.util.StrUtil;
-import com.code.framework.basic.web.api.annotation.Api;
+import com.code.framework.web.api.annotation.Api;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;

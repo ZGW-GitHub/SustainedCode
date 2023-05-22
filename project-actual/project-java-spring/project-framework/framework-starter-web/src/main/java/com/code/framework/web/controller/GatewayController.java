@@ -15,25 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.web.api.exception;
+package com.code.framework.web.controller;
 
-import com.code.framework.basic.result.code.ExceptionResultCode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2023/5/21 15:25
+ * @date 2023/5/20 20:00
  */
 @Slf4j
-@Getter
-@AllArgsConstructor
-public enum ApiExceptionCode implements ExceptionResultCode {
+@RestController
+public class GatewayController {
 
-	API_PARAM_VALIDATE_EXCEPTION(2001, "api 参数验证异常");
-
-	private final int    code;
-	private final String message;
+	@PostMapping("gateway")
+	public void gateway() {
+		System.err.println("gateway ...");
+	}
 
 }

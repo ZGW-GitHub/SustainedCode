@@ -15,28 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.code;
+package com.code.framework.web.api;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
 
 /**
  * @author Snow
- * @date 2023/5/21 15:15
+ * @date 2023/5/21 14:53
  */
 @Slf4j
-@Getter
-@AllArgsConstructor
-public enum SuccessResultCode implements ResultCode {
-
-	/**
-	 * 处理成功
-	 */
-	SUCCESS(200, "成功"),
-	;
-
-	private final int    code;
-	private final String message;
-
+@Component
+public class ApiContainer extends HashMap<String, ApiDescriptor> {
 }

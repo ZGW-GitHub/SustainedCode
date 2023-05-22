@@ -15,18 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.code;
+package com.code.framework.web.api.exception;
+
+import com.code.framework.basic.result.code.ExceptionCode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Code 规范：<br/>
- * <ul>
- *     <li>均为 6 位数字</li>
- *     <li>BizExceptionCode 	: 1xxxxx</li>
- *     <li>XxxExceptionCode 	: 2xxxxx</li>
- * </ul>
- *
  * @author Snow
- * @date 2023/5/21 15:12
+ * @date 2023/5/21 15:25
  */
-public interface ExceptionResultCode extends ResultCode {
+@Slf4j
+@Getter
+@AllArgsConstructor
+public enum ApiExceptionCode implements ExceptionCode<ApiException> {
+
+	API_PARAM_VALIDATE_EXCEPTION(2001, "api 参数验证异常");
+
+	private final int    code;
+	private final String message;
+
+	@Override
+	public Class<ApiException> getExceptionType() {
+		return ApiException.class;
+	}
+
 }

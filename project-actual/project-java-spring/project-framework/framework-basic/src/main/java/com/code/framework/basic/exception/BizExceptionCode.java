@@ -17,7 +17,8 @@
 
 package com.code.framework.basic.exception;
 
-import com.code.framework.basic.result.code.ExceptionResultCode;
+import com.code.framework.basic.result.code.ExceptionCode;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -25,9 +26,9 @@ import lombok.Getter;
  * @author 愆凡
  * @date 2022/6/13 21:51
  */
-@Getter
+@Getter(AccessLevel.PROTECTED)
 @AllArgsConstructor
-public enum BizExceptionCode implements ExceptionResultCode {
+public enum BizExceptionCode implements ExceptionCode<BizException> {
 
 	/**
 	 * 通用错误码
@@ -55,7 +56,12 @@ public enum BizExceptionCode implements ExceptionResultCode {
 	 */
 	BAD_XXL_JOB_HANDLER(2001, "定时任务配置错误");
 
-	private final int     code;
-	private final String  message;
+	private final int    code;
+	private final String message;
+
+	@Override
+	public Class<BizException> getExceptionType() {
+		return BizException.class;
+	}
 
 }

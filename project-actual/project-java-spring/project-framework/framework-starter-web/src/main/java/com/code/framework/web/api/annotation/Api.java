@@ -15,16 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.code;
+package com.code.framework.web.api.annotation;
+
+import java.lang.annotation.*;
 
 /**
  * @author Snow
- * @date 2023/5/18 10:16
+ * @date 2023/5/21 14:31
  */
-interface ResultCode {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Api {
 
-	int getCode();
+	String value() default "";
 
-	String getMessage();
+	String version() default "1.0.0";
 
 }

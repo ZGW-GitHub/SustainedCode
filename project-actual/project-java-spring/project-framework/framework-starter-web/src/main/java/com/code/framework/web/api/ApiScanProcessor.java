@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.web.api;
+package com.code.framework.web.api;
 
-import com.code.framework.basic.web.api.annotation.Api;
-import com.code.framework.basic.web.api.exception.ApiException;
-import com.code.framework.basic.web.api.exception.ApiExceptionCode;
+import com.code.framework.web.api.annotation.Api;
+import com.code.framework.web.api.exception.ApiException;
+import com.code.framework.web.api.exception.ApiExceptionCode;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -59,7 +59,7 @@ public class ApiScanProcessor implements BeanPostProcessor {
 			int parameterCount = method.getParameterCount();
 			if (ApiDescriptor.API_PARAM_COUNT != parameterCount) {
 				log.error("【 API 加载 】发生异常：方法[ {} ], 参数个数不等于 1", method.toGenericString());
-				throw new ApiException(ApiExceptionCode.API_PARAM_VALIDATE_EXCEPTION);
+				throw ApiExceptionCode.API_PARAM_VALIDATE_EXCEPTION.newException(ApiException::new);
 			}
 
 			String api = apiAnno.value();

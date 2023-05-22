@@ -15,18 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.web.api;
+package com.code.framework.web.api.exception;
 
+import com.code.framework.basic.result.code.Exception;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
 
 /**
  * @author Snow
- * @date 2023/5/21 14:53
+ * @date 2023/5/21 15:02
  */
 @Slf4j
-@Component
-public class ApiContainer extends HashMap<String, ApiDescriptor> {
+public class ApiException extends Exception {
+
 }

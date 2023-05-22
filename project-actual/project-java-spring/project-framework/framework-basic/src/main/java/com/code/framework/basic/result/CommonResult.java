@@ -1,8 +1,7 @@
 package com.code.framework.basic.result;
 
 import com.code.framework.basic.exception.BizException;
-import com.code.framework.basic.result.code.ExceptionResultCode;
-import com.code.framework.basic.result.code.SuccessResultCode;
+import com.code.framework.basic.result.code.ExceptionCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +14,9 @@ import java.io.Serializable;
 @Slf4j
 @Getter
 public class CommonResult<T> implements Serializable {
+
+	public static final int    SUCCESS_CODE = 200;
+	public static final String SUCCESS_MSG  = "成功";
 
 	/**
 	 * 返回码
@@ -34,21 +36,25 @@ public class CommonResult<T> implements Serializable {
 	private CommonResult() {
 	}
 
+	static CommonResult<String> success() {
+		return success("");
+	}
+
 	static <T> CommonResult<T> success(T data) {
 		CommonResult<T> result = new CommonResult<>();
-		result.code = SuccessResultCode.SUCCESS.getCode();
-		result.message = SuccessResultCode.SUCCESS.getMessage();
+		result.code = SUCCESS_CODE;
+		result.message = SUCCESS_MSG;
 		result.data = data;
 		return result;
 	}
 
-	static <T> CommonResult<T> error(ExceptionResultCode resultCode) {
-		return error(resultCode, resultCode.getMessage());
+	static <T> CommonResult<T> error(ExceptionCode exceptionCode) {
+		return error(exceptionCode, exceptionCode.getMessage());
 	}
 
-	static <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
+	static <T> CommonResult<T> error(ExceptionCode exceptionCode, String message) {
 		CommonResult<T> result = new CommonResult<>();
-		result.code = resultCode.getCode();
+		result.code = exceptionCode.getCode();
 		result.message = message;
 		return result;
 	}

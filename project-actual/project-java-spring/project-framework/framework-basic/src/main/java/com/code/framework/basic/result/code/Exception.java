@@ -15,23 +15,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.web;
+package com.code.framework.basic.result.code;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2023/5/20 20:00
+ * @date 2023/5/22 21:39
  */
 @Slf4j
-@RestController
-public class GatewayController {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class Exception extends RuntimeException {
 
-	@PostMapping("gateway")
-	public void gateway() {
-		System.err.println("gateway ...");
-	}
+	/**
+	 * 业务错误码
+	 *
+	 * @see ExceptionCode#getCode()
+	 */
+	private Integer code;
+
+	/**
+	 * 错误提示
+	 *
+	 * @see ExceptionCode#getMessage()
+	 */
+	private String message;
 
 }

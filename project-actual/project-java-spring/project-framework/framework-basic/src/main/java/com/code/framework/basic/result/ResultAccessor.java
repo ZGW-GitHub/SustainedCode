@@ -17,7 +17,7 @@
 
 package com.code.framework.basic.result;
 
-import com.code.framework.basic.result.code.ExceptionResultCode;
+import com.code.framework.basic.result.code.ExceptionCode;
 
 /**
  * @author Snow
@@ -29,12 +29,12 @@ public interface ResultAccessor {
 		return CommonResult.success(data);
 	}
 
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode) {
-		return CommonResult.error(resultCode);
+	default <T> CommonResult<T> error(ExceptionCode exceptionCode) {
+		return CommonResult.error(exceptionCode);
 	}
 
-	default <T> CommonResult<T> error(ExceptionResultCode resultCode, String message) {
-		return CommonResult.error(resultCode, message);
+	default <T> CommonResult<T> error(ExceptionCode exceptionCode, String message) {
+		return CommonResult.error(exceptionCode, message);
 	}
 
 }

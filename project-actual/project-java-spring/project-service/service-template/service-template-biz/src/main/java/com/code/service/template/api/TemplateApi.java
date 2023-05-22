@@ -17,7 +17,7 @@
 
 package com.code.service.template.api;
 
-import com.code.framework.basic.web.api.annotation.Api;
+import com.code.framework.web.api.annotation.Api;
 import com.code.service.template.api.domain.request.TemplateCreateReqVO;
 import org.springframework.web.bind.annotation.RequestBody;
 
