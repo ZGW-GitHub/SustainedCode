@@ -30,12 +30,15 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 /**
+ * @param api      对应 {@link Api} 中 value 取值
+ * @param method   方法对象
+ * @param beanName Spring Bean 名称
  * @author Snow
  * @date 2023/5/21 14:33
  */
 @Slf4j
 @Getter
-public class ApiDescriptor {
+public record ApiDescriptor(String api, Method method, String beanName) {
 
 	/**
 	 * api 参数个数
@@ -45,25 +48,6 @@ public class ApiDescriptor {
 	 * 方法签名拆分正则
 	 */
 	private static final Pattern PATTERN         = Pattern.compile("\\s+(.*)\\s+((.*)\\.(.*))\\((.*)\\)", Pattern.DOTALL);
-
-	/**
-	 * 对应 {@link Api} 中 code 取值
-	 */
-	private final String apiCode;
-	/**
-	 * 方法对象
-	 */
-	private final Method method;
-	/**
-	 * Spring Bean 名称
-	 */
-	private final String beanName;
-
-	public ApiDescriptor(String apiCode, Method method, String beanName) {
-		this.apiCode = apiCode;
-		this.method = method;
-		this.beanName = beanName;
-	}
 
 	private List<String> splitMethodName(Method method) {
 		String methodGenericString = method.toGenericString();

@@ -51,8 +51,8 @@ public class ApiScanProcessor implements BeanPostProcessor {
 		Method[] methods = ReflectionUtils.getAllDeclaredMethods(bean.getClass());
 
 		for (Method method : methods) {
-			Api api = AnnotationUtils.findAnnotation(method, Api.class);
-			if (Objects.isNull(api)) {
+			Api apiAnno = AnnotationUtils.findAnnotation(method, Api.class);
+			if (Objects.isNull(apiAnno)) {
 				return bean;
 			}
 
@@ -62,10 +62,10 @@ public class ApiScanProcessor implements BeanPostProcessor {
 				throw new ApiException(ApiExceptionCode.API_PARAM_VALIDATE_EXCEPTION);
 			}
 
-			String apiCode = api.value();
-			ApiDescriptor apiDescriptor = new ApiDescriptor(apiCode, method, beanName);
-			apiContainer.put(apiCode, apiDescriptor);
-			log.info("【 API 加载 】API[${}]，加载成功，apiDescriptor=${}", apiCode, apiDescriptor);
+			String api = apiAnno.value();
+			ApiDescriptor apiDescriptor = new ApiDescriptor(api, method, beanName);
+			apiContainer.put(api, apiDescriptor);
+			log.info("【 API 加载 】API[${}]，加载成功，apiDescriptor=${}", api, apiDescriptor);
 		}
 		return bean;
 	}
