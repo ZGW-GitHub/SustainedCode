@@ -56,6 +56,19 @@ public class ResultExceptionHandler {
 	}
 
 	/**
+	 * 异常处理程序 - 自定义异常
+	 *
+	 * @param exception 自定义异常
+	 * @return {@link GatewayResponse}<{@link ?}>
+	 */
+	@ExceptionHandler(Exception.class)
+	public GatewayResponse<?> bizExceptionhandler(Exception exception) {
+		log.error("[异常拦截 : ServiceException] : {}-{}", exception.getCode(), exception.getMessage(), exception);
+
+		return GatewayResponse.error(exception);
+	}
+
+	/**
 	 * 异常处理程序 - 兜底
 	 *
 	 * @param request   请求
@@ -68,19 +81,6 @@ public class ResultExceptionHandler {
 		log.error("[异常拦截 : RuntimeException]", exception);
 
 		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
-	}
-
-	/**
-	 * 异常处理程序 - 自定义异常
-	 *
-	 * @param exception 自定义异常
-	 * @return {@link GatewayResponse}<{@link ?}>
-	 */
-	@ExceptionHandler(Exception.class)
-	public GatewayResponse<?> bizExceptionhandler(Exception exception) {
-		log.error("[异常拦截 : ServiceException] : {}-{}", exception.getCode(), exception.getMessage(), exception);
-
-		return GatewayResponse.error(exception);
 	}
 
 }
