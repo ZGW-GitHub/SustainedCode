@@ -26,6 +26,7 @@ import com.code.framework.web.api.invoker.ApiInvoker;
 import com.code.framework.web.controller.domain.GatewayRequest;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.annotation.Resource;
+import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,8 +64,16 @@ public class GatewayController {
 
 			// 5、返回 response
 			return GatewayResponse.success(result);
-		} catch (InvocationTargetException | IllegalAccessException e) {
-			log.error("【 Gateway 异常 】——【 API Method Invoke 发生异常 】异常信息 : {}", e.getMessage(), e);
+		} catch (InvocationTargetException e) {
+			if (e.getTargetException() instanceof ValidationException violationException) {
+				log.error("【 Gateway 异常 】——【 参数验证 】异常信息 : {}", violationException.getMessage(), violationException);
+				throw violationException;
+			} else {
+				log.error("【 Gateway 异常 】——【 API Method Invoke 】异常信息 : {}", e.getMessage(), e);
+				throw e;
+			}
+		} catch (IllegalAccessException e) {
+			log.error("【 Gateway 异常 】——【 API Method Invoke 】异常信息 : {}", e.getMessage(), e);
 			throw e;
 		} catch (Throwable t) {
 			log.error("【 Gateway 异常 】——【 发生 Throwable 异常 】异常信息 : {}", t.getMessage(), t);

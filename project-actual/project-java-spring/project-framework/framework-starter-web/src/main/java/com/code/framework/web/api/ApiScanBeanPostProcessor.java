@@ -22,6 +22,7 @@ import com.code.framework.web.api.exception.ApiExceptionCode;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
@@ -35,7 +36,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class ApiScanBeanPostProcessor implements BeanPostProcessor {
+public class ApiScanBeanPostProcessor implements BeanPostProcessor, Ordered {
 
 	@Resource
 	private ApiContainer apiContainer;
@@ -73,4 +74,10 @@ public class ApiScanBeanPostProcessor implements BeanPostProcessor {
 		}
 		return bean;
 	}
+
+	@Override
+	public int getOrder() {
+		return 0;
+	}
+
 }

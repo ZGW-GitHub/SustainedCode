@@ -23,7 +23,6 @@ import com.code.service.template.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Snow
@@ -40,7 +39,7 @@ public class TemplateApiImpl implements TemplateApi {
 		return "test";
 	}
 
-	public Long save(@RequestBody TemplateCreateReqVO reqVO) {
+	public Long save(TemplateCreateReqVO reqVO) {
 		// return templateService.save(reqVO);
 		return 6L;
 	}

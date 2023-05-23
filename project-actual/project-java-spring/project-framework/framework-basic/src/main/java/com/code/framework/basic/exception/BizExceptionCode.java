@@ -45,6 +45,7 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 	 * 参数异常
 	 */
 	PARAMS_ERROR(4001, "参数异常"),
+	VALIDATION_EXCEPTION(4002, "验证异常"),
 
 	/**
 	 * 系统异常

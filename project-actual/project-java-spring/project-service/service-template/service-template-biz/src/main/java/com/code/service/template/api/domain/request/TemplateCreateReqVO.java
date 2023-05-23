@@ -17,6 +17,7 @@
 
 package com.code.service.template.api.domain.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Accessors(chain = true)
 public class TemplateCreateReqVO {
 
+	@NotNull
 	private Long recordNo;
 
 	private String name;
