@@ -17,14 +17,32 @@
 
 package com.code.framework.web.api.invoker;
 
+import cn.hutool.json.JSONUtil;
+import com.code.framework.web.api.ApiDescriptor;
+import org.springframework.context.annotation.Configuration;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Snow
  * @date 2023/5/23 20:22
  */
+@Configuration(proxyBeanMethods = false)
 public interface ApiMethodInvoker {
 
 	Object invoke() throws InvocationTargetException, IllegalAccessException;
+
+	static ApiMethodInvoker getInvoker(ApiDescriptor apiDescriptor, Object springBean, String content) {
+		return () -> {
+			Class<?>[] parameterTypes = apiDescriptor.method().getParameterTypes();
+			// 存在参数
+			if (parameterTypes.length > 0) {
+				Object paramObj = JSONUtil.toBean(content, parameterTypes[0]);
+				return apiDescriptor.method().invoke(springBean, paramObj);
+			}
+			// 没有参数
+			return apiDescriptor.method().invoke(springBean);
+		};
+	}
 
 }

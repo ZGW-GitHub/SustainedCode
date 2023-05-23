@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface TemplateApi {
 
 	@Api("template.test")
-	String test(Object o);
+	String test();
 
 	@Api("template.save")
 	Long save(@RequestBody TemplateCreateReqVO reqVO);

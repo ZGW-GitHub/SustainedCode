@@ -36,12 +36,13 @@ public class TemplateApiImpl implements TemplateApi {
 	@Resource
 	private TemplateService templateService;
 
-	public String test(Object o) {
+	public String test() {
 		return "test";
 	}
 
 	public Long save(@RequestBody TemplateCreateReqVO reqVO) {
-		return templateService.save(reqVO);
+		// return templateService.save(reqVO);
+		return 6L;
 	}
 
 }

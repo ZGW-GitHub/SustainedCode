@@ -18,7 +18,6 @@
 package com.code.framework.web.api.invoker;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
 import com.code.framework.web.api.ApiContainer;
 import com.code.framework.web.api.ApiDescriptor;
 import com.code.framework.web.api.exception.ApiExceptionCode;
@@ -58,21 +57,9 @@ public abstract class ApiInvoker {
 			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
 		}
 
-		return doInvoke(apiDescriptor, content, doApiMethodInvoke(apiDescriptor, springBean, content));
+		return doInvoke(apiDescriptor, content, ApiMethodInvoker.getInvoker(apiDescriptor, springBean, content));
 	}
 
-	private ApiMethodInvoker doApiMethodInvoke(ApiDescriptor apiDescriptor, Object springBean, String content) {
-		return () -> {
-			Class<?>[] parameterTypes = apiDescriptor.method().getParameterTypes();
-			// 存在参数
-			if (parameterTypes.length > 0) {
-				Object paramObj = JSONUtil.toBean(content, parameterTypes[0]);
-				return apiDescriptor.method().invoke(springBean, paramObj);
-			}
-			// 没有参数
-			return apiDescriptor.method().invoke(springBean);
-		};
-	}
 
 	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException;
 

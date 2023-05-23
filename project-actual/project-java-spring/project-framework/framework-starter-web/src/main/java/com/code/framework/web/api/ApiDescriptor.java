@@ -42,7 +42,7 @@ public record ApiDescriptor(String api, String version, Method method, String be
 	/**
 	 * API 参数个数
 	 */
-	public static final int API_PARAM_COUNT = 1;
+	public static final int API_PARAM_MAX_COUNT = 1;
 
 	/**
 	 * API 默认版本
