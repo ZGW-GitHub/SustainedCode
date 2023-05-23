@@ -18,6 +18,7 @@
 package com.code.framework.web.api.invoker;
 
 import com.code.framework.web.api.ApiDescriptor;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -25,6 +26,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Snow
  * @date 2023/5/23 18:08
  */
+@Component
 public class DefaultApiInvoker extends ApiInvoker {
 
 	@Override
