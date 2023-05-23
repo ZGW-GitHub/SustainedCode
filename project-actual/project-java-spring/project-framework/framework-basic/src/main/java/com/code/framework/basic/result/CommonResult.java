@@ -1,6 +1,6 @@
 package com.code.framework.basic.result;
 
-import com.code.framework.basic.exception.BizException;
+import com.code.framework.basic.result.code.Exception;
 import com.code.framework.basic.result.code.ExceptionCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -36,11 +36,11 @@ public class CommonResult<T> implements Serializable {
 	private CommonResult() {
 	}
 
-	static CommonResult<String> success() {
+	public static CommonResult<String> success() {
 		return success("");
 	}
 
-	static <T> CommonResult<T> success(T data) {
+	public static <T> CommonResult<T> success(T data) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = SUCCESS_CODE;
 		result.message = SUCCESS_MSG;
@@ -48,24 +48,24 @@ public class CommonResult<T> implements Serializable {
 		return result;
 	}
 
-	static <T> CommonResult<T> error(ExceptionCode exceptionCode) {
+	public static <T> CommonResult<T> error(ExceptionCode exceptionCode) {
 		return error(exceptionCode, exceptionCode.getMessage());
 	}
 
-	static <T> CommonResult<T> error(ExceptionCode exceptionCode, String message) {
+	public static <T> CommonResult<T> error(ExceptionCode exceptionCode, String message) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = exceptionCode.getCode();
 		result.message = message;
 		return result;
 	}
 
-	static <T> CommonResult<T> error(BizException bizException) {
-		return error(bizException, bizException.getMessage());
+	public static <T> CommonResult<T> error(Exception exception) {
+		return error(exception, exception.getMessage());
 	}
 
-	static <T> CommonResult<T> error(BizException bizException, String message) {
+	public static <T> CommonResult<T> error(Exception exception, String message) {
 		CommonResult<T> result = new CommonResult<>();
-		result.code = bizException.getCode();
+		result.code = exception.getCode();
 		result.message = message;
 		return result;
 	}

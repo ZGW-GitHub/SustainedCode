@@ -15,10 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result;
+package com.code.framework.web.controller.advice;
 
-import com.code.framework.basic.exception.BizException;
 import com.code.framework.basic.exception.BizExceptionCode;
+import com.code.framework.basic.result.CommonResult;
+import com.code.framework.basic.result.ResultAccessor;
+import com.code.framework.basic.result.code.Exception;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -38,18 +40,32 @@ public class ResultExceptionHandler implements ResultAccessor {
 	 */
 	static Integer MAX_LENGTH = 200;
 
-	@ExceptionHandler(Exception.class)
-	public CommonResult<?> bottomExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
+	/**
+	 * 异常处理程序 - 兜底
+	 *
+	 * @param request   请求
+	 * @param response  响应
+	 * @param exception 异常
+	 * @return {@link CommonResult}<{@link ?}>
+	 */
+	@ExceptionHandler(java.lang.Exception.class)
+	public CommonResult<?> bottomExceptionHandler(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
 		log.error("[异常拦截 : RuntimeException]", exception);
 
 		return error(BizExceptionCode.COMMON_ERROR);
 	}
 
-	@ExceptionHandler(BizException.class)
-	public CommonResult<?> bizExceptionhandler(BizException bizException) {
-		log.error("[异常拦截 : ServiceException] : {}-{}", bizException.getCode(), bizException.getMessage(), bizException);
+	/**
+	 * 异常处理程序 - 自定义异常
+	 *
+	 * @param exception 自定义异常
+	 * @return {@link CommonResult}<{@link ?}>
+	 */
+	@ExceptionHandler(Exception.class)
+	public CommonResult<?> bizExceptionhandler(Exception exception) {
+		log.error("[异常拦截 : ServiceException] : {}-{}", exception.getCode(), exception.getMessage(), exception);
 
-		return CommonResult.error(bizException);
+		return CommonResult.error(exception);
 	}
 
 }
