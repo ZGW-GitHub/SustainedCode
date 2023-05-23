@@ -45,7 +45,7 @@ public abstract class SimpleJob<T> extends AbstractJob<T> {
 			} catch (Exception e) {
 				failedCnt.getAndIncrement();
 				log.error("xxl-job : {}(traceId:{}) ，执行【 handler(data) 】发生异常：{} ，data ：{}", jobClassName,
-						TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.UNIQUE_ID), e.getMessage(), data.toString(), e);
+						TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), data.toString(), e);
 			}
 		});
 	}

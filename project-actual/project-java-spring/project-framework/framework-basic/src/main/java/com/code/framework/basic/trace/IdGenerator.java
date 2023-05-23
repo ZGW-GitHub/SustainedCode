@@ -15,12 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.controller.invoker;
+package com.code.framework.basic.trace;
+
+import cn.hutool.core.util.IdUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/23 18:08
+ * @date 2023/5/23 21:07
  */
-public class DefaultApiInvoker extends ApiInvoker {
+@Slf4j
+public class IdGenerator {
+
+	public static String generateTraceId() {
+		return IdUtil.getSnowflakeNextIdStr();
+	}
 
 }

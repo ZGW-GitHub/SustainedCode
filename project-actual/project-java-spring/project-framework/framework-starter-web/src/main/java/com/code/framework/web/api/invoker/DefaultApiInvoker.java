@@ -15,26 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.controller.domain;
+package com.code.framework.web.api.invoker;
 
-import lombok.Data;
+import com.code.framework.web.api.ApiDescriptor;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Snow
- * @date 2023/5/23 16:12
+ * @date 2023/5/23 18:08
  */
-@Data
-public class GatewayRequest implements Serializable {
+public class DefaultApiInvoker extends ApiInvoker {
 
-	@Serial
-	private static final long serialVersionUID = 3774272602477699222L;
+	@Override
+	protected Object doInvoke(ApiDescriptor apiDescriptor, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException {
+		// 登录校验
 
-	private String api;
-	private String version;
-	private String traceId;
-	private String content;
+		// 权限校验
+
+		// ...
+
+		// 调用 API‘s Method
+		return apiMethodInvoker.invoke();
+	}
 
 }

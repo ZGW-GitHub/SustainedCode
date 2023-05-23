@@ -62,11 +62,10 @@ public abstract class AbstractJob<T> extends IJobHandler {
 	@Override
 	public final void execute() {
 
-		TraceContext traceContext = new TraceContext();
-		TraceContextHelper.setTraceContext(traceContext);
+		TraceContext traceContext = TraceContextHelper.startTrace();
 
 		startTime = System.currentTimeMillis();
-		log.info("xxl-job : {}(traceId:{}) ，开始执行，开始时间(ms)：{}", jobClassName, traceContext.getInfo(TraceContextKeyEnum.UNIQUE_ID), startTime);
+		log.info("xxl-job : {}(traceId:{}) ，开始执行，开始时间(ms)：{}", jobClassName, traceContext.getInfo(TraceContextKeyEnum.JOB_ID), startTime);
 
 		try {
 			// 1、初始化统计计数
@@ -82,7 +81,7 @@ public abstract class AbstractJob<T> extends IJobHandler {
 		} finally {
 			endTime = System.currentTimeMillis();
 			log.info("xxl-job : {}(traceId:{}) ，执行结束，执行耗时(ms)：{}，totalCnt：{}，successCnt：{}，failedCnt：{}", jobClassName,
-					traceContext.getInfo(TraceContextKeyEnum.UNIQUE_ID), endTime - startTime, totalCnt.get(), successCnt.get(), failedCnt.get());
+					traceContext.getInfo(TraceContextKeyEnum.JOB_ID), endTime - startTime, totalCnt.get(), successCnt.get(), failedCnt.get());
 
 			TraceContextHelper.clear();
 		}
@@ -101,7 +100,7 @@ public abstract class AbstractJob<T> extends IJobHandler {
 			return Optional.ofNullable(dataList).orElse(Collections.emptyList());
 		} catch (Exception e) {
 			log.error("xxl-job : {}(traceId:{}) ，执行【 doFetchDataList() 】发生异常：{}", jobClassName,
-					TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.UNIQUE_ID), e.getMessage(), e);
+					TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
 		}
 		return Collections.emptyList();
 	}

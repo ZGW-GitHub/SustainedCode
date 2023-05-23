@@ -1,9 +1,11 @@
 package com.code.framework.basic.trace.context;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -24,9 +26,12 @@ public class TraceContext {
 	}
 
 	public void addInfo(TraceContextKeyEnum key, String value) {
-		if (value == null) {
-			value = "";
+		if (TraceContextKeyEnum.TRACE_ID.equals(key) && contextInfo.containsKey(TraceContextKeyEnum.TRACE_ID)) {
+			log.warn("【 链路追踪 】>>>>>> 线程【 {} 】试图覆盖 TRACE_ID ，线程栈：{}", Thread.currentThread().getName(), Thread.currentThread().getStackTrace());
+			return;
 		}
+
+		value = Optional.ofNullable(value).orElse(StrUtil.EMPTY);
 		contextInfo.put(key, value);
 	}
 

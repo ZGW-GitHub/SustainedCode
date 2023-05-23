@@ -12,7 +12,13 @@ public class TraceContextHelper {
 	private static final ThreadLocal<TraceContext> CONTEXT_HOLDER = new ThreadLocal<>();
 
 	public static TraceContext startTrace() {
-		TraceContext traceContext = new TraceContext();
+		TraceContext traceContext = CONTEXT_HOLDER.get();
+		if (traceContext == null) {
+			traceContext = new TraceContext();
+		} else {
+			traceContext = new TraceContext(traceContext);
+		}
+
 		CONTEXT_HOLDER.set(traceContext);
 		return traceContext;
 	}
@@ -22,7 +28,16 @@ public class TraceContextHelper {
 	}
 
 	public static TraceContext getTraceContext() {
-		return CONTEXT_HOLDER.get();
+		TraceContext traceContext = CONTEXT_HOLDER.get();
+		if (traceContext == null) {
+			traceContext = new TraceContext();
+			CONTEXT_HOLDER.set(traceContext);
+		}
+		return traceContext;
+	}
+
+	public static String getTraceId() {
+		return getTraceContext().getInfo(TraceContextKeyEnum.TRACE_ID);
 	}
 
 	public static void clear() {

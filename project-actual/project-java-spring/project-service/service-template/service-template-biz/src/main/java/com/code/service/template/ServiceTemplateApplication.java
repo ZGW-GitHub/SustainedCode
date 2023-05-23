@@ -11,7 +11,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  */
 @Slf4j
 @EnableDubbo
-@SpringBootApplication(scanBasePackages = {"com.code.service.template", "com.code.framework.basic.web"})
+@SpringBootApplication
 public class ServiceTemplateApplication {
 	public static void main(String[] args) {
 

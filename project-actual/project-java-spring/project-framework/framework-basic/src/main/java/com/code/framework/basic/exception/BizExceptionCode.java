@@ -18,7 +18,6 @@
 package com.code.framework.basic.exception;
 
 import com.code.framework.basic.exception.core.ExceptionCode;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -28,7 +27,7 @@ import java.util.function.Supplier;
  * @author 愆凡
  * @date 2022/6/13 21:51
  */
-@Getter(AccessLevel.PROTECTED)
+@Getter
 @AllArgsConstructor
 public enum BizExceptionCode implements ExceptionCode<BizException> {
 

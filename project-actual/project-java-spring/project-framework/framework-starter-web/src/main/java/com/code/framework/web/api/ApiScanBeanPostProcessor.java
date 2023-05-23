@@ -15,10 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.api.component;
+package com.code.framework.web.api;
 
-import com.code.framework.web.api.ApiContainer;
-import com.code.framework.web.api.ApiDescriptor;
 import com.code.framework.web.api.annotation.Api;
 import com.code.framework.web.api.exception.ApiExceptionCode;
 import jakarta.annotation.Resource;
@@ -37,7 +35,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class ApiScanProcessor implements BeanPostProcessor {
+public class ApiScanBeanPostProcessor implements BeanPostProcessor {
 
 	@Resource
 	private ApiContainer apiContainer;

@@ -15,9 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.controller.invoker;
+package com.code.framework.web.api.invoker;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.code.framework.web.api.ApiContainer;
 import com.code.framework.web.api.ApiDescriptor;
 import com.code.framework.web.api.exception.ApiExceptionCode;
@@ -26,8 +27,8 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
-import java.util.function.BiFunction;
 
 /**
  * @author Snow
@@ -35,12 +36,12 @@ import java.util.function.BiFunction;
  */
 @Slf4j
 @Component
-public abstract class ApiInvoker<A extends ApiDescriptor, P, R> {
+public abstract class ApiInvoker {
 
 	@Resource
 	private ApiContainer apiContainer;
 
-	public Object invoke(String api, String version, String content) {
+	public Object invoke(String api, String version, String content) throws InvocationTargetException, IllegalAccessException {
 		if (StrUtil.isBlank(api)) {
 			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
 		}
@@ -57,13 +58,22 @@ public abstract class ApiInvoker<A extends ApiDescriptor, P, R> {
 			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
 		}
 
-		return doInvoke(apiDescriptor, (ApiInvoker<A, P, R>) (apiDesc, param) -> {
-			apiDesc.method().invoke()
-		});
+		return doInvoke(apiDescriptor, content, doApiMethodInvoke(apiDescriptor, springBean, content));
 	}
 
-	abstract R invoke(ApiDescriptor apiDescriptor, P param);
+	private ApiMethodInvoker doApiMethodInvoke(ApiDescriptor apiDescriptor, Object springBean, String content) {
+		return () -> {
+			Class<?>[] parameterTypes = apiDescriptor.method().getParameterTypes();
+			// 存在参数
+			if (parameterTypes.length > 0) {
+				Object paramObj = JSONUtil.toBean(content, parameterTypes[0]);
+				return apiDescriptor.method().invoke(springBean, paramObj);
+			}
+			// 没有参数
+			return apiDescriptor.method().invoke(springBean);
+		};
+	}
 
-	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, String content, BiFunction<A, P, R> function);
+	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException;
 
 }

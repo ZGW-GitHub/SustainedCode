@@ -19,7 +19,17 @@ public enum TraceContextKeyEnum {
 	UNIQUE_ID("UNIQUE_ID"),
 
 	/**
-	 *
+	 * 链路 ID
+	 */
+	TRACE_ID("TRACE_ID"),
+
+	/**
+	 * 任务 ID
+	 */
+	JOB_ID("JOB_ID"),
+
+	/**
+	 * 异步任务 ID
 	 */
 	ASYNC_TASK_ID("ASYNC_TASK_ID"),
 	;

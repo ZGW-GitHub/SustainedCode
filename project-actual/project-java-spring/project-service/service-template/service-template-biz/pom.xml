@@ -16,6 +16,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
+		<framework-starter-web.version>1.0.0-SNAPSHOT</framework-starter-web.version>
 		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
 	</properties>
 
@@ -75,6 +76,12 @@
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>service-template-facade</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-starter-web</artifactId>
+			<version>${framework-starter-web.version}</version>
 		</dependency>
 
 		<dependency>
