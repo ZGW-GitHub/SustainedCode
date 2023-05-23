@@ -77,8 +77,23 @@ public class ResultExceptionHandler {
 	 * @return {@link GatewayResponse}<{@link ?}>
 	 */
 	@ExceptionHandler(java.lang.Exception.class)
-	public GatewayResponse<?> bottomExceptionHandler(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
-		log.error("[异常拦截 : RuntimeException]", exception);
+	public GatewayResponse<?> bottomExceptionHandler1(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
+		log.error("[异常拦截 : Exception]", exception);
+
+		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
+	}
+
+	/**
+	 * 异常处理程序 - 兜底
+	 *
+	 * @param request   请求
+	 * @param response  响应
+	 * @param throwable 异常
+	 * @return {@link GatewayResponse}<{@link ?}>
+	 */
+	@ExceptionHandler(java.lang.Exception.class)
+	public GatewayResponse<?> bottomExceptionHandler2(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
+		log.error("[异常拦截 : Throwable]", throwable);
 
 		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
 	}
