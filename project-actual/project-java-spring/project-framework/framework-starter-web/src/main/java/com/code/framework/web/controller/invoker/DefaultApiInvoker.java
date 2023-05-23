@@ -15,23 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.api.annotation;
-
-import com.code.framework.web.api.ApiDescriptor;
-
-import java.lang.annotation.*;
+package com.code.framework.web.controller.invoker;
 
 /**
  * @author Snow
- * @date 2023/5/21 14:31
+ * @date 2023/5/23 18:08
  */
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface Api {
-
-	String value() default "";
-
-	String version() default ApiDescriptor.DEFAULT_VERSION;
+public class DefaultApiInvoker extends ApiInvoker {
 
 }

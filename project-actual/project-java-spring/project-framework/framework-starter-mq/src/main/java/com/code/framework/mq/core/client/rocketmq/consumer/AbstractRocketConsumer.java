@@ -1,6 +1,5 @@
 package com.code.framework.mq.core.client.rocketmq.consumer;
 
-import com.code.framework.basic.exception.BizException;
 import com.code.framework.basic.exception.BizExceptionCode;
 import com.code.framework.mq.core.client.MqClientBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +32,7 @@ public abstract class AbstractRocketConsumer implements MqClientBuilder<DefaultM
 			client.start();
 		} catch (MQClientException e) {
 			log.error("------ RocketMQ ------ RocketMQ Consumer 启动失败 ！！！", e);
-			throw BizExceptionCode.COMMON_ERROR.exception(BizException::new);
+			throw BizExceptionCode.COMMON_ERROR.exception();
 		}
 	}
 

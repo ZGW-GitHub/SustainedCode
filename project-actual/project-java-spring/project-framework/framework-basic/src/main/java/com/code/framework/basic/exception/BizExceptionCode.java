@@ -22,6 +22,8 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.function.Supplier;
+
 /**
  * @author 愆凡
  * @date 2022/6/13 21:51
@@ -56,7 +58,8 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 	 */
 	BAD_XXL_JOB_HANDLER(2001, "定时任务配置错误");
 
-	private final int    code;
-	private final String message;
+	private final int                    code;
+	private final String                 message;
+	private final Supplier<BizException> supplier = BizException::new;
 
 }

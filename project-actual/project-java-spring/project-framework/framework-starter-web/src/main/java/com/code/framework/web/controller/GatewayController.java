@@ -19,6 +19,8 @@ package com.code.framework.web.controller;
 
 import com.code.framework.web.controller.domain.GatewayRequest;
 import com.code.framework.web.controller.domain.GatewayResponse;
+import com.code.framework.web.controller.invoker.ApiInvoker;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,9 +34,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GatewayController {
 
+	@Resource
+	private ApiInvoker apiInvoker;
+
 	@PostMapping("gateway")
 	public GatewayResponse<?> gateway(@RequestBody GatewayRequest gatewayRequest) {
 		System.err.println("gateway ...");
+
+		Object result = apiInvoker.invoke(gatewayRequest.getApi(), gatewayRequest.getVersion(), gatewayRequest.getContent());
+
 
 		return null;
 	}

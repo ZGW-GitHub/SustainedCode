@@ -17,11 +17,53 @@
 
 package com.code.framework.web.controller.invoker;
 
+import cn.hutool.core.util.StrUtil;
+import com.code.framework.web.api.ApiContainer;
+import com.code.framework.web.api.ApiDescriptor;
+import com.code.framework.web.api.exception.ApiExceptionCode;
+import com.code.framework.web.component.ApplicationContextHelper;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+import java.util.function.BiFunction;
+
 /**
  * @author Snow
  * @date 2023/5/23 16:20
  */
-public abstract class ApiInvoker {
+@Slf4j
+@Component
+public abstract class ApiInvoker<A extends ApiDescriptor, P, R> {
 
+	@Resource
+	private ApiContainer apiContainer;
+
+	public Object invoke(String api, String version, String content) {
+		if (StrUtil.isBlank(api)) {
+			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
+		}
+
+		String apiIdentification = api + "_" + (StrUtil.isBlank(version) ? ApiDescriptor.DEFAULT_VERSION : version);
+
+		ApiDescriptor apiDescriptor = apiContainer.get(apiIdentification);
+		if (Objects.isNull(apiDescriptor)) {
+			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
+		}
+
+		Object springBean = ApplicationContextHelper.getBean(apiDescriptor.beanName());
+		if (Objects.isNull(springBean)) {
+			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
+		}
+
+		return doInvoke(apiDescriptor, (ApiInvoker<A, P, R>) (apiDesc, param) -> {
+			apiDesc.method().invoke()
+		});
+	}
+
+	abstract R invoke(ApiDescriptor apiDescriptor, P param);
+
+	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, String content, BiFunction<A, P, R> function);
 
 }

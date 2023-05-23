@@ -30,22 +30,33 @@ import java.util.stream.IntStream;
 
 /**
  * @param api      对应 {@link Api} 中 value 取值
+ * @param version  对应 {@link Api} 中 version 取值
  * @param method   方法对象
  * @param beanName Spring Bean 名称
  * @author Snow
  * @date 2023/5/21 14:33
  */
 @Slf4j
-public record ApiDescriptor(String api, Method method, String beanName) {
+public record ApiDescriptor(String api, String version, Method method, String beanName) {
 
 	/**
-	 * api 参数个数
+	 * API 参数个数
 	 */
-	public static final  int     API_PARAM_COUNT = 1;
+	public static final int API_PARAM_COUNT = 1;
+
+	/**
+	 * API 默认版本
+	 */
+	public static final String DEFAULT_VERSION = "1.0.0";
+
 	/**
 	 * 方法签名拆分正则
 	 */
-	private static final Pattern PATTERN         = Pattern.compile("\\s+(.*)\\s+((.*)\\.(.*))\\((.*)\\)", Pattern.DOTALL);
+	private static final Pattern PATTERN = Pattern.compile("\\s+(.*)\\s+((.*)\\.(.*))\\((.*)\\)", Pattern.DOTALL);
+
+	public String identification() {
+		return api + "_" + version;
+	}
 
 	private List<String> splitMethodName(Method method) {
 		String methodGenericString = method.toGenericString();

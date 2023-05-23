@@ -23,8 +23,8 @@ import java.util.function.Supplier;
  * Code 规范：<br/>
  * <ul>
  *     <li>均为 6 位数字</li>
- *     <li>BizExceptionCode 	: 1xxxxx</li>
- *     <li>XxxExceptionCode 	: 2xxxxx</li>
+ *     <li>BizExceptionCode 	: 11xxxx</li>
+ *     <li>ApiExceptionCode 	: 12xxxx</li>
  * </ul>
  *
  * @author Snow
@@ -36,14 +36,16 @@ public interface ExceptionCode<E extends Exception> {
 
 	String getMessage();
 
-	default E exception(Supplier<E> supplier) {
-		return exception(supplier, getMessage());
+	Supplier<E> getSupplier();
+
+	default E exception() {
+		return exception(getMessage());
 	}
 
-	default E exception(Supplier<E> supplier, String msgFormat, Object... args) {
+	default E exception(String msgFormat, Object... args) {
 		String msg = (args != null && args.length > 0) ? String.format(msgFormat, args) : msgFormat;
 
-		E exception = supplier.get();
+		E exception = getSupplier().get();
 		exception.setCode(getCode());
 		exception.setMessage(msg);
 		return exception;

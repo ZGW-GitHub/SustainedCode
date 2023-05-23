@@ -15,10 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.api;
+package com.code.framework.web.api.component;
 
+import com.code.framework.web.api.ApiContainer;
+import com.code.framework.web.api.ApiDescriptor;
 import com.code.framework.web.api.annotation.Api;
-import com.code.framework.web.api.exception.ApiException;
 import com.code.framework.web.api.exception.ApiExceptionCode;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -59,12 +60,17 @@ public class ApiScanProcessor implements BeanPostProcessor {
 			int parameterCount = method.getParameterCount();
 			if (ApiDescriptor.API_PARAM_COUNT != parameterCount) {
 				log.error("【 API 加载 】发生异常：方法[ {} ], 参数个数不等于 1", method.toGenericString());
-				throw ApiExceptionCode.API_PARAM_VALIDATE_EXCEPTION.exception(ApiException::new);
+				throw ApiExceptionCode.API_SCAN_EXCEPTION_PARAM_VALIDATE.exception();
 			}
 
 			String api = apiAnno.value();
-			ApiDescriptor apiDescriptor = new ApiDescriptor(api, method, beanName);
-			apiContainer.put(api, apiDescriptor);
+			String version = apiAnno.version();
+			ApiDescriptor apiDescriptor = new ApiDescriptor(api, version, method, beanName);
+
+			if (apiContainer.containsKey(apiDescriptor.identification())) {
+				throw ApiExceptionCode.API_SCAN_EXCEPTION_REPEAT.exception();
+			}
+			apiContainer.put(apiDescriptor.identification(), apiDescriptor);
 			log.info("【 API 加载 】API[ {} ]，加载成功，apiDescriptor : {}", api, apiDescriptor);
 		}
 		return bean;

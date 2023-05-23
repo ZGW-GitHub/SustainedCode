@@ -22,7 +22,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.function.Supplier;
+
 /**
+ * ApiExceptionCode : 12xxxx
+ *
  * @author Snow
  * @date 2023/5/21 15:25
  */
@@ -31,9 +35,12 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public enum ApiExceptionCode implements ExceptionCode<ApiException> {
 
-	API_PARAM_VALIDATE_EXCEPTION(2001, "api 参数验证异常");
+	API_SCAN_EXCEPTION_PARAM_VALIDATE(120001, "API 参数验证异常"),
+	API_SCAN_EXCEPTION_REPEAT(120002, "API 重复"),
+	API_INVOKE_EXCEPTION_API_NOT_EXIST(120101, "API 不存在");
 
-	private final int    code;
-	private final String message;
+	private final int                    code;
+	private final String                 message;
+	private final Supplier<ApiException> supplier = ApiException::new;
 
 }
