@@ -33,7 +33,7 @@ public abstract class AbstractRocketConsumer implements MqClientBuilder<DefaultM
 			client.start();
 		} catch (MQClientException e) {
 			log.error("------ RocketMQ ------ RocketMQ Consumer 启动失败 ！！！", e);
-			throw BizExceptionCode.COMMON_ERROR.newException(BizException::new);
+			throw BizExceptionCode.COMMON_ERROR.exception(BizException::new);
 		}
 	}
 

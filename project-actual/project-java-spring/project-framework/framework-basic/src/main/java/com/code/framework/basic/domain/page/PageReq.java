@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.page;
+package com.code.framework.basic.domain.page;
 
 import jakarta.validation.constraints.Min;
 import lombok.Getter;

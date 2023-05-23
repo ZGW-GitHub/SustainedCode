@@ -43,7 +43,7 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 
 		CompletionService<Boolean> completionService = getCompletionService();
 		if (completionService == null) {
-			throw BizExceptionCode.BAD_XXL_JOB_HANDLER.newException(BizException::new);
+			throw BizExceptionCode.BAD_XXL_JOB_HANDLER.exception(BizException::new);
 		}
 
 		List<Future<Boolean>> futureList = new ArrayList<>();

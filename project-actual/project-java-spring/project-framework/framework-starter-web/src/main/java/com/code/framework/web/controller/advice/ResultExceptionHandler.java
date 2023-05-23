@@ -18,9 +18,8 @@
 package com.code.framework.web.controller.advice;
 
 import com.code.framework.basic.exception.BizExceptionCode;
-import com.code.framework.basic.result.CommonResult;
-import com.code.framework.basic.result.ResultAccessor;
-import com.code.framework.basic.result.code.Exception;
+import com.code.framework.basic.exception.core.Exception;
+import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +32,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice
-public class ResultExceptionHandler implements ResultAccessor {
+public class ResultExceptionHandler {
 
 	/**
 	 * 如果超过长度，前端交互体验不佳，使用默认错误消息
@@ -46,26 +45,26 @@ public class ResultExceptionHandler implements ResultAccessor {
 	 * @param request   请求
 	 * @param response  响应
 	 * @param exception 异常
-	 * @return {@link CommonResult}<{@link ?}>
+	 * @return {@link GatewayResponse}<{@link ?}>
 	 */
 	@ExceptionHandler(java.lang.Exception.class)
-	public CommonResult<?> bottomExceptionHandler(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
+	public GatewayResponse<?> bottomExceptionHandler(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
 		log.error("[异常拦截 : RuntimeException]", exception);
 
-		return error(BizExceptionCode.COMMON_ERROR);
+		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
 	}
 
 	/**
 	 * 异常处理程序 - 自定义异常
 	 *
 	 * @param exception 自定义异常
-	 * @return {@link CommonResult}<{@link ?}>
+	 * @return {@link GatewayResponse}<{@link ?}>
 	 */
 	@ExceptionHandler(Exception.class)
-	public CommonResult<?> bizExceptionhandler(Exception exception) {
+	public GatewayResponse<?> bizExceptionhandler(Exception exception) {
 		log.error("[异常拦截 : ServiceException] : {}-{}", exception.getCode(), exception.getMessage(), exception);
 
-		return CommonResult.error(exception);
+		return GatewayResponse.error(exception);
 	}
 
 }

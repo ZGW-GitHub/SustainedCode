@@ -25,7 +25,7 @@ public abstract class AbstractRocketProducer implements MqClientBuilder<DefaultM
 			log.debug("------ RocketMQ ------ RocketMQ Producer 启动成功");
 		} catch (MQClientException e) {
 			log.error("------ RocketMQ ------ RocketMQ Producer 启动失败 ！！！", e);
-			throw BizExceptionCode.COMMON_ERROR.newException(BizException::new);
+			throw BizExceptionCode.COMMON_ERROR.exception(BizException::new);
 		}
 	}
 

@@ -17,7 +17,7 @@
 
 package com.code.framework.basic.exception;
 
-import com.code.framework.basic.result.code.ExceptionCode;
+import com.code.framework.basic.exception.core.ExceptionCode;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -58,10 +58,5 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 
 	private final int    code;
 	private final String message;
-
-	@Override
-	public Class<BizException> getExceptionType() {
-		return BizException.class;
-	}
 
 }

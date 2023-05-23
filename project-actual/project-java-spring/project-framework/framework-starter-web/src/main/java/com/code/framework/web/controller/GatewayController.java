@@ -17,8 +17,11 @@
 
 package com.code.framework.web.controller;
 
+import com.code.framework.web.controller.domain.GatewayRequest;
+import com.code.framework.web.controller.domain.GatewayResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,8 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class GatewayController {
 
 	@PostMapping("gateway")
-	public void gateway() {
+	public GatewayResponse<?> gateway(@RequestBody GatewayRequest gatewayRequest) {
 		System.err.println("gateway ...");
+
+		return null;
 	}
 
 }

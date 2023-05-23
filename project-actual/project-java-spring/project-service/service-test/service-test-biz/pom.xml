@@ -17,6 +17,7 @@
 
 	<properties>
 		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
+		<framework-starter-web.version>1.0.0-SNAPSHOT</framework-starter-web.version>
 		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
 	</properties>
 
@@ -54,11 +55,6 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
@@ -76,6 +72,12 @@
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>
 			<version>${framework-basic.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-starter-web</artifactId>
+			<version>${framework-starter-web.version}</version>
 		</dependency>
 
 		<!-- <dependency> -->

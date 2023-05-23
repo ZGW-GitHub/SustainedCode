@@ -17,9 +17,12 @@
 
 package com.code.framework.web;
 
+import org.springframework.context.annotation.ComponentScan;
+
 /**
  * @author Snow
  * @date 2023/5/22 10:25
  */
+@ComponentScan("com.code.framework.web")
 public class WebFrameworkAutoConfiguration {
 }

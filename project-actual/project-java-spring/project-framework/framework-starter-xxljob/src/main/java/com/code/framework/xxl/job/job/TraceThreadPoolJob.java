@@ -44,7 +44,7 @@ public abstract class TraceThreadPoolJob<T> extends AbstractJob<T> {
 
 		ExecutorCompletionService<Boolean> completionService = getCompletionService();
 		if (completionService == null) {
-			throw BizExceptionCode.BAD_XXL_JOB_HANDLER.newException(BizException::new);
+			throw BizExceptionCode.BAD_XXL_JOB_HANDLER.exception(BizException::new);
 		}
 
 		List<TraceFutureTask<Boolean>> futureList = new ArrayList<>();

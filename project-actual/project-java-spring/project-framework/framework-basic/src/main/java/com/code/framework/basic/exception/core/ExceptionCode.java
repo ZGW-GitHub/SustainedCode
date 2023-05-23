@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.code;
+package com.code.framework.basic.exception.core;
 
 import java.util.function.Supplier;
 
@@ -36,14 +36,11 @@ public interface ExceptionCode<E extends Exception> {
 
 	String getMessage();
 
-	default E newException(Supplier<E> supplier) {
-		E exception = supplier.get();
-		exception.setCode(getCode());
-		exception.setMessage(getMessage());
-		return exception;
+	default E exception(Supplier<E> supplier) {
+		return exception(supplier, getMessage());
 	}
 
-	default E newException(Supplier<E> supplier, String msgFormat, Object... args) {
+	default E exception(Supplier<E> supplier, String msgFormat, Object... args) {
 		String msg = (args != null && args.length > 0) ? String.format(msgFormat, args) : msgFormat;
 
 		E exception = supplier.get();

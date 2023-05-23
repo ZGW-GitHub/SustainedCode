@@ -15,33 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.code;
+package com.code.framework.web.controller.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * @author Snow
- * @date 2023/5/22 21:39
+ * @date 2023/5/23 16:12
  */
-@Slf4j
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class Exception extends RuntimeException {
+public class GatewayRequest implements Serializable {
 
-	/**
-	 * 业务错误码
-	 *
-	 * @see ExceptionCode#getCode()
-	 */
-	private Integer code;
+	@Serial
+	private static final long serialVersionUID = 3774272602477699222L;
 
-	/**
-	 * 错误提示
-	 *
-	 * @see ExceptionCode#getMessage()
-	 */
-	private String message;
+	private String api;
+	private String version;
+	private String content;
 
 }

@@ -3,7 +3,7 @@ package com.code.service.test.service;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.code.framework.basic.result.page.PageResp;
+import com.code.framework.basic.domain.page.PageResp;
 import com.code.service.test.convert.UserConvert;
 import com.code.service.test.dal.dos.UserDO;
 import com.code.service.test.dal.mapper.UserMapper;

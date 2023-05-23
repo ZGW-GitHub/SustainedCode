@@ -1,6 +1,6 @@
 package com.code.service.test.service;
 
-import com.code.framework.basic.result.page.PageResp;
+import com.code.framework.basic.domain.page.PageResp;
 import com.code.service.test.service.model.UserCreateReqModel;
 import com.code.service.test.service.model.UserPageReqModel;
 import com.code.service.test.service.model.UserPageRespModel;

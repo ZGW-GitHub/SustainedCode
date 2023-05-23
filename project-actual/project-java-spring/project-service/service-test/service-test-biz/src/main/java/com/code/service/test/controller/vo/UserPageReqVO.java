@@ -17,7 +17,7 @@
 
 package com.code.service.test.controller.vo;
 
-import com.code.framework.basic.result.page.PageReq;
+import com.code.framework.basic.domain.page.PageReq;
 
 /**
  * @author Snow

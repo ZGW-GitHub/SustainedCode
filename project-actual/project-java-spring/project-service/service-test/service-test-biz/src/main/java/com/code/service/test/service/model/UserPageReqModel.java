@@ -17,7 +17,7 @@
 
 package com.code.service.test.service.model;
 
-import com.code.framework.basic.result.page.PageReq;
+import com.code.framework.basic.domain.page.PageReq;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -15,49 +15,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result.page;
+package com.code.framework.basic.exception.core;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-
-import java.util.Collections;
-import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:28
+ * @date 2023/5/22 21:39
  */
+@Slf4j
 @Data
-@Accessors(chain = true)
-public class PageResp<T> {
-
-	private static final PageResp EMPTY = new PageResp();
+@EqualsAndHashCode(callSuper = true)
+public class Exception extends RuntimeException {
 
 	/**
-	 * 总数
+	 * 业务错误码
+	 *
+	 * @see ExceptionCode#getCode()
 	 */
-	private long total = 0;
+	private Integer code;
 
 	/**
-	 * 查询数据列表
+	 * 错误提示
+	 *
+	 * @see ExceptionCode#getMessage()
 	 */
-	private List<T> records = Collections.emptyList();
-
-	private PageResp() {
-	}
-
-	private PageResp(long total, List<T> records) {
-		this.total = total;
-		this.records = records;
-	}
-
-	public static <T> PageResp<T> of(long total, List<T> records) {
-		return new PageResp<>(total, records);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> PageResp<T> empty() {
-		return (PageResp<T>) EMPTY;
-	}
+	private String message;
 
 }

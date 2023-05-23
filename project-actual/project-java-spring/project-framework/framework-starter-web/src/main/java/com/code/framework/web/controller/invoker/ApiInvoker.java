@@ -15,26 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.result;
-
-import com.code.framework.basic.result.code.ExceptionCode;
+package com.code.framework.web.controller.invoker;
 
 /**
  * @author Snow
- * @date 2023/5/20 12:35
+ * @date 2023/5/23 16:20
  */
-public interface ResultAccessor {
+public abstract class ApiInvoker {
 
-	default <T> CommonResult<T> success(T data) {
-		return CommonResult.success(data);
-	}
-
-	default <T> CommonResult<T> error(ExceptionCode exceptionCode) {
-		return CommonResult.error(exceptionCode);
-	}
-
-	default <T> CommonResult<T> error(ExceptionCode exceptionCode, String message) {
-		return CommonResult.error(exceptionCode, message);
-	}
 
 }

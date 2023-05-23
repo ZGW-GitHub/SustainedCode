@@ -17,7 +17,7 @@
 
 package com.code.framework.web.api.exception;
 
-import com.code.framework.basic.result.code.ExceptionCode;
+import com.code.framework.basic.exception.core.ExceptionCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +35,5 @@ public enum ApiExceptionCode implements ExceptionCode<ApiException> {
 
 	private final int    code;
 	private final String message;
-
-	@Override
-	public Class<ApiException> getExceptionType() {
-		return ApiException.class;
-	}
 
 }
