@@ -12,5 +12,5 @@ Content-Type: application/json; charset=UTF-8
 
 {
   "api": "template.save",
-  "content": "{\"name\":\"测试\",\"price\":6.67,\"coverImgUrl\":\"https://google.com\"}"
+  "content": "{\"price\":6.67,\"coverImgUrl\":\"https://google.com\"}"
 }

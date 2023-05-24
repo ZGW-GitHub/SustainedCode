@@ -17,6 +17,8 @@
 
 package com.code.service.template.api.domain.request;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -32,12 +34,16 @@ import lombok.extern.slf4j.Slf4j;
 public class TemplateCreateReqVO {
 
 	@NotNull
+	@Min(value = 0, message = "recordNo 不合法")
 	private Long recordNo;
 
+	@NotBlank
 	private String name;
 
+	@NotNull
 	private Double price;
 
+	@NotBlank
 	private String coverImgUrl;
 
 }

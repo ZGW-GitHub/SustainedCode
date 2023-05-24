@@ -23,7 +23,7 @@ import com.code.framework.basic.exception.core.Exception;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.ValidationException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,54 +46,64 @@ public class ResultExceptionHandler {
 	 */
 	static Integer MAX_LENGTH = 200;
 
-	@ExceptionHandler(ValidationException.class)
-	public GatewayResponse<?> bizExceptionhandler(ValidationException exception) {
-		log.error("[异常拦截 : ValidationException] : {}-{}", BizExceptionCode.VALIDATION_EXCEPTION.getCode(), exception.getMessage(), exception);
+	/**
+	 * 异常处理程序
+	 *
+	 * @param request   请求
+	 * @param response  响应
+	 * @param throwable 异常
+	 * @return {@link GatewayResponse}<{@link Void}>
+	 */
+	@ExceptionHandler(Throwable.class)
+	public GatewayResponse<Void> exceptionHandler(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
+		log.error("【 异常拦截 】>>>>>> 异常类型：{}", throwable.getClass());
+
+		if (throwable instanceof ConstraintViolationException constraintViolationException) {
+			// 处理验证异常
+			return handleConstraintViolationException(constraintViolationException);
+		}
+
+		if (throwable instanceof Exception customRuntimeException) {
+			// 处理自定义 RuntimeException
+			return handleCustomRuntimeException(customRuntimeException);
+		}
+
+		if (throwable instanceof java.lang.Exception exception) {
+			// 处理 java.lang.Exception
+			return handleException(request, response, exception);
+		}
+
+		// 处理 java.lang.Throwable
+		return handleThrowable(request, response, throwable);
+	}
+
+	private GatewayResponse<Void> handleConstraintViolationException(ConstraintViolationException exception) {
+		// exception.getConstraintViolations().stream().map(violation -> {
+		// 	for (Path.Node node : violation.getPropertyPath()) {
+		// 		node.getName();
+		// 	}
+		// };
+		log.error("【 异常拦截 】>>>>>> ValidationException : {}", exception.getMessage(), exception);
 
 		String[] split = exception.getMessage().split(StrUtil.BACKSLASH + StrUtil.DOT);
 		String msg = Arrays.stream(split).skip(2).collect(Collectors.joining());
 		return GatewayResponse.error(BizExceptionCode.VALIDATION_EXCEPTION.exception(msg));
 	}
 
-	/**
-	 * 异常处理程序 - 自定义异常
-	 *
-	 * @param exception 自定义异常
-	 * @return {@link GatewayResponse}<{@link ?}>
-	 */
-	@ExceptionHandler(Exception.class)
-	public GatewayResponse<?> bizExceptionhandler(Exception exception) {
-		log.error("[异常拦截 : ServiceException] : {}-{}", exception.getCode(), exception.getMessage(), exception);
+	private GatewayResponse<Void> handleCustomRuntimeException(Exception exception) {
+		log.error("【 异常拦截 】>>>>>> ServiceException : {}-{}", exception.getCode(), exception.getMessage(), exception);
 
 		return GatewayResponse.error(exception);
 	}
 
-	/**
-	 * 异常处理程序 - 兜底
-	 *
-	 * @param request   请求
-	 * @param response  响应
-	 * @param exception 异常
-	 * @return {@link GatewayResponse}<{@link ?}>
-	 */
-	@ExceptionHandler(java.lang.Exception.class)
-	public GatewayResponse<?> bottomExceptionHandler1(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
-		log.error("[异常拦截 : Exception]", exception);
+	private GatewayResponse<Void> handleException(HttpServletRequest request, HttpServletResponse response, java.lang.Exception exception) {
+		log.error("【 异常拦截 】>>>>>> Exception : {}", exception.getMessage(), exception);
 
 		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
 	}
 
-	/**
-	 * 异常处理程序 - 兜底
-	 *
-	 * @param request   请求
-	 * @param response  响应
-	 * @param throwable 异常
-	 * @return {@link GatewayResponse}<{@link ?}>
-	 */
-	@ExceptionHandler(java.lang.Exception.class)
-	public GatewayResponse<?> bottomExceptionHandler2(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
-		log.error("[异常拦截 : Throwable]", throwable);
+	private GatewayResponse<Void> handleThrowable(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
+		log.error("【 异常拦截 】>>>>>> Throwable : {}", throwable.getMessage(), throwable);
 
 		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
 	}
