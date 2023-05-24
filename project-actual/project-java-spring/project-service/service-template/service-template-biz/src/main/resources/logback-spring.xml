@@ -17,83 +17,25 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<configuration scan="true" scanPeriod="1 seconds">
+<configuration scan="true" scanPeriod="10 seconds" debug="false">
 
-	<!-- 彩色日志依赖的渲染类 -->
-	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
-	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
-	<conversionRule conversionWord="wEx"
-					converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
-	<!-- 自定义属性   -->
-	<property name="CONSOLE_LOG_PATTERN"
-			  value="[%clr(%X{TRACE_ID:-}){yellow}] %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+	<property name="CUSTOM_CONSOLE_LOG_PATTERN"
+			  value="${CUSTOM_CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([%X{TRACE_ID}]){yellow} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
-	<!-- 获取 Spring 上下文属性 -->
-	<springProperty name="AppName" source="spring.application.name" defaultValue="default-application"/>
-	<springProperty name="AppLogAppender" source="custom.log.appender" defaultValue="Console"/>
-	<springProperty name="LogstashInput_log" source="custom.logstash.inputs.log" defaultValue="linux.little:39001"/>
-
-	<!-- 控制台 appender  -->
-	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="CUSTOM_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
-			<charset>UTF-8</charset>
-			<includeMdcKeyName>TRACE_ID</includeMdcKeyName>
+			<pattern>${CUSTOM_CONSOLE_LOG_PATTERN}</pattern>
+			<charset>${CONSOLE_LOG_CHARSET}</charset>
 		</encoder>
 	</appender>
 
-	<!-- Logstash appender -->
-	<!-- <appender name="TCP_Logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender"> -->
-	<!-- 	<keepAliveDuration>5 minutes</keepAliveDuration> -->
-	<!-- 	&lt;!&ndash; Logstash 地址 &ndash;&gt; -->
-	<!-- 	<destination>${LogstashInput_log}</destination> -->
-	<!-- 	&lt;!&ndash; encoder 必须配置 &ndash;&gt; -->
-	<!-- 	<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"> -->
-	<!-- 		&lt;!&ndash; 定义时间戳格式 &ndash;&gt; -->
-	<!-- 		<timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern> -->
-	<!-- 		&lt;!&ndash; 设置默认字段及其名字 &ndash;&gt; -->
-	<!-- 		<fieldNames> -->
-	<!-- 			<timestamp>time</timestamp> -->
-	<!-- 			<message>msg</message> -->
-	<!-- 			<logger>class</logger> -->
-	<!-- 			&lt;!&ndash; 设置要忽略的字段 &ndash;&gt; -->
-	<!-- 			<version>[ignore]</version> -->
-	<!-- 			<thread>[ignore]</thread> -->
-	<!-- 			<levelValue>[ignore]</levelValue> -->
-	<!-- 		</fieldNames> -->
-	<!-- 		&lt;!&ndash; 设置 mdc 字段名 &ndash;&gt; -->
-	<!-- 		<includeMdcKeyName>traceId</includeMdcKeyName> -->
-	<!-- 		&lt;!&ndash; 自定义字段 &ndash;&gt; -->
-	<!-- 		<customFields>{"appName": "${AppName}"}</customFields> -->
-	<!-- 		&lt;!&ndash; 设置 logger name 的长度 &ndash;&gt; -->
-	<!-- 		<shortenedLoggerNameLength>40</shortenedLoggerNameLength> -->
-	<!-- 	</encoder> -->
-	<!-- </appender> -->
+	<root level="INFO">
+		<appender-ref ref="CUSTOM_CONSOLE"/>
+	</root>
 
-	<!-- 控制框架输出日志 -->
-	<logger name="org.slf4j" level="INFO"/>
-	<logger name="springfox" level="INFO"/>
-	<logger name="io.swagger" level="INFO"/>
-	<logger name="org.springframework" level="INFO"/>
-	<logger name="org.hibernate.validator" level="DEBUG"/>
 	<logger name="com.code" level="DEBUG"/>
-
-	<!-- 测试环境：上述 appender 的日志输出级别 -->
-	<springProfile name="dev">
-		<root level="DEBUG">
-			<appender-ref ref="Console"/>
-		</root>
-	</springProfile>
-
-	<!-- 线上环境：上述 appender 的日志输出级别 -->
-	<springProfile name="prod">
-		<root level="INFO">
-			<appender-ref ref="${AppLogAppender}"/>
-		</root>
-		<root level="DEBUG">
-			<appender-ref ref="Console"/>
-		</root>
-	</springProfile>
 
 </configuration>

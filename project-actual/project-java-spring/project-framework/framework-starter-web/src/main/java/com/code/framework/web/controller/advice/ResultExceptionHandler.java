@@ -20,6 +20,7 @@ package com.code.framework.web.controller.advice;
 import cn.hutool.core.util.StrUtil;
 import com.code.framework.basic.exception.BizExceptionCode;
 import com.code.framework.basic.exception.core.Exception;
+import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ import jakarta.validation.Path;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.hibernate.validator.internal.engine.path.PathImpl;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -54,6 +56,14 @@ public class ResultExceptionHandler {
 	public GatewayResponse<Void> exceptionHandler(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
 		log.error("【 异常拦截 】>>>>>> 异常类型：{}", throwable.getClass());
 
+		GatewayResponse<Void> gatewayResponse = doExceptionHandler(request, response, throwable);
+
+		MDC.remove(TraceContextKeyEnum.TRACE_ID.getName());
+
+		return gatewayResponse;
+	}
+
+	private GatewayResponse<Void> doExceptionHandler(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
 		if (throwable instanceof ConstraintViolationException constraintViolationException) {
 			// 处理验证异常
 			return handleConstraintViolationException(constraintViolationException);

@@ -75,7 +75,6 @@ public class GatewayController {
 		} finally {
 			// 4、清除 ThreadLocal
 			TraceContextHelper.clear();
-			MDC.remove(TraceContextKeyEnum.TRACE_ID.getName());
 		}
 	}
 
