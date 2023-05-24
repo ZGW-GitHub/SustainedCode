@@ -116,11 +116,11 @@ public class ResultExceptionHandler {
 		}
 
 		Class<?> constraintClazz = violation.getLeafBean().getClass();
-		violationMessage.append(constraintClazz.getName()).append(StrUtil.SPACE);
+		violationMessage.append(constraintClazz.getSimpleName()).append(StrUtil.SPACE);
 		Path propertyPath = violation.getPropertyPath();
 		if (propertyPath instanceof PathImpl path) {
 			String propertyName = path.getLeafNode().getName();
-			violationMessage.append("的 ").append(propertyName).append(": ");
+			violationMessage.append("的 ").append(propertyName).append(" : ");
 		}
 		String violationMsg = violation.getMessage();
 		violationMessage.append(violationMsg).append(", ");
