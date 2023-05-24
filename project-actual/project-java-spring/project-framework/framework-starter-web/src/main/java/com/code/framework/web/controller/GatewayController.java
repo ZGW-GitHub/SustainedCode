@@ -28,6 +28,7 @@ import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.annotation.Resource;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,7 @@ public class GatewayController {
 		// 2、将 traceId 设置到 ThreadLocal
 		TraceContext traceContext = TraceContextHelper.startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, traceId);
+		MDC.put(TraceContextKeyEnum.TRACE_ID.getName(), traceId);
 
 		try {
 			// 3、调用 API
@@ -73,6 +75,7 @@ public class GatewayController {
 		} finally {
 			// 4、清除 ThreadLocal
 			TraceContextHelper.clear();
+			MDC.remove(TraceContextKeyEnum.TRACE_ID.getName());
 		}
 	}
 
