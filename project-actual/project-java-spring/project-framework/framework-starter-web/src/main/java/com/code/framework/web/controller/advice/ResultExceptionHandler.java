@@ -23,14 +23,15 @@ import com.code.framework.basic.exception.core.Exception;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Path;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @author 愆凡
@@ -78,16 +79,17 @@ public class ResultExceptionHandler {
 	}
 
 	private GatewayResponse<Void> handleConstraintViolationException(ConstraintViolationException exception) {
-		// exception.getConstraintViolations().stream().map(violation -> {
-		// 	for (Path.Node node : violation.getPropertyPath()) {
-		// 		node.getName();
-		// 	}
-		// };
 		log.error("【 异常拦截 】>>>>>> ValidationException : {}", exception.getMessage(), exception);
 
-		String[] split = exception.getMessage().split(StrUtil.BACKSLASH + StrUtil.DOT);
-		String msg = Arrays.stream(split).skip(2).collect(Collectors.joining());
-		return GatewayResponse.error(BizExceptionCode.VALIDATION_EXCEPTION.exception(msg));
+		StringBuilder violationMessage = StrUtil.builder();
+		exception.getConstraintViolations().forEach(constraintViolation -> buildViolationMessage(violationMessage, constraintViolation));
+
+		if (violationMessage.isEmpty()) {
+			violationMessage.append(exception.getMessage());
+		} else {
+			violationMessage.delete(violationMessage.length() - 2, violationMessage.length());
+		}
+		return GatewayResponse.error(BizExceptionCode.VALIDATION_EXCEPTION.exception(violationMessage.toString()));
 	}
 
 	private GatewayResponse<Void> handleCustomRuntimeException(Exception exception) {
@@ -106,6 +108,22 @@ public class ResultExceptionHandler {
 		log.error("【 异常拦截 】>>>>>> Throwable : {}", throwable.getMessage(), throwable);
 
 		return GatewayResponse.error(BizExceptionCode.COMMON_ERROR);
+	}
+
+	private void buildViolationMessage(StringBuilder violationMessage, ConstraintViolation<?> constraintViolation) {
+		if (!(constraintViolation instanceof ConstraintViolationImpl<?> violation)) {
+			return;
+		}
+
+		Class<?> constraintClazz = violation.getLeafBean().getClass();
+		violationMessage.append(constraintClazz.getName()).append(StrUtil.SPACE);
+		Path propertyPath = violation.getPropertyPath();
+		if (propertyPath instanceof PathImpl path) {
+			String propertyName = path.getLeafNode().getName();
+			violationMessage.append("的 ").append(propertyName).append(": ");
+		}
+		String violationMsg = violation.getMessage();
+		violationMessage.append(violationMsg).append(", ");
 	}
 
 }
