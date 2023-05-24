@@ -83,14 +83,6 @@
 		<resources>
 			<resource>
 				<directory>${pom.basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.yml</include>
-					<include>**/*.properties</include>
-					<include>**/*.txt</include>
-					<include>**/*.sql</include>
-					<include>META-INF/**/**</include>
-				</includes>
 				<excludes>
 					<exclude>**/*.log</exclude>
 				</excludes>
@@ -101,14 +93,6 @@
 		<testResources>
 			<testResource>
 				<directory>${pom.basedir}/src/test/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.yml</include>
-					<include>**/*.properties</include>
-					<include>**/*.txt</include>
-					<include>**/*.sql</include>
-					<include>META-INF/**/**</include>
-				</includes>
 				<excludes>
 					<exclude>**/*.log</exclude>
 				</excludes>

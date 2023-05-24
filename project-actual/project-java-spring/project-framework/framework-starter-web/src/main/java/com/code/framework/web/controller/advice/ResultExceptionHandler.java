@@ -43,11 +43,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ResultExceptionHandler {
 
 	/**
-	 * 如果超过长度，前端交互体验不佳，使用默认错误消息
-	 */
-	static Integer MAX_LENGTH = 200;
-
-	/**
 	 * 异常处理程序
 	 *
 	 * @param request   请求
