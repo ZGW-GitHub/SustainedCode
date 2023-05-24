@@ -58,9 +58,9 @@ public class GatewayController {
 
 		try {
 			// 3、调用 API
-			log.debug("【 Gateway 请求 】\nrequest : {}", gatewayRequest);
+			log.debug("【 Gateway 请求 】request : {}", gatewayRequest);
 			Object result = apiInvoker.invoke(gatewayRequest.getApi(), gatewayRequest.getVersion(), gatewayRequest.getContent());
-			log.debug("【 Gateway 响应 】\nrequest : {}\nresponse : {}", gatewayRequest, result);
+			log.debug("【 Gateway 响应 】request : {} , response : {}", gatewayRequest, result);
 
 			// 5、返回 response
 			return GatewayResponse.success(result);
