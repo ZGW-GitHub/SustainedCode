@@ -48,8 +48,6 @@ public class GatewayController {
 
 	@PostMapping("gateway")
 	public GatewayResponse<?> gateway(@RequestBody GatewayRequest gatewayRequest) throws Throwable {
-		log.debug("【 Gateway 请求 】\nrequest : {}", gatewayRequest);
-
 		// 1、生成/获取 traceId
 		String traceId = StrUtil.isBlank(gatewayRequest.getTraceId()) ? IdGenerator.generateTraceId() : gatewayRequest.getTraceId();
 
@@ -60,8 +58,8 @@ public class GatewayController {
 
 		try {
 			// 3、调用 API
+			log.debug("【 Gateway 请求 】\nrequest : {}", gatewayRequest);
 			Object result = apiInvoker.invoke(gatewayRequest.getApi(), gatewayRequest.getVersion(), gatewayRequest.getContent());
-
 			log.debug("【 Gateway 响应 】\nrequest : {}\nresponse : {}", gatewayRequest, result);
 
 			// 5、返回 response
