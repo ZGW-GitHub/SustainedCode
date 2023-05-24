@@ -57,10 +57,10 @@ public abstract class ApiInvoker {
 			throw ApiExceptionCode.API_INVOKE_EXCEPTION_API_NOT_EXIST.exception();
 		}
 
-		return doInvoke(apiDescriptor, content, ApiMethodInvoker.getInvoker(apiDescriptor, springBean, content));
+		return doInvoke(apiDescriptor, springBean, content, ApiMethodInvoker.getInvoker());
 	}
 
 
-	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException;
+	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, Object springBean, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException;
 
 }

@@ -30,10 +30,10 @@ import java.lang.reflect.InvocationTargetException;
 @Configuration(proxyBeanMethods = false)
 public interface ApiMethodInvoker {
 
-	Object invoke() throws InvocationTargetException, IllegalAccessException;
+	Object invoke(ApiDescriptor apiDescriptor, Object springBean, String content) throws InvocationTargetException, IllegalAccessException;
 
-	static ApiMethodInvoker getInvoker(ApiDescriptor apiDescriptor, Object springBean, String content) {
-		return () -> {
+	static ApiMethodInvoker getInvoker() {
+		return (ApiDescriptor apiDescriptor, Object springBean, String content) -> {
 			Class<?>[] parameterTypes = apiDescriptor.method().getParameterTypes();
 			// 存在参数
 			if (parameterTypes.length > 0) {

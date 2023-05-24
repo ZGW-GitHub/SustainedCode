@@ -30,7 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 public class DefaultApiInvoker extends ApiInvoker {
 
 	@Override
-	protected Object doInvoke(ApiDescriptor apiDescriptor, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException {
+	protected Object doInvoke(ApiDescriptor apiDescriptor, Object springBean, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException {
 		// 登录校验
 
 		// 权限校验
@@ -38,7 +38,7 @@ public class DefaultApiInvoker extends ApiInvoker {
 		// ...
 
 		// 调用 API‘s Method
-		return apiMethodInvoker.invoke();
+		return apiMethodInvoker.invoke(apiDescriptor, springBean, content);
 	}
 
 }
