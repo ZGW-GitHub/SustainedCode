@@ -66,18 +66,10 @@ public class GatewayController {
 			return GatewayResponse.success(result);
 		} catch (InvocationTargetException e) {
 			if (e.getTargetException() instanceof ValidationException violationException) {
-				log.error("【 Gateway 异常 】——【 参数验证 】异常信息 : {}", violationException.getMessage(), violationException);
 				throw violationException;
 			} else {
-				log.error("【 Gateway 异常 】——【 API Method Invoke 】异常信息 : {}", e.getMessage(), e);
 				throw e;
 			}
-		} catch (IllegalAccessException e) {
-			log.error("【 Gateway 异常 】——【 API Method Invoke 】异常信息 : {}", e.getMessage(), e);
-			throw e;
-		} catch (Throwable t) {
-			log.error("【 Gateway 异常 】——【 发生 Throwable 异常 】异常信息 : {}", t.getMessage(), t);
-			throw t;
 		} finally {
 			// 4、清除 ThreadLocal
 			TraceContextHelper.clear();
