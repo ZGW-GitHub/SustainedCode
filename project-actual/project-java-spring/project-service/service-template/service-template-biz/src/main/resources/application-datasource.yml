@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${mysql.url}/sustained_project?${mysql.url.params}
+    url: ${mysql.url}/project_actual?${mysql.url.params}
     username: ${mysql.username}
     password: ${mysql.password}
     driver-class-name: com.mysql.cj.jdbc.Driver

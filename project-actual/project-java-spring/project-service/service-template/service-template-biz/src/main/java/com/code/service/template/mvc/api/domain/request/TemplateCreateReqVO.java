@@ -15,32 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.dal.domain.dos;
+package com.code.service.template.mvc.api.domain.request;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author 愆凡
- * @date 2022/6/12 17:43
+ * @date 2022/6/12 18:27
  */
 @Slf4j
 @Data
 @Accessors(chain = true)
-@TableName("template")
-public class TemplateDO {
+public class TemplateCreateReqVO {
 
-	@TableField(fill = FieldFill.INSERT)
-	private Long recordNo;
-
+	@NotNull
 	private String name;
 
-	private Double price;
-
-	private String coverImgUrl;
+	@Min(value = 0, message = "年龄需大于 0")
+	private Integer age;
 
 }

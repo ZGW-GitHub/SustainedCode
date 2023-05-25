@@ -1,7 +1,7 @@
 package com.code.service.template.facade.impl;
 
 import com.code.service.template.facade.TemplateFacade;
-import com.code.service.template.service.TemplateService;
+import com.code.service.template.mvc.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;

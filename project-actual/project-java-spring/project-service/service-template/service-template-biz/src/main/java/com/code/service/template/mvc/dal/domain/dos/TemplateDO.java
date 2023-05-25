@@ -15,14 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.service.model;
+package com.code.service.template.mvc.dal.domain.dos;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
+
 /**
- * @author Snow
- * @date 2023/5/19 21:36
+ * @author 愆凡
+ * @date 2022/6/12 17:43
  */
 @Slf4j
-public class XxxRespModel {
+@Data
+@Accessors(chain = true)
+@TableName("template")
+public class TemplateDO {
+
+	private Integer id;
+	private Long    recordNo;
+	private String  name;
+	private Integer age;
+	private Date    createTime;
+	private Date    updateTime;
+
 }

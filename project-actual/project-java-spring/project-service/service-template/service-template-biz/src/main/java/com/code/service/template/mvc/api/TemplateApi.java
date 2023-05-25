@@ -15,33 +15,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api.impl;
+package com.code.service.template.mvc.api;
 
-import com.code.service.template.api.TemplateApi;
-import com.code.service.template.api.domain.request.TemplateCreateReqVO;
-import com.code.service.template.service.TemplateService;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import com.code.framework.web.api.annotation.Api;
+import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:36
+ * @date 2023/5/20 19:34
  */
-@Slf4j
-@Component
-public class TemplateApiImpl implements TemplateApi {
+@Validated
+public interface TemplateApi {
 
-	@Resource
-	private TemplateService templateService;
+	@Api("template.test")
+	String test();
 
-	public String test() {
-		return "test";
-	}
-
-	public Long save(TemplateCreateReqVO reqVO) {
-		// return templateService.save(reqVO);
-		return 6L;
-	}
+	@Api("template.save")
+	Long save(@Valid TemplateCreateReqVO reqVO);
 
 }

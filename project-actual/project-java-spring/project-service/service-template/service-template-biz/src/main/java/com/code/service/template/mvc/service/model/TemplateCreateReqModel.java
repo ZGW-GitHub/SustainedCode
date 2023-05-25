@@ -15,24 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api;
+package com.code.service.template.mvc.service.model;
 
-import com.code.framework.web.api.annotation.Api;
-import com.code.service.template.api.domain.request.TemplateCreateReqVO;
-import jakarta.validation.Valid;
-import org.springframework.validation.annotation.Validated;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:34
+ * @date 2023/5/25 23:05
  */
-@Validated
-public interface TemplateApi {
+@Slf4j
+@Data
+public class TemplateCreateReqModel {
 
-	@Api("template.test")
-	String test();
+	private String name;
 
-	@Api("template.save")
-	Long save(@Valid TemplateCreateReqVO reqVO);
+	private Integer age;
 
 }

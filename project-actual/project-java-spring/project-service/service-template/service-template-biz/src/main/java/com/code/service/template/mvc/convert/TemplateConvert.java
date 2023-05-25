@@ -15,14 +15,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api.domain.response;
+package com.code.service.template.mvc.convert;
 
-import lombok.extern.slf4j.Slf4j;
+import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
+import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
+import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 /**
- * @author Snow
- * @date 2023/5/20 19:57
+ * @author 愆凡
+ * @date 2022/6/12 21:39
  */
-@Slf4j
-public class XxxResponse {
+@Mapper
+public interface TemplateConvert {
+
+	TemplateConvert INSTANCE = Mappers.getMapper(TemplateConvert.class);
+
+	TemplateCreateReqModel voToModel(TemplateCreateReqVO createReqVO);
+
+	TemplateDO modelToDo(TemplateCreateReqModel createReqModel);
 }

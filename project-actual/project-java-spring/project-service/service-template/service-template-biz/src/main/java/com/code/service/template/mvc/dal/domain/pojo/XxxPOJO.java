@@ -15,35 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.api.domain.request;
+package com.code.service.template.mvc.dal.domain.pojo;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 愆凡
- * @date 2022/6/12 18:27
+ * @author Snow
+ * @date 2023/5/19 21:38
  */
 @Slf4j
-@Data
-@Accessors(chain = true)
-public class TemplateCreateReqVO {
-
-	@NotNull
-	@Min(value = 0, message = "recordNo 不合法")
-	private Long recordNo;
-
-	@NotBlank
-	private String name;
-
-	@NotNull
-	private Double price;
-
-	@NotBlank
-	private String coverImgUrl;
-
+public class XxxPOJO {
 }

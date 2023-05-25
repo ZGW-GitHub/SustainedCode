@@ -1,8 +1,9 @@
 package com.code.service.template.controller;
 
 import cn.hutool.json.JSONUtil;
-import com.code.service.template.api.domain.request.TemplateCreateReqVO;
-import com.code.service.template.service.TemplateService;
+import com.code.framework.web.controller.GatewayController;
+import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
+import com.code.service.template.mvc.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import java.nio.charset.Charset;
  * @date 2022/6/27 18:20
  */
 @Slf4j
-@WebMvcTest(controllers = TemplateController.class)
+@WebMvcTest(controllers = GatewayController.class)
 class TemplateControllerTest {
 
 	@Resource
