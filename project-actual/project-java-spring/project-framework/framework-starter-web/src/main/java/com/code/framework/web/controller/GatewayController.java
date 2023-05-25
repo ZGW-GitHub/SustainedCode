@@ -26,15 +26,14 @@ import com.code.framework.web.api.invoker.ApiInvoker;
 import com.code.framework.web.controller.domain.GatewayRequest;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.annotation.Resource;
-import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
-import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 /**
  * @author Snow
@@ -66,11 +65,8 @@ public class GatewayController {
 			// 5、返回 response
 			return GatewayResponse.success(result);
 		} catch (InvocationTargetException e) {
-			if (e.getTargetException() instanceof ValidationException violationException) {
-				throw violationException;
-			}
-			if (e.getTargetException() instanceof DataAccessException dataAccessException) {
-				throw dataAccessException;
+			if (Objects.nonNull(e.getCause())) {
+				throw e.getCause();
 			}
 			throw e;
 		} finally {

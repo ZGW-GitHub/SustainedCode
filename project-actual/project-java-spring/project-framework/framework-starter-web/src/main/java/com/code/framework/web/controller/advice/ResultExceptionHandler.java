@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.slf4j.MDC;
-import org.springframework.dao.DataAccessException;
+import org.springframework.core.NestedRuntimeException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -72,8 +72,9 @@ public class ResultExceptionHandler {
 			return handleConstraintViolationException(constraintViolationException);
 		}
 
-		if (throwable instanceof DataAccessException dataAccessException) {
-			return handleDataAccessException(dataAccessException);
+		if (throwable instanceof NestedRuntimeException nestedRuntimeException) {
+			// 处理嵌套 RuntimeException
+			return handleNestedRuntimeException(nestedRuntimeException);
 		}
 
 		if (throwable instanceof Exception customRuntimeException) {
@@ -90,11 +91,11 @@ public class ResultExceptionHandler {
 		return handleThrowable(request, response, throwable);
 	}
 
-	private GatewayResponse<Void> handleDataAccessException(DataAccessException exception) {
-		log.error("【 异常拦截 】>>>>>> DataAccessException : {}", exception.getMessage(), exception);
+	private GatewayResponse<Void> handleNestedRuntimeException(NestedRuntimeException exception) {
+		log.error("【 异常拦截 】>>>>>> NestedRuntimeException : {}", exception.getMessage(), exception);
 
 		String msg = Optional.ofNullable(exception.getCause().getMessage()).orElse(exception.getMessage());
-		return GatewayResponse.error(BizExceptionCode.DATA_ACCESS_EXCEPTION.exception(msg));
+		return GatewayResponse.error(BizExceptionCode.NESTED_RUNTIME_EXCEPTION.exception(msg));
 	}
 
 	private GatewayResponse<Void> handleConstraintViolationException(ConstraintViolationException exception) {
