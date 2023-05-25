@@ -22,7 +22,7 @@ CREATE TABLE project_actual.template
 (
     `id`          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
     `record_no`   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
-    `name`        VARCHAR(10) DEFAULT NULL COMMENT '姓名',
+    `name` VARCHAR(1) DEFAULT NULL COMMENT '姓名',
     `age`         INT(5)      DEFAULT NULL COMMENT '年龄',
     `create_time` DATETIME    DEFAULT NOW() COMMENT '创建时间',
     `update_time` DATETIME    DEFAULT NOW() COMMENT '更新时间',

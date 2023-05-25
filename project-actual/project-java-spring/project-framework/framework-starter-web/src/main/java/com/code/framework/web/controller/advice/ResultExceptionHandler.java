@@ -31,9 +31,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.slf4j.MDC;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Optional;
 
 /**
  * @author 愆凡
@@ -69,6 +72,10 @@ public class ResultExceptionHandler {
 			return handleConstraintViolationException(constraintViolationException);
 		}
 
+		if (throwable instanceof DataAccessException dataAccessException) {
+			return handleDataAccessException(dataAccessException);
+		}
+
 		if (throwable instanceof Exception customRuntimeException) {
 			// 处理自定义 RuntimeException
 			return handleCustomRuntimeException(customRuntimeException);
@@ -81,6 +88,13 @@ public class ResultExceptionHandler {
 
 		// 处理 java.lang.Throwable
 		return handleThrowable(request, response, throwable);
+	}
+
+	private GatewayResponse<Void> handleDataAccessException(DataAccessException exception) {
+		log.error("【 异常拦截 】>>>>>> DataAccessException : {}", exception.getMessage(), exception);
+
+		String msg = Optional.ofNullable(exception.getCause().getMessage()).orElse(exception.getMessage());
+		return GatewayResponse.error(BizExceptionCode.DATA_ACCESS_EXCEPTION.exception(msg));
 	}
 
 	private GatewayResponse<Void> handleConstraintViolationException(ConstraintViolationException exception) {

@@ -29,6 +29,7 @@ import jakarta.annotation.Resource;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,9 +68,11 @@ public class GatewayController {
 		} catch (InvocationTargetException e) {
 			if (e.getTargetException() instanceof ValidationException violationException) {
 				throw violationException;
-			} else {
-				throw e;
 			}
+			if (e.getTargetException() instanceof DataAccessException dataAccessException) {
+				throw dataAccessException;
+			}
+			throw e;
 		} finally {
 			// 4、清除 ThreadLocal
 			TraceContextHelper.clear();
