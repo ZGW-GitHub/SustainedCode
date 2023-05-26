@@ -67,22 +67,46 @@
 
 	<profiles>
 		<profile>
-			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<build>
-				<filters>
-					<filter>${project.dir}/project-env/dev.properties</filter>
-				</filters>
-			</build>
+			<id>dev</id>
+			<properties>
+				<profile.id>dev</profile.id>
+			</properties>
+		</profile>
+		<profile>
+			<!-- <activation> -->
+			<!-- 	<activeByDefault>true</activeByDefault> -->
+			<!-- </activation> -->
+			<id>test</id>
+			<properties>
+				<profile.id>test</profile.id>
+			</properties>
+		</profile>
+		<profile>
+			<!-- <activation> -->
+			<!-- 	<activeByDefault>true</activeByDefault> -->
+			<!-- </activation> -->
+			<id>prod</id>
+			<properties>
+				<profile.id>test</profile.id>
+			</properties>
 		</profile>
 	</profiles>
 
 	<build>
+		<filters>
+			<filter>${project.dir}/project-env/${profile.id}.properties</filter>
+		</filters>
+
 		<resources>
 			<resource>
-				<directory>${pom.basedir}/src/main/resources</directory>
+				<directory>src/main/profile/${profile.id}</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>**/*.log</exclude>
 				</excludes>
@@ -92,7 +116,11 @@
 
 		<testResources>
 			<testResource>
-				<directory>${pom.basedir}/src/test/resources</directory>
+				<directory>src/main/profile/${profile.id}</directory>
+				<filtering>true</filtering>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
 				<excludes>
 					<exclude>**/*.log</exclude>
 				</excludes>

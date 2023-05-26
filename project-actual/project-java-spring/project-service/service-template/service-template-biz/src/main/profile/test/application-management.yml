@@ -1,0 +1,14 @@
+management:
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+    pause:
+      enabled: true
+    restart:
+      enabled: true # 之所以要启用 restart 端点，是因为 pause 端点的启用依赖 restart 端点的启用
+  endpoints:
+    web:
+      exposure:
+        include: "*"
