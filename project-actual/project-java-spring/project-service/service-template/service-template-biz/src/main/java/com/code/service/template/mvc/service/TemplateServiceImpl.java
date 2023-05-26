@@ -19,7 +19,7 @@ package com.code.service.template.mvc.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
-import com.code.service.template.mvc.convert.TemplateConvert;
+import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
 import com.code.service.template.mvc.service.model.TemplateCreateReqModel;

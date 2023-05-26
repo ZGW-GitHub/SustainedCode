@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.convert;
+package com.code.service.template.convert;
 
 import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
