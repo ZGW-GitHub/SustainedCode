@@ -21,6 +21,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.code.mybatis.plus.dal.dos.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -48,11 +50,13 @@ public interface UserMapper extends BaseMapper<User> {
 		userList.forEach(System.err::println);
 
 		// 3、ChainWrapper
-		userList = ChainWrappers.queryChain(this).eq("age", age).list();
+		QueryChainWrapper<User> queryChainWrapper = ChainWrappers.queryChain(this).eq("age", age);
+		queryChainWrapper.list();
 		userList.forEach(System.err::println);
 
 		// 4、LambdaChainWrapper
-		userList = ChainWrappers.lambdaQueryChain(this).eq(User::getAge, age).list();
+		LambdaQueryChainWrapper<User> lambdaQueryChainWrapper = ChainWrappers.lambdaQueryChain(this).eq(User::getAge, age);
+		lambdaQueryChainWrapper.list();
 		userList.forEach(System.err::println);
 
 		return userList;
