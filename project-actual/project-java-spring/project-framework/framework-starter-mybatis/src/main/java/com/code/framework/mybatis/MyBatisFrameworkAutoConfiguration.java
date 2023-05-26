@@ -17,9 +17,12 @@
 
 package com.code.framework.mybatis;
 
+import org.springframework.context.annotation.Configuration;
+
 /**
  * @author Snow
  * @date 2023/5/26 18:04
  */
+@Configuration
 public class MyBatisFrameworkAutoConfiguration {
 }
