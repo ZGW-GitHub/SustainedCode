@@ -15,27 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.dal.mapper;
+package com.code.service.template.mvc.service.model;
 
-import com.code.framework.mybatis.mapper.BaseMapper;
-import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 愆凡
- * @date 2022/6/12 18:41
+ * @author Snow
+ * @date 2023/5/26 21:07
  */
-@Mapper
-public interface TemplateMapper extends BaseMapper<TemplateDO> {
+@Data
+@Slf4j
+public class TemplateDetailRespModel {
 
-	default List<TemplateDO> list() {
-		return chainQueryWrapper().list();
-	}
-
-	default List<TemplateDO> page() {
-		return chainQueryWrapper().list();
-	}
 
 }

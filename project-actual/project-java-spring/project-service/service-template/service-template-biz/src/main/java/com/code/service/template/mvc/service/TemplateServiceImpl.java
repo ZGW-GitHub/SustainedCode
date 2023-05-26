@@ -23,12 +23,15 @@ import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
 import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
+import com.code.service.template.mvc.service.model.TemplateDetailRespModel;
 import jakarta.annotation.Resource;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author 愆凡
@@ -55,6 +58,12 @@ public class TemplateServiceImpl implements TemplateService {
 		// applicationContext.publishEvent(new RocketSendEvent(new TestMessage()));
 
 		return templateDO.getRecordNo();
+	}
+
+	public List<TemplateDetailRespModel> page() {
+		List<TemplateDO> templateDOList = templateMapper.page();
+
+		return TemplateConvert.INSTANCE.doToModel(templateDOList);
 	}
 
 }

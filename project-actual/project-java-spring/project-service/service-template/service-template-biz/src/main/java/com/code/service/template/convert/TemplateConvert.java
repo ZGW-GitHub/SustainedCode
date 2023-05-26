@@ -20,8 +20,11 @@ package com.code.service.template.convert;
 import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
+import com.code.service.template.mvc.service.model.TemplateDetailRespModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @author 愆凡
@@ -35,4 +38,9 @@ public interface TemplateConvert {
 	TemplateCreateReqModel voToModel(TemplateCreateReqVO createReqVO);
 
 	TemplateDO modelToDo(TemplateCreateReqModel createReqModel);
+
+	TemplateDetailRespModel doToModel(TemplateDO templateDO);
+
+	List<TemplateDetailRespModel> doToModel(List<TemplateDO> templateDOList);
+
 }
