@@ -22,7 +22,7 @@ public class TraceContext {
 	}
 
 	public TraceContext(TraceContext parentTraceContext) {
-		parentTraceContext.getContext().forEach(this::addInfo);
+		parentTraceContext.getInfos().forEach(this::addInfo);
 	}
 
 	public void addInfo(TraceContextKeyEnum key, String value) {
@@ -35,15 +35,19 @@ public class TraceContext {
 		contextInfo.put(key, value);
 	}
 
-	public String getInfo(TraceContextKeyEnum key) {
-		return contextInfo.get(key);
-	}
-
 	public void removeInfo(TraceContextKeyEnum key) {
 		contextInfo.remove(key);
 	}
 
-	public Map<TraceContextKeyEnum, String> getContext() {
+	public String getInfo(TraceContextKeyEnum key) {
+		return contextInfo.get(key);
+	}
+
+	public String getTraceId() {
+		return contextInfo.getOrDefault(TraceContextKeyEnum.TRACE_ID, "");
+	}
+
+	public Map<TraceContextKeyEnum, String> getInfos() {
 		return contextInfo;
 	}
 

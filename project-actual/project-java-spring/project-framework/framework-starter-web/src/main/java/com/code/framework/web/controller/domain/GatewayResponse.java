@@ -19,6 +19,7 @@ package com.code.framework.web.controller.domain;
 
 import com.code.framework.basic.exception.core.Exception;
 import com.code.framework.basic.exception.core.ExceptionCode;
+import com.code.framework.basic.trace.context.TraceContextHelper;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,14 +42,19 @@ public class GatewayResponse<T> implements Serializable {
 	private Integer code;
 
 	/**
+	 * 返回码说明
+	 */
+	private String message;
+
+	/**
 	 * 返回数据
 	 */
 	private T data;
 
 	/**
-	 * 错误提示
+	 * 链路 ID
 	 */
-	private String message;
+	private String traceId;
 
 	private GatewayResponse() {
 	}
@@ -62,6 +68,7 @@ public class GatewayResponse<T> implements Serializable {
 		result.code = SUCCESS_CODE;
 		result.message = SUCCESS_MSG;
 		result.data = data;
+		result.traceId = TraceContextHelper.getTraceId();
 		return result;
 	}
 
@@ -73,6 +80,7 @@ public class GatewayResponse<T> implements Serializable {
 		GatewayResponse<T> result = new GatewayResponse<>();
 		result.code = exceptionCode.getCode();
 		result.message = message;
+		result.traceId = TraceContextHelper.getTraceId();
 		return result;
 	}
 
@@ -84,6 +92,7 @@ public class GatewayResponse<T> implements Serializable {
 		GatewayResponse<T> result = new GatewayResponse<>();
 		result.code = exception.getCode();
 		result.message = message;
+		result.traceId = TraceContextHelper.getTraceId();
 		return result;
 	}
 

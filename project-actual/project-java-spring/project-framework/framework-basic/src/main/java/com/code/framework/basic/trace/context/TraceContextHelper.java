@@ -2,6 +2,8 @@ package com.code.framework.basic.trace.context;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 /**
  * @author 愆凡
  * @date 2022/6/13 16:47
@@ -28,16 +30,15 @@ public class TraceContextHelper {
 	}
 
 	public static TraceContext getTraceContext() {
-		TraceContext traceContext = CONTEXT_HOLDER.get();
-		if (traceContext == null) {
-			traceContext = new TraceContext();
-			CONTEXT_HOLDER.set(traceContext);
-		}
-		return traceContext;
+		return CONTEXT_HOLDER.get();
+	}
+
+	public static Boolean hasTraceContext() {
+		return CONTEXT_HOLDER.get() != null;
 	}
 
 	public static String getTraceId() {
-		return getTraceContext().getInfo(TraceContextKeyEnum.TRACE_ID);
+		return Optional.ofNullable(getTraceContext()).map(TraceContext::getTraceId).orElse("");
 	}
 
 	public static void clear() {
