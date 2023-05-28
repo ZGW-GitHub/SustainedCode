@@ -21,6 +21,7 @@ import cn.hutool.core.util.StrUtil;
 import com.code.framework.web.api.ApiContainer;
 import com.code.framework.web.api.ApiDescriptor;
 import com.code.framework.web.api.exception.ApiExceptionCode;
+import com.code.framework.web.api.invoker.method.ApiMethodInvoker;
 import com.code.framework.web.component.ApplicationContextHelper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +60,6 @@ public abstract class ApiInvoker {
 
 		return doInvoke(apiDescriptor, springBean, content, ApiMethodInvoker.getInvoker());
 	}
-
 
 	protected abstract Object doInvoke(ApiDescriptor apiDescriptor, Object springBean, String content, ApiMethodInvoker apiMethodInvoker) throws InvocationTargetException, IllegalAccessException;
 

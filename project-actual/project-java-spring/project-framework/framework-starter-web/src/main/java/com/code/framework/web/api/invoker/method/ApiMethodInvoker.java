@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.api.invoker;
+package com.code.framework.web.api.invoker.method;
 
 import cn.hutool.json.JSONUtil;
 import com.code.framework.web.api.ApiDescriptor;
