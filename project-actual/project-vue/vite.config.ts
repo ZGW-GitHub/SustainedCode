@@ -19,9 +19,19 @@ export default defineConfig({
             resolvers: [ElementPlusResolver()],
         }),
     ],
+    server: {
+        host: '127.0.0.1',
+        port: 65000,
+        proxy: {
+            '/gateway': {
+                target: 'http://127.0.0.1:65001',
+                changeOrigin: true,
+            }
+        }
+    },
     resolve: {
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
-    },
+    }
 });
