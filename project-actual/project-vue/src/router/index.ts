@@ -1,8 +1,12 @@
 import {createRouter, createWebHistory} from "vue-router";
+
+// 1、引入组件（可选）
 import HomeView from "../views/HomeView.vue";
 
+// 2、创建 Router
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
+    // 定义的路由：
     routes: [
         {
             path: "/",
@@ -20,9 +24,10 @@ const router = createRouter({
         {
             path: "/demo",
             name: "demo",
-            component: () => import("../demo/DemoView.vue"),
+            component: () => import("../components/demo/DemoView.vue"),
         },
     ],
 });
 
+// 3、暴露 Router
 export default router;
