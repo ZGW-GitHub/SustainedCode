@@ -17,14 +17,19 @@
 
 package com.code.spring.authorization.infra.authorization.configuration;
 
+import cn.hutool.core.util.IdUtil;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -37,14 +42,20 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 import java.security.KeyStore;
 import java.time.Duration;
+import java.util.Objects;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * @author Snow
@@ -60,148 +71,106 @@ public class SpringAuthorizationServerConfiguration {
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		// 定义授权服务配置器
-		OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer =
-				new OAuth2AuthorizationServerConfigurer<>();
+		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(httpSecurity);
+		// 启用 OpenID Connect 1.0
+		httpSecurity.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(withDefaults());
+		// 接受用户信息/客户端注册的访问令牌
+		httpSecurity.oauth2ResourceServer((oAuth2ResourceServerConfigurer) -> oAuth2ResourceServerConfigurer.jwt(withDefaults()));
+		// 当未从授权端点进行身份验证时，重定向到登录页
+		httpSecurity.exceptionHandling((exceptions) -> exceptions.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
 
-		// 获取授权服务器相关的请求端点
-		RequestMatcher authorizationServerEndpointsMatcher =
-				authorizationServerConfigurer.getEndpointsMatcher();
-
-		http
-				// 拦截对 授权服务器 相关端点的请求
-				.requestMatcher(authorizationServerEndpointsMatcher)
-				// 拦载到的请求需要认证确认（登录）
-				.authorizeRequests()
-				// 其余所有请求都要认证
-				.anyRequest().authenticated()
-				.and()
-				// 忽略掉相关端点的csrf（跨站请求）：对授权端点的访问可以是跨站的
-				.csrf(csrf -> csrf
-						.ignoringRequestMatchers(authorizationServerEndpointsMatcher))
-
-				//.and()
-				// 表单登录
-				.formLogin()
-				.and()
-				.logout()
-				.and()
-				// 应用 授权服务器的配置
-				.apply(authorizationServerConfigurer);
-		return http.build();
+		return httpSecurity.build();
 	}
 
 	/**
-	 * 注册客户端
+	 * Registered Client 存储库
 	 *
-	 * @param jdbcTemplate 操作数据库
-	 * @return 客户端仓库
+	 * @param jdbcTemplate jdbcTemplate
+	 * @return Registered Client 存储库
 	 */
 	@Bean
 	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
-		// ---------- 1、检查当前客户端是否已注册
-		// 操作数据库对象
 		JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
 
-        /*
-         客户端在数据库中的几个记录字段的说明
-         ------------------------------------------
-         id：仅表示客户端在数据库中的这个记录
-         client_id：唯一标示客户端；请求token时，以此作为客户端的账号
-         client_name：客户端的名称，可以省略
-         client_secret：密码
-         */
-		String clientId_1 = "my_client";
-		// 查询客户端是否存在
-		RegisteredClient registeredClient_1 = registeredClientRepository.findByClientId(clientId_1);
+		String firstClientId = "first_client";
+		// 1、检查当前客户端是否已注册
+		RegisteredClient registeredClient = registeredClientRepository.findByClientId(firstClientId);
 
-		// ---------- 2、添加客户端
-		// 数据库中没有
-		if (registeredClient_1 == null) {
-			registeredClient_1 = this.createRegisteredClientAuthorizationCode(clientId_1);
-			registeredClientRepository.save(registeredClient_1);
+		if (Objects.isNull(registeredClient)) {
+			// 2、添加客户端
+			registeredClient = this.createRegisteredClientAuthorizationCode(firstClientId);
+			registeredClientRepository.save(registeredClient);
 		}
 
-		// ---------- 3、返回客户端仓库
 		return registeredClientRepository;
 	}
 
 	/**
 	 * 定义客户端（令牌申请方式：授权码模式）
 	 *
-	 * @param clientId 客户端ID
-	 * @return
+	 * @param clientId 客户端 ID
+	 * @return Registered Client
 	 */
 	private RegisteredClient createRegisteredClientAuthorizationCode(final String clientId) {
-		// JWT（Json Web Token）的配置项：TTL、是否复用refrechToken等等
+		// Token 配置：TTL 、是否复用 refreshToken 、等等
 		TokenSettings tokenSettings = TokenSettings.builder()
-				// 令牌存活时间：2小时
+				// accessToken 存活时间：2 小时
 				.accessTokenTimeToLive(Duration.ofHours(2))
-				// 令牌可以刷新，重新获取
-				.reuseRefreshTokens(true)
-				// 刷新时间：30天（30天内当令牌过期时，可以用刷新令牌重新申请新令牌，不需要再认证）
+				// refreshToken 存活时间：30天（ 30 天内当令牌过期时，可以用刷新令牌重新申请新令牌，不需要再认证 ）
 				.refreshTokenTimeToLive(Duration.ofDays(30))
+				// 是否复用 refreshToken
+				.reuseRefreshTokens(true)
 				.build();
-		// 客户端相关配置
+
+		// 客户端配置
 		ClientSettings clientSettings = ClientSettings.builder()
 				// 是否需要用户授权确认
 				.requireAuthorizationConsent(false)
 				.build();
 
 		return RegisteredClient
-				// 客户端ID和密码
-				.withId(UUID.randomUUID().toString())
-				//.withId(id)
+				.withId("Test_" + IdUtil.randomUUID())
 				.clientId(clientId)
-				//.clientSecret("{noop}123456")
 				.clientSecret(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456"))
-				// 客户端名称：可省略
-				.clientName("my_client_name")
-				// 授权方法
+				.clientName(String.format("客户端[%s]", clientId))
+				// 客户端认证方式
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
 				// 授权模式
-				// ---- 【授权码模式】
-				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-				// ---------- 刷新令牌（授权码模式）
-				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-				/* 回调地址：
-				 * 授权服务器向当前客户端响应时调用下面地址；
-				 * 不在此列的地址将被拒绝；
-				 * 只能使用IP或域名，不能使用localhost
-				 */
-				.redirectUri("http://127.0.0.1:8000/login/oauth2/code/myClient")
-				.redirectUri("http://127.0.0.1:8000")
-				// 授权范围（当前客户端的授权范围）
-				.scope("read")
-				.scope("write")
-				// JWT（Json Web Token）配置项
+				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // 授权码模式
+				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) // 刷新令牌（授权码模式）
+				// 回调地址：授权服务器向当前客户端响应时调用下面地址，不在此列的地址将被拒绝（ 只能使用 IP/域名，不能使用 localhost ）
+				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/infra-authorization")
+				.redirectUri("https://www.bing.com")
+				// .redirectUri("http://127.0.0.1:8000/login/oauth2/code/myClient")
+				// .redirectUri("http://127.0.0.1:8000")
+				// 对该客户端的授权范围
+				.scope("service-read")
+				.scope("service-write")
+				// set 上面创建的 token 配置
 				.tokenSettings(tokenSettings)
-				// 客户端配置项
+				// set 上面创建的 客户端配置
 				.clientSettings(clientSettings)
 				.build();
 	}
 
 	/**
-	 * 令牌的发放记录
+	 * OAuth2 授权 Service
 	 *
 	 * @param jdbcTemplate               操作数据库
 	 * @param registeredClientRepository 客户端仓库
-	 * @return 授权服务
+	 * @return OAuth2AuthorizationService ：通过 JDBC 操作令牌发放记录
 	 */
 	@Bean
-	public OAuth2AuthorizationService auth2AuthorizationService(
-			JdbcTemplate jdbcTemplate,
-			RegisteredClientRepository registeredClientRepository) {
+	public OAuth2AuthorizationService auth2AuthorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
 		return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
 	}
 
 	/**
-	 * 把资源拥有者授权确认操作保存到数据库
-	 * 资源拥有者（Resource Owner）对客户端的授权记录
+	 * OAuth2 授权确认 Service
 	 *
 	 * @param jdbcTemplate               操作数据库
 	 * @param registeredClientRepository 客户端仓库
-	 * @return
+	 * @return OAuth2AuthorizationConsentService ：通过 JDBC 把资源拥有者授权确认操作保存到数据库
 	 */
 	@Bean
 	public OAuth2AuthorizationConsentService auth2AuthorizationConsentService(
@@ -212,18 +181,17 @@ public class SpringAuthorizationServerConfiguration {
 
 
 	/**
-	 * 加载jwk资源
-	 * 用于生成令牌
+	 * 加载 jwk 资源（用于生成令牌）
 	 *
-	 * @return
+	 * @return JWK Source
 	 */
 	@SneakyThrows
 	@Bean
 	public JWKSource<SecurityContext> jwkSource() {
 		// 证书的路径
-		String path = "myjks.jks";
+		String path = "demoKey.jks";
 		// 证书别名
-		String alias = "myjks";
+		String alias = "demoKey";
 		// keystore 密码
 		String pass = "123456";
 
@@ -238,16 +206,13 @@ public class SpringAuthorizationServerConfiguration {
 	}
 
 	/**
-	 * <p>授权服务器元信息配置</p>
-	 * <p>
-	 * 授权服务器本身也提供了一个配置工具来配置其元信息，大多数都使用默认配置即可，唯一需要配置的其实只有授权服务器的地址issuer
-	 * 在生产中这个地方应该配置为域名
+	 * 授权服务器配置：授权服务器本身也提供了一个配置工具来配置其元信息，大多数都使用默认配置即可，唯一需要配置的其实只有授权服务器的地址 issuer 在生产中这个地方应该配置为域名
 	 *
-	 * @return
+	 * @return Authorization Server Settings
 	 */
 	@Bean
-	public ProviderSettings providerSettings() {
-		return ProviderSettings.builder().issuer("http://os.com:9000").build();
+	public AuthorizationServerSettings providerSettings() {
+		return AuthorizationServerSettings.builder().issuer("http://os.com:9000").build();
 	}
 
 }
