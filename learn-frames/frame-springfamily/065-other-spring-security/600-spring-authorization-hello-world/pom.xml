@@ -27,14 +27,18 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>030-spring-security-filter</artifactId>
+	<artifactId>600-spring-authorization-hello-world</artifactId>
 
 	<packaging>jar</packaging>
+
+	<properties>
+		<spring-boot.version>3.1.0</spring-boot.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
 		</dependency>
 	</dependencies>
 
