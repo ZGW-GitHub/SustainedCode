@@ -1,0 +1,28 @@
+### 获取 token
+POST http://127.0.0.1:65000/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic ZGVtby1jbGllbnQ6c2VjcmV0 # 取值：代码里配置的 clientId:clientSecret 进行 Base64 编码（如当前的：demo-client:secret => ZGVtby1jbGllbnQ6c2VjcmV0）
+
+# grant_type：授权类型，redirect_uri：代码里配置的 redirectUri ，code：认证后返回的 code
+grant_type = authorization_code &
+redirect_uri = https://www.bing.com &
+code = XEXinFF_e4wkzQ-6pEOBb60ckM1p3R7jFInrLdKMwUHi3J5rucFmJQ9vmjkCDCvadB2u5BmGTUQBAzsw4RFIJlTwspqX1PrNrHP7qknAxjlHOpb_jWeSHJKsbnKUjmsm
+
+
+### 刷新 token
+POST http://127.0.0.1:65000/oauth2/token
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Basic ZGVtby1jbGllbnQ6c2VjcmV0
+
+--WebAppBoundary
+Content-Disposition: form-data; name="grant_type"
+Content-Type: text/plain
+
+refresh_token
+
+--WebAppBoundary
+Content-Disposition: form-data; name="refresh_token"
+Content-Type: text/plain
+
+# 获取 token 调用返回的 refresh_token
+Wibz1iMCqPiLkxLBOf6ghjA73DOHi8T_levekBUGYan-I2Yr5Z_k2wVJw3gHaX-jQ1Hgvg5IyDxoRRpi1GIpOZ8k-6MaPuRhTeWeSvvbtg1J3cnp-x7hgSsJ8aqffhdo
