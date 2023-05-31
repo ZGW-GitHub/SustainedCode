@@ -4,11 +4,11 @@ spring:
       enabled: true
       path: /h2
       settings:
-        trace: true
+        trace: false
         web-allow-others: true
   sql:
     init:
       mode: embedded
       continue-on-error: false
       schema-locations: classpath*:sql/ddl.sql
-      data-locations: classpath*:sql/dml.sql
+      # data-locations: classpath*:sql/dml.sql

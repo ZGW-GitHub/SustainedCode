@@ -44,7 +44,7 @@ CREATE TABLE oauth2_authorization_consent
 );
 
 -- 令牌发放记录
-# IMPORTANT: If using PostgreSQL, update ALL columns defined with 'blob' to 'text', as PostgreSQL does not support the 'blob' data type.
+-- IMPORTANT: If using PostgreSQL, update ALL columns defined with 'blob' to 'text', as PostgreSQL does not support the 'blob' data type.
 CREATE TABLE oauth2_authorization
 (
     id                            varchar(100) NOT NULL,
