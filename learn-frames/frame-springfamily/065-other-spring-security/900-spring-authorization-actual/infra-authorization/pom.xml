@@ -33,6 +33,7 @@
 
 	<properties>
 		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
+		<druid-starter.version>1.2.11</druid-starter.version>
 	</properties>
 
 	<dependencies>
@@ -48,14 +49,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid-starter.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

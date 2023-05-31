@@ -6,7 +6,7 @@ Authorization: Basic Zmlyc3RfY2xpZW50OjEyMzQ1Ng== # 取值：代码里配置的 
 # grant_type：授权类型，redirect_uri：代码里配置的 redirectUri ，code：认证后返回的 code
 grant_type = authorization_code &
 redirect_uri = https://www.bing.com &
-code = a1Mu6HH0n4Ebjm_-ocTdVqNcL0lPrF_tLqut7n6EOjSsQ54hqM0q7iYQddvdu4iYiDKApM_YgQ97Mk7ICAsmKED-nEcOkrOjNLxs1yPXzIxsDiqsznjNymHYybK13cSV
+code = f1fFn6a4VVHjbP_3h5yCA2kmrBm_rawoF6Uud7rxWjZUCGBfINOvr_t1PbUSrLucs0BfzVgTOwcmLR1LNGeKRwBoZbkVyiHu6wHqFhNv0eDjQecRpazajc7B-wtzx90H
 
 
 ### 刷新 token
@@ -25,4 +25,4 @@ Content-Disposition: form-data; name="refresh_token"
 Content-Type: text/plain
 
 # 获取 token 调用返回的 refresh_token
-Kd9rbvoTRfGyMZnm7dUPVhkGDq2AQQcoTLPbaiC6EAz4SIqhrS6VmKLQhFGD0FxF_LmSkB8X26bZr2jroLCdC6hDOnEzthakqyBTnUiO-gYgErCiWD4lSI83nLOh1VTH
+xE8BkjDgja4Ta0tdGQ1nEZEWuFUx8ykf0hNcjdCUK4u-yhbsRlZ2PnbvHJJxs3P5QQjvYi-KkysUXwuvu6DFL91uNeuNBvewUZ7k9mAYA9qfpg3dqx8qgUfYaQj1V6DG
