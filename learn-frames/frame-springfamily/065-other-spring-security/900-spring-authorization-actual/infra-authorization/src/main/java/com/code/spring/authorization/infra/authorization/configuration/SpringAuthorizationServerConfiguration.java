@@ -62,7 +62,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
  * @date 2023/5/30 22:22
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class SpringAuthorizationServerConfiguration {
 
 	/**
@@ -125,13 +125,17 @@ public class SpringAuthorizationServerConfiguration {
 		// 客户端配置
 		ClientSettings clientSettings = ClientSettings.builder()
 				// 是否需要用户授权确认
-				.requireAuthorizationConsent(false)
+				.requireAuthorizationConsent(true)
 				.build();
+
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=first_client&response_type=code&scope=service.read&redirect_uri=https://www.bing.com
+		String clientSecret = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456");
+		log.info("createRegisteredClientAuthorizationCode : clientSecret[{}]", clientSecret);
 
 		return RegisteredClient
 				.withId("Test_" + IdUtil.randomUUID())
 				.clientId(clientId)
-				.clientSecret(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456"))
+				.clientSecret("{noop}123456")
 				.clientName(String.format("客户端[%s]", clientId))
 				// 客户端认证方式
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -144,8 +148,8 @@ public class SpringAuthorizationServerConfiguration {
 				// .redirectUri("http://127.0.0.1:8000/login/oauth2/code/myClient")
 				// .redirectUri("http://127.0.0.1:8000")
 				// 对该客户端的授权范围
-				.scope("service-read")
-				.scope("service-write")
+				.scope("service.read")
+				.scope("service.write")
 				// set 上面创建的 token 配置
 				.tokenSettings(tokenSettings)
 				// set 上面创建的 客户端配置
@@ -173,9 +177,7 @@ public class SpringAuthorizationServerConfiguration {
 	 * @return OAuth2AuthorizationConsentService ：通过 JDBC 把资源拥有者授权确认操作保存到数据库
 	 */
 	@Bean
-	public OAuth2AuthorizationConsentService auth2AuthorizationConsentService(
-			JdbcTemplate jdbcTemplate,
-			RegisteredClientRepository registeredClientRepository) {
+	public OAuth2AuthorizationConsentService auth2AuthorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
 		return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
 	}
 
@@ -212,7 +214,7 @@ public class SpringAuthorizationServerConfiguration {
 	 */
 	@Bean
 	public AuthorizationServerSettings providerSettings() {
-		return AuthorizationServerSettings.builder().issuer("http://os.com:9000").build();
+		return AuthorizationServerSettings.builder().issuer("http://notuptoyou.com:65000").build();
 	}
 
 }
