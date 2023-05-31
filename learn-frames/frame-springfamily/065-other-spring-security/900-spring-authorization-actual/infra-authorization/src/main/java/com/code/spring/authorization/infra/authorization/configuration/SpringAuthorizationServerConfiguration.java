@@ -151,8 +151,6 @@ public class SpringAuthorizationServerConfiguration {
 				// 回调地址：授权服务器向当前客户端响应时调用下面地址，不在此列的地址将被拒绝（ 只能使用 IP/域名，不能使用 localhost ）
 				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/infra-authorization")
 				.redirectUri("https://www.bing.com")
-				// .redirectUri("http://127.0.0.1:8000/login/oauth2/code/myClient")
-				// .redirectUri("http://127.0.0.1:8000")
 				// 对该客户端的授权范围
 				.scope("service.read")
 				.scope("service.write")
