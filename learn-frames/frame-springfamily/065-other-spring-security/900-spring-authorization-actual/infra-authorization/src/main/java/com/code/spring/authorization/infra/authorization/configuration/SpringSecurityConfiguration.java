@@ -19,9 +19,10 @@ package com.code.spring.authorization.infra.authorization.configuration;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -47,6 +48,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class SpringSecurityConfiguration {
+
+	@Value("${keystore.path}")
+	private String keystorePath;
 
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -78,10 +82,11 @@ public class SpringSecurityConfiguration {
 	@Bean
 	@SneakyThrows
 	JwtDecoder jwtDecoder() {
-		CertificateFactory certificateFactory = CertificateFactory.getInstance("x.509");
+		String keyFilePath = keystorePath + "/demoKey.cer";
+
 		// 读取 cer 公钥证书来配置解码器
-		ClassPathResource resource = new ClassPathResource("demoKey.cer");
-		Certificate certificate = certificateFactory.generateCertificate(resource.getInputStream());
+		CertificateFactory certificateFactory = CertificateFactory.getInstance("x.509");
+		Certificate certificate = certificateFactory.generateCertificate(new FileSystemResource(keyFilePath).getInputStream());
 		RSAPublicKey publicKey = (RSAPublicKey) certificate.getPublicKey();
 		return NimbusJwtDecoder.withPublicKey(publicKey).build();
 	}

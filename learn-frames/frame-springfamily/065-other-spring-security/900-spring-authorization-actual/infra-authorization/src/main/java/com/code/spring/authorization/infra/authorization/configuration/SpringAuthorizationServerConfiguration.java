@@ -22,13 +22,15 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -62,8 +64,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
  * @date 2023/5/30 22:22
  */
 @Slf4j
+@Data
 @Configuration
 public class SpringAuthorizationServerConfiguration {
+
+	@Value("${keystore.path}")
+	private String keystorePath;
 
 	/**
 	 * 授权配置
@@ -191,17 +197,15 @@ public class SpringAuthorizationServerConfiguration {
 	@Bean
 	public JWKSource<SecurityContext> jwkSource() {
 		// 证书的路径
-		String path = "demoKey.jks";
+		String keyFilePath = keystorePath + "/demoKey.jks";
 		// 证书别名
-		String alias = "demoKey";
+		String keyAlias = "demoKey";
 		// keystore 密码
-		String pass = "123456";
+		char[] keystorePassword = "123456".toCharArray();
 
-		ClassPathResource resource = new ClassPathResource(path);
 		KeyStore jks = KeyStore.getInstance("jks");
-		char[] pin = pass.toCharArray();
-		jks.load(resource.getInputStream(), pin);
-		RSAKey rsaKey = RSAKey.load(jks, alias, pin);
+		jks.load(new FileSystemResource(keyFilePath).getInputStream(), keystorePassword);
+		RSAKey rsaKey = RSAKey.load(jks, keyAlias, keystorePassword);
 
 		JWKSet jwkSet = new JWKSet(rsaKey);
 		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);

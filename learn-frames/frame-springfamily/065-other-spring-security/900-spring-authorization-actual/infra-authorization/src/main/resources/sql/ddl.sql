@@ -16,7 +16,7 @@
  */
 
 -- 保存注册的客户端
-CREATE TABLE `oauth2-server-resource-client`.oauth2_registered_client
+CREATE TABLE oauth2_registered_client
 (
     id            varchar(100) NOT NULL COMMENT '主键，记录 ID',
     client_id     varchar(100) NOT NULL COMMENT '客户端的 ID ，客户端的唯一标识，请求 token 时，以此作为客户端的账号',
@@ -35,7 +35,7 @@ CREATE TABLE `oauth2-server-resource-client`.oauth2_registered_client
 );
 
 -- 用户确认授权记录
-CREATE TABLE `oauth2-server-resource-client`.oauth2_authorization_consent
+CREATE TABLE oauth2_authorization_consent
 (
     registered_client_id varchar(100)  NOT NULL,
     principal_name       varchar(200)  NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `oauth2-server-resource-client`.oauth2_authorization_consent
 
 -- 令牌发放记录
 -- IMPORTANT: If using PostgreSQL, update ALL columns defined with 'blob' to 'text', as PostgreSQL does not support the 'blob' data type.
-CREATE TABLE `oauth2-server-resource-client`.oauth2_authorization
+CREATE TABLE oauth2_authorization
 (
     id                            varchar(100) NOT NULL,
     registered_client_id          varchar(100) NOT NULL,
