@@ -80,7 +80,7 @@ public class SpringSecurityConfiguration {
 	JwtDecoder jwtDecoder() {
 		CertificateFactory certificateFactory = CertificateFactory.getInstance("x.509");
 		// 读取 cer 公钥证书来配置解码器
-		ClassPathResource resource = new ClassPathResource("myjks.cer");
+		ClassPathResource resource = new ClassPathResource("demoKey.cer");
 		Certificate certificate = certificateFactory.generateCertificate(resource.getInputStream());
 		RSAPublicKey publicKey = (RSAPublicKey) certificate.getPublicKey();
 		return NimbusJwtDecoder.withPublicKey(publicKey).build();
