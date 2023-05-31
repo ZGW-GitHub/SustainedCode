@@ -82,10 +82,10 @@ public class SpringAuthorizationServerConfiguration {
 		// 客户端配置
 		ClientSettings clientSettings = ClientSettings.builder()
 				// 是否需要用户授权确认
-				.requireAuthorizationConsent(false)
+				.requireAuthorizationConsent(true)
 				.build();
 
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo-client&response_type=code&scope=demo.read&redirect_uri=https://www.bing.com
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo-client&response_type=code&scope=demo.read%20demo.write&redirect_uri=https://www.bing.com
 		RegisteredClient oidcClient = RegisteredClient.withId(IdUtil.randomUUID())
 				.clientId("demo-client")
 				.clientSecret("{noop}secret")

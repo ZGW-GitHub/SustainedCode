@@ -134,7 +134,7 @@ public class SpringAuthorizationServerConfiguration {
 				.requireAuthorizationConsent(true)
 				.build();
 
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=first_client&response_type=code&scope=service.read&redirect_uri=https://www.bing.com
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=first_client&response_type=code&scope=service.read%20service.write&redirect_uri=https://www.bing.com
 		String clientSecret = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456");
 		log.info("createRegisteredClientAuthorizationCode : clientSecret[{}]", clientSecret);
 
