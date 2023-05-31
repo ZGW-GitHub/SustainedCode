@@ -45,8 +45,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	@SneakyThrows
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
 		if (authException instanceof InvalidBearerTokenException) {
-			// TODO token 失效的处理逻辑
-			log.info("token 失效");
+			// TODO token 无效的处理逻辑
+			log.warn("token 无效");
 		}
 
 		// TODO 认证失败的处理逻辑
