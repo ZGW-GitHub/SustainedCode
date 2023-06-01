@@ -17,8 +17,8 @@
 
 package com.code.spring.authorization.infra.user.center.configuration;
 
-import com.code.spring.authorization.service.one.component.CustomAccessDeniedHandler;
-import com.code.spring.authorization.service.one.component.CustomAuthenticationEntryPoint;
+import com.code.spring.authorization.infra.user.center.component.CustomAccessDeniedHandler;
+import com.code.spring.authorization.infra.user.center.component.CustomAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
