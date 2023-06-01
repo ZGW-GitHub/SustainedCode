@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/oauth2")
+@RequestMapping("oauth2")
 public class AuthenticationController {
 
 	/**
@@ -38,7 +38,7 @@ public class AuthenticationController {
 	 *
 	 * @return Authentication
 	 */
-	@GetMapping("/user")
+	@GetMapping("user")
 	public Authentication oauth2UserInfo() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		log.info("【 获取用户信息 】{}", authentication);
