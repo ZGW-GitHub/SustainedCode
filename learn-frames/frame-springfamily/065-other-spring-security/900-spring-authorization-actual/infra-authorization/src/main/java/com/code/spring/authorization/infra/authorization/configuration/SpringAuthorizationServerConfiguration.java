@@ -135,7 +135,7 @@ public class SpringAuthorizationServerConfiguration {
 				.build();
 
 		// http://notuptoyou.com:65000/oauth2/authorize?client_id=user_center&response_type=code&scope=read%20write&redirect_uri=https://www.bing.com
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=user_center&response_type=code&scope=read%20write&redirect_uri=http://notuptoyou.com:65001/login/oauth2/code/UserCenter
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=user_center&response_type=code&scope=read%20write&redirect_uri=http://notuptoyou.com:65001/login/oauth2/code/userCenter
 		String clientSecret = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456");
 		log.info("createRegisteredClientAuthorizationCode : clientSecret[{}]", clientSecret);
 
@@ -150,7 +150,7 @@ public class SpringAuthorizationServerConfiguration {
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // 授权码模式
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) // 刷新令牌（授权码模式）
 				// 回调地址：授权服务器向当前客户端响应时调用下面地址，不在此列的地址将被拒绝（ 只能使用 IP/域名，不能使用 localhost ）
-				.redirectUri("http://notuptoyou.com:65001/login/oauth2/code/UserCenter")
+				.redirectUri("http://notuptoyou.com:65001/login/oauth2/code/userCenter")
 				.redirectUri("http://notuptoyou.com:65001")
 				.redirectUri("https://www.bing.com")
 				// 对该客户端的授权范围
