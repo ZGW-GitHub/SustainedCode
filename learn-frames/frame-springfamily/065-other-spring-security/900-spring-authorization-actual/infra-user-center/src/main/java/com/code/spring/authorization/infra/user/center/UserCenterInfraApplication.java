@@ -20,13 +20,6 @@ package com.code.spring.authorization.infra.user.center;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * @author Snow
@@ -39,15 +32,15 @@ public class UserCenterInfraApplication {
 
 		new SpringApplicationBuilder(UserCenterInfraApplication.class).run(args);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		log.info("UserCenter 认证信息：{}", auth);
-
-		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-		Iterator<? extends GrantedAuthority> iterator = authorities.stream().iterator();
-		ArrayList<Object> authList = new ArrayList<>();
-		while (iterator.hasNext()) {
-			authList.add(iterator.next().getAuthority());
-		}
-		log.info("UserCenter 认证解析，name : {} , authorities : {}", auth.getName(), authList);
+		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		// log.debug("UserCenter 认证信息：{}", auth);
+		//
+		// Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		// Iterator<? extends GrantedAuthority> iterator = authorities.stream().iterator();
+		// ArrayList<Object> authList = new ArrayList<>();
+		// while (iterator.hasNext()) {
+		// 	authList.add(iterator.next().getAuthority());
+		// }
+		// log.debug("UserCenter 认证解析，name : {} , authorities : {}", auth.getName(), authList);
 	}
 }

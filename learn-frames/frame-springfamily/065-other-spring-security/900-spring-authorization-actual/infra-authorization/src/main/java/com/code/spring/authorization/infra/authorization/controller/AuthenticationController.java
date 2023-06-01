@@ -17,6 +17,8 @@
 
 package com.code.spring.authorization.infra.authorization.controller;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,14 +41,14 @@ public class AuthenticationController {
 	 * @return Authentication
 	 */
 	@GetMapping("user")
-	public Authentication oauth2UserInfo() {
+	public JSONObject oauth2UserInfo() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		log.info("【 获取用户信息 】{}", authentication);
+		log.debug("【 获取用户信息 】{}", authentication);
 
 		if (authentication == null) {
 			throw new RuntimeException("无有效认证的用户！");
 		}
-		return authentication;
+		return JSONUtil.parseObj(authentication);
 	}
 
 }

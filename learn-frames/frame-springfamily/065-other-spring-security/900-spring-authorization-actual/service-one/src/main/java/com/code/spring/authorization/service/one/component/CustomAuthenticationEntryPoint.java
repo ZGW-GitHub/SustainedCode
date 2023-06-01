@@ -46,14 +46,15 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
 		if (authException instanceof InvalidBearerTokenException) {
 			// TODO token 无效的处理逻辑
-			log.warn("token 无效");
+			log.warn("【 自定义认证失败处理器 】token 无效");
 		}
 
-		// TODO 认证失败的处理逻辑
 		if (response.isCommitted()) {
+			log.debug("【 自定义认证失败处理器 】认证通过");
 			return;
 		}
 
+		// TODO 认证失败的处理逻辑
 		HashMap<String, String> map = new HashMap<>(2);
 		map.put("uri", request.getRequestURI());
 		map.put("msg", "认证失败");
@@ -69,4 +70,5 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 		printWriter.flush();
 		printWriter.close();
 	}
+
 }

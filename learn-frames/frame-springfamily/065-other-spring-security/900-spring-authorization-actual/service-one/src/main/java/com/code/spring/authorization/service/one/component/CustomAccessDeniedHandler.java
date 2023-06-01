@@ -17,6 +17,7 @@
 
 package com.code.spring.authorization.service.one.component;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,6 +45,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	@SneakyThrows
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
 		// TODO 拒绝访问的处理逻辑
+
+		log.debug(StrUtil.format("【 自定义拒绝访问处理器 】accessDeniedException : {}", accessDeniedException));
 
 		HashMap<String, String> map = new HashMap<>(2);
 		map.put("uri", request.getRequestURI());

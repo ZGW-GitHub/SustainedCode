@@ -6,3 +6,4 @@ spring:
   config:
     import:
       - classpath:application-authorization.yml
+      - classpath:application-log.yml
