@@ -1,5 +1,0 @@
-server:
-  port: 65102
-spring:
-  application:
-    name: service_other

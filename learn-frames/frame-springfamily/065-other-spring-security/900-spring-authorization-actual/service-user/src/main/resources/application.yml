@@ -1,8 +1,0 @@
-server:
-  port: 65101
-spring:
-  application:
-    name: service_user
-  config:
-    import:
-      - classpath:application-keystore.yml

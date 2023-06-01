@@ -23,25 +23,19 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>065-other-spring-security</artifactId>
+		<artifactId>900-spring-authorization-actual</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>900-spring-authorization-actual</artifactId>
+	<artifactId>service-two</artifactId>
 
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
-	<modules>
-		<module>infra-authorization</module>
-		<module>infra-user-center</module>
-		<module>service-one</module>
-		<module>service-two</module>
-	</modules>
-
-	<properties>
-		<spring-boot.version>3.1.0</spring-boot.version>
-		<spring-cloud.version>2022.0.3</spring-cloud.version>
-		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
-	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

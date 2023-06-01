@@ -1,0 +1,8 @@
+server:
+  port: 65001
+spring:
+  application:
+    name: infra_user_center
+  config:
+    import:
+      - classpath:application-keystore.yml
