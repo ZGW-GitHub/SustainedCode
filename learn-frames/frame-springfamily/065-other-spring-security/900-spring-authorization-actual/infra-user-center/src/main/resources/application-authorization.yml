@@ -6,8 +6,8 @@ spring:
         registration:
           # 客户端：与注册时保持一致
           UserCenter:
-            client-id: UserCenter
-            client-secret: UserCenter_123456
+            client-id: user_center
+            client-secret: user_center_123456
             client-name: ${spring.application.name}
             scope: read,write
             authorization-grant-type: authorization_code
