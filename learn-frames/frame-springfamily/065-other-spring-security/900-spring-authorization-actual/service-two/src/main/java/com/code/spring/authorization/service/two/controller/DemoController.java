@@ -28,15 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("other")
+@RequestMapping("two")
 public class DemoController {
 
-	@GetMapping("one")
+	@GetMapping("aaa")
 	public String sourceOne() {
 		return "服务【 other 】，资源 one";
 	}
 
-	@GetMapping("two")
+	@GetMapping("bbb")
 	public String sourceTwo() {
 		return "服务【 other 】，资源 two";
 	}

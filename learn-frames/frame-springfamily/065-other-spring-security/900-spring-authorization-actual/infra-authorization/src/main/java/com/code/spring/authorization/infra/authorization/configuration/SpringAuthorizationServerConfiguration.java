@@ -98,7 +98,7 @@ public class SpringAuthorizationServerConfiguration {
 	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
 		JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
 
-		String firstClientId = "first_client";
+		String firstClientId = "UserCenter";
 		// 1、检查当前客户端是否已注册
 		RegisteredClient registeredClient = registeredClientRepository.findByClientId(firstClientId);
 
@@ -134,14 +134,14 @@ public class SpringAuthorizationServerConfiguration {
 				.requireAuthorizationConsent(true)
 				.build();
 
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=first_client&response_type=code&scope=service.read%20service.write&redirect_uri=https://www.bing.com
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=UserCenter&response_type=code&scope=read%20write&redirect_uri=https://www.bing.com
 		String clientSecret = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456");
 		log.info("createRegisteredClientAuthorizationCode : clientSecret[{}]", clientSecret);
 
 		return RegisteredClient
 				.withId("Test_" + IdUtil.randomUUID())
 				.clientId(clientId)
-				.clientSecret("{noop}123456")
+				.clientSecret(clientId + "_123456")
 				.clientName(String.format("客户端[%s]", clientId))
 				// 客户端认证方式
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -152,8 +152,8 @@ public class SpringAuthorizationServerConfiguration {
 				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/infra-authorization")
 				.redirectUri("https://www.bing.com")
 				// 对该客户端的授权范围
-				.scope("service.read")
-				.scope("service.write")
+				.scope("read")
+				.scope("write")
 				// set 上面创建的 token 配置
 				.tokenSettings(tokenSettings)
 				// set 上面创建的 客户端配置

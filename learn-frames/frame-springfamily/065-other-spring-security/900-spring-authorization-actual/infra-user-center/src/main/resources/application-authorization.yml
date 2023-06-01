@@ -1,0 +1,30 @@
+spring:
+  security:
+    oauth2:
+      client:
+
+        registration:
+          # 客户端：与注册时保持一致
+          myClient:
+            client-id: UserCenter
+            client-secret: UserCenter_123456
+            client-name: ${spring.application.name}
+            scope: read,write
+            authorization-grant-type: authorization_code
+            provider: infraAuthorization
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            # 认证方法
+            client-authentication-method: client_secret_basic
+
+        provider:
+          # 服务提供地址
+          infraAuthorization:
+            # 请求授权码地址
+            authorization-uri: http://notuptoyou.com:65000/oauth2/authorize
+            # 请求令牌地址
+            token-uri: http://notuptoyou.com:65000/oauth2/token
+            # 用户资源地址
+            user-info-uri: http://notuptoyou.com:65000/oauth2/user
+            # 用户资源返回中的一个属性名
+            user-name-attribute: name
+            user-info-authentication-method: GET
