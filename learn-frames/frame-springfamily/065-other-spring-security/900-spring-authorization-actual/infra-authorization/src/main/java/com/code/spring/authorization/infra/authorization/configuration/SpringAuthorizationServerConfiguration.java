@@ -98,13 +98,13 @@ public class SpringAuthorizationServerConfiguration {
 	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
 		JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
 
-		String firstClientId = "UserCenter";
+		String clientId = "user_center";
 		// 1、检查当前客户端是否已注册
-		RegisteredClient registeredClient = registeredClientRepository.findByClientId(firstClientId);
+		RegisteredClient registeredClient = registeredClientRepository.findByClientId(clientId);
 
 		if (Objects.isNull(registeredClient)) {
 			// 2、添加客户端
-			registeredClient = this.createRegisteredClientAuthorizationCode(firstClientId);
+			registeredClient = this.createRegisteredClientAuthorizationCode(clientId);
 			registeredClientRepository.save(registeredClient);
 		}
 
@@ -134,14 +134,15 @@ public class SpringAuthorizationServerConfiguration {
 				.requireAuthorizationConsent(true)
 				.build();
 
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=UserCenter&response_type=code&scope=read%20write&redirect_uri=https://www.bing.com
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=user_center&response_type=code&scope=read%20write&redirect_uri=https://www.bing.com
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=user_center&response_type=code&scope=read%20write&redirect_uri=http://notuptoyou.com:65001/login/oauth2/code/UserCenter
 		String clientSecret = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456");
 		log.info("createRegisteredClientAuthorizationCode : clientSecret[{}]", clientSecret);
 
 		return RegisteredClient
 				.withId("Test_" + IdUtil.randomUUID())
 				.clientId(clientId)
-				.clientSecret(clientId + "_123456")
+				.clientSecret("{noop}" + clientId + "_123456")
 				.clientName(String.format("客户端[%s]", clientId))
 				// 客户端认证方式
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -149,7 +150,8 @@ public class SpringAuthorizationServerConfiguration {
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // 授权码模式
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) // 刷新令牌（授权码模式）
 				// 回调地址：授权服务器向当前客户端响应时调用下面地址，不在此列的地址将被拒绝（ 只能使用 IP/域名，不能使用 localhost ）
-				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/infra-authorization")
+				.redirectUri("http://notuptoyou.com:65001/login/oauth2/code/UserCenter")
+				.redirectUri("http://notuptoyou.com:65001")
 				.redirectUri("https://www.bing.com")
 				// 对该客户端的授权范围
 				.scope("read")

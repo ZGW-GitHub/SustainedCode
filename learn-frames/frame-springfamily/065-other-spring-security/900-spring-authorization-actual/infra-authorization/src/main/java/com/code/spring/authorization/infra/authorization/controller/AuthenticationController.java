@@ -41,6 +41,8 @@ public class AuthenticationController {
 	@GetMapping("/user")
 	public Authentication oauth2UserInfo() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		log.info("【 获取用户信息 】{}", authentication);
+
 		if (authentication == null) {
 			throw new RuntimeException("无有效认证的用户！");
 		}

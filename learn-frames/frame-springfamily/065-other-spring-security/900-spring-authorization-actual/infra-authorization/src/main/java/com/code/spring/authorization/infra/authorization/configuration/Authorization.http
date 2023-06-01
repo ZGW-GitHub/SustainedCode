@@ -1,12 +1,12 @@
 ### 获取 token
 POST http://notuptoyou.com:65000/oauth2/token
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic Zmlyc3RfY2xpZW50OjEyMzQ1Ng== # 取值：代码里配置的 clientId:clientSecret 进行 Base64 编码（如当前的：first_client:123456 => Zmlyc3QtY2xpZW50OjEyMzQ1Ng==）
+Authorization: Basic dXNlcl9jZW50ZXI6dXNlcl9jZW50ZXJfMTIzNDU2 # 取值：代码里配置的 clientId:clientSecret 进行 Base64 编码（如当前的：user_center:user_center_123456 => dXNlcl9jZW50ZXI6dXNlcl9jZW50ZXJfMTIzNDU2）
 
 # grant_type：授权类型，redirect_uri：代码里配置的 redirectUri ，code：认证后返回的 code
 grant_type = authorization_code &
 redirect_uri = https://www.bing.com &
-code = HhVdNvElKTO_hSNsKhiGGM1nKVenSaSk_RjSYpnshmIGUhKKD38IoIuD5qPba7iqbUp1KAJH9kyc9wz3gLgA8OaNxzTl-ciVOAAU2KMCKvAaSWLeAbeieeErVs3RwPhE
+code = LxsMoBCOVhapry6lFTOiO95de07xt6egZ37ut6nyWvL7A6ZGHqpp4D-V439ifnUAbCUF3CBEV68QFBuYT9KzBzK4CiEHEuL4-sa5einmj2ebczAbadiGlHXRIFlKBFSr
 
 
 ### 刷新 token
