@@ -62,8 +62,8 @@ public class OAuth2ResourceServerConfiguration {
 				// 设置 security 的 session 生成策略为：不创建
 				.sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-						.requestMatchers("/user/one").hasAnyAuthority("SCOPE_service.read", "SCOPE_all")
-						.requestMatchers("/user/two").hasAnyAuthority("SCOPE_service.write", "SCOPE_all")
+						.requestMatchers("/one/aaa").hasAnyAuthority("SCOPE_service.read", "SCOPE_all")
+						.requestMatchers("/one/bbb").hasAnyAuthority("SCOPE_service.write", "SCOPE_all")
 						.anyRequest()
 						.authenticated())
 				.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer

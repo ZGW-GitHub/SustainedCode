@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
 	/**
-	 * 客户认证授权后，会通过该接口获取 user 的信息
+	 * 客户通过认证授权后，可以通过该接口获取 user 的信息
 	 *
 	 * @return Authentication
 	 */

@@ -5,7 +5,7 @@ spring:
 
         registration:
           # 客户端：与注册时保持一致
-          myClient:
+          UserCenter:
             client-id: UserCenter
             client-secret: UserCenter_123456
             client-name: ${spring.application.name}
@@ -23,8 +23,8 @@ spring:
             authorization-uri: http://notuptoyou.com:65000/oauth2/authorize
             # 请求令牌地址
             token-uri: http://notuptoyou.com:65000/oauth2/token
-            # 用户资源地址
+            # 获取用户信息的地址：必须和 infra-authorization 服务中自己定义的 Controller 的 RequestMapping 路径一致
             user-info-uri: http://notuptoyou.com:65000/oauth2/user
-            # 用户资源返回中的一个属性名
+            # 获取到的用户信息中用户名的属性名
             user-name-attribute: name
             user-info-authentication-method: GET

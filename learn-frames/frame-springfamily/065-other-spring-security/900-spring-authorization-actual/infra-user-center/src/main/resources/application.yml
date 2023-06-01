@@ -5,4 +5,4 @@ spring:
     name: infra_user_center
   config:
     import:
-      - classpath:application-keystore.yml
+      - classpath:application-authorization.yml
