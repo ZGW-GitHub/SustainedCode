@@ -12,7 +12,7 @@ code = LxsMoBCOVhapry6lFTOiO95de07xt6egZ37ut6nyWvL7A6ZGHqpp4D-V439ifnUAbCUF3CBEV
 ### 刷新 token
 POST http://notuptoyou.com:65000/oauth2/token
 Content-Type: multipart/form-data; boundary=WebAppBoundary
-Authorization: Basic Zmlyc3RfY2xpZW50OjEyMzQ1Ng==
+Authorization: Basic dXNlcl9jZW50ZXI6dXNlcl9jZW50ZXJfMTIzNDU2
 
 --WebAppBoundary
 Content-Disposition: form-data; name="grant_type"
@@ -25,4 +25,4 @@ Content-Disposition: form-data; name="refresh_token"
 Content-Type: text/plain
 
 # 获取 token 调用返回的 refresh_token
-xE8BkjDgja4Ta0tdGQ1nEZEWuFUx8ykf0hNcjdCUK4u-yhbsRlZ2PnbvHJJxs3P5QQjvYi-KkysUXwuvu6DFL91uNeuNBvewUZ7k9mAYA9qfpg3dqx8qgUfYaQj1V6DG
+gAPnWkGGWghPw4cfloJCdjCxTs1y9XMOqe9yr7lHt_IRDYHdVU-Fi7PMfYDE7cD_roMPMZ-3RhiUNbn0fv8e3Fjfuat7P5aNdeSkmiQbp6APVAPbbmxXiUA53dRN1G-3
