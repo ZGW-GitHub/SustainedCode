@@ -17,19 +17,24 @@
 
 package com.code.spring.authorization.mode.code.client.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
  * @date 2023/6/1 16:22
  */
+@Slf4j
 @RestController
-public class DemoController {
+public class AuthorizationController {
 
-	@GetMapping("demo")
-	public String demo() {
-		return "user center";
+	@GetMapping("redirect")
+	public String redirect(@RequestParam String code) {
+		log.debug("【 Authorization Server 回调 】code : {}", code);
+
+		return "SUCCESS";
 	}
 
 }

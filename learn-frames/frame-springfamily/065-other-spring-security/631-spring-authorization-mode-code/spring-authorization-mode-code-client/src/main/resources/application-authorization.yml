@@ -12,7 +12,7 @@ spring:
             scope: read,write
             authorization-grant-type: authorization_code
             provider: demoAuthorization
-            redirect-uri: http://127.0.0.1:65001/demo
+            redirect-uri: http://127.0.0.1:65001/redirect
             # 认证方法
             client-authentication-method: client_secret_basic
 
