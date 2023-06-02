@@ -1,0 +1,13 @@
+server:
+  port: 65000
+spring:
+  application:
+    name: authorization_mode_code_server
+  config:
+    import:
+      - classpath:application-datasource.yml
+      - classpath:application-mybatis-plus.yml
+      - classpath:application-keystore.yml
+      - classpath:application-security.yml
+      - classpath:application-authorization.yml
+      - classpath:application-log.yml

@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: ${mysql.url}/oauth2-server-resource-client?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource

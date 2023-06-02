@@ -1,0 +1,11 @@
+spring:
+  authorization:
+    custom:
+      server:
+        issuer: http://notuptoyou.com:65000
+        default-register-client:
+          client-id: demo_client
+          client-secret: 123456
+          client-name: demo_client_name
+          scopes: read,write
+          redirect-uris: http://127.0.0.1:65001/login/oauth2/code/user_center,http://127.0.0.1:65001,https://www.bing.com

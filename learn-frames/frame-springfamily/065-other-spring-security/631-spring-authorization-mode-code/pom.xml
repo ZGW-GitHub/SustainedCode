@@ -39,7 +39,6 @@
 	<properties>
 		<spring-boot.version>3.1.0</spring-boot.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
-		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
 	</properties>
 
 </project>
