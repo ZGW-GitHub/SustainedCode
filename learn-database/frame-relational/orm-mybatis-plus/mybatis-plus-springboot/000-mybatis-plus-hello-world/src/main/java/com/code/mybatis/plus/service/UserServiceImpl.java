@@ -20,6 +20,7 @@ package com.code.mybatis.plus.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.code.mybatis.plus.dal.dos.User;
 import com.code.mybatis.plus.dal.mapper.UserMapper;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -27,7 +28,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.LongStream;
 
@@ -49,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	public void transaction(User user) {
 		userMapper.insert(user);
 
-		throw new ArithmeticException();
+		// throw new ArithmeticException();
 	}
 
 	@Override

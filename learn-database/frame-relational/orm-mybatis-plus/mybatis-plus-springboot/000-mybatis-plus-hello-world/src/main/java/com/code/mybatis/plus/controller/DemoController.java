@@ -20,11 +20,10 @@ package com.code.mybatis.plus.controller;
 import cn.hutool.core.util.RandomUtil;
 import com.code.mybatis.plus.dal.dos.User;
 import com.code.mybatis.plus.service.UserService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @author Snow
