@@ -1,4 +1,12 @@
 logging:
   level:
+    root: debug
+    org: info
+    com: info
+    sun: info
+    javax: info
+    io: info
     com.code: debug
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
     org.springframework.security: debug
