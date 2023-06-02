@@ -48,6 +48,7 @@ public class SpringSecurityConfiguration {
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+						.requestMatchers("/demo").permitAll()
 						.requestMatchers("/**").authenticated())
 				.formLogin(withDefaults())
 				.logout(withDefaults());

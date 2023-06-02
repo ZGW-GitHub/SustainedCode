@@ -36,8 +36,10 @@ public class AuthorizationServerConfiguration {
 	@Bean
 	SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+						.requestMatchers("/demo", "/demo/**").permitAll()
 						.anyRequest().authenticated())
-				.oauth2Login(withDefaults())
+				.oauth2Login(oAuth2LoginConfigurer -> oAuth2LoginConfigurer
+						.loginPage("/demo"))
 				.oauth2Client(withDefaults())
 				.logout(withDefaults())
 				.build();

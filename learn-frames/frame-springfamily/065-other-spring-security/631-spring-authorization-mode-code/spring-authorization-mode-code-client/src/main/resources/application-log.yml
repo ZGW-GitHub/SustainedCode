@@ -1,6 +1,6 @@
 logging:
   level:
-    root: debug
+    root: trace
     org: info
     com: info
     sun: info
@@ -9,4 +9,4 @@ logging:
     com.code: debug
     org.hibernate.SQL: debug
     org.hibernate.type: trace
-    org.springframework.security: debug
+    org.springframework.security: trace
