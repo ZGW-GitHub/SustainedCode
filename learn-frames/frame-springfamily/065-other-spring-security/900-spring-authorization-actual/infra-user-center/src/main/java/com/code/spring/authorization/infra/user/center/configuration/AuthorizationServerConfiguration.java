@@ -31,7 +31,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
  */
 @Slf4j
 @Configuration
-public class SpringAuthorizationServerConfiguration {
+public class AuthorizationServerConfiguration {
 
 	@Bean
 	SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
