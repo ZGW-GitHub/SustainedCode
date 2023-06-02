@@ -12,7 +12,7 @@ spring:
             scope: read,write
             authorization-grant-type: authorization_code
             provider: demoAuthorization
-            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/demoClient'
             # 认证方法
             client-authentication-method: client_secret_basic
 
