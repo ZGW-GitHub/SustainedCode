@@ -8,4 +8,4 @@ spring:
           client-secret: 123456
           client-name: demo_client_name
           scopes: read,write
-          redirect-uris: http://127.0.0.1:65001/login/oauth2/code/demoClient,http://127.0.0.1:65001/redirect,https://www.bing.com
+          redirect-uris: http://127.0.0.1:65001/redirect,http://127.0.0.1:65001/login/oauth2/code/demoClient,https://www.bing.com
