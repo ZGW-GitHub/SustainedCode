@@ -5,7 +5,7 @@ spring:
 
         registration:
           # 客户端：与 Server 的设置保持一致
-          UserCenter:
+          demoClient:
             client-id: demo_client
             client-secret: 123456
             client-name: demo_client_name
