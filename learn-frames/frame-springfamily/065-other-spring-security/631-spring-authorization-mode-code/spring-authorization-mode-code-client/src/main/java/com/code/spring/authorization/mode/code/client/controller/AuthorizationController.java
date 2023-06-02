@@ -67,13 +67,4 @@ public class AuthorizationController {
 		throw new RuntimeException("Token 获取失败");
 	}
 
-	public static void main(String[] args) {
-		HttpRequest httpRequest = HttpUtil.createPost("tokenUri");
-		httpRequest.header(Header.CONTENT_TYPE, ContentType.FORM_URLENCODED.getValue());
-		httpRequest.header(Header.AUTHORIZATION, "Basic " + Base64.encode("aaa"));
-		httpRequest.form("grant_type", "authorization_code");
-		httpRequest.form("code", "code");
-		httpRequest.form("redirect_uri", "redirectUri");
-	}
-
 }
