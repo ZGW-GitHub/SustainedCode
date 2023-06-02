@@ -17,7 +17,12 @@
 
 package com.code.spring.authorization.mode.code.client.controller;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.http.*;
+import cn.hutool.json.JSONUtil;
+import com.code.spring.authorization.mode.code.client.controller.domain.AuthorizationTokenInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,11 +35,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthorizationController {
 
-	@GetMapping("redirect")
-	public String redirect(@RequestParam String code) {
-		log.debug("【 Authorization Server 回调 】code : {}", code);
+	@Value("${spring.security.oauth2.client.provider.demoAuthorization.token-uri}")
+	private String tokenUri;
 
-		return "SUCCESS";
+	@Value("${spring.security.oauth2.client.registration.demoClient.redirect-uri}")
+	private String redirectUri;
+
+	@Value("${spring.security.oauth2.client.registration.demoClient.client-id}")
+	private String clientId;
+
+	@Value("${spring.security.oauth2.client.registration.demoClient.client-secret}")
+	private String clientSecret;
+
+	@GetMapping("redirect")
+	public AuthorizationTokenInfo redirect(@RequestParam String code) {
+		HttpRequest httpRequest = HttpUtil.createPost(tokenUri);
+		httpRequest.header(Header.CONTENT_TYPE, ContentType.FORM_URLENCODED.getValue());
+		httpRequest.header(Header.AUTHORIZATION, "Basic " + Base64.encode(clientId + ":" + clientSecret));
+		httpRequest.form("grant_type", "authorization_code");
+		httpRequest.form("code", code);
+		httpRequest.form("redirect_uri", redirectUri);
+
+		log.debug("【 Authorization Server 回调 】request url : {} , request form : {}", httpRequest.getUrl(), httpRequest.form());
+		try (HttpResponse httpResponse = httpRequest.execute()) {
+			log.debug("【 Authorization Server 回调 】response status : {} , response body : {}", httpResponse.getStatus(), httpResponse.body());
+			return JSONUtil.parseObj(httpResponse.body()).toBean(AuthorizationTokenInfo.class);
+		} catch (Exception e) {
+			log.error("【 Authorization Server 回调 】调用 server 获取 token 异常：{}", e.getMessage(), e);
+		}
+
+		throw new RuntimeException("Token 获取失败");
+	}
+
+	public static void main(String[] args) {
+		HttpRequest httpRequest = HttpUtil.createPost("tokenUri");
+		httpRequest.header(Header.CONTENT_TYPE, ContentType.FORM_URLENCODED.getValue());
+		httpRequest.header(Header.AUTHORIZATION, "Basic " + Base64.encode("aaa"));
+		httpRequest.form("grant_type", "authorization_code");
+		httpRequest.form("code", "code");
+		httpRequest.form("redirect_uri", "redirectUri");
 	}
 
 }

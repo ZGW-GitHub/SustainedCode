@@ -5,8 +5,8 @@ Authorization: Basic ZGVtb19jbGllbnQ6MTIzNDU2 # 取值：代码里配置的 clie
 
 # grant_type：授权类型，redirect_uri：代码里配置的 redirectUri ，code：认证后返回的 code
 grant_type = authorization_code &
-redirect_uri = https://www.bing.com &
-code = Jpn8fmBgBsOZQNlU3__2RlbppLRUZVxcmYrEfh0bNGB3IWrLjNiJExlxM2KGuhqREtdpOSPrOfvQj8RuJRfcj-VLkY1Eug8d9lSE-NxXQ9goa6rBVL_Rp35io__rILUC
+redirect_uri = http://127.0.0.1:65001/redirect &
+code = RGPpLfXbiDxN23iCsVTySjJo0nr9_w-q8fJXDJ7pw8AtTcZbGn11o7i-iEC7g99vV6mJ7Ji62HPh_gwpslD-1wzlX0JwPVURqsJLFNeZGc5gAdNDPIQ2CZO7-_ATPfda
 
 
 ### 刷新 token
