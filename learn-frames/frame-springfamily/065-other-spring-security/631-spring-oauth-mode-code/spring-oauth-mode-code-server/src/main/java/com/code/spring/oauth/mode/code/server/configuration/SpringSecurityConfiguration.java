@@ -51,7 +51,6 @@ public class SpringSecurityConfiguration {
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						.requestMatchers("/oauth2/user").permitAll()
 						.anyRequest().authenticated())
 				.formLogin(withDefaults())
 				.logout(withDefaults());

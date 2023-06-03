@@ -98,7 +98,8 @@ public class SpringAuthorizationServerConfiguration {
 				.apply(oAuth2AuthorizationServerConfigurer);
 
 		// 当未从授权端点进行身份验证时，重定向到登录页
-		httpSecurity.exceptionHandling((exceptions) -> exceptions.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
+		httpSecurity.exceptionHandling((exceptions) -> exceptions
+				.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
 
 		return httpSecurity.build();
 	}

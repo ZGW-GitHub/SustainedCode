@@ -1,18 +1,18 @@
 ### 获取 token
 POST http://notuptoyou.com:65000/oauth2/token
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic ZGVtb19jbGllbnQ6MTIzNDU2 # 取值：代码里配置的 clientId:clientSecret 进行 Base64 编码（如当前的：demo_client:123456 => ZGVtb19jbGllbnQ6MTIzNDU2）
+Authorization: Basic ZGVtby1jbGllbnQ6MTIzNDU2 # 取值：代码里配置的 clientId:clientSecret 进行 Base64 编码（如当前的：demo-client:123456 => ZGVtby1jbGllbnQ6MTIzNDU2）
 
 # grant_type：授权类型，redirect_uri：代码里配置的 redirectUri ，code：认证后返回的 code
 grant_type = authorization_code &
-redirect_uri = https://www.bing.com &
+redirect_uri = http://127.0.0.1:65001/login/oauth2/code/first-registration &
 code = tNFs8xAUizK0lqPzVVj62Py7WaxPIIMYSkKv1hVNWY22lFX4a5Vb7Qd-2JraTF8lEbjYjBSAGqVqmsb2qG0eDhSMaX4I5eFPD04_9hWUjmuNVDUWnC5UrX7ulyUmw-nn
 
 
 ### 刷新 token
 POST http://notuptoyou.com:65000/oauth2/token
 Content-Type: multipart/form-data; boundary=WebAppBoundary
-Authorization: Basic ZGVtb19jbGllbnQ6MTIzNDU2
+Authorization: Basic ZGVtby1jbGllbnQ6MTIzNDU2
 
 --WebAppBoundary
 Content-Disposition: form-data; name="grant_type"

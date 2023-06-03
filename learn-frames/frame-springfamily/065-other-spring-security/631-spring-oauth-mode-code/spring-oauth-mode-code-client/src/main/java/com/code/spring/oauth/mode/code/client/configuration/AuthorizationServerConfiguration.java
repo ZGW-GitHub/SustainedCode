@@ -18,7 +18,6 @@
 package com.code.spring.oauth.mode.code.client.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,9 +34,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class AuthorizationServerConfiguration {
 
-	@Value("${spring.security.oauth2.client.registration.first-registration.client-id}")
-	private String clientId;
-
 	@Bean
 	SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
@@ -45,7 +41,6 @@ public class AuthorizationServerConfiguration {
 
 		return httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						.requestMatchers("/redirect", "/redirect/**").permitAll()
 						.requestMatchers("/favicon.ico").permitAll()
 						.anyRequest().authenticated())
 				.oauth2Login(configurer -> configurer

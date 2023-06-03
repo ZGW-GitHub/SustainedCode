@@ -17,8 +17,11 @@
 
 package com.code.spring.oauth.mode.code.server.controller;
 
+import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,9 +32,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-	@PostMapping("demo")
-	public String demo() {
+	@GetMapping("test")
+	public String test() {
 		return "infra-authorization 服务：demo";
+	}
+
+	@GetMapping("currentUser")
+	public String currentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		return JSONUtil.toJsonStr(authentication);
 	}
 
 }

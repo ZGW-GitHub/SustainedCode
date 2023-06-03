@@ -15,40 +15,36 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.oauth.mode.code.server.controller;
+package com.code.spring.oauth.mode.code.client.controller;
 
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2023/5/30 23:09
+ * @date 2023/6/1 16:22
  */
 @Slf4j
 @RestController
-@RequestMapping("oauth2")
-public class AuthenticationController {
+public class DemoController {
 
 	/**
-	 * 客户通过认证授权后，可以通过该接口获取 user 的信息
-	 *
-	 * @return Authentication
+	 * 防止 404
 	 */
-	@GetMapping("user")
-	public JSONObject oauth2UserInfo() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		log.debug("【 获取用户信息 】{}", authentication);
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
 
-		if (authentication == null) {
-			throw new RuntimeException("无有效认证的用户！");
-		}
-		return JSONUtil.parseObj(authentication);
+	@GetMapping("currentUser")
+	public String currentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		return JSONUtil.toJsonStr(authentication);
 	}
 
 }
