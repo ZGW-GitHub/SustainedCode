@@ -150,9 +150,7 @@ public class SpringAuthorizationServerConfiguration {
 				.requireAuthorizationConsent(true)
 				.build();
 
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo_client&response_type=code&scope=read%20write&redirect_uri=https://www.bing.com
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demoClient&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/redirect
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo_client&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/login/oauth2/code/demoClient
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo-client&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/login/oauth2/code/first-registration
 		RegisteredClient.Builder registeredClientBuilder = RegisteredClient
 				.withId("Test_" + IdUtil.randomUUID())
 				.clientId(clientId)
