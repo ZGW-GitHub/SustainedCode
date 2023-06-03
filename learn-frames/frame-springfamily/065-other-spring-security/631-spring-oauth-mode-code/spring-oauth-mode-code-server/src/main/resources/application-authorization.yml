@@ -4,8 +4,8 @@ spring:
       server:
         issuer: http://notuptoyou.com:65000
         default-register-client:
-          client-id: demo_client
+          client-id: demo-client
           client-secret: 123456
-          client-name: demo_client_name
-          scopes: read,write
-          redirect-uris: http://127.0.0.1:65001/redirect,http://127.0.0.1:65001/login/oauth2/code/demoClient,https://www.bing.com
+          client-name: demo-client-name
+          scopes: openid,read,write
+          redirect-uris: http://127.0.0.1:65001/login/oauth2/code/demo-client-oidc,http://127.0.0.1:65001/authorized

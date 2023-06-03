@@ -4,14 +4,14 @@ spring:
       client:
         registration:
           # 客户端：与 Server 的设置保持一致
-          demoClient:
-            client-id: demo_client
+          demo-client-oidc:
+            client-id: demo-client
             client-secret: 123456
-            client-name: demo_client_name
-            scope: read,write
+            client-name: demo-client-name
+            scope: openid,read,write
             authorization-grant-type: authorization_code
             provider: demoAuthorization
-            redirect-uri: http://127.0.0.1:65001/redirect
+            redirect-uri: http://127.0.0.1:65001/login/oauth2/code/{registrationId}
             # 认证方法
             client-authentication-method: client_secret_basic
 

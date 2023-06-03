@@ -18,15 +18,8 @@
 package com.code.spring.oauth.mode.code.client.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Snow
@@ -68,15 +61,15 @@ public class AuthorizationController {
 	// 	throw new RuntimeException("Token 获取失败");
 	// }
 
-	@GetMapping("redirect")
-	public Map<String, Object> redirect(@RegisteredOAuth2AuthorizedClient("demo_client") OAuth2AuthorizedClient client) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Map<String, Object> map = new HashMap<>();
-		map.put("authentication", authentication);
-		// OAuth2AuthorizedClient 为敏感信息不应该返回前端
-		map.put("oAuth2AuthorizedClient", client);
-		return map;
-	}
+	// @GetMapping("redirect")
+	// public Map<String, Object> redirect(@RegisteredOAuth2AuthorizedClient("demoClient") OAuth2AuthorizedClient client) {
+	// 	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	// 	Map<String, Object> map = new HashMap<>();
+	// 	map.put("authentication", authentication);
+	// 	// OAuth2AuthorizedClient 为敏感信息不应该返回前端
+	// 	map.put("oAuth2AuthorizedClient", client);
+	// 	return map;
+	// }
 
 	/**
 	 * 默认登录成功跳转页为 /  防止404状态
@@ -84,14 +77,8 @@ public class AuthorizationController {
 	 * @return the map
 	 */
 	@GetMapping("/")
-	public Map<String, Object> index(@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Map<String, Object> map = new HashMap<>(2);
-
-		// OAuth2AuthorizedClient 为敏感信息不应该返回前端
-		log.debug("OAuth2AuthorizedClient：{} ", oAuth2AuthorizedClient);
-		map.put("authentication", authentication);
-		return map;
+	public String index() {
+		return "index";
 	}
 
 }

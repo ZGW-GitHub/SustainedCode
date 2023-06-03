@@ -150,7 +150,7 @@ public class SpringAuthorizationServerConfiguration {
 				.build();
 
 		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo_client&response_type=code&scope=read%20write&redirect_uri=https://www.bing.com
-		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo_client&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/redirect
+		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demoClient&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/redirect
 		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo_client&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/login/oauth2/code/demoClient
 		RegisteredClient.Builder registeredClientBuilder = RegisteredClient
 				.withId("Test_" + IdUtil.randomUUID())
@@ -163,6 +163,7 @@ public class SpringAuthorizationServerConfiguration {
 				// 授权模式
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // 授权码模式
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) // 刷新令牌（授权码模式）
+				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
 				// set 上面创建的 token 配置
 				.tokenSettings(tokenSettings)
 				// set 上面创建的 客户端配置

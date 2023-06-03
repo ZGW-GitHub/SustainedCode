@@ -18,8 +18,10 @@
 package com.code.spring.oauth.mode.code.client.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -33,15 +35,21 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class AuthorizationServerConfiguration {
 
+	@Value("${spring.security.oauth2.client.registration.demo-client-oidc.client-id}")
+	private String clientId;
+
 	@Bean
 	SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.eraseCredentials(false);
+
 		return httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
 						.requestMatchers("/redirect", "/redirect/**").permitAll()
+						.requestMatchers("/favicon.ico").permitAll()
 						.anyRequest().authenticated())
-				// .oauth2Login(oAuth2LoginConfigurer -> oAuth2LoginConfigurer
-				// 		.loginPage("/redirect"))
-				.oauth2Login(withDefaults())
+				.oauth2Login(configurer -> configurer
+						.loginPage("/oauth2/authorization/demo-client-oidc"))
 				.oauth2Client(withDefaults())
 				.logout(withDefaults())
 				.build();
