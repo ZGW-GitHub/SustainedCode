@@ -8,4 +8,4 @@ spring:
           client-secret: 123456
           client-name: demo-client-name
           scopes: openid,read,write
-          redirect-uris: http://127.0.0.1:65001/login/oauth2/code/demo-client-oidc,http://127.0.0.1:65001/authorized
+          redirect-uris: http://127.0.0.1:65001/login/oauth2/code/demo-client-aaa,http://127.0.0.1:65001/authorized

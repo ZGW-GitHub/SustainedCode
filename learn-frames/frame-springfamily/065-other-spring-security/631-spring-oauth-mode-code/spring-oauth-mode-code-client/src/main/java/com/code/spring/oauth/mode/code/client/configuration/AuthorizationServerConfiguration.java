@@ -35,7 +35,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class AuthorizationServerConfiguration {
 
-	@Value("${spring.security.oauth2.client.registration.demo-client-oidc.client-id}")
+	@Value("${spring.security.oauth2.client.registration.demo-client-aaa.client-id}")
 	private String clientId;
 
 	@Bean
@@ -49,7 +49,7 @@ public class AuthorizationServerConfiguration {
 						.requestMatchers("/favicon.ico").permitAll()
 						.anyRequest().authenticated())
 				.oauth2Login(configurer -> configurer
-						.loginPage("/oauth2/authorization/demo-client-oidc"))
+						.loginPage("/oauth2/authorization/demo-client-aaa"))
 				.oauth2Client(withDefaults())
 				.logout(withDefaults())
 				.build();

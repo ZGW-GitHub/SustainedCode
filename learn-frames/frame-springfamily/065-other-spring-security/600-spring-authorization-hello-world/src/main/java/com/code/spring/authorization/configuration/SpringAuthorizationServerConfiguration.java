@@ -93,7 +93,7 @@ public class SpringAuthorizationServerConfiguration {
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-				.redirectUri("http://notuptoyou.com:8080/login/oauth2/code/demo-client-oidc")
+				.redirectUri("http://notuptoyou.com:8080/login/oauth2/code/demo-client-aaa")
 				.redirectUri("https://www.bing.com")
 				.postLogoutRedirectUri("https://www.google.com")
 				.scope(OidcScopes.OPENID)

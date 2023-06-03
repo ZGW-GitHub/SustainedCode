@@ -72,9 +72,7 @@ public class AuthorizationController {
 	// }
 
 	/**
-	 * 默认登录成功跳转页为 /  防止404状态
-	 *
-	 * @return the map
+	 * 防止 404
 	 */
 	@GetMapping("/")
 	public String index() {

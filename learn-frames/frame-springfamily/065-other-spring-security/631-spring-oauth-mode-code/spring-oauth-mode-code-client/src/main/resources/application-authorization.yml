@@ -4,7 +4,7 @@ spring:
       client:
         registration:
           # 客户端：与 Server 的设置保持一致
-          demo-client-oidc:
+          demo-client-aaa:
             client-id: demo-client
             client-secret: 123456
             client-name: demo-client-name
