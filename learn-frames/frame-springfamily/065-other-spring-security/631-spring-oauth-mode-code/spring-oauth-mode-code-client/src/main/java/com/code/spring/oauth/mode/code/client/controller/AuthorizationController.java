@@ -17,15 +17,16 @@
 
 package com.code.spring.oauth.mode.code.client.controller;
 
-import cn.hutool.core.codec.Base64;
-import cn.hutool.http.*;
-import cn.hutool.json.JSONUtil;
-import com.code.spring.oauth.mode.code.client.controller.domain.AuthorizationTokenInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Snow
@@ -35,36 +36,62 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthorizationController {
 
-	@Value("${spring.security.oauth2.client.provider.demoAuthorization.token-uri}")
-	private String tokenUri;
+	// @Value("${spring.security.oauth2.client.provider.demoAuthorization.token-uri}")
+	// private String tokenUri;
+	//
+	// @Value("${spring.security.oauth2.client.registration.demoClient.redirect-uri}")
+	// private String redirectUri;
+	//
+	// @Value("${spring.security.oauth2.client.registration.demoClient.client-id}")
+	// private String clientId;
+	//
+	// @Value("${spring.security.oauth2.client.registration.demoClient.client-secret}")
+	// private String clientSecret;
 
-	@Value("${spring.security.oauth2.client.registration.demoClient.redirect-uri}")
-	private String redirectUri;
-
-	@Value("${spring.security.oauth2.client.registration.demoClient.client-id}")
-	private String clientId;
-
-	@Value("${spring.security.oauth2.client.registration.demoClient.client-secret}")
-	private String clientSecret;
+	// @GetMapping("redirect")
+	// public AuthorizationTokenInfo redirect(@RequestParam String code) {
+	// 	HttpRequest httpRequest = HttpUtil.createPost(tokenUri);
+	// 	httpRequest.header(Header.CONTENT_TYPE, ContentType.FORM_URLENCODED.getValue());
+	// 	httpRequest.header(Header.AUTHORIZATION, "Basic " + Base64.encode(clientId + ":" + clientSecret));
+	// 	httpRequest.form("grant_type", "authorization_code");
+	// 	httpRequest.form("code", code);
+	// 	httpRequest.form("redirect_uri", redirectUri);
+	//
+	// 	log.debug("【 Authorization Server 回调 】request url : {} , request form : {}", httpRequest.getUrl(), httpRequest.form());
+	// 	try (HttpResponse httpResponse = httpRequest.execute()) {
+	// 		log.debug("【 Authorization Server 回调 】response status : {} , response body : {}", httpResponse.getStatus(), httpResponse.body());
+	// 		return JSONUtil.parseObj(httpResponse.body()).toBean(AuthorizationTokenInfo.class);
+	// 	} catch (Exception e) {
+	// 		log.error("【 Authorization Server 回调 】调用 server 获取 token 异常：{}", e.getMessage(), e);
+	// 	}
+	//
+	// 	throw new RuntimeException("Token 获取失败");
+	// }
 
 	@GetMapping("redirect")
-	public AuthorizationTokenInfo redirect(@RequestParam String code) {
-		HttpRequest httpRequest = HttpUtil.createPost(tokenUri);
-		httpRequest.header(Header.CONTENT_TYPE, ContentType.FORM_URLENCODED.getValue());
-		httpRequest.header(Header.AUTHORIZATION, "Basic " + Base64.encode(clientId + ":" + clientSecret));
-		httpRequest.form("grant_type", "authorization_code");
-		httpRequest.form("code", code);
-		httpRequest.form("redirect_uri", redirectUri);
+	public Map<String, Object> redirect(@RegisteredOAuth2AuthorizedClient("demo_client") OAuth2AuthorizedClient client) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Map<String, Object> map = new HashMap<>();
+		map.put("authentication", authentication);
+		// OAuth2AuthorizedClient 为敏感信息不应该返回前端
+		map.put("oAuth2AuthorizedClient", client);
+		return map;
+	}
 
-		log.debug("【 Authorization Server 回调 】request url : {} , request form : {}", httpRequest.getUrl(), httpRequest.form());
-		try (HttpResponse httpResponse = httpRequest.execute()) {
-			log.debug("【 Authorization Server 回调 】response status : {} , response body : {}", httpResponse.getStatus(), httpResponse.body());
-			return JSONUtil.parseObj(httpResponse.body()).toBean(AuthorizationTokenInfo.class);
-		} catch (Exception e) {
-			log.error("【 Authorization Server 回调 】调用 server 获取 token 异常：{}", e.getMessage(), e);
-		}
+	/**
+	 * 默认登录成功跳转页为 /  防止404状态
+	 *
+	 * @return the map
+	 */
+	@GetMapping("/")
+	public Map<String, Object> index(@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Map<String, Object> map = new HashMap<>(2);
 
-		throw new RuntimeException("Token 获取失败");
+		// OAuth2AuthorizedClient 为敏感信息不应该返回前端
+		log.debug("OAuth2AuthorizedClient：{} ", oAuth2AuthorizedClient);
+		map.put("authentication", authentication);
+		return map;
 	}
 
 }

@@ -24,12 +24,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -47,9 +49,10 @@ public class SpringSecurityConfiguration {
 
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-						.requestMatchers("/demo").permitAll()
-						.requestMatchers("/**").authenticated())
+		httpSecurity.securityMatcher("/**")
+				.authorizeHttpRequests(configurer -> configurer
+						.requestMatchers("/oauth2/user").permitAll()
+						.anyRequest().authenticated())
 				.formLogin(withDefaults())
 				.logout(withDefaults());
 
@@ -70,6 +73,11 @@ public class SpringSecurityConfiguration {
 				.build();
 
 		return new InMemoryUserDetailsManager(user);
+	}
+
+	@Bean
+	WebSecurityCustomizer webSecurityCustomizer() {
+		return webSecurity -> webSecurity.ignoring().requestMatchers(new AntPathRequestMatcher("/h2/**"));
 	}
 
 }

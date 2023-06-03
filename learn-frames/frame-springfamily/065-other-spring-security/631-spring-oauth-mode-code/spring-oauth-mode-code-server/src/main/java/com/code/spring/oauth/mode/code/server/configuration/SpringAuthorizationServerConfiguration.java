@@ -47,7 +47,6 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
@@ -55,6 +54,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.security.KeyStore;
 import java.security.cert.Certificate;
@@ -86,11 +86,17 @@ public class SpringAuthorizationServerConfiguration {
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(httpSecurity);
-		// 启用 OpenID Connect 1.0
-		httpSecurity.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(withDefaults());
-		// 接受用户信息/客户端注册的访问令牌
-		httpSecurity.oauth2ResourceServer((oAuth2ResourceServerConfigurer) -> oAuth2ResourceServerConfigurer.jwt(withDefaults()));
+		OAuth2AuthorizationServerConfigurer oAuth2AuthorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
+		oAuth2AuthorizationServerConfigurer.oidc(withDefaults()); // 启用 OpenID Connect 1.0
+
+		RequestMatcher endpointsMatcher = oAuth2AuthorizationServerConfigurer.getEndpointsMatcher();
+		httpSecurity.securityMatcher(endpointsMatcher)
+				.authorizeHttpRequests(configurer -> configurer
+						.anyRequest().authenticated())
+				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+				.oauth2ResourceServer(configurer -> configurer.jwt(withDefaults()))
+				.apply(oAuth2AuthorizationServerConfigurer);
+
 		// 当未从授权端点进行身份验证时，重定向到登录页
 		httpSecurity.exceptionHandling((exceptions) -> exceptions.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
 
@@ -201,8 +207,8 @@ public class SpringAuthorizationServerConfiguration {
 	 *
 	 * @return JWK Source
 	 */
-	@SneakyThrows
 	@Bean
+	@SneakyThrows
 	public JWKSource<SecurityContext> jwkSource() {
 		// keystore 的路径
 		String keystorePath = keystoreConfig.getKeystorePath();
