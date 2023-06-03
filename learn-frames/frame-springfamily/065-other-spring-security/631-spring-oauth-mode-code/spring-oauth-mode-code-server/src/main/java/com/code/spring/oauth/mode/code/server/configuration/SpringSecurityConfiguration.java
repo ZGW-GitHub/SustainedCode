@@ -51,7 +51,8 @@ public class SpringSecurityConfiguration {
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						.anyRequest().authenticated())
+						.anyRequest().authenticated()) // 授权中心提供其它服务时设置
+				// .anyRequest().denyAll()) // 授权中心不提供其它服务时设置
 				.formLogin(withDefaults())
 				.logout(withDefaults());
 
