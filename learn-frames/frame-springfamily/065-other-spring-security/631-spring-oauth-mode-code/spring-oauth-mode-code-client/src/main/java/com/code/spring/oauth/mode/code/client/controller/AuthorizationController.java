@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthorizationController {
 
-	// @Value("${spring.security.oauth2.client.provider.demoAuthorization.token-uri}")
+	// @Value("${spring.security.oauth2.client.provider.demo-provider.token-uri}")
 	// private String tokenUri;
 	//
 	// @Value("${spring.security.oauth2.client.registration.demoClient.redirect-uri}")
