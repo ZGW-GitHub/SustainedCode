@@ -85,7 +85,7 @@ public class OAuthConfiguration {
 	 */
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+	public SecurityFilterChain oAuthSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		OAuth2AuthorizationServerConfigurer oAuth2AuthorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 		oAuth2AuthorizationServerConfigurer.oidc(withDefaults()); // 启用 OpenID Connect 1.0
 
@@ -120,7 +120,7 @@ public class OAuthConfiguration {
 
 		if (Objects.isNull(registeredClient)) {
 			// 2、添加客户端
-			registeredClient = this.createRegisteredClientAuthorizationCode(clientId);
+			registeredClient = this.createRegisteredClient(clientId);
 			registeredClientRepository.save(registeredClient);
 		}
 
@@ -133,7 +133,7 @@ public class OAuthConfiguration {
 	 * @param clientId 客户端 ID
 	 * @return Registered Client
 	 */
-	private RegisteredClient createRegisteredClientAuthorizationCode(final String clientId) {
+	private RegisteredClient createRegisteredClient(final String clientId) {
 		// Token 配置：TTL 、是否复用 refreshToken 、等等
 		TokenSettings tokenSettings = TokenSettings.builder()
 				// accessToken 存活时间：2 小时
@@ -243,7 +243,7 @@ public class OAuthConfiguration {
 	 * @return Authorization Server Settings
 	 */
 	@Bean
-	public AuthorizationServerSettings providerSettings() {
+	public AuthorizationServerSettings authorizationServerSettings() {
 		return AuthorizationServerSettings.builder().issuer(OAuthConfig.getIssuer()).build();
 	}
 

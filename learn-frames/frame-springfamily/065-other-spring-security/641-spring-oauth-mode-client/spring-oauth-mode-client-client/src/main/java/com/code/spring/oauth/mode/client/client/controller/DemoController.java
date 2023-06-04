@@ -18,6 +18,8 @@
 package com.code.spring.oauth.mode.client.client.controller;
 
 import cn.hutool.json.JSONUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,6 +47,13 @@ public class DemoController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		return JSONUtil.toJsonStr(authentication);
+	}
+
+	@GetMapping("currentSession")
+	public String session(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+
+		return JSONUtil.toJsonStr(session);
 	}
 
 }
