@@ -1,0 +1,5 @@
+spring:
+  jwt:
+    custom:
+      key:
+        location: ${keystore.dir}

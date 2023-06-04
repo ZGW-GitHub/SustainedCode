@@ -1,0 +1,4 @@
+spring:
+  oauth:
+    custom:
+      issuer: http://notuptoyou.com:65000
