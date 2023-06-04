@@ -31,7 +31,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class OAuthConfiguration {
 
-	public void configForHttpSecurity(HttpSecurity httpSecurity) throws Exception {
+	public void configByHttpSecurity(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 				.oauth2Login(configurer -> configurer
 						.loginPage("/oauth2/authorization/first-registration"))
