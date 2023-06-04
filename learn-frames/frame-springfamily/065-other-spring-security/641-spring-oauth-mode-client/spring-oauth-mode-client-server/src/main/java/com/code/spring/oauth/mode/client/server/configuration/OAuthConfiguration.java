@@ -18,28 +18,19 @@
 package com.code.spring.oauth.mode.client.server.configuration;
 
 import cn.hutool.core.util.IdUtil;
-import com.code.spring.oauth.mode.client.server.config.KeystoreConfig;
 import com.code.spring.oauth.mode.client.server.config.OAuthConfig;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.annotation.Resource;
 import lombok.Data;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
@@ -56,10 +47,6 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.security.KeyStore;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
-import java.security.interfaces.RSAPublicKey;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -73,9 +60,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Data
 @Configuration
 public class OAuthConfiguration {
-
-	@Resource
-	private KeystoreConfig keystoreConfig;
 
 	@Resource
 	private OAuthConfig OAuthConfig;
@@ -196,45 +180,6 @@ public class OAuthConfiguration {
 	@Bean
 	public OAuth2AuthorizationConsentService auth2AuthorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
 		return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
-	}
-
-
-	/**
-	 * 加载 jwk 资源（用于生成令牌）
-	 *
-	 * @return JWK Source
-	 */
-	@Bean
-	@SneakyThrows
-	public JWKSource<SecurityContext> jwkSource() {
-		// keystore 的路径
-		String keystorePath = keystoreConfig.getKeystorePath();
-		// keystore 密码
-		char[] keystorePassword = keystoreConfig.getKeystorePassword().toCharArray();
-		// 加载 keystore
-		KeyStore jks = KeyStore.getInstance("jks");
-		jks.load(new FileSystemResource(keystorePath).getInputStream(), keystorePassword);
-
-		// 加载 RSAKey
-		RSAKey rsaKey = RSAKey.load(jks, keystoreConfig.getCertificateAlias(), keystorePassword);
-
-		JWKSet jwkSet = new JWKSet(rsaKey);
-		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-	}
-
-	/**
-	 * jwt 解码器：客户端认证授权后，需要访问 user 信息，解码器可以从令牌中解析出 user 信息
-	 */
-	@Bean
-	@SneakyThrows
-	JwtDecoder jwtDecoder() {
-		// 读取 cer 公钥证书来配置解码器
-		CertificateFactory certificateFactory = CertificateFactory.getInstance("x.509");
-		Certificate certificate = certificateFactory.generateCertificate(new FileSystemResource(keystoreConfig.getCertificatePath()).getInputStream());
-
-		RSAPublicKey publicKey = (RSAPublicKey) certificate.getPublicKey();
-
-		return NimbusJwtDecoder.withPublicKey(publicKey).build();
 	}
 
 	/**
