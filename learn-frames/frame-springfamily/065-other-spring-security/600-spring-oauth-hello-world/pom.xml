@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>600-spring-authorization-hello-world</artifactId>
+	<artifactId>600-spring-oauth-hello-world</artifactId>
 
 	<packaging>jar</packaging>
 

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.authorization.configuration;
+package com.code.spring.oauth.configuration;
 
 import cn.hutool.core.util.IdUtil;
 import com.nimbusds.jose.jwk.JWKSet;

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.authorization;
+package com.code.spring.oauth;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -25,10 +25,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2023/5/30 16:14
  */
 @SpringBootApplication
-public class SnowSpringAuthorizationApplication {
+public class SnowSpringOAuthApplication {
 	public static void main(String[] args) {
 
-		new SpringApplicationBuilder(SnowSpringAuthorizationApplication.class).run(args);
+		new SpringApplicationBuilder(SnowSpringOAuthApplication.class).run(args);
 
 	}
 }
