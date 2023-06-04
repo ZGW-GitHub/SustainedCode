@@ -17,25 +17,42 @@
 
 package com.code.spring.oauth.mode.code.client.configuration;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * @author Snow
- * @date 2023/6/4 12:18
+ * @date 2023/6/1 15:21
  */
 @Slf4j
 @Configuration
-public class OAuthConfiguration {
+public class SecurityConfiguration {
 
-	public void configForHttpSecurity(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity
-				.oauth2Login(configurer -> configurer
-						.loginPage("/oauth2/authorization/first-registration"))
-				.oauth2Client(withDefaults());
+	@Resource
+	private OAuthConfiguration oAuthConfiguration;
+
+	@Bean
+	SecurityFilterChain oAuthSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.eraseCredentials(false);
+
+		httpSecurity.securityMatcher("/**")
+				.authorizeHttpRequests(configurer -> configurer
+						.requestMatchers("/favicon.ico").permitAll()
+						.anyRequest().authenticated())
+				.logout(withDefaults());
+
+		// 执行 OAuth 相关的配置
+		oAuthConfiguration.configForHttpSecurity(httpSecurity);
+
+		return httpSecurity.build();
 	}
 
 }
