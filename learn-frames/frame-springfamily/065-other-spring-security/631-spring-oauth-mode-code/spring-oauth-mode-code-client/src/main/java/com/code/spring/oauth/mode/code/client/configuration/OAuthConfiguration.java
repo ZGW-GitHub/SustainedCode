@@ -35,7 +35,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class OAuthConfiguration {
 
 	@Bean
-	SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+	SecurityFilterChain oAuthSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
 		authenticationManagerBuilder.eraseCredentials(false);
 
