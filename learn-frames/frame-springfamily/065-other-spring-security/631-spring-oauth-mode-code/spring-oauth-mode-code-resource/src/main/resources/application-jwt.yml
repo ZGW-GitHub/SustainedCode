@@ -1,5 +1,5 @@
 spring:
   jwt:
     custom:
-      key:
-        location: ${keystore.dir}
+      keystore:
+        public-key-location: ${public-key.dir}

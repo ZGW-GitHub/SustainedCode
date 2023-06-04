@@ -17,14 +17,14 @@
 
 package com.code.spring.oauth.mode.code.resource.configuration;
 
+import com.code.spring.oauth.mode.code.resource.config.JwtConfig;
+import com.code.spring.oauth.mode.code.resource.config.OAuthConfig;
 import com.nimbusds.jose.jwk.RSAKey;
+import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
@@ -32,6 +32,7 @@ import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
+import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
@@ -46,23 +47,11 @@ import java.util.Collection;
 @Configuration(proxyBeanMethods = false)
 public class JwtConfiguration {
 
-	/**
-	 * 授权服务器地址
-	 */
-	@Value("${spring.oauth.custom.issuer}")
-	private String issuer;
+	@Resource
+	private JwtConfig jwtConfig;
 
-	/**
-	 * jwt 有效期
-	 */
-	@Value("${spring.jwt.expires:0}")
-	private Long expires;
-
-	/**
-	 * key 地址
-	 */
-	@Value("${spring.jwt.custom.key.location}")
-	private String keyLocation;
+	@Resource
+	private OAuthConfig oAuthConfig;
 
 	/**
 	 * 校验 jwt issuer 是否合法
@@ -71,7 +60,7 @@ public class JwtConfiguration {
 	 */
 	@Bean
 	JwtIssuerValidator jwtIssuerValidator() {
-		return new JwtIssuerValidator(issuer);
+		return new JwtIssuerValidator(oAuthConfig.getIssuer());
 	}
 
 	/**
@@ -82,7 +71,7 @@ public class JwtConfiguration {
 	@Bean
 	JwtTimestampValidator jwtTimestampValidator() {
 		// 入参：为 0 时，和令牌实际时间一致。大于 0 时，会在原来过期时间的基础再加上入参值。所以这里可以不用配置这个值。
-		return new JwtTimestampValidator(Duration.ofSeconds(expires));
+		return new JwtTimestampValidator(Duration.ofSeconds(jwtConfig.getExpires()));
 	}
 
 	/**
@@ -96,7 +85,7 @@ public class JwtConfiguration {
 		// 如果不按照规范解析权限集合 Authorities 就需要自定义 key
 		// jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("scopes");
 		// OAuth2 默认前缀是 "SCOPE_" 、Spring Security 是 "ROLE_"
-		// jwtGrantedAuthoritiesConverter.setAuthorityPrefix("");
+		// jwtGrantedAuthoritiesConverter.setAuthorityPrefix("SCOPE_");
 
 		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
 		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
@@ -105,38 +94,26 @@ public class JwtConfiguration {
 	}
 
 	/**
-	 * OAuth Token 委托校验器
-	 *
-	 * @param tokenValidators token validators
-	 * @return delegating oauth2 token validator
-	 */
-	@Primary
-	@Bean({"delegatingTokenValidator"})
-	public DelegatingOAuth2TokenValidator<Jwt> delegatingTokenValidator(Collection<OAuth2TokenValidator<Jwt>> tokenValidators) {
-		return new DelegatingOAuth2TokenValidator<>(tokenValidators);
-	}
-
-	/**
 	 * 基于 Nimbus 的 jwt 解码器，并增加了一些自定义校验策略
 	 *
 	 * @param validator DelegatingOAuth2TokenValidator<Jwt>
 	 * @return jwt decoder
 	 */
-	@Bean
+	@Bean("customJwtDecoder")
 	@SneakyThrows
-	JwtDecoder jwtDecoder(@Qualifier("delegatingTokenValidator") DelegatingOAuth2TokenValidator<Jwt> validator) {
+	JwtDecoder jwtDecoder(Collection<OAuth2TokenValidator<Jwt>> tokenValidators) {
 		// 指定 X.509 类型的证书工厂
 		CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
 		// 读取并构建证书
-		X509Certificate certificate = (X509Certificate) certificateFactory.generateCertificate(new FileSystemResource(keyLocation + "/demoKey.cer").getInputStream());
+		Certificate certificate = certificateFactory.generateCertificate(new FileSystemResource(jwtConfig.getPublicKeyLocation()).getInputStream());
 		// 解析证书
-		RSAKey rsaKey = RSAKey.parse(certificate);
+		RSAKey rsaKey = RSAKey.parse((X509Certificate) certificate);
 		// 得到公钥
 		RSAPublicKey key = rsaKey.toRSAPublicKey();
 
 		// 构造解码器
 		NimbusJwtDecoder nimbusJwtDecoder = NimbusJwtDecoder.withPublicKey(key).build();
-		nimbusJwtDecoder.setJwtValidator(validator); // 注入自定义 JWT 校验逻辑
+		nimbusJwtDecoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(tokenValidators)); // 注入自定义 JWT 校验逻辑
 		return nimbusJwtDecoder;
 	}
 

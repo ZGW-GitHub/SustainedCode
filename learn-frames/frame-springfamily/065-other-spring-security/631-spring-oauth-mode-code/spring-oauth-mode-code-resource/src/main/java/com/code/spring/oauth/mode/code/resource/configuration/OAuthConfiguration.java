@@ -23,6 +23,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -48,8 +49,13 @@ public class OAuthConfiguration {
 	@Resource
 	private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
+	@Resource
+	private JwtDecoder customJwtDecoder;
+
 	public void configForHttpSecurity(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.oauth2ResourceServer(configurer -> configurer
+				.jwt(jwtConfigurer -> jwtConfigurer
+						.decoder(customJwtDecoder))
 				.accessDeniedHandler(customAccessDeniedHandler)
 				.authenticationEntryPoint(customAuthenticationEntryPoint).jwt(withDefaults()));
 	}

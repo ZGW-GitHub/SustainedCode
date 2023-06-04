@@ -18,6 +18,7 @@
 package com.code.spring.oauth.mode.code.resource.component;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +48,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
 		// TODO 拒绝访问的处理逻辑
 
+		log.debug(StrUtil.format("【 自定义拒绝访问处理器 】authentication : {}", JSONUtil.toJsonStr(SecurityContextHolder.getContext().getAuthentication())));
 		log.debug(StrUtil.format("【 自定义拒绝访问处理器 】accessDeniedException : {}", accessDeniedException));
 
 		HashMap<String, String> map = new HashMap<>(2);
