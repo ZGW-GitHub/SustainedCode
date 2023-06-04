@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          # 注意要与 Server 的设置保持一致
+          first-registration:
+            client-id: demo-client
+            client-secret: 123456
+            client-name: Demo客户端
+            scope: openid,read,write
+            authorization-grant-type: client_credentials
+            client-authentication-method: client_secret_basic
+            provider: demo-provider
+        provider:
+          # 服务提供地址
+          demo-provider:
+            issuer-uri: http://notuptoyou.com:65000
