@@ -27,18 +27,18 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration(proxyBeanMethods = false)
-public class KeystoreConfig {
+public class JwtConfig {
 
-	@Value("${keystore.path}")
-	private String keystorePath;
+	@Value("${spring.jwt.custom.keystore.location}")
+	private String keystoreLocation;
 
-	@Value("${keystore.password}")
+	@Value("${spring.jwt.custom.keystore.password}")
 	private String keystorePassword;
 
-	@Value("${keystore.certificate-alias}")
-	private String certificateAlias;
+	@Value("${spring.jwt.custom.keystore.public-key-alias}")
+	private String publicKeyAlias;
 
-	@Value("${keystore.certificate-path}")
-	private String certificatePath;
+	@Value("${spring.jwt.custom.keystore.public-key-location}")
+	private String publicKeyLocation;
 
 }
