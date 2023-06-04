@@ -1,5 +1,5 @@
 spring:
-  authorization:
+  oauth:
     custom:
       server:
         issuer: http://notuptoyou.com:65000

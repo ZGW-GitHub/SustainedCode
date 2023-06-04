@@ -31,22 +31,22 @@ import java.util.Set;
 @Configuration(proxyBeanMethods = false)
 public class OAuthConfig {
 
-	@Value("${spring.authorization.custom.server.issuer}")
+	@Value("${spring.oauth.custom.server.issuer}")
 	private String issuer;
 
-	@Value("${spring.authorization.custom.server.default-registration-client.client-id}")
+	@Value("${spring.oauth.custom.server.default-registration-client.client-id}")
 	private String defaultClientId;
 
-	@Value("${spring.authorization.custom.server.default-registration-client.client-secret}")
+	@Value("${spring.oauth.custom.server.default-registration-client.client-secret}")
 	private String defaultClientSecret;
 
-	@Value("${spring.authorization.custom.server.default-registration-client.client-name}")
+	@Value("${spring.oauth.custom.server.default-registration-client.client-name}")
 	private String defaultClientName;
 
-	@Value("#{'${spring.authorization.custom.server.default-registration-client.scopes}'.split(',')}")
+	@Value("#{'${spring.oauth.custom.server.default-registration-client.scopes}'.split(',')}")
 	private Set<String> defaultClientScopes;
 
-	@Value("#{'${spring.authorization.custom.server.default-registration-client.redirect-uris}'.split(',')}")
+	@Value("#{'${spring.oauth.custom.server.default-registration-client.redirect-uris}'.split(',')}")
 	private Set<String> defaultClientRedirectUris;
 
 }
