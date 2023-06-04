@@ -3,7 +3,7 @@ spring:
     custom:
       server:
         issuer: http://notuptoyou.com:65000
-        default-register-client:
+        default-registration-client:
           client-id: demo-client
           client-secret: 123456
           client-name: Demo客户端

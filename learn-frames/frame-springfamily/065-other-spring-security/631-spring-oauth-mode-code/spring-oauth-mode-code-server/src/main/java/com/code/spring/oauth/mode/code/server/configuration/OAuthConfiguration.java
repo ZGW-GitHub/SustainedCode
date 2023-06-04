@@ -18,8 +18,8 @@
 package com.code.spring.oauth.mode.code.server.configuration;
 
 import cn.hutool.core.util.IdUtil;
-import com.code.spring.oauth.mode.code.server.config.AuthorizationServerConfig;
 import com.code.spring.oauth.mode.code.server.config.KeystoreConfig;
+import com.code.spring.oauth.mode.code.server.config.OAuthConfig;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -72,13 +72,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Slf4j
 @Data
 @Configuration
-public class SpringAuthorizationServerConfiguration {
+public class OAuthConfiguration {
 
 	@Resource
 	private KeystoreConfig keystoreConfig;
 
 	@Resource
-	private AuthorizationServerConfig authorizationServerConfig;
+	private OAuthConfig OAuthConfig;
 
 	/**
 	 * 授权配置
@@ -114,7 +114,7 @@ public class SpringAuthorizationServerConfiguration {
 	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
 		JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
 
-		String clientId = authorizationServerConfig.getDefaultClientId();
+		String clientId = OAuthConfig.getDefaultClientId();
 		// 1、检查当前客户端是否已注册
 		RegisteredClient registeredClient = registeredClientRepository.findByClientId(clientId);
 
@@ -155,8 +155,8 @@ public class SpringAuthorizationServerConfiguration {
 				.withId("Test_" + IdUtil.randomUUID())
 				.clientId(clientId)
 				// .clientSecret("TODO" + PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(authorizationServerConfig.getDefaultClientSecret()))
-				.clientSecret("{noop}" + authorizationServerConfig.getDefaultClientSecret())
-				.clientName(authorizationServerConfig.getDefaultClientName())
+				.clientSecret("{noop}" + OAuthConfig.getDefaultClientSecret())
+				.clientName(OAuthConfig.getDefaultClientName())
 				// 客户端认证方式
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
 				// 授权模式
@@ -169,10 +169,10 @@ public class SpringAuthorizationServerConfiguration {
 				.clientSettings(clientSettings);
 
 		// 对该客户端的授权范围
-		authorizationServerConfig.getScopes().forEach(registeredClientBuilder::scope);
+		OAuthConfig.getDefaultClientScopes().forEach(registeredClientBuilder::scope);
 
 		// 回调地址：授权服务器向当前客户端响应时调用下面地址，不在此列的地址将被拒绝（ 只能使用 IP/域名，不能使用 localhost ）
-		authorizationServerConfig.getRedirectUris().forEach(registeredClientBuilder::redirectUri);
+		OAuthConfig.getDefaultClientRedirectUris().forEach(registeredClientBuilder::redirectUri);
 
 		return registeredClientBuilder.build();
 	}
@@ -247,7 +247,7 @@ public class SpringAuthorizationServerConfiguration {
 	 */
 	@Bean
 	public AuthorizationServerSettings providerSettings() {
-		return AuthorizationServerSettings.builder().issuer(authorizationServerConfig.getIssuer()).build();
+		return AuthorizationServerSettings.builder().issuer(OAuthConfig.getIssuer()).build();
 	}
 
 }

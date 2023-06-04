@@ -42,7 +42,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Slf4j
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
-public class SpringSecurityConfiguration {
+public class SecurityConfiguration {
 
 	@Resource
 	private SecurityConfig securityConfig;

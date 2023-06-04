@@ -29,24 +29,24 @@ import java.util.Set;
  */
 @Data
 @Configuration(proxyBeanMethods = false)
-public class AuthorizationServerConfig {
+public class OAuthConfig {
 
 	@Value("${spring.authorization.custom.server.issuer}")
 	private String issuer;
 
-	@Value("${spring.authorization.custom.server.default-register-client.client-id}")
+	@Value("${spring.authorization.custom.server.default-registration-client.client-id}")
 	private String defaultClientId;
 
-	@Value("${spring.authorization.custom.server.default-register-client.client-secret}")
+	@Value("${spring.authorization.custom.server.default-registration-client.client-secret}")
 	private String defaultClientSecret;
 
-	@Value("${spring.authorization.custom.server.default-register-client.client-name}")
+	@Value("${spring.authorization.custom.server.default-registration-client.client-name}")
 	private String defaultClientName;
 
-	@Value("#{'${spring.authorization.custom.server.default-register-client.scopes}'.split(',')}")
-	private Set<String> scopes;
+	@Value("#{'${spring.authorization.custom.server.default-registration-client.scopes}'.split(',')}")
+	private Set<String> defaultClientScopes;
 
-	@Value("#{'${spring.authorization.custom.server.default-register-client.redirect-uris}'.split(',')}")
-	private Set<String> redirectUris;
+	@Value("#{'${spring.authorization.custom.server.default-registration-client.redirect-uris}'.split(',')}")
+	private Set<String> defaultClientRedirectUris;
 
 }
