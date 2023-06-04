@@ -50,7 +50,7 @@ public class DemoController {
 	}
 
 	@GetMapping("currentSession")
-	public String session(HttpServletRequest request) {
+	public String currentSession(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 
 		return JSONUtil.toJsonStr(session);

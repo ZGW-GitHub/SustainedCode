@@ -34,7 +34,7 @@ public class OAuthConfig {
 	/**
 	 * 授权服务器地址
 	 */
-	@Value("${spring.oauth.custom.server.issuer}")
+	@Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
 	private String issuer;
 
 }

@@ -2,7 +2,7 @@ server:
   port: 65101
 spring:
   application:
-    name: service_one
+    name: oauth_mode_code_resource
   config:
     import:
       - classpath:application-jwt.yml

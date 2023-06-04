@@ -1,5 +1,6 @@
 spring:
-  oauth:
-    custom:
-      server:
-        issuer: http://notuptoyou.com:65000
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://notuptoyou.com:65000
