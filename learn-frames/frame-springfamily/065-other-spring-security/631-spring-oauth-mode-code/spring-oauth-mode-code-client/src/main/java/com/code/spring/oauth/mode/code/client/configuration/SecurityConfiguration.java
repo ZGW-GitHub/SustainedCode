@@ -21,7 +21,6 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -40,8 +39,8 @@ public class SecurityConfiguration {
 
 	@Bean
 	SecurityFilterChain oAuthSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
-		authenticationManagerBuilder.eraseCredentials(false);
+		// AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+		// authenticationManagerBuilder.eraseCredentials(false);
 
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
