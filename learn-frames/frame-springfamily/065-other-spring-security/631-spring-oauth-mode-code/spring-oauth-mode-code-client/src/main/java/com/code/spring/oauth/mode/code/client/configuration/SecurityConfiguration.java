@@ -50,7 +50,7 @@ public class SecurityConfiguration {
 				.logout(withDefaults());
 
 		// 执行 OAuth 相关的配置
-		oAuthConfiguration.configForHttpSecurity(httpSecurity);
+		oAuthConfiguration.configByHttpSecurity(httpSecurity);
 
 		return httpSecurity.build();
 	}
