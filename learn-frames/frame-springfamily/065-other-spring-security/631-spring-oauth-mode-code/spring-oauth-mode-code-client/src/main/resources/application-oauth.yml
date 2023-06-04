@@ -9,11 +9,10 @@ spring:
             client-secret: 123456
             client-name: Demo客户端
             scope: openid,read,write
-            authorization-grant-type: authorization_code
-            provider: demo-provider
             redirect-uri: http://127.0.0.1:65001/login/oauth2/code/{registrationId}
-            # 认证方法
+            authorization-grant-type: authorization_code
             client-authentication-method: client_secret_basic
+            provider: demo-provider
         provider:
           # 服务提供地址
           demo-provider:
