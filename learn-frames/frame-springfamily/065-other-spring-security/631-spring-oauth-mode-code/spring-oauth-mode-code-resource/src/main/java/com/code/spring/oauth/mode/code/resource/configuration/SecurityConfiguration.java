@@ -69,7 +69,7 @@ public class SecurityConfiguration {
 				.sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
 						.requestMatchers("/one/aaa").hasAnyAuthority("SCOPE_read", "SCOPE_all")
-						.requestMatchers("/one/bbb").hasAnyAuthority("SCOPE_write", "SCOPE_all")
+						.requestMatchers("/one/bbb").hasAnyAuthority("SCOPE_read", "SCOPE_all")
 						.anyRequest()
 						.authenticated())
 				.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer

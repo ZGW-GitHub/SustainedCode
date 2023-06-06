@@ -19,9 +19,9 @@ package com.code.spring.oauth.mode.code.resource.configuration;
 
 import com.code.spring.oauth.mode.code.resource.config.JwtConfig;
 import com.code.spring.oauth.mode.code.resource.config.OAuthConfig;
+import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.RSAKey;
 import jakarta.annotation.Resource;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,9 @@ import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
+import java.io.IOException;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
@@ -79,7 +81,7 @@ public class JwtConfiguration {
 	 *
 	 * @return JWT 认证转换器
 	 */
-	@Bean
+	// @Bean("customJwtAuthenticationConverter")
 	JwtAuthenticationConverter jwtAuthenticationConverter() {
 		JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 		// 如果不按照规范解析权限集合 Authorities 就需要自定义 key
@@ -96,12 +98,11 @@ public class JwtConfiguration {
 	/**
 	 * 基于 Nimbus 的 jwt 解码器，并增加了一些自定义校验策略
 	 *
-	 * @param validator DelegatingOAuth2TokenValidator<Jwt>
+	 * @param oAuth2TokenValidators Collection<OAuth2TokenValidator<Jwt>>
 	 * @return jwt decoder
 	 */
 	@Bean("customJwtDecoder")
-	@SneakyThrows
-	JwtDecoder jwtDecoder(Collection<OAuth2TokenValidator<Jwt>> tokenValidators) {
+	JwtDecoder jwtDecoder(Collection<OAuth2TokenValidator<Jwt>> oAuth2TokenValidators) throws JOSEException, CertificateException, IOException {
 		// 指定 X.509 类型的证书工厂
 		CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
 		// 读取并构建证书
@@ -113,7 +114,7 @@ public class JwtConfiguration {
 
 		// 构造解码器
 		NimbusJwtDecoder nimbusJwtDecoder = NimbusJwtDecoder.withPublicKey(key).build();
-		nimbusJwtDecoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(tokenValidators)); // 注入自定义 JWT 校验逻辑
+		nimbusJwtDecoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(oAuth2TokenValidators)); // 注入自定义 JWT 校验逻辑
 		return nimbusJwtDecoder;
 	}
 
