@@ -32,9 +32,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
@@ -46,7 +43,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.security.oauth2.server.authorization.token.JwtGenerator;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
@@ -80,16 +76,6 @@ public class OAuthConfiguration {
 	public SecurityFilterChain oAuthSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		OAuth2AuthorizationServerConfigurer oAuth2AuthorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 		oAuth2AuthorizationServerConfigurer.oidc(withDefaults()); // 启用 OpenID Connect 1.0
-
-
-		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource);
-		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
-		jwtGenerator.setJwtCustomizer(context -> {
-			JwtClaimsSet.Builder claimsBuilder = context.getClaims();
-			claimsBuilder.claim(OAuth2ParameterNames.SCOPE, context.getAuthorizedScopes());
-		});
-		httpSecurity.setSharedObject(JwtGenerator.class, jwtGenerator);
-
 
 		RequestMatcher endpointsMatcher = oAuth2AuthorizationServerConfigurer.getEndpointsMatcher();
 		httpSecurity.securityMatcher(endpointsMatcher)
