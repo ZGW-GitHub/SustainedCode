@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class IdGenerator {
 
 	public static String generateTraceId() {
-		return IdUtil.getSnowflakeNextIdStr();
+		return "trace" + IdUtil.getSnowflakeNextIdStr();
 	}
 
 }
