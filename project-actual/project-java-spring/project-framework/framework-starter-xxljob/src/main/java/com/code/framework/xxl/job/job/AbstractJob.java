@@ -17,9 +17,10 @@
 
 package com.code.framework.xxl.job.job;
 
-import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
+import com.code.framework.basic.trace.log.MDCUtil;
+import com.code.framework.basic.util.IdGenerator;
 import com.xxl.job.core.handler.IJobHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,11 +62,12 @@ public abstract class AbstractJob<T> extends IJobHandler {
 
 	@Override
 	public final void execute() {
-
-		TraceContext traceContext = TraceContextHelper.startTrace();
+		TraceContextHelper.startTrace();
+		TraceContextHelper.addInfo(TraceContextKeyEnum.JOB_ID, IdGenerator.generateJobId());
+		MDCUtil.setTraceId(TraceContextHelper.getInfo(TraceContextKeyEnum.JOB_ID));
 
 		startTime = System.currentTimeMillis();
-		log.info("xxl-job : {}(traceId:{}) ，开始执行，开始时间(ms)：{}", jobClassName, traceContext.getInfo(TraceContextKeyEnum.JOB_ID), startTime);
+		log.info("xxl-job : {}，开始执行，开始时间(ms)：{}", jobClassName, startTime);
 
 		try {
 			// 1、初始化统计计数
@@ -80,10 +82,10 @@ public abstract class AbstractJob<T> extends IJobHandler {
 			}
 		} finally {
 			endTime = System.currentTimeMillis();
-			log.info("xxl-job : {}(traceId:{}) ，执行结束，执行耗时(ms)：{}，totalCnt：{}，successCnt：{}，failedCnt：{}", jobClassName,
-					traceContext.getInfo(TraceContextKeyEnum.JOB_ID), endTime - startTime, totalCnt.get(), successCnt.get(), failedCnt.get());
+			log.info("xxl-job : {}，执行结束，执行耗时(ms)：{}，totalCnt：{}，successCnt：{}，failedCnt：{}", jobClassName, endTime - startTime, totalCnt.get(), successCnt.get(), failedCnt.get());
 
 			TraceContextHelper.clear();
+			MDCUtil.clear();
 		}
 	}
 
@@ -99,8 +101,7 @@ public abstract class AbstractJob<T> extends IJobHandler {
 
 			return Optional.ofNullable(dataList).orElse(Collections.emptyList());
 		} catch (Exception e) {
-			log.error("xxl-job : {}(traceId:{}) ，执行【 doFetchDataList() 】发生异常：{}", jobClassName,
-					TraceContextHelper.currentTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
+			log.error("xxl-job : {}，执行【 doFetchDataList() 】发生异常：{}", jobClassName, e.getMessage(), e);
 		}
 		return Collections.emptyList();
 	}

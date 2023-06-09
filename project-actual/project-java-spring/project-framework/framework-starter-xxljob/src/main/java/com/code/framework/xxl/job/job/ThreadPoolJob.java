@@ -18,8 +18,6 @@
 package com.code.framework.xxl.job.job;
 
 import com.code.framework.basic.exception.BizExceptionCode;
-import com.code.framework.basic.trace.context.TraceContextHelper;
-import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -51,8 +49,7 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 				try {
 					return handler(data);
 				} catch (Exception e) {
-					log.error("xxl-job : {}(traceId:{}) ，执行【 handler(data) 】发生异常：{} ，data ：{}", jobClassName,
-							TraceContextHelper.currentTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), data.toString(), e);
+					log.error("xxl-job : {}，执行【 handler(data) 】发生异常：{} ，data ：{}", jobClassName, e.getMessage(), data.toString(), e);
 					return false;
 				}
 			});
@@ -73,8 +70,7 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 				}
 			} catch (Exception e) {
 				failedCnt.getAndIncrement();
-				log.error("xxl-job : {}(traceId:{}) ，执行【 completionService.take().get() 】发生异常：{}", jobClassName,
-						TraceContextHelper.currentTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
+				log.error("xxl-job : {}，执行【 completionService.take().get() 】发生异常：{}", jobClassName, e.getMessage(), e);
 			}
 		}
 	}

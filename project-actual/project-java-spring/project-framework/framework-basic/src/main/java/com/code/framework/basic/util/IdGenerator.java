@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.trace;
+package com.code.framework.basic.util;
 
 import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +29,10 @@ public class IdGenerator {
 
 	public static String generateTraceId() {
 		return "trace" + IdUtil.getSnowflakeNextIdStr();
+	}
+
+	public static String generateJobId() {
+		return "job" + IdUtil.getSnowflakeNextIdStr();
 	}
 
 }

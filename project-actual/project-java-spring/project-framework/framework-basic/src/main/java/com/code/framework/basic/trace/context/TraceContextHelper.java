@@ -47,6 +47,14 @@ public class TraceContextHelper {
 		return CONTEXT_HOLDER.get() != null;
 	}
 
+	public static void addInfo(TraceContextKeyEnum key, String value) {
+		CONTEXT_HOLDER.get().addInfo(key, value);
+	}
+
+	public static String getInfo(TraceContextKeyEnum key) {
+		return CONTEXT_HOLDER.get().getInfo(key);
+	}
+
 	public static String getTraceId() {
 		return Optional.ofNullable(currentTraceContext()).map(TraceContext::getTraceId).orElse("");
 	}
