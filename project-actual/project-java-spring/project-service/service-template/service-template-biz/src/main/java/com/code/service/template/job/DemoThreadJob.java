@@ -15,36 +15,34 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.xxl.job.job;
+package com.code.service.template.job;
 
+import com.code.framework.xxl.job.job.ThreadPoolJob;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
- * @author 愆凡
- * @date 2022/6/13 18:03
+ * @author Snow
+ * @date 2023/6/9 22:42
  */
 @Slf4j
-public abstract class SimpleJob<D> extends AbstractJob<D> {
+public class DemoThreadJob extends ThreadPoolJob<Object> {
 
 	@Override
-	protected final void doExecute(List<D> dataList) {
-		totalCnt.getAndAdd(dataList.size());
+	protected List<Object> doFetchData() {
+		return null;
+	}
 
-		dataList.forEach(data -> {
-			try {
-				boolean success = handler(data);
-				if (success) {
-					successCnt.getAndIncrement();
-				} else {
-					failedCnt.getAndIncrement();
-				}
-			} catch (Exception e) {
-				failedCnt.getAndIncrement();
-				log.error("xxl-job : {}，执行【 handler(data) 】发生异常：{} ，data ：{}", jobClassName, e.getMessage(), data.toString(), e);
-			}
-		});
+	@Override
+	protected boolean handler(Object data) {
+		return false;
+	}
+
+	@Override
+	protected Executor getThreadPoolExecutor() {
+		return null;
 	}
 
 }

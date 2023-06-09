@@ -31,10 +31,10 @@ import java.util.concurrent.Future;
  * @date 2022/6/13 18:10
  */
 @Slf4j
-public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
+public abstract class ThreadPoolJob<D> extends AbstractJob<D> {
 
 	@Override
-	protected final void doExecute(List<T> dataList) {
+	protected final void doExecute(List<D> dataList) {
 		totalCnt.getAndAdd(dataList.size());
 
 		CompletionService<Boolean> completionService = getCompletionService();

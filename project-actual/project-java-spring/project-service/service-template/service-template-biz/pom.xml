@@ -72,14 +72,14 @@
 
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>service-template-integration</artifactId>
+			<artifactId>framework-starter-xxljob</artifactId>
+			<version>${framework-starter-xxljob.version}</version>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- 	<groupId>com.code</groupId> -->
-		<!-- 	<artifactId>framework-starter-xxljob</artifactId> -->
-		<!-- 	<version>${framework-starter-xxljob.version}</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>service-template-integration</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

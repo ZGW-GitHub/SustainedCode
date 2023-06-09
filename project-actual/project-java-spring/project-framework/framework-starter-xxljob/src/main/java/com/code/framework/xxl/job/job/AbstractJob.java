@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2022/6/13 11:46
  */
 @Slf4j
-public abstract class AbstractJob<T> extends IJobHandler {
+public abstract class AbstractJob<D> extends IJobHandler {
 
 	protected String jobClassName = this.getClass().getSimpleName();
 
@@ -74,12 +74,14 @@ public abstract class AbstractJob<T> extends IJobHandler {
 			initCnt();
 
 			// 2、查询数据
-			List<T> dataList = fetchDataList();
+			List<D> dataList = fetchData();
 
 			if (!dataList.isEmpty()) {
 				// 3、处理数据
 				doExecute(dataList);
 			}
+		} catch (Exception e) {
+			log.error("xxl-job : {}，执行【 execute() 】发生异常：{}", jobClassName, e.getMessage(), e);
 		} finally {
 			endTime = System.currentTimeMillis();
 			log.info("xxl-job : {}，执行结束，执行耗时(ms)：{}，totalCnt：{}，successCnt：{}，failedCnt：{}", jobClassName, endTime - startTime, totalCnt.get(), successCnt.get(), failedCnt.get());
@@ -95,9 +97,9 @@ public abstract class AbstractJob<T> extends IJobHandler {
 		failedCnt = new AtomicInteger(0);
 	}
 
-	private List<T> fetchDataList() {
+	private List<D> fetchData() {
 		try {
-			List<T> dataList = doFetchDataList();
+			List<D> dataList = doFetchData();
 
 			return Optional.ofNullable(dataList).orElse(Collections.emptyList());
 		} catch (Exception e) {
@@ -106,10 +108,10 @@ public abstract class AbstractJob<T> extends IJobHandler {
 		return Collections.emptyList();
 	}
 
-	protected abstract void doExecute(List<T> dataList);
+	protected abstract void doExecute(List<D> dataList);
 
-	protected abstract List<T> doFetchDataList();
+	protected abstract List<D> doFetchData();
 
-	protected abstract boolean handler(T data);
+	protected abstract boolean handler(D data);
 
 }
