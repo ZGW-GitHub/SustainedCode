@@ -1,5 +1,5 @@
 xxl-job:
-  address: "http://${xxl.job.admin.addr}"
+  address: http://${xxl.job.admin.addr}/
   executor:
     appname: service-template
     port: ${random.int[60505,60566]}
