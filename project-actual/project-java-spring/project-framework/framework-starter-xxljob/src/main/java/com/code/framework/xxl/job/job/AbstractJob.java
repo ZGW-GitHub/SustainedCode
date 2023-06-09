@@ -100,7 +100,7 @@ public abstract class AbstractJob<T> extends IJobHandler {
 			return Optional.ofNullable(dataList).orElse(Collections.emptyList());
 		} catch (Exception e) {
 			log.error("xxl-job : {}(traceId:{}) ，执行【 doFetchDataList() 】发生异常：{}", jobClassName,
-					TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
+					TraceContextHelper.currentTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
 		}
 		return Collections.emptyList();
 	}

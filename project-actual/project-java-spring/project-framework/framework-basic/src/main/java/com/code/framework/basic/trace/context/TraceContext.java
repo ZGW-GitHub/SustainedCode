@@ -17,12 +17,13 @@ public class TraceContext {
 
 	private final Map<TraceContextKeyEnum, String> contextInfo = new ConcurrentHashMap<>();
 
-	public TraceContext() {
+	TraceContext() {
 		addInfo(TraceContextKeyEnum.UNIQUE_ID, IdUtil.fastSimpleUUID());
 	}
 
-	public TraceContext(TraceContext parentTraceContext) {
-		parentTraceContext.getInfos().forEach(this::addInfo);
+	TraceContext(TraceContext parentTraceContext) {
+		this();
+		addInfoFromParent(parentTraceContext);
 	}
 
 	public void addInfo(TraceContextKeyEnum key, String value) {
@@ -33,6 +34,10 @@ public class TraceContext {
 
 		value = Optional.ofNullable(value).orElse(StrUtil.EMPTY);
 		contextInfo.put(key, value);
+	}
+
+	public void addInfoFromParent(TraceContext parentTraceContext) {
+		parentTraceContext.getInfos().forEach(this::addInfo);
 	}
 
 	public void removeInfo(TraceContextKeyEnum key) {

@@ -52,7 +52,7 @@ public abstract class TraceThreadPoolJob<T> extends AbstractJob<T> {
 				try {
 					return handler(data);
 				} catch (Exception e) {
-					TraceContext traceContext = TraceContextHelper.getTraceContext();
+					TraceContext traceContext = TraceContextHelper.currentTraceContext();
 					log.error("xxl-job : {}(traceId:{}、taskId:{}) ，执行【 handler(data) 】发生异常：{} ，data ：{}", jobClassName,
 							traceContext.getInfo(TraceContextKeyEnum.JOB_ID), traceContext.getInfo(TraceContextKeyEnum.ASYNC_TASK_ID), e.getMessage(),
 							data.toString(), e);
@@ -77,7 +77,7 @@ public abstract class TraceThreadPoolJob<T> extends AbstractJob<T> {
 			} catch (Exception e) {
 				failedCnt.getAndIncrement();
 
-				TraceContext traceContext = TraceContextHelper.getTraceContext();
+				TraceContext traceContext = TraceContextHelper.currentTraceContext();
 				log.error("xxl-job : {}(traceId:{}、taskId:{}) ，执行【 completionService.take().get() 】发生异常：{}", jobClassName,
 						traceContext.getInfo(TraceContextKeyEnum.JOB_ID), traceContext.getInfo(TraceContextKeyEnum.ASYNC_TASK_ID), e.getMessage(), e);
 			}

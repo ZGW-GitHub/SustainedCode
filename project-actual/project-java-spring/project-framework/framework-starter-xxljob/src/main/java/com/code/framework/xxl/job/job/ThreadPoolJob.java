@@ -52,7 +52,7 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 					return handler(data);
 				} catch (Exception e) {
 					log.error("xxl-job : {}(traceId:{}) ，执行【 handler(data) 】发生异常：{} ，data ：{}", jobClassName,
-							TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), data.toString(), e);
+							TraceContextHelper.currentTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), data.toString(), e);
 					return false;
 				}
 			});
@@ -74,7 +74,7 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 			} catch (Exception e) {
 				failedCnt.getAndIncrement();
 				log.error("xxl-job : {}(traceId:{}) ，执行【 completionService.take().get() 】发生异常：{}", jobClassName,
-						TraceContextHelper.getTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
+						TraceContextHelper.currentTraceContext().getInfo(TraceContextKeyEnum.JOB_ID), e.getMessage(), e);
 			}
 		}
 	}

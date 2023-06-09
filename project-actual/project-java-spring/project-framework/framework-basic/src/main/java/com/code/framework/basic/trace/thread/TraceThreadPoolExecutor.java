@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
+import com.code.framework.basic.trace.log.MDCUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.*;
@@ -47,17 +48,21 @@ public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
 	@Override
 	protected void beforeExecute(Thread t, Runnable r) {
 		TraceFutureTask<?> task = (TraceFutureTask<?>) r;
-		TraceContext mainThreadTraceContext = task.getMainThreadTraceContext();
-		TraceContext subThreadTraceContext = new TraceContext(mainThreadTraceContext);
+		TraceContext traceContext = task.getTraceContext();
 
-		subThreadTraceContext.addInfo(TraceContextKeyEnum.ASYNC_TASK_ID, IdUtil.fastSimpleUUID());
-		TraceContextHelper.setTraceContext(subThreadTraceContext);
+		// 启动新 TraceContext
+		traceContext = TraceContextHelper.startTrace(traceContext);
+		traceContext.addInfo(TraceContextKeyEnum.ASYNC_TASK_ID, IdUtil.fastSimpleUUID());
+
+		// 设置日志的 traceId 为 异步任务id
+		MDCUtil.setTraceId(traceContext.getInfo(TraceContextKeyEnum.ASYNC_TASK_ID));
 
 		super.beforeExecute(t, r);
 	}
 
 	@Override
 	protected void afterExecute(Runnable r, Throwable t) {
+		MDCUtil.clear();
 		TraceContextHelper.clear();
 
 		super.afterExecute(r, t);

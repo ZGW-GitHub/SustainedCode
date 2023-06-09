@@ -22,6 +22,7 @@ import com.code.framework.basic.trace.IdGenerator;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
+import com.code.framework.basic.trace.log.MDCUtil;
 import com.code.framework.web.api.invoker.ApiInvoker;
 import com.code.framework.web.controller.domain.GatewayRequest;
 import com.code.framework.web.controller.domain.GatewayResponse;
@@ -54,6 +55,7 @@ public class GatewayController {
 		// 2、将 traceId 设置到 ThreadLocal
 		TraceContext traceContext = TraceContextHelper.startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, traceId);
+
 		MDC.put(TraceContextKeyEnum.TRACE_ID.getName(), traceId);
 
 		try {
@@ -71,6 +73,7 @@ public class GatewayController {
 			throw e;
 		} finally {
 			// 4、清除 ThreadLocal
+			MDCUtil.clear();
 			TraceContextHelper.clear();
 		}
 	}

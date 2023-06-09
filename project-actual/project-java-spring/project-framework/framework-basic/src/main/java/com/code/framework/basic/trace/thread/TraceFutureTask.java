@@ -16,16 +16,19 @@ import java.util.concurrent.FutureTask;
 @Getter
 public class TraceFutureTask<V> extends FutureTask<V> {
 
-	private final TraceContext mainThreadTraceContext;
+	/**
+	 * 提交任务到线程池的线程的 TraceContext
+	 */
+	private final TraceContext traceContext;
 
 	public TraceFutureTask(Callable<V> callable) {
 		super(callable);
-		mainThreadTraceContext = TraceContextHelper.getTraceContext();
+		traceContext = TraceContextHelper.currentTraceContext();
 	}
 
 	public TraceFutureTask(Runnable runnable, V result) {
 		super(runnable, result);
-		mainThreadTraceContext = TraceContextHelper.getTraceContext();
+		traceContext = TraceContextHelper.currentTraceContext();
 	}
 
 }

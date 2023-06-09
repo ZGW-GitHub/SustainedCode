@@ -17,8 +17,18 @@ public class TraceContextHelper {
 		TraceContext traceContext = CONTEXT_HOLDER.get();
 		if (traceContext == null) {
 			traceContext = new TraceContext();
+			CONTEXT_HOLDER.set(traceContext);
+		}
+
+		return traceContext;
+	}
+
+	public static TraceContext startTrace(TraceContext parentTraceContext) {
+		TraceContext traceContext = CONTEXT_HOLDER.get();
+		if (traceContext == null) {
+			traceContext = new TraceContext(parentTraceContext);
 		} else {
-			traceContext = new TraceContext(traceContext);
+			traceContext.addInfoFromParent(parentTraceContext);
 		}
 
 		CONTEXT_HOLDER.set(traceContext);
@@ -29,7 +39,7 @@ public class TraceContextHelper {
 		CONTEXT_HOLDER.set(context);
 	}
 
-	public static TraceContext getTraceContext() {
+	public static TraceContext currentTraceContext() {
 		return CONTEXT_HOLDER.get();
 	}
 
@@ -38,7 +48,7 @@ public class TraceContextHelper {
 	}
 
 	public static String getTraceId() {
-		return Optional.ofNullable(getTraceContext()).map(TraceContext::getTraceId).orElse("");
+		return Optional.ofNullable(currentTraceContext()).map(TraceContext::getTraceId).orElse("");
 	}
 
 	public static void clear() {
