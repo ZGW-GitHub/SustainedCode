@@ -17,14 +17,13 @@
 
 package com.code.framework.xxl.job.job;
 
-import com.code.framework.basic.exception.BizExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletionService;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
@@ -39,9 +38,6 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 		totalCnt.getAndAdd(dataList.size());
 
 		CompletionService<Boolean> completionService = getCompletionService();
-		if (completionService == null) {
-			throw BizExceptionCode.BAD_XXL_JOB_HANDLER.exception();
-		}
 
 		List<Future<Boolean>> futureList = new ArrayList<>();
 		dataList.forEach(data -> {
@@ -75,8 +71,10 @@ public abstract class ThreadPoolJob<T> extends AbstractJob<T> {
 		}
 	}
 
-	protected abstract ExecutorCompletionService<Boolean> getCompletionService();
+	private CompletionService<Boolean> getCompletionService() {
+		return new ExecutorCompletionService<>(getThreadPoolExecutor());
+	}
 
-	protected abstract ExecutorService getThreadPoolExecutor();
+	protected abstract Executor getThreadPoolExecutor();
 
 }

@@ -17,7 +17,6 @@
 
 package com.code.framework.xxl.job.job;
 
-import com.code.framework.basic.exception.BizExceptionCode;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
@@ -41,10 +40,7 @@ public abstract class TraceThreadPoolJob<T> extends AbstractJob<T> {
 	protected void doExecute(List<T> dataList) {
 		totalCnt.getAndAdd(dataList.size());
 
-		ExecutorCompletionService<Boolean> completionService = getCompletionService();
-		if (completionService == null) {
-			throw BizExceptionCode.BAD_XXL_JOB_HANDLER.exception();
-		}
+		CompletionService<Boolean> completionService = getCompletionService();
 
 		List<TraceFutureTask<Boolean>> futureList = new ArrayList<>();
 		for (final T data : dataList) {
@@ -84,7 +80,9 @@ public abstract class TraceThreadPoolJob<T> extends AbstractJob<T> {
 		}
 	}
 
-	protected abstract ExecutorCompletionService<Boolean> getCompletionService();
+	private CompletionService<Boolean> getCompletionService() {
+		return new ExecutorCompletionService<>(getThreadPoolExecutor());
+	}
 
 	protected abstract TraceThreadPoolExecutor getThreadPoolExecutor();
 
