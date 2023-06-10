@@ -15,16 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service;
+package com.code.spring.boot.controller;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2022/7/1 10:50
+ * @date 2023/6/10 19:41
  */
-public interface TestService {
-
-	void test1();
-
-	void test2();
-
+@Slf4j
+public class AsyncTestController {
 }
