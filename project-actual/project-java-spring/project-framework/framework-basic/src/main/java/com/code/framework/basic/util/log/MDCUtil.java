@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.trace.log;
+package com.code.framework.basic.util.log;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -31,6 +31,10 @@ public class MDCUtil {
 
 	public static void setTraceId(String traceId) {
 		MDC.put(TRACE_ID_KEY, traceId);
+	}
+
+	public static void removeTraceId() {
+		MDC.remove(TRACE_ID_KEY);
 	}
 
 	public static void clear() {
