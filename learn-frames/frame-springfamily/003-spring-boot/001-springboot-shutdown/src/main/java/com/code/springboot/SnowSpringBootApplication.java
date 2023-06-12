@@ -33,9 +33,14 @@ public class SnowSpringBootApplication {
 
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(SnowSpringBootApplication.class).run(args);
 
+		context.registerShutdownHook();
+
+		// 添加优雅停机关闭钩子
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			log.info("执行 ShutdownHook ...");
+			log.info("run ShutdownHook before ...");
 			context.close();
+			// Optional.ofNullable(context.getParent()).ifPresent(parentContext -> ((ConfigurableApplicationContext) parentContext).close());
+			log.info("run ShutdownHook after ...");
 		}));
 
 	}
