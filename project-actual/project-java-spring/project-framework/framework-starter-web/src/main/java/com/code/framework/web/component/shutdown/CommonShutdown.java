@@ -17,9 +17,11 @@
 
 package com.code.framework.web.component.shutdown;
 
+import cn.hutool.core.collection.CollUtil;
 import com.code.framework.basic.trace.thread.TraceThreadPoolExecutor;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.stereotype.Component;
@@ -41,21 +43,26 @@ public class CommonShutdown implements ApplicationListener<ContextClosedEvent> {
 	@Resource
 	private TomcatShutdown tomcatShutdown;
 
-	@Resource
+	@Autowired(required = false)
 	private List<TraceThreadPoolExecutor> threadPoolExecutorList;
 
 	@Override
 	public void onApplicationEvent(ContextClosedEvent event) {
+		long begin = System.currentTimeMillis();
+
 		tomcatShutdown.shutdownGracefullyConnector(10, TimeUnit.SECONDS);
 
-		shutdownGracefullyExecutor();
+		shutdownGracefullyExecutor(begin);
 	}
 
-	public void shutdownGracefullyExecutor() {
+	public void shutdownGracefullyExecutor(long begin) {
+		if (CollUtil.isEmpty(threadPoolExecutorList)) {
+			return;
+		}
+
 		threadPoolExecutorList.forEach(ThreadPoolExecutor::shutdown);
 
 		boolean timeOut = false;
-		long begin = System.currentTimeMillis();
 		for (TraceThreadPoolExecutor executor : threadPoolExecutorList) {
 			try {
 				if (timeOut) {

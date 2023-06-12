@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * @author 愆凡
@@ -15,7 +16,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class ServiceTemplateApplication {
 	public static void main(String[] args) {
 
-		new SpringApplicationBuilder(ServiceTemplateApplication.class).run(args);
+		ConfigurableApplicationContext context = new SpringApplicationBuilder(ServiceTemplateApplication.class).run(args);
+
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			log.info("run ShutdownHook before ...");
+
+			context.close();
+
+			log.info("run ShutdownHook after ...");
+		}));
 
 	}
 }
