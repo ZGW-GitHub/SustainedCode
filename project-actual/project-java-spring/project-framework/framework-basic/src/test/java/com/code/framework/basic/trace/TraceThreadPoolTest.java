@@ -22,6 +22,7 @@ import com.code.framework.basic.BasicFrameworkTest;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
+import com.code.framework.basic.trace.thread.TraceExecutorCompletionService;
 import com.code.framework.basic.trace.thread.TraceThreadPoolExecutor;
 import com.code.framework.basic.util.log.MDCUtil;
 import lombok.SneakyThrows;
@@ -29,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -90,6 +92,35 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 		});
 
 		TimeUnit.SECONDS.sleep(5);
+
+		log.info("结束，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
+	}
+
+	@Test
+	@SneakyThrows
+	void test() {
+		TraceContext traceContext = TraceContextHelper.startTrace();
+		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
+
+		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
+
+		log.info("准备提交任务到线程池，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
+
+		CompletionService<Boolean> completionService = new TraceExecutorCompletionService<>(executorService);
+
+		completionService.submit(() -> {
+			log.info("开始执行任务，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+			log.info("执行任务结束，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
+			return true;
+		});
+
+		Boolean result = completionService.take().get();
+		System.err.println(result);
 
 		log.info("结束，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 	}
