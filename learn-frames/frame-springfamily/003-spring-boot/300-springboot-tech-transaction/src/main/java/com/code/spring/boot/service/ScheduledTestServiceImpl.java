@@ -21,49 +21,38 @@ import cn.hutool.core.util.RandomUtil;
 import com.code.spring.boot.dal.dos.User;
 import com.code.spring.boot.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.framework.AopContext;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Snow
- * @date 2022/5/5 21:33
+ * @date 2023/6/10 20:04
  */
 @Slf4j
 @Service
-public class TestServiceImpl implements TestService {
+public class ScheduledTestServiceImpl {
 
 	@Resource
 	private UserMapper userMapper;
 
-	@Override
-	@SneakyThrows
-	@Transactional(rollbackFor = Exception.class)
+	@Resource
+	private TransactionServiceImpl transactionServiceImpl;
+
+	@Transactional
+	// @Scheduled(initialDelay = 3000, fixedDelay = 1000 * 60 * 60 * 24)
 	public void test1() {
-		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-1").setAge(16));
+		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled-").setAge(16));
 
-		TimeUnit.SECONDS.sleep(1);
+		int num = 1 / 0;
 
-		// 通过下面两种不同的调用可以发现只有 ② 的调用方式 test2 方法的 @Transaction 才会生效
-		// this.test2(); // ①
-		((TestService) AopContext.currentProxy()).test2(); // ②
-
-		// throw new ArithmeticException();
+		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled2").setAge(16));
 	}
 
-	@Override
-	@SneakyThrows
-	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+	@Scheduled(initialDelay = 3000, fixedDelay = 1000 * 60 * 60 * 24)
 	public void test2() {
-		log.info("test2 run ...");
-		TimeUnit.SECONDS.sleep(1);
-
-		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("tran-2").setAge(16));
+		transactionServiceImpl.transaction();
 	}
 
 }
