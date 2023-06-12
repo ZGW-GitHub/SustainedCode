@@ -24,7 +24,7 @@ import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import com.code.framework.basic.trace.thread.TraceExecutorCompletionService;
 import com.code.framework.basic.trace.thread.TraceThreadPoolExecutor;
-import com.code.framework.basic.util.log.MDCUtil;
+import com.code.framework.basic.util.MDCUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
