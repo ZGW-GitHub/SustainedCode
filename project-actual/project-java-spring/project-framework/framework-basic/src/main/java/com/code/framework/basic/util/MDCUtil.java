@@ -15,16 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mybatis;
+package com.code.framework.basic.util;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 
 /**
  * @author Snow
- * @date 2023/5/26 18:04
+ * @date 2023/6/9 20:29
  */
-@Configuration
-@ComponentScan("com.code.framework.mybatis")
-public class MyBatisFrameworkAutoConfiguration {
+@Slf4j
+public class MDCUtil {
+
+	private static final String TRACE_ID_KEY = "TRACE_ID";
+
+	public static void setTraceId(String traceId) {
+		MDC.put(TRACE_ID_KEY, traceId);
+	}
+
+	public static void removeTraceId() {
+		MDC.remove(TRACE_ID_KEY);
+	}
+
+	public static void clear() {
+		MDC.clear();
+	}
+
 }

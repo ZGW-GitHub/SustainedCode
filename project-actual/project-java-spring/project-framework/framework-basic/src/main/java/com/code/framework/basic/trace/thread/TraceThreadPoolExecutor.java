@@ -4,7 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
-import com.code.framework.basic.util.log.MDCUtil;
+import com.code.framework.basic.util.MDCUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.*;

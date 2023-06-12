@@ -15,30 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.util.log;
+package com.code.framework.basic.util;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 
 /**
  * @author Snow
- * @date 2023/6/9 20:29
+ * @date 2023/6/12 17:25
  */
 @Slf4j
-public class MDCUtil {
+public class FileUtil {
 
-	private static final String TRACE_ID_KEY = "TRACE_ID";
+	public static String getFileType(String fileName, boolean isJoin) {
+		try {
+			String fileType = StrUtil.subAfter(fileName, ".", true);
 
-	public static void setTraceId(String traceId) {
-		MDC.put(TRACE_ID_KEY, traceId);
-	}
-
-	public static void removeTraceId() {
-		MDC.remove(TRACE_ID_KEY);
-	}
-
-	public static void clear() {
-		MDC.clear();
+			return isJoin ? StrUtil.DOT + fileType : fileType;
+		} catch (Exception e) {
+			log.error("获取文件类型出错，fileName : {}", fileName, e);
+			throw e;
+		}
 	}
 
 }

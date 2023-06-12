@@ -15,16 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mybatis;
+package com.code.framework.mybatis.domain;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Date;
 
 /**
  * @author Snow
- * @date 2023/5/26 18:04
+ * @date 2023/6/12 17:38
  */
-@Configuration
-@ComponentScan("com.code.framework.mybatis")
-public class MyBatisFrameworkAutoConfiguration {
+@Data
+@Slf4j
+public class BaseDO {
+
+	private Boolean delete;
+	private Long    creator;
+	private Date    createTime;
+	private Long    updater;
+	private Date    updateTime;
+
 }

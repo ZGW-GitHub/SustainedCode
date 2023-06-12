@@ -15,16 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mybatis;
-
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+package com.code.springboot;
 
 /**
  * @author Snow
- * @date 2023/5/26 18:04
+ * @date 2023/6/12 15:33
  */
-@Configuration
-@ComponentScan("com.code.framework.mybatis")
-public class MyBatisFrameworkAutoConfiguration {
+public class SnowSpringBootApplication {
 }

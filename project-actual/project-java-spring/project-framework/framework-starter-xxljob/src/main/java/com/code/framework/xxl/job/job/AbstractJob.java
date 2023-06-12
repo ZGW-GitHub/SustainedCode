@@ -20,7 +20,7 @@ package com.code.framework.xxl.job.job;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import com.code.framework.basic.util.IdGenerator;
-import com.code.framework.basic.util.log.MDCUtil;
+import com.code.framework.basic.util.MDCUtil;
 import com.xxl.job.core.handler.IJobHandler;
 import lombok.extern.slf4j.Slf4j;
 

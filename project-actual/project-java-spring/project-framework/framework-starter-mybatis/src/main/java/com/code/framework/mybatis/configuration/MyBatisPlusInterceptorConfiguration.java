@@ -15,31 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.configuration;
+package com.code.framework.mybatis.configuration;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2023/5/19 22:49
+ * @date 2023/6/12 17:33
  */
-@Slf4j
 @Configuration
-public class MyBatisPlusConfiguration {
-
+public class MyBatisPlusInterceptorConfiguration {
 
 	/**
-	 * MyBatis Plus 拦截器
+	 * 分页拦截器
 	 */
 	@Bean
 	public MybatisPlusInterceptor paginationInterceptor() {
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-		// 添加 MySQL 的分页拦截器
 		interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
 		return interceptor;
 	}

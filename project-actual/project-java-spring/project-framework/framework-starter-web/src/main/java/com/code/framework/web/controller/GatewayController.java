@@ -22,7 +22,7 @@ import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import com.code.framework.basic.util.IdGenerator;
-import com.code.framework.basic.util.log.MDCUtil;
+import com.code.framework.basic.util.MDCUtil;
 import com.code.framework.web.api.invoker.ApiInvoker;
 import com.code.framework.web.controller.domain.GatewayRequest;
 import com.code.framework.web.controller.domain.GatewayResponse;

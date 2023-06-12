@@ -15,16 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mybatis;
+package com.code.springboot.controller;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Snow
- * @date 2023/5/26 18:04
+ * @date 2023/6/12 15:34
  */
-@Configuration
-@ComponentScan("com.code.framework.mybatis")
-public class MyBatisFrameworkAutoConfiguration {
+@RestController
+public class DemoController {
+
+	@PostMapping("demo")
+	public String demo(@RequestParam("file") MultipartFile multipartFile) {
+
+
+		return "SUCCESS";
+	}
+
 }
