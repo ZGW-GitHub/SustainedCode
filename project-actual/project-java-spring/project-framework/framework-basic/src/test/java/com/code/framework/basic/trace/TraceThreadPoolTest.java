@@ -29,10 +29,9 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * @author Snow
@@ -41,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class TraceThreadPoolTest extends BasicFrameworkTest {
 
-	private final ExecutorService executorService = new TraceThreadPoolExecutor(3, 3, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
+	private final ExecutorService executorService = new TraceThreadPoolExecutor(10, 10, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
 
 	@Test
 	@SneakyThrows
@@ -96,18 +95,19 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 		log.info("结束，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 	}
 
+	/**
+	 * TraceExecutorCompletionService 链路追踪测试
+	 */
 	@Test
 	@SneakyThrows
-	void test() {
+	void traceExecutorCompletionServiceTraceTest() {
+		CompletionService<Boolean> completionService = new TraceExecutorCompletionService<>(executorService);
+
 		TraceContext traceContext = TraceContextHelper.startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
-
 		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
 
 		log.info("准备提交任务到线程池，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
-
-		CompletionService<Boolean> completionService = new TraceExecutorCompletionService<>(executorService);
-
 		completionService.submit(() -> {
 			log.info("开始执行任务，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 			try {
@@ -123,6 +123,45 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 		System.err.println(result);
 
 		log.info("结束，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
+	}
+
+	/**
+	 * TraceExecutorCompletionService 耗时测试
+	 */
+	@Test
+	void traceExecutorCompletionServiceTimeTest() throws InterruptedException, ExecutionException {
+		CompletionService<Integer> completionService = new TraceExecutorCompletionService<>(executorService);
+
+		TraceContext traceContext = TraceContextHelper.startTrace();
+		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
+		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
+
+		final List<Future<Integer>> futures = new ArrayList<>();
+		futures.add(completionService.submit(() -> task(60)));
+		futures.add(completionService.submit(() -> task(6)));
+		futures.add(completionService.submit(() -> task(4)));
+		futures.add(completionService.submit(() -> task(2)));
+
+		long before = System.currentTimeMillis();
+		// 遍历 Future list，通过 get() 方法获取每个 future 结果
+		for (Future<Integer> ignored : futures) {
+			Integer result = completionService.take().get();
+
+			System.out.println(result);
+		}
+		// 32+30+30+30=122
+		System.err.println((System.currentTimeMillis() - before) / 1000);
+	}
+
+	public Integer task(Integer sleep) {
+		try {
+			log.info("执行睡眠：{}", sleep);
+			TimeUnit.SECONDS.sleep(sleep);
+		} catch (Throwable e) {
+			log.error("发生异常 ：", e);
+		}
+
+		return sleep;
 	}
 
 }
