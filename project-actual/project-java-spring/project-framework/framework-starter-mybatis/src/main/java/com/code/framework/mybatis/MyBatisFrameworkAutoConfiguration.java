@@ -17,6 +17,7 @@
 
 package com.code.framework.mybatis;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -24,5 +25,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/5/26 18:04
  */
 @Configuration
+@ComponentScan("com.code.framework.mybatis")
 public class MyBatisFrameworkAutoConfiguration {
 }
