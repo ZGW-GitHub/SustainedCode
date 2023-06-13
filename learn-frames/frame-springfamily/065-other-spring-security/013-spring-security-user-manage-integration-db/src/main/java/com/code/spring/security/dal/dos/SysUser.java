@@ -23,7 +23,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author Snow
@@ -38,12 +37,7 @@ public class SysUser implements Serializable {
 	private static final long serialVersionUID = -5625175115874392926L;
 
 	private Integer id;
-	private Long    recordId;
-	private String  account;
-	private String  password;
 	private String  username;
-	private Integer age;
-	private Date    createTime;
-	private Date    updateTime;
+	private String  password;
 
 }

@@ -15,5 +15,5 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-INSERT INTO frame_spring_security.sys_user(record_id, account, password, username, age)
-VALUES (10086543, '123456', '123456', 'test', 18);
+INSERT INTO sys_user(username, password)
+VALUES ('123456', '123456');

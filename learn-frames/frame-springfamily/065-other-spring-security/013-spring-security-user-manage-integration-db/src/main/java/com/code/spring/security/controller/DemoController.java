@@ -17,6 +17,10 @@
 
 package com.code.spring.security.controller;
 
+import cn.hutool.json.JSONUtil;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +34,14 @@ public class DemoController {
 	@RequestMapping("demo")
 	public String demo() {
 		return "hello spring security !";
+	}
+
+	@RequestMapping("user")
+	public String currentUser() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+
+		return JSONUtil.toJsonStr(authentication);
 	}
 
 }

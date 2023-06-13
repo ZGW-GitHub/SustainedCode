@@ -15,21 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-DROP SCHEMA IF EXISTS `frame_spring_security`;
-CREATE SCHEMA `frame_spring_security`;
-USE `frame_spring_security`;
-
-DROP TABLE IF EXISTS `frame_spring_security`.`sys_user`;
-CREATE TABLE `frame_spring_security`.`sys_user`
+DROP TABLE IF EXISTS sys_user;
+CREATE TABLE sys_user
 (
-    `id`          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `record_id`   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
-    `account`     VARCHAR(10) DEFAULT NULL COMMENT '账号',
-    `password`    VARCHAR(10) DEFAULT NULL COMMENT '密码',
-    `username`    VARCHAR(10) DEFAULT NULL COMMENT '用户名',
-    `age`         INT(5)      DEFAULT NULL COMMENT '年龄',
-    `create_time` DATETIME    DEFAULT NOW() COMMENT '创建时间',
-    `update_time` DATETIME    DEFAULT NOW() COMMENT '更新时间',
+    `id`       INT(11)     NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `username` VARCHAR(30) NOT NULL COMMENT '姓名',
+    `password` VARCHAR(30) NOT NULL COMMENT '密码',
     PRIMARY KEY (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
