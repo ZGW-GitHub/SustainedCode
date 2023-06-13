@@ -17,6 +17,8 @@
 
 package com.code.framework.basic.exception.core;
 
+import com.code.framework.basic.exception.Exception;
+
 import java.util.function.Supplier;
 
 /**

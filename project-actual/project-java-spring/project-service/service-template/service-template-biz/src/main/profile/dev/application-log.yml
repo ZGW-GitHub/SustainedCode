@@ -3,3 +3,4 @@ logging:
     root: info
     com.code: debug
     # org.apache.dubbo: debug
+    org.springframework.web: debug

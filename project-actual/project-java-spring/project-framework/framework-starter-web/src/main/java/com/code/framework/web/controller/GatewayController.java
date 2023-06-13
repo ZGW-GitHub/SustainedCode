@@ -17,18 +17,11 @@
 
 package com.code.framework.web.controller;
 
-import cn.hutool.core.util.StrUtil;
-import com.code.framework.basic.trace.context.TraceContext;
-import com.code.framework.basic.trace.context.TraceContextHelper;
-import com.code.framework.basic.trace.context.TraceContextKeyEnum;
-import com.code.framework.basic.util.IdGenerator;
-import com.code.framework.basic.util.MDCUtil;
 import com.code.framework.web.api.invoker.ApiInvoker;
 import com.code.framework.web.controller.domain.GatewayRequest;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,32 +42,19 @@ public class GatewayController {
 
 	@PostMapping("gateway")
 	public GatewayResponse<?> gateway(@RequestBody GatewayRequest gatewayRequest) throws Throwable {
-		// 1、生成/获取 traceId
-		String traceId = StrUtil.isBlank(gatewayRequest.getTraceId()) ? IdGenerator.generateTraceId() : gatewayRequest.getTraceId();
-
-		// 2、将 traceId 设置到 ThreadLocal
-		TraceContext traceContext = TraceContextHelper.startTrace();
-		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, traceId);
-
-		MDC.put(TraceContextKeyEnum.TRACE_ID.getName(), traceId);
-
 		try {
-			// 3、调用 API
+			// 1、调用 API
 			log.debug("【 Gateway 请求 】request : {}", gatewayRequest);
 			Object result = apiInvoker.invoke(gatewayRequest.getApi(), gatewayRequest.getVersion(), gatewayRequest.getContent());
 			log.debug("【 Gateway 响应 】request : {} , response : {}", gatewayRequest, result);
 
-			// 5、返回 response
+			// 2、返回 response
 			return GatewayResponse.success(result);
 		} catch (InvocationTargetException e) {
 			if (Objects.nonNull(e.getCause())) {
 				throw e.getCause();
 			}
 			throw e;
-		} finally {
-			// 4、清除 ThreadLocal
-			MDCUtil.clear();
-			TraceContextHelper.clear();
 		}
 	}
 

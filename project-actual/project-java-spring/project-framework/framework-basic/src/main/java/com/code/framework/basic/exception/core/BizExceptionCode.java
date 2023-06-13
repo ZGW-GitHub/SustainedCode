@@ -15,15 +15,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.exception;
+package com.code.framework.basic.exception.core;
 
-import com.code.framework.basic.exception.core.ExceptionCode;
+import com.code.framework.basic.exception.BizException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.function.Supplier;
 
 /**
+ * Code 规范：<br/>
+ * <ul>
+ *     <li>均为 6 位数字</li>
+ *     <li>BizExceptionCode 	: 11xxxx</li>
+ *     <li>ApiExceptionCode 	: 12xxxx</li>
+ * </ul>
+ *
  * @author 愆凡
  * @date 2022/6/13 21:51
  */
@@ -41,19 +48,21 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 	 */
 	RUNTIME_EXCEPTION(401, "服务器繁忙，请稍后重试"),
 
+	NESTED_RUNTIME_EXCEPTION(110000, "嵌套 RuntimeException"),
+
+	/**
+	 * 系统异常
+	 */
+	LIMIT_ERROR(110001, "访问过于频繁，请稍后再试"),
+	ILLEGAL_REQUEST(110002, "非法请求，请重新刷新页面操作"),
+
+	TRACE_EXCEPTION(111001, "当前线程已有 TraceContext ，不能新建 TraceContext"),
+
 	/**
 	 * 参数异常
 	 */
 	PARAMS_ERROR(4001, "参数异常"),
 	VALIDATION_EXCEPTION(4002, "验证异常"),
-
-	NESTED_RUNTIME_EXCEPTION(4004, "嵌套 RuntimeException"),
-
-	/**
-	 * 系统异常
-	 */
-	LIMIT_ERROR(1001, "访问过于频繁，请稍后再试"),
-	ILLEGAL_REQUEST(1002, "非法请求，请重新刷新页面操作"),
 
 	/**
 	 * 定时任务

@@ -34,7 +34,6 @@ public class GatewayRequest implements Serializable {
 
 	private String api;
 	private String version;
-	private String traceId;
 	private String content;
 
 }

@@ -17,6 +17,7 @@
 
 package com.code.framework.basic.util;
 
+import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 
@@ -27,14 +28,12 @@ import org.slf4j.MDC;
 @Slf4j
 public class MDCUtil {
 
-	private static final String TRACE_ID_KEY = "TRACE_ID";
-
 	public static void setTraceId(String traceId) {
-		MDC.put(TRACE_ID_KEY, traceId);
+		MDC.put(TraceContextKeyEnum.TRACE_ID.getName(), traceId);
 	}
 
 	public static void removeTraceId() {
-		MDC.remove(TRACE_ID_KEY);
+		MDC.remove(TraceContextKeyEnum.TRACE_ID.getName());
 	}
 
 	public static void clear() {

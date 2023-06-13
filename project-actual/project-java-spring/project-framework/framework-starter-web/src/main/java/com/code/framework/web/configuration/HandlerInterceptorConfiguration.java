@@ -15,24 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.util;
+package com.code.framework.web.configuration;
 
-import cn.hutool.core.util.IdUtil;
+import com.code.framework.web.component.interceptor.TraceHandlerInterceptor;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author Snow
- * @date 2023/5/23 21:07
+ * @date 2023/6/13 20:31
  */
 @Slf4j
-public class IdGenerator {
+@Configuration
+public class HandlerInterceptorConfiguration implements WebMvcConfigurer {
 
-	public static String generateTraceId() {
-		return "trace$" + IdUtil.fastSimpleUUID();
-	}
+	@Resource
+	private TraceHandlerInterceptor traceHandlerInterceptor;
 
-	public static String generateJobId() {
-		return "job$" + IdUtil.fastSimpleUUID();
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(traceHandlerInterceptor);
 	}
 
 }

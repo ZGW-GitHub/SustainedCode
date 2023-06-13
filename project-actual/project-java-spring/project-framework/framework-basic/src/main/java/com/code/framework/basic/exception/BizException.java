@@ -1,6 +1,5 @@
 package com.code.framework.basic.exception;
 
-import com.code.framework.basic.exception.core.Exception;
 import lombok.extern.slf4j.Slf4j;
 
 /**

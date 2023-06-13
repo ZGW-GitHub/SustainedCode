@@ -1,5 +1,6 @@
 package com.code.framework.basic.trace.context;
 
+import com.code.framework.basic.exception.core.BizExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -15,22 +16,34 @@ public class TraceContextHelper {
 
 	public static TraceContext startTrace() {
 		TraceContext traceContext = CONTEXT_HOLDER.get();
-		if (traceContext == null) {
-			traceContext = new TraceContext();
-			CONTEXT_HOLDER.set(traceContext);
+		if (traceContext != null) {
+			throw BizExceptionCode.TRACE_EXCEPTION.exception();
 		}
 
+		traceContext = new TraceContext();
+		CONTEXT_HOLDER.set(traceContext);
 		return traceContext;
+	}
+
+	public static void startTrace(String traceId) {
+		TraceContext traceContext = CONTEXT_HOLDER.get();
+		if (traceContext != null) {
+			throw BizExceptionCode.TRACE_EXCEPTION.exception();
+		}
+
+		traceContext = new TraceContext();
+		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, traceId);
+
+		CONTEXT_HOLDER.set(traceContext);
 	}
 
 	public static TraceContext startTrace(TraceContext parentTraceContext) {
 		TraceContext traceContext = CONTEXT_HOLDER.get();
-		if (traceContext == null) {
-			traceContext = new TraceContext(parentTraceContext);
-		} else {
-			traceContext.addInfoFromParent(parentTraceContext);
+		if (traceContext != null) {
+			throw BizExceptionCode.TRACE_EXCEPTION.exception();
 		}
 
+		traceContext = new TraceContext(parentTraceContext);
 		CONTEXT_HOLDER.set(traceContext);
 		return traceContext;
 	}
