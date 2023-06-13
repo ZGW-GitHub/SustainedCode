@@ -3,4 +3,7 @@ server:
 spring:
   config:
     import:
+      - application-datasource.yml
+      - application-h2.yml
+      - application-mybatis-plus.yml
       - application-log.yml
