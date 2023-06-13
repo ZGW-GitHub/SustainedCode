@@ -40,7 +40,7 @@ public class TemplateApiImpl implements TemplateApi {
 		return "test";
 	}
 
-	public Long save(TemplateCreateReqVO createReqVO) {
+	public String save(TemplateCreateReqVO createReqVO) {
 		return templateService.save(TemplateConvert.INSTANCE.voToModel(createReqVO));
 	}
 

@@ -17,10 +17,12 @@
 
 package com.code.framework.mybatis.domain;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author Snow
@@ -30,10 +32,22 @@ import java.util.Date;
 @Slf4j
 public class BaseDO {
 
+	private Long id;
+
+	private String recordNo;
+
 	private Boolean delete;
-	private Long    creator;
-	private Date    createTime;
-	private Long    updater;
-	private Date    updateTime;
+
+	@TableField(fill = FieldFill.INSERT)
+	private String creator;
+
+	@TableField(fill = FieldFill.INSERT)
+	private LocalDateTime createTime;
+
+	@TableField(fill = FieldFill.UPDATE)
+	private String updater;
+
+	@TableField(fill = FieldFill.UPDATE)
+	private LocalDateTime updateTime;
 
 }

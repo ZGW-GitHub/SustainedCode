@@ -33,6 +33,6 @@ public interface TemplateApi {
 	String test();
 
 	@Api("template.save")
-	Long save(@Valid TemplateCreateReqVO reqVO);
+	String save(@Valid TemplateCreateReqVO reqVO);
 
 }

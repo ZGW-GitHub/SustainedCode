@@ -45,7 +45,7 @@ public class TraceContext {
 	}
 
 	public String getInfo(TraceContextKeyEnum key) {
-		return contextInfo.get(key);
+		return Optional.ofNullable(contextInfo.get(key)).orElse("");
 	}
 
 	public String getTraceId() {

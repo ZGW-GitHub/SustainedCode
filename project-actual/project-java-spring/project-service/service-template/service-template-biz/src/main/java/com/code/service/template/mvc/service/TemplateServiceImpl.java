@@ -17,7 +17,6 @@
 
 package com.code.service.template.mvc.service;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
@@ -49,10 +48,9 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	@Transactional
-	public Long save(TemplateCreateReqModel createReqModel) {
+	public String save(TemplateCreateReqModel createReqModel) {
 		TemplateDO templateDO = TemplateConvert.INSTANCE.modelToDo(createReqModel);
-		templateDO.setRecordNo(IdUtil.getSnowflakeNextId());
-		templateDO.setCreateTime(DateUtil.date());
+		templateDO.setRecordNo(IdUtil.fastSimpleUUID());
 		templateMapper.insert(templateDO);
 
 		// applicationContext.publishEvent(new RocketSendEvent(new TestMessage()));

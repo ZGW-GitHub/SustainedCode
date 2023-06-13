@@ -1,5 +1,6 @@
 package com.code.framework.basic.trace.context;
 
+import cn.hutool.json.JSONUtil;
 import com.code.framework.basic.exception.code.BizExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,20 +22,15 @@ public class TraceContextHelper {
 		}
 
 		traceContext = new TraceContext();
+		// TODO 接入 Security 后修改
+		traceContext.addInfo(TraceContextKeyEnum.USER_INFO, JSONUtil.toJsonStr(new TraceUserInfo().setUserId("666").setUserName("test")));
 		CONTEXT_HOLDER.set(traceContext);
 		return traceContext;
 	}
 
 	public static void startTrace(String traceId) {
-		TraceContext traceContext = CONTEXT_HOLDER.get();
-		if (traceContext != null) {
-			throw BizExceptionCode.TRACE_EXCEPTION.exception();
-		}
-
-		traceContext = new TraceContext();
+		TraceContext traceContext = startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, traceId);
-
-		CONTEXT_HOLDER.set(traceContext);
 	}
 
 	public static TraceContext startTrace(TraceContext parentTraceContext) {

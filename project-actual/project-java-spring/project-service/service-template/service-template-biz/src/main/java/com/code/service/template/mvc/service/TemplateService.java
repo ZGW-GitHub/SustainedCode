@@ -26,6 +26,6 @@ import org.springframework.context.ApplicationContextAware;
  */
 public interface TemplateService extends ApplicationContextAware {
 
-	Long save(TemplateCreateReqModel createReqModel);
+	String save(TemplateCreateReqModel createReqModel);
 
 }

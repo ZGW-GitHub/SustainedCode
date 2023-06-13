@@ -15,27 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.dal.domain.dos;
+package com.code.framework.basic.trace.context;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.code.framework.mybatis.domain.BaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 愆凡
- * @date 2022/6/12 17:43
+ * @author Snow
+ * @date 2023/6/13 21:14
  */
 @Slf4j
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("template")
-public class TemplateDO extends BaseDO {
+public class TraceUserInfo {
 
-	private String  name;
-	private Integer age;
+	private String userId;
+
+	private String userName;
 
 }

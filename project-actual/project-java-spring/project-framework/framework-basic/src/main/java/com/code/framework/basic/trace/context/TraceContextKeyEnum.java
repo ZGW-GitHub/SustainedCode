@@ -24,6 +24,11 @@ public enum TraceContextKeyEnum {
 	TRACE_ID("TRACE_ID"),
 
 	/**
+	 * 当前用户信息
+	 */
+	USER_INFO("USER_INFO"),
+
+	/**
 	 * 任务 ID
 	 */
 	JOB_ID("JOB_ID"),

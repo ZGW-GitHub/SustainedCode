@@ -20,12 +20,15 @@ CREATE DATABASE IF NOT EXISTS project_actual CHARSET utf8;
 DROP TABLE IF EXISTS project_actual.template;
 CREATE TABLE project_actual.template
 (
-    `id`          INT(5)     NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `record_no`   BIGINT(32) NOT NULL UNIQUE COMMENT '唯一键',
-    `name` VARCHAR(10) DEFAULT NULL COMMENT '姓名',
-    `age`         INT(5)      DEFAULT NULL COMMENT '年龄',
-    `create_time` DATETIME    DEFAULT NOW() COMMENT '创建时间',
-    `update_time` DATETIME    DEFAULT NOW() COMMENT '更新时间',
+    `id`          INT(11)     NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `record_no`   VARCHAR(50) NOT NULL UNIQUE COMMENT '唯一键',
+    `name`        VARCHAR(10)          DEFAULT NULL COMMENT '姓名',
+    `age`         INT(5)               DEFAULT NULL COMMENT '年龄',
+    `delete`      TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '逻辑删除',
+    `creator`     VARCHAR(30) NOT NULL COMMENT '创建人',
+    `create_time` DATETIME             DEFAULT NOW() COMMENT '创建时间',
+    `updater`     VARCHAR(30)          DEFAULT NULL COMMENT '更新人',
+    `update_time` DATETIME             DEFAULT NULL ON UPDATE NOW() COMMENT '更新时间',
     PRIMARY KEY (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
