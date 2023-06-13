@@ -18,7 +18,7 @@
 package com.code.framework.web.controller.domain;
 
 import com.code.framework.basic.exception.Exception;
-import com.code.framework.basic.exception.core.ExceptionCode;
+import com.code.framework.basic.exception.code.ExceptionCode;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

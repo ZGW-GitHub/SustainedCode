@@ -1,6 +1,6 @@
 package com.code.framework.mq.core.client.rocketmq.consumer;
 
-import com.code.framework.basic.exception.core.BizExceptionCode;
+import com.code.framework.basic.exception.code.BizExceptionCode;
 import com.code.framework.mq.core.client.MqClientBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;

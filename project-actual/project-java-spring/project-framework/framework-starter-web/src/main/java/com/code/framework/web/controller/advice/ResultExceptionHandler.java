@@ -19,7 +19,7 @@ package com.code.framework.web.controller.advice;
 
 import cn.hutool.core.util.StrUtil;
 import com.code.framework.basic.exception.Exception;
-import com.code.framework.basic.exception.core.BizExceptionCode;
+import com.code.framework.basic.exception.code.BizExceptionCode;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import com.code.framework.web.controller.domain.GatewayResponse;
 import jakarta.servlet.http.HttpServletRequest;

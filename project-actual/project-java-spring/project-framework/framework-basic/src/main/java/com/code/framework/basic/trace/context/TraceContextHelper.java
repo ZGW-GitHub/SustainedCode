@@ -1,6 +1,6 @@
 package com.code.framework.basic.trace.context;
 
-import com.code.framework.basic.exception.core.BizExceptionCode;
+import com.code.framework.basic.exception.code.BizExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;

@@ -86,8 +86,6 @@ public class TraceHandlerInterceptor implements HandlerInterceptor {
 	 */
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-		response.setHeader(TraceContextKeyEnum.TRACE_ID.getName(), TraceContextHelper.getTraceId());
-
 		MDCUtil.removeTraceId();
 		TraceContextHelper.clear();
 	}

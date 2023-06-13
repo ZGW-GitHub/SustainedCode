@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.exception.core;
+package com.code.framework.basic.exception.code;
 
 import com.code.framework.basic.exception.BizException;
 import lombok.AllArgsConstructor;
