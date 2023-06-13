@@ -82,3 +82,13 @@ CREATE TABLE oauth2_authorization
     device_code_metadata          blob          DEFAULT NULL,
     PRIMARY KEY (id)
 );
+
+-- 自定义表：用户表
+CREATE TABLE sys_user
+(
+    `id`       INT(11)     NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `username` VARCHAR(30) NOT NULL COMMENT '姓名',
+    `password` VARCHAR(30) NOT NULL COMMENT '密码',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
