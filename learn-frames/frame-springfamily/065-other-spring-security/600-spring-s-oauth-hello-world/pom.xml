@@ -23,18 +23,24 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>631-spring-oauth-mode-code</artifactId>
+		<artifactId>065-other-spring-security</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>spring-oauth-mode-code-client</artifactId>
+	<artifactId>600-spring-s-oauth-hello-world</artifactId>
 
 	<packaging>jar</packaging>
+
+	<properties>
+		<spring-boot.version>3.1.0</spring-boot.version>
+		<spring-cloud.version>2022.0.3</spring-cloud.version>
+		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+			<artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
 		</dependency>
 	</dependencies>
 

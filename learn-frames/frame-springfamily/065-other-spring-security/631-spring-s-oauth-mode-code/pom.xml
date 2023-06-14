@@ -27,13 +27,14 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>641-spring-oauth-mode-client</artifactId>
+	<artifactId>631-spring-s-oauth-mode-code</artifactId>
 
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>spring-oauth-mode-client-server</module>
-		<module>spring-oauth-mode-client-client</module>
+		<module>spring-oauth-mode-code-server</module>
+		<module>spring-oauth-mode-code-client</module>
+		<module>spring-oauth-mode-code-resource</module>
 	</modules>
 
 	<properties>

@@ -23,23 +23,47 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>065-other-spring-security</artifactId>
+		<artifactId>641-spring-s-oauth-mode-client</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>631-spring-oauth-mode-code</artifactId>
+	<artifactId>spring-oauth-mode-client-server</artifactId>
 
-	<packaging>pom</packaging>
-
-	<modules>
-		<module>spring-oauth-mode-code-server</module>
-		<module>spring-oauth-mode-code-client</module>
-		<module>spring-oauth-mode-code-resource</module>
-	</modules>
+	<packaging>jar</packaging>
 
 	<properties>
-		<spring-boot.version>3.1.0</spring-boot.version>
-		<spring-cloud.version>2022.0.3</spring-cloud.version>
+		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
+		<druid-starter.version>1.2.11</druid-starter.version>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>${mybatis-plus-starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid-starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

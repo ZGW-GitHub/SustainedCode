@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>301-spring-security-authorization-custom</artifactId>
+	<artifactId>201-spring-security-authorization-custom</artifactId>
 
 	<packaging>jar</packaging>
 

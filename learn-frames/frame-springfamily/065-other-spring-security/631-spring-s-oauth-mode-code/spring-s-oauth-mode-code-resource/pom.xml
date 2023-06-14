@@ -23,18 +23,18 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>641-spring-oauth-mode-client</artifactId>
+		<artifactId>631-spring-s-oauth-mode-code</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>spring-oauth-mode-client-client</artifactId>
+	<artifactId>spring-oauth-mode-code-resource</artifactId>
 
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 	</dependencies>
 
