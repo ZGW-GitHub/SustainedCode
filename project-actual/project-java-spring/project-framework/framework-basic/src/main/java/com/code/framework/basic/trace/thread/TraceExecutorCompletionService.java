@@ -20,9 +20,23 @@ package com.code.framework.basic.trace.thread;
 import java.util.concurrent.*;
 
 /**
+ * 已弃用，因为：通过在 TraceThreadPoolExecutor 中重写 execute 方法解决了使用原生 CompletionService 的类型转换异常：
+ * <pre> {@code
+ * @Override
+ * public void execute(Runnable command) {
+ *     if (command instanceof TraceFutureTask) {
+ *         super.execute(command);
+ *             return;
+ *     }
+ *
+ *     RunnableFuture<Void> future = newTaskFor(command, null);
+ *     super.execute(future);
+ * }
+ * }</pre>
  * @author Snow
  * @date 2023/6/12 11:34
  */
+@Deprecated
 public class TraceExecutorCompletionService<V> implements CompletionService<V> {
 
 	private final TraceThreadPoolExecutor  executor;

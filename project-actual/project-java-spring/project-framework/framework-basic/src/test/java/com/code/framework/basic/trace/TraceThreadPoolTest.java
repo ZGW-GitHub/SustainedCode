@@ -22,7 +22,6 @@ import com.code.framework.basic.BasicFrameworkTest;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
-import com.code.framework.basic.trace.thread.TraceExecutorCompletionService;
 import com.code.framework.basic.trace.thread.TraceThreadPoolExecutor;
 import com.code.framework.basic.util.MDCUtil;
 import lombok.SneakyThrows;
@@ -52,7 +51,7 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 
 		log.info("准备提交任务到线程池，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 
-		executorService.submit(() -> {
+		executorService.execute(() -> {
 			log.info("开始执行任务，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 			try {
 				TimeUnit.SECONDS.sleep(1);
@@ -101,7 +100,7 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	@Test
 	@SneakyThrows
 	void traceExecutorCompletionServiceTraceTest() {
-		CompletionService<Boolean> completionService = new TraceExecutorCompletionService<>(executorService);
+		CompletionService<Boolean> completionService = new ExecutorCompletionService<>(executorService);
 
 		TraceContext traceContext = TraceContextHelper.startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
@@ -130,7 +129,7 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	 */
 	@Test
 	void traceExecutorCompletionServiceTimeTest() throws InterruptedException, ExecutionException {
-		CompletionService<Integer> completionService = new TraceExecutorCompletionService<>(executorService);
+		CompletionService<Integer> completionService = new ExecutorCompletionService<>(executorService);
 
 		TraceContext traceContext = TraceContextHelper.startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());

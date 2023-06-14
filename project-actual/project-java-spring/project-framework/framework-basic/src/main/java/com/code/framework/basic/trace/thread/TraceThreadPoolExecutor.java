@@ -36,6 +36,17 @@ public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
 	}
 
 	@Override
+	public void execute(Runnable command) {
+		if (command instanceof TraceFutureTask) {
+			super.execute(command);
+			return;
+		}
+
+		RunnableFuture<Void> future = newTaskFor(command, null);
+		super.execute(future);
+	}
+
+	@Override
 	protected <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
 		return new TraceFutureTask<>(runnable, value);
 	}
