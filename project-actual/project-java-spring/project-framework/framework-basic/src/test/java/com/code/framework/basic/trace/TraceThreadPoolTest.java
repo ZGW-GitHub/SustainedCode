@@ -99,7 +99,7 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	 */
 	@Test
 	@SneakyThrows
-	void traceExecutorCompletionServiceTraceTest() {
+	void completionServiceTraceTest() {
 		CompletionService<Boolean> completionService = new ExecutorCompletionService<>(executorService);
 
 		TraceContext traceContext = TraceContextHelper.startTrace();
@@ -128,7 +128,7 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	 * TraceExecutorCompletionService 耗时测试
 	 */
 	@Test
-	void traceExecutorCompletionServiceTimeTest() throws InterruptedException, ExecutionException {
+	void completionServiceTimeTest() throws InterruptedException, ExecutionException {
 		CompletionService<Integer> completionService = new ExecutorCompletionService<>(executorService);
 
 		TraceContext traceContext = TraceContextHelper.startTrace();
@@ -150,6 +150,14 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 		}
 		// 32+30+30+30=122
 		System.err.println((System.currentTimeMillis() - before) / 1000);
+	}
+
+	@Test
+	@SneakyThrows
+	void completableFutureTest() {
+		CompletableFuture.supplyAsync(() -> task(3), executorService).whenComplete((result, e) -> System.err.println(result));
+
+		TimeUnit.SECONDS.sleep(5);
 	}
 
 	public Integer task(Integer sleep) {
