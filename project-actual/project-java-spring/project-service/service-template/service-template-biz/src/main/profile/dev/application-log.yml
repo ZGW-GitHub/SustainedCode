@@ -3,4 +3,5 @@ logging:
     root: info
     com.code: debug
     # org.apache.dubbo: debug
-    org.springframework.web: debug
+    # org.springframework.web: debug
+    org.springframework.web.servlet.mvc.method.annotation: debug

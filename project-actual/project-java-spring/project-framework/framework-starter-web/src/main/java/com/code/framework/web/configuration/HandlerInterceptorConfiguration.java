@@ -17,6 +17,7 @@
 
 package com.code.framework.web.configuration;
 
+import com.code.framework.web.component.interceptor.LogHandlerInterceptor;
 import com.code.framework.web.component.interceptor.TraceHandlerInterceptor;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -35,9 +36,13 @@ public class HandlerInterceptorConfiguration implements WebMvcConfigurer {
 	@Resource
 	private TraceHandlerInterceptor traceHandlerInterceptor;
 
+	@Resource
+	private LogHandlerInterceptor logHandlerInterceptor;
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(traceHandlerInterceptor);
+		registry.addInterceptor(logHandlerInterceptor);
 	}
 
 }
