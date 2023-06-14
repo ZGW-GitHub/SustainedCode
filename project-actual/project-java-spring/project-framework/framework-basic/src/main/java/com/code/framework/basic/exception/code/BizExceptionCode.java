@@ -56,7 +56,9 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 	LIMIT_ERROR(110001, "访问过于频繁，请稍后再试"),
 	ILLEGAL_REQUEST(110002, "非法请求，请重新刷新页面操作"),
 
-	TRACE_EXCEPTION(111001, "当前线程已有 TraceContext ，不能新建 TraceContext"),
+	TRACE_EXCEPTION(111001, "Trace 异常"),
+	TRACE_CONTEXT_EXIST_EXCEPTION(111002, "当前线程已有 TraceContext ，不能新建 TraceContext"),
+	TRACE_CONTEXT_NOT_EXIST_EXCEPTION(111002, "当前线程没有 TraceContext"),
 
 	/**
 	 * 参数异常

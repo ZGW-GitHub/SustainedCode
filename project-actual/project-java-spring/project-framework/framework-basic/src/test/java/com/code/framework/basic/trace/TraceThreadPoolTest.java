@@ -26,6 +26,8 @@ import com.code.framework.basic.trace.thread.TraceThreadPoolExecutor;
 import com.code.framework.basic.util.MDCUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -41,14 +43,22 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 
 	private final ExecutorService executorService = new TraceThreadPoolExecutor(10, 10, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
 
-	@Test
-	@SneakyThrows
-	void demoTest() {
+	@BeforeAll
+	static void before() {
 		TraceContext traceContext = TraceContextHelper.startTrace();
 		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
 
 		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
+	}
 
+	@AfterAll
+	static void after() {
+		MDCUtil.removeTraceId();
+	}
+
+	@Test
+	@SneakyThrows
+	void demoTest() {
 		log.info("准备提交任务到线程池，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 
 		executorService.execute(() -> {
@@ -69,11 +79,6 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	@Test
 	@SneakyThrows
 	void exceptionTest() {
-		TraceContext traceContext = TraceContextHelper.startTrace();
-		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
-
-		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
-
 		log.info("准备提交任务到线程池，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 
 		executorService.submit(() -> {
@@ -102,10 +107,6 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	void completionServiceTraceTest() {
 		CompletionService<Boolean> completionService = new ExecutorCompletionService<>(executorService);
 
-		TraceContext traceContext = TraceContextHelper.startTrace();
-		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
-		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
-
 		log.info("准备提交任务到线程池，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
 		completionService.submit(() -> {
 			log.info("开始执行任务，hasTraceContext : {}", TraceContextHelper.hasTraceContext());
@@ -130,10 +131,6 @@ public class TraceThreadPoolTest extends BasicFrameworkTest {
 	@Test
 	void completionServiceTimeTest() throws InterruptedException, ExecutionException {
 		CompletionService<Integer> completionService = new ExecutorCompletionService<>(executorService);
-
-		TraceContext traceContext = TraceContextHelper.startTrace();
-		traceContext.addInfo(TraceContextKeyEnum.TRACE_ID, IdUtil.fastSimpleUUID());
-		MDCUtil.setTraceId(TraceContextHelper.getTraceId());
 
 		final List<Future<Integer>> futures = new ArrayList<>();
 		futures.add(completionService.submit(() -> task(60)));

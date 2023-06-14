@@ -1,5 +1,6 @@
 package com.code.framework.basic.trace.thread;
 
+import com.code.framework.basic.exception.code.BizExceptionCode;
 import com.code.framework.basic.trace.context.TraceContext;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import lombok.Getter;
@@ -24,11 +25,19 @@ public class TraceFutureTask<V> extends FutureTask<V> {
 	public TraceFutureTask(Callable<V> callable) {
 		super(callable);
 		traceContext = TraceContextHelper.currentTraceContext();
+
+		if (traceContext == null) {
+			throw BizExceptionCode.TRACE_CONTEXT_NOT_EXIST_EXCEPTION.exception();
+		}
 	}
 
 	public TraceFutureTask(Runnable runnable, V result) {
 		super(runnable, result);
 		traceContext = TraceContextHelper.currentTraceContext();
+
+		if (traceContext == null) {
+			throw BizExceptionCode.TRACE_CONTEXT_NOT_EXIST_EXCEPTION.exception();
+		}
 	}
 
 }
