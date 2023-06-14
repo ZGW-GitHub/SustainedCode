@@ -15,14 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api.domain.response;
+package com.code.service.template.mvc.dal.domain.enums;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:57
+ * @date 2023/5/19 21:33
  */
 @Slf4j
-public class XxxResponse {
+public enum XxxEnum {
 }

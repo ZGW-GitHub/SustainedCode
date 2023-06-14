@@ -15,12 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.service;
+package com.code.service.template.mvc.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
+import com.code.service.template.mvc.service.TemplateService;
 import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
 import com.code.service.template.mvc.service.model.TemplateDetailRespModel;
 import jakarta.annotation.Resource;

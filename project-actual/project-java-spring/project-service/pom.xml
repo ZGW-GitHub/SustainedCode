@@ -28,6 +28,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>service-file</module>
 		<module>service-template</module>
 		<module>service-test</module>
 	</modules>
