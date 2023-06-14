@@ -26,6 +26,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -106,7 +108,10 @@ public class SpringSecurityConfiguration {
 				.authorizeHttpRequests(config -> config.requestMatchers("/h2/**").permitAll())
 				.authorizeHttpRequests(config -> config.anyRequest().authenticated())
 				.addFilterBefore(new DemoFilter(), UsernamePasswordAuthenticationFilter.class)
-				.formLogin(withDefaults());
+				.formLogin(withDefaults())
+				.cors(withDefaults())
+				.csrf(AbstractHttpConfigurer::disable)
+				.headers(config -> config.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 
 		return httpSecurity.build();
 	}
