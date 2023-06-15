@@ -17,6 +17,9 @@
 
 package com.code.spring.security.controller;
 
+import cn.hutool.json.JSONUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +38,13 @@ public class DemoController {
 	@RequestMapping("visitor")
 	public String visitor() {
 		return "hello visitor !";
+	}
+
+	@RequestMapping("session")
+	public String session(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+
+		return JSONUtil.toJsonStr(session);
 	}
 
 }
