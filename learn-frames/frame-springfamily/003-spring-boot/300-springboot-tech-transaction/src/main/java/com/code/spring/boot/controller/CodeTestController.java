@@ -15,34 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service;
+package com.code.spring.boot.controller;
 
-import cn.hutool.core.util.RandomUtil;
-import com.code.spring.boot.dal.dos.User;
-import com.code.spring.boot.dal.mapper.UserMapper;
+import com.code.spring.boot.service.CodeTestService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2023/6/10 20:22
+ * @date 2022/5/5 21:32
  */
 @Slf4j
-@Service
-public class TransactionServiceImpl {
+@RestController
+@RequestMapping("code")
+public class CodeTestController {
 
 	@Resource
-	private UserMapper userMapper;
+	private CodeTestService codeTestService;
 
-	@Transactional
-	public void transaction() {
-		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled-").setAge(16));
+	@PostMapping("demo")
+	public String demo() {
+		codeTestService.demo();
 
-		int num = 1 / 0;
-
-		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled2").setAge(16));
+		return "SUCCESS";
 	}
 
 }
