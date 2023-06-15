@@ -53,6 +53,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(configurer -> configurer
 						.anyRequest().authenticated()) // 授权中心提供其它服务时设置
 				// .anyRequest().denyAll()) // 授权中心不提供其它服务时设置
+				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.formLogin(withDefaults())
 				.logout(withDefaults());
 

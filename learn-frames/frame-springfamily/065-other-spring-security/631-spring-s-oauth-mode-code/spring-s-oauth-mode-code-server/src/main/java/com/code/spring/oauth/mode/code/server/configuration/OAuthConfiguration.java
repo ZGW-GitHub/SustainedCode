@@ -85,6 +85,8 @@ public class OAuthConfiguration {
 				.oauth2ResourceServer(configurer -> configurer.jwt(withDefaults()))
 				.apply(oAuth2AuthorizationServerConfigurer);
 
+		// httpSecurity.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
 		// 当未从授权端点进行身份验证时，重定向到登录页
 		httpSecurity.exceptionHandling((exceptions) -> exceptions
 				.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));

@@ -17,7 +17,12 @@
 
 package com.code.spring.oauth.mode.code.resource.controller;
 
+import cn.hutool.json.JSONUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +44,20 @@ public class DemoController {
 	@GetMapping("bbb")
 	public String sourceTwo() {
 		return "服务【 user 】，资源 two";
+	}
+
+	@GetMapping("currentUser")
+	public String currentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		return JSONUtil.toJsonStr(authentication);
+	}
+
+	@GetMapping("currentSession")
+	public String currentSession(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+
+		return JSONUtil.toJsonStr(session);
 	}
 
 }

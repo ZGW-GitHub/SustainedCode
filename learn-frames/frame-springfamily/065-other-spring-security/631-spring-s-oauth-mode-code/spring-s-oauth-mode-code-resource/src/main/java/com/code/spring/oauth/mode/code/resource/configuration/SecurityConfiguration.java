@@ -59,7 +59,9 @@ public class SecurityConfiguration {
 	 * 资源管理器配置
 	 *
 	 * @param httpSecurity httpSecurity
+	 *
 	 * @return security filter chain
+	 *
 	 * @throws Exception exception
 	 */
 	@Bean
@@ -74,7 +76,9 @@ public class SecurityConfiguration {
 						.authenticated())
 				.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
 						.accessDeniedHandler(customAccessDeniedHandler)
-						.authenticationEntryPoint(customAuthenticationEntryPoint));
+						.authenticationEntryPoint(customAuthenticationEntryPoint))
+		// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		;
 
 		oAuthConfiguration.configForHttpSecurity(httpSecurity);
 

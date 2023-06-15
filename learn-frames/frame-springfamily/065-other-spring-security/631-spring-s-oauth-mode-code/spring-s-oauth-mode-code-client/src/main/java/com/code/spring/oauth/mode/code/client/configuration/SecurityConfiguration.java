@@ -46,6 +46,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(configurer -> configurer
 						.requestMatchers("/favicon.ico").permitAll()
 						.anyRequest().authenticated())
+				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.logout(withDefaults());
 
 		// 执行 OAuth 相关的配置
