@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>spring-oauth-mode-code-client</artifactId>
+	<artifactId>spring-s-oauth-mode-code-client</artifactId>
 
 	<packaging>jar</packaging>
 

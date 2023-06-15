@@ -32,8 +32,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>spring-oauth-mode-client-server</module>
-		<module>spring-oauth-mode-client-client</module>
+		<module>spring-s-oauth-mode-client-server</module>
+		<module>spring-s-oauth-mode-client-client</module>
 	</modules>
 
 	<properties>

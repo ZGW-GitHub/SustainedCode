@@ -32,9 +32,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>spring-oauth-mode-code-server</module>
-		<module>spring-oauth-mode-code-client</module>
-		<module>spring-oauth-mode-code-resource</module>
+		<module>spring-s-oauth-mode-code-server</module>
+		<module>spring-s-oauth-mode-code-client</module>
+		<module>spring-s-oauth-mode-code-resource</module>
 	</modules>
 
 	<properties>
