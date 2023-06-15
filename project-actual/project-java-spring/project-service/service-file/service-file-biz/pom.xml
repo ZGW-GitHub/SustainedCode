@@ -15,7 +15,17 @@
 
 	<packaging>jar</packaging>
 
+	<properties>
+		<cos.version>5.6.133</cos.version>
+	</properties>
+
 	<dependencies>
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos_api</artifactId>
+			<version>${cos.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
