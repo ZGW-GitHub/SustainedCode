@@ -15,16 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.configuration;
+package com.code.springboot;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
  * @author Snow
- * @date 2022/9/28 11:24
+ * @date 2020/7/31 11:48 上午
  */
-@Configuration
-@EnableAspectJAutoProxy(exposeProxy = true)
-public class AopConfiguration {
+@SpringBootApplication
+public class SnowSpringBootApplication {
+	public static void main(String[] args) {
+
+		new SpringApplicationBuilder(SnowSpringBootApplication.class).run(args);
+
+	}
 }

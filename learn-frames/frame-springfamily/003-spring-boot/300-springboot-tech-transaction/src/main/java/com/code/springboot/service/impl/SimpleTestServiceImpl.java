@@ -15,12 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service.impl;
+package com.code.springboot.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
-import com.code.spring.boot.dal.dos.User;
-import com.code.spring.boot.dal.mapper.UserMapper;
-import com.code.spring.boot.service.SimpleTestService;
+import com.code.springboot.dal.dos.User;
+import com.code.springboot.dal.mapper.UserMapper;
+import com.code.springboot.service.SimpleTestService;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

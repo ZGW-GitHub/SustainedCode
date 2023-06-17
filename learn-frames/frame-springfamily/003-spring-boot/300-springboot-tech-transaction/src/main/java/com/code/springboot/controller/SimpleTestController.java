@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.controller;
+package com.code.springboot.controller;
 
-import com.code.spring.boot.service.CodeTestService;
+import com.code.springboot.service.SimpleTestService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,15 +30,22 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("code")
-public class CodeTestController {
+@RequestMapping("simple")
+public class SimpleTestController {
 
 	@Resource
-	private CodeTestService codeTestService;
+	private SimpleTestService simpleTestService;
 
-	@PostMapping("demo")
-	public String demo() {
-		codeTestService.demo();
+	@PostMapping("test1")
+	public String test1() {
+		simpleTestService.test1();
+
+		return "SUCCESS";
+	}
+
+	@PostMapping("test2")
+	public String test2() {
+		simpleTestService.test2();
 
 		return "SUCCESS";
 	}

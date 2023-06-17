@@ -15,14 +15,34 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.controller;
+package com.code.springboot.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
+import com.code.springboot.dal.dos.User;
+import com.code.springboot.dal.mapper.UserMapper;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Snow
- * @date 2023/6/10 19:41
+ * @date 2023/6/10 20:22
  */
 @Slf4j
-public class AsyncTestController {
+@Service
+public class TransactionServiceImpl {
+
+	@Resource
+	private UserMapper userMapper;
+
+	@Transactional
+	public void transaction() {
+		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled-").setAge(16));
+
+		int num = 1 / 0;
+
+		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled2").setAge(16));
+	}
+
 }

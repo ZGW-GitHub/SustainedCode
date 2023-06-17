@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service;
+package com.code.springboot.service;
 
 /**
  * @author Snow

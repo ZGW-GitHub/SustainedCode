@@ -15,18 +15,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service.impl;
+package com.code.springboot.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
-import com.code.spring.boot.dal.dos.User;
-import com.code.spring.boot.dal.mapper.UserMapper;
-import com.code.spring.boot.service.CodeTestService;
+import com.code.springboot.dal.dos.User;
+import com.code.springboot.dal.mapper.UserMapper;
+import com.code.springboot.service.CodeTestService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
  * @author Snow
@@ -49,15 +50,24 @@ public class CodeTestServiceImpl implements CodeTestService {
 		TransactionStatus status = transactionManager.getTransaction(definition);
 
 		try {
+			System.err.println("1 : " + TransactionSynchronizationManager.isActualTransactionActive());
+
 			userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("code-1").setAge(16));
 			// int i = 1/0;
 			userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("code-1").setAge(16));
 
-			transactionManager.commit(status);
+			System.err.println("2 : " + TransactionSynchronizationManager.isActualTransactionActive());
 		} catch (Exception e) {
 			log.error("发生异常：{}", e.getMessage(), e);
 
 			transactionManager.rollback(status);
+
+			System.err.println("3 : " + TransactionSynchronizationManager.isActualTransactionActive());
+		} finally {
+			if (TransactionSynchronizationManager.isActualTransactionActive()) {
+				log.debug("提交事务");
+				transactionManager.commit(status);
+			}
 		}
 	}
 

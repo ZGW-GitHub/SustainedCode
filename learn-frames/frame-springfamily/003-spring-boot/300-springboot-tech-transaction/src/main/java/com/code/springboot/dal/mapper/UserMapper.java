@@ -15,16 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.configuration;
+package com.code.springboot.dal.mapper;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import com.code.springboot.dal.dos.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2023/6/10 20:13
+ * @date 2020/8/14 11:49 上午
  */
-@Configuration
-@EnableScheduling
-public class SchedulingConfiguration {
+@Mapper
+@Component
+public interface UserMapper {
+
+	/**
+	 * 保存实体
+	 *
+	 * @param user 实体
+	 * @return 影响行数
+	 */
+	int save(User user);
+
+	List<User> listAll();
+
 }

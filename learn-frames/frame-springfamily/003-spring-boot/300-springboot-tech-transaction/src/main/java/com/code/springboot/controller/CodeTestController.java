@@ -15,16 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.configuration;
+package com.code.springboot.controller;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import com.code.springboot.service.CodeTestService;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2022/9/28 11:42
+ * @date 2022/5/5 21:32
  */
-@Configuration
-@EnableTransactionManagement(proxyTargetClass = true)
-public class TransactionConfiguration {
+@Slf4j
+@RestController
+@RequestMapping("code")
+public class CodeTestController {
+
+	@Resource
+	private CodeTestService codeTestService;
+
+	@PostMapping("demo")
+	public String demo() {
+		codeTestService.demo();
+
+		return "SUCCESS";
+	}
+
 }

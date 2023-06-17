@@ -15,14 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service;
+package com.code.springboot.configuration;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author Snow
- * @date 2023/6/15 13:17
+ * @date 2022/9/28 11:24
  */
-public interface CodeTestService {
-
-	void demo();
-
+@Configuration
+@EnableAspectJAutoProxy(exposeProxy = true)
+public class AopConfiguration {
 }

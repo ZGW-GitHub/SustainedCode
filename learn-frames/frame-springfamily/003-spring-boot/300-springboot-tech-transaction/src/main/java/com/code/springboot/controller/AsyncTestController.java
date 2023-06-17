@@ -15,30 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.dal.mapper;
+package com.code.springboot.controller;
 
-import com.code.spring.boot.dal.dos.User;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2020/8/14 11:49 上午
+ * @date 2023/6/10 19:41
  */
-@Mapper
-@Component
-public interface UserMapper {
-
-	/**
-	 * 保存实体
-	 *
-	 * @param user 实体
-	 * @return 影响行数
-	 */
-	int save(User user);
-
-	List<User> listAll();
-
+@Slf4j
+public class AsyncTestController {
 }

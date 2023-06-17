@@ -15,34 +15,44 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.boot.service.impl;
+package com.code.springboot.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
-import com.code.spring.boot.dal.dos.User;
-import com.code.spring.boot.dal.mapper.UserMapper;
+import com.code.springboot.dal.dos.User;
+import com.code.springboot.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Snow
- * @date 2023/6/10 20:22
+ * @date 2023/6/10 20:04
  */
 @Slf4j
 @Service
-public class TransactionServiceImpl {
+public class ScheduledTestServiceImpl {
 
 	@Resource
 	private UserMapper userMapper;
 
+	@Resource
+	private TransactionServiceImpl transactionServiceImpl;
+
 	@Transactional
-	public void transaction() {
+	// @Scheduled(initialDelay = 3000, fixedDelay = 1000 * 60 * 60 * 24)
+	public void test1() {
 		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled-").setAge(16));
 
 		int num = 1 / 0;
 
 		userMapper.save(new User().setRecordId(RandomUtil.randomLong()).setName("scheduled2").setAge(16));
+	}
+
+	@Scheduled(initialDelay = 3000, fixedDelay = 1000 * 60 * 60 * 24)
+	public void test2() {
+		transactionServiceImpl.transaction();
 	}
 
 }
