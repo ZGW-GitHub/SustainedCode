@@ -5,36 +5,35 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>service-file</artifactId>
+		<artifactId>infra-authorization</artifactId>
 		<groupId>com.code</groupId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>service-file-biz</artifactId>
-	<version>${service-file.version}</version>
+	<artifactId>infra-authorization-common</artifactId>
+	<version>${infra-authorization.version}</version>
 
 	<packaging>jar</packaging>
 
 	<properties>
-		<cos.version>5.6.133</cos.version>
+		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.qcloud</groupId>
-			<artifactId>cos_api</artifactId>
-			<version>${cos.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>service-file-common</artifactId>
+			<artifactId>framework-basic</artifactId>
+			<version>${framework-basic.version}</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

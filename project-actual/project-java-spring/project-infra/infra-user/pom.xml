@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>project-infra</artifactId>
+		<groupId>com.code</groupId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>infra-user</artifactId>
+	<version>${revision}</version>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>infra-user-common</module>
+		<module>infra-user-biz</module>
+	</modules>
+
+	<properties>
+		<infra-user.version>2.0.0-SNAPSHOT</infra-user.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>infra-user-common</artifactId>
+				<version>${infra-user.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
+				<artifactId>infra-user-biz</artifactId>
+				<version>${infra-user.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

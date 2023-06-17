@@ -5,37 +5,37 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>project-service</artifactId>
+		<artifactId>project-infra</artifactId>
 		<groupId>com.code</groupId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>service-file</artifactId>
+	<artifactId>infra-authorization</artifactId>
 	<version>${revision}</version>
 
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>service-file-common</module>
-		<module>service-file-biz</module>
+		<module>infra-authorization-common</module>
+		<module>infra-authorization-biz</module>
 	</modules>
 
 	<properties>
-		<service-file.version>2.0.0-SNAPSHOT</service-file.version>
+		<infra-authorization.version>2.0.0-SNAPSHOT</infra-authorization.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.code</groupId>
-				<artifactId>service-file-common</artifactId>
-				<version>${service-file.version}</version>
+				<artifactId>infra-authorization-common</artifactId>
+				<version>${infra-authorization.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.code</groupId>
-				<artifactId>service-file-biz</artifactId>
-				<version>${service-file.version}</version>
+				<artifactId>infra-authorization-biz</artifactId>
+				<version>${infra-authorization.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
