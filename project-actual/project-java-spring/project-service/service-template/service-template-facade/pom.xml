@@ -20,16 +20,16 @@
 	</properties>
 
 	<dependencies>
+		<!-- Dubbo -->
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>service-template-common</artifactId>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- 	<groupId>com.code</groupId> -->
-		<!-- 	<artifactId>framework-starter-mq</artifactId> -->
-		<!-- 	<version>${framework-mq.version}</version> -->
-		<!-- </dependency> -->
 	</dependencies>
 
 </project>
