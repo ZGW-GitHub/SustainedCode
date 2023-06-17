@@ -152,7 +152,7 @@ public class OAuthConfiguration {
 				// 授权模式
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // 授权码模式
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) // 刷新令牌（授权码模式）
-				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+				// .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
 				// set 上面创建的 token 配置
 				.tokenSettings(tokenSettings)
 				// set 上面创建的 客户端配置
