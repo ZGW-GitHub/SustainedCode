@@ -72,6 +72,11 @@ public class DemoController {
 		return JSONUtil.toJsonStr(oAuth2AuthorizedClient);
 	}
 
+	@GetMapping("refreshToken")
+	public String refreshToken() {
+		return "";
+	}
+
 	@GetMapping("currentSession")
 	public boolean currentSession(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
