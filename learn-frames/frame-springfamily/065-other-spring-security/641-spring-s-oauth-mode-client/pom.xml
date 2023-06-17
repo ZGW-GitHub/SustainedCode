@@ -31,11 +31,6 @@
 
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>spring-s-oauth-mode-client-server</module>
-		<module>spring-s-oauth-mode-client-client</module>
-	</modules>
-
 	<properties>
 		<spring-boot.version>3.1.0</spring-boot.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>

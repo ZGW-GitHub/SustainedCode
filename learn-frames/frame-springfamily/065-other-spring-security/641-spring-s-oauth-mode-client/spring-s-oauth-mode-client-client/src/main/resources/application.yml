@@ -1,9 +1,0 @@
-server:
-  port: 65001
-spring:
-  application:
-    name: oauth_mode_client_client
-  config:
-    import:
-      - classpath:application-oauth.yml
-      - classpath:application-log.yml

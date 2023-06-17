@@ -1,7 +1,0 @@
-spring:
-  security:
-    custom:
-      default-user:
-        name: snow
-        password: 666666
-        roles: USER

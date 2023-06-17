@@ -1,8 +1,0 @@
-spring:
-  jwt:
-    custom:
-      keystore:
-        location: ${keystore.dir}
-        password: 123456
-        public-key-location: ${public-key.dir}
-        public-key-alias: demoKey
