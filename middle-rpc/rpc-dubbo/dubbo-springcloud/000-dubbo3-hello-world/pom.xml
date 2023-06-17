@@ -30,11 +30,11 @@
 	<artifactId>000-dubbo3-hello-world</artifactId>
 	<version>${revision}</version>
 
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<properties>
-		<dubbo.version>3.0.8</dubbo.version>
-		<nacos.version>2.1.0</nacos.version>
+		<dubbo.version>3.1.7</dubbo.version>
+		<nacos.version>2.2.0</nacos.version>
 
 		<spring-boot.version>2.7.0</spring-boot.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
@@ -43,14 +43,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-dubbo</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-openfeign-core</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+			<version>${dubbo.version}</version>
 		</dependency>
 
 		<dependency>
