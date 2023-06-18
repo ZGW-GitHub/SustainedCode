@@ -15,16 +15,81 @@
   - along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<script setup lang="ts">
-
-</script>
-
 <template>
-	<div>
-		<h1>登录页面</h1>
-	</div>
+	<el-form
+		ref="ruleFormRef"
+		:model="ruleForm"
+		status-icon
+		:rules="rules"
+		label-width="120px"
+		class="demo-ruleForm">
+
+		<el-form-item label="账号：" prop="account">
+			<el-input v-model.number="ruleForm.account"/>
+		</el-form-item>
+
+		<el-form-item label="密码：" prop="password">
+			<el-input v-model="ruleForm.password" type="password" autocomplete="off"/>
+		</el-form-item>
+
+		<el-form-item>
+			<el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
+			<el-button @click="resetForm(ruleFormRef)">重置</el-button>
+		</el-form-item>
+
+	</el-form>
 </template>
 
-<style scoped>
+<script lang="ts" setup>
+import {reactive, ref} from 'vue'
+import type {FormInstance, FormRules} from 'element-plus'
+
+const ruleFormRef = ref<FormInstance>()
+
+const checkAccount = (rule: any, value: any, callback: any) => {
+	if (value === '') {
+		return callback(new Error('请输入账号'))
+	} else {
+		callback()
+	}
+}
+
+const validatePassword = (rule: any, value: any, callback: any) => {
+	if (value === '') {
+		callback(new Error('请输入密码'))
+	} else {
+		callback()
+	}
+}
+
+const ruleForm = reactive({
+	account: '',
+	password: '',
+})
+
+const rules = reactive<FormRules>({
+	account: [{validator: checkAccount, trigger: 'blur'}],
+	password: [{validator: validatePassword, trigger: 'blur'}],
+})
+
+const submitForm = (formEl: FormInstance | undefined) => {
+	if (!formEl) return
+	formEl.validate((valid) => {
+		if (valid) {
+			console.log('submit!')
+		} else {
+			console.log('error submit!')
+			return false
+		}
+	})
+}
+
+const resetForm = (formEl: FormInstance | undefined) => {
+	if (!formEl) return
+	formEl.resetFields()
+}
+</script>
+
+<style lang="" scoped>
 
 </style>
