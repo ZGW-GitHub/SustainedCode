@@ -49,17 +49,15 @@ const ruleFormRef = ref<FormInstance>()
 const checkAccount = (rule: any, value: any, callback: any) => {
 	if (value === '') {
 		return callback(new Error('请输入账号'))
-	} else {
-		callback()
 	}
+	callback()
 }
 
 const checkPassword = (rule: any, value: any, callback: any) => {
 	if (value === '') {
-		callback(new Error('请输入密码'))
-	} else {
-		callback()
+		return callback(new Error('请输入密码'))
 	}
+	callback()
 }
 
 const ruleForm = reactive({
