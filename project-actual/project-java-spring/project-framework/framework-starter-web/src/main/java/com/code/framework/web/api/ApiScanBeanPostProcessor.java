@@ -59,7 +59,7 @@ public class ApiScanBeanPostProcessor implements BeanPostProcessor, Ordered {
 			int parameterCount = method.getParameterCount();
 			if (parameterCount > ApiDescriptor.API_PARAM_MAX_COUNT) {
 				log.error("【 API 加载 】发生异常：方法[ {} ], 参数个数不等于 1", method.toGenericString());
-				throw ApiExceptionCode.API_SCAN_EXCEPTION_PARAM_VALIDATE.exception();
+				throw ApiExceptionCode.API_SCAN_EXCEPTION_PARAM_MORE_THAN_ONE.exception();
 			}
 
 			String api = apiAnno.value();

@@ -35,7 +35,7 @@ import java.util.function.Supplier;
 @AllArgsConstructor
 public enum ApiExceptionCode implements ExceptionCode<ApiException> {
 
-	API_SCAN_EXCEPTION_PARAM_VALIDATE(120001, "API 参数验证异常"),
+	API_SCAN_EXCEPTION_PARAM_MORE_THAN_ONE(120001, "API 参数个数大于 1"),
 	API_SCAN_EXCEPTION_REPEAT(120002, "API 重复"),
 	API_INVOKE_EXCEPTION_API_NOT_EXIST(120101, "API 不存在");
 
