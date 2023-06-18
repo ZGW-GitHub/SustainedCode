@@ -25,7 +25,7 @@
 		class="demo-ruleForm">
 
 		<el-form-item label="账号：" prop="account">
-			<el-input v-model.number="ruleForm.account"/>
+			<el-input v-model="ruleForm.account"/>
 		</el-form-item>
 
 		<el-form-item label="密码：" prop="password">
