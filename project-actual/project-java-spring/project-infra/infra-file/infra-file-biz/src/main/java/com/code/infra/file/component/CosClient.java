@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.file.component;
+package com.code.infra.file.component;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

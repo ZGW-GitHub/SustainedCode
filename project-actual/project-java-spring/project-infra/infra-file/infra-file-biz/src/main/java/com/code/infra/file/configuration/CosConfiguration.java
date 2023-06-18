@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.file.configuration;
+package com.code.infra.file.configuration;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
