@@ -54,7 +54,7 @@ const checkAccount = (rule: any, value: any, callback: any) => {
 	}
 }
 
-const validatePassword = (rule: any, value: any, callback: any) => {
+const checkPassword = (rule: any, value: any, callback: any) => {
 	if (value === '') {
 		callback(new Error('请输入密码'))
 	} else {
@@ -69,7 +69,7 @@ const ruleForm = reactive({
 
 const rules = reactive<FormRules>({
 	account: [{validator: checkAccount, trigger: 'blur'}],
-	password: [{validator: validatePassword, trigger: 'blur'}],
+	password: [{validator: checkPassword, trigger: 'blur'}],
 })
 
 const submitForm = (formEl: FormInstance | undefined) => {
