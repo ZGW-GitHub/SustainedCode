@@ -40,6 +40,9 @@ biz:
       service: service 接口
         model: reqModel 、respModel
         impl: 
+      biz: biz 接口(service公共逻辑)
+        model: reqModel 、respModel
+        impl:
 ```
 
 ### 模型
