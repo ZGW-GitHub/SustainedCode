@@ -1,6 +1,7 @@
 infra:
   file:
     cos:
+      # 文档：https://cloud.tencent.com/document/product/436/65935
       accessKey: ${external.infra.file.cos.accessKey}
       secretKey: ${external.infra.file.cos.secretKey}
       region: ${external.infra.file.cos.region}
