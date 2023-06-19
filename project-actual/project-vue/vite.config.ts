@@ -20,12 +20,17 @@ export default defineConfig({
         }),
     ],
     server: {
+        // 监听的主机（前端项目的启动地址）
         host: '127.0.0.1',
+        // 监听的端口（前端项目的启动端口）
         port: 65000,
+        // 配置代理
         proxy: {
             '/gateway': {
+                // 后端服务地址
                 target: 'http://127.0.0.1:65001',
                 changeOrigin: true,
+                // rewrite: path => path.replace(/^\/gateway/,'')
             }
         }
     },

@@ -17,8 +17,10 @@
 
 import axios from 'axios';
 
+// baseURL 应配置为前端项目的启动地址与端口
+const baseURL = 'http://127.0.0.1:65000'
+
 // 创建 axios 实例
-const baseURL = 'http://127.0.0.1:65001/gateway'
 const service = axios.create({
 	baseURL: baseURL,
 	timeout: 5000,
@@ -38,13 +40,13 @@ service.interceptors.request.use((config) => {
 
 //响应拦截
 service.interceptors.response.use(({data}) => {
-	const code: number = data.data.code
+	const code: number = data.code
 	if (code != 200) {
 		return Promise.reject(data)
 	}
-	return data
+	return Promise.resolve(data)
 }, (err) => {
-	console.log(err)
+	return Promise.reject(err)
 })
 
 export default service

@@ -38,11 +38,15 @@
 		</el-form-item>
 
 	</el-form>
+
+	<el-button type="success" @click="testRequest">testButton</el-button>
+
 </template>
 
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import type {FormInstance, FormRules} from 'element-plus'
+import {templateSave, templateTest} from '@/request/api'
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -85,6 +89,17 @@ const submitForm = (formEl: FormInstance | undefined) => {
 const resetForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return
 	formEl.resetFields()
+}
+
+const testRequest = () => {
+	const data1 = templateTest({})
+	console.log(data1)
+
+	const data2 = templateSave({
+		"name": "测试",
+		"age": 16
+	})
+	console.log(data2)
 }
 </script>
 

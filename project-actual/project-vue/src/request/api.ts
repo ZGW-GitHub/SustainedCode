@@ -20,7 +20,33 @@ import service from "@/request/index";
 // 登录接口
 export function login() {
 	return service({
-		url: "/login",
+		url: "/gateway/login",
 		method: "POST"
+	})
+}
+
+// 测试接口
+export function templateTest(content: Object) {
+	return service({
+		url: "/gateway",
+		method: "POST",
+		data: {
+			api: "template.test",
+			version: "1.0.0",
+			content: JSON.stringify(content)
+		}
+	})
+}
+
+// 测试接口
+export function templateSave(content: Object) {
+	return service({
+		url: "/gateway",
+		method: "POST",
+		data: {
+			api: "template.save",
+			version: "1.0.0",
+			content: JSON.stringify(content)
+		}
 	})
 }
