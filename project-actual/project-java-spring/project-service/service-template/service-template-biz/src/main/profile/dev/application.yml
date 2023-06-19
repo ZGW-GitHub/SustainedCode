@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: SERVICE_TEMPLATE
+    name: service_template
   config:
     import:
       - classpath:application-datasource.yml

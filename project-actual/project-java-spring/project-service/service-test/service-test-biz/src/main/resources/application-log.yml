@@ -1,5 +1,0 @@
-logging:
-  level:
-    root: info
-    com.code: debug
-    org.apache.dubbo: debug

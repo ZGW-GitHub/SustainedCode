@@ -17,12 +17,15 @@
 
 package com.code.infra.file.configuration;
 
+import com.code.infra.file.config.CosConfig;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
-import com.qcloud.cos.auth.BasicSessionCredentials;
+import com.qcloud.cos.auth.BasicCOSCredentials;
+import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.region.Region;
 import com.qcloud.cos.transfer.TransferManager;
 import com.qcloud.cos.transfer.TransferManagerConfiguration;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,14 +41,17 @@ import java.util.concurrent.Executors;
 @Configuration
 public class CosConfiguration {
 
+	@Resource
+	private CosConfig cosConfig;
+
 	@Bean
 	public TransferManager createTransferManager() {
-		// 创建一个 COSClient 实例，这是访问 COS 服务的基础实例。
+		// 创建一个 COSClient ，这是访问 COS 服务的基础实例
 		COSClient cosClient = createCOSClient();
 
 		ExecutorService threadPool = Executors.newFixedThreadPool(32);
 
-		// 传入一个 ThreadPool, 若不传入线程池，默认 TransferManager 中会生成一个单线程的线程池。
+		// 传入一个 ThreadPool, 若不传入线程池，默认 TransferManager 中会生成一个单线程的线程池
 		TransferManager transferManager = new TransferManager(cosClient, threadPool);
 
 		// 设置高级接口的配置项
@@ -59,20 +65,15 @@ public class CosConfiguration {
 	}
 
 	private COSClient createCOSClient() {
-		// 1 传入获取到的临时密钥 (tmpSecretId, tmpSecretKey, sessionToken)
-		String tmpSecretId = "SECRET_ID";
-		String tmpSecretKey = "SECRETKEY";
-		String sessionToken = "TOKEN";
-		BasicSessionCredentials cred = new BasicSessionCredentials(tmpSecretId, tmpSecretKey, sessionToken);
+		// 1、创建证书
+		COSCredentials cosCredentials = new BasicCOSCredentials(cosConfig.getAccessKey(), cosConfig.getSecretKey());
 
-		// 2 设置 bucket 的地域
-		Region region = new Region("COS_REGION"); // COS_REGION 参数：配置存储桶的实际地域，例如 ap-beijing，更多 COS 地域的简称请参见 https://cloud.tencent.com/document/product/436/6224
+		// 2、创建并配置 ClientConfig（ ClientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分 ）
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.setRegion(new Region(cosConfig.getRegion()));
 
-		// clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分
-		ClientConfig clientConfig = new ClientConfig(region);
-
-		// 3 生成 cos 客户端
-		return new COSClient(cred, clientConfig);
+		// 3、创建 COSClient
+		return new COSClient(cosCredentials, clientConfig);
 	}
 
 }
