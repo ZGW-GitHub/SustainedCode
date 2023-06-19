@@ -1,6 +1,11 @@
 server:
-  port: 65001
+  port: 65003
 
 spring:
   application:
-	name: infra_file
+    name: infra_file
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - classpath:application-upload.yml

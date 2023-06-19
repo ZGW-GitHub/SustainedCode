@@ -38,4 +38,6 @@ public class CosConfig {
 
 	private String region;
 
+	private String bucketName;
+
 }

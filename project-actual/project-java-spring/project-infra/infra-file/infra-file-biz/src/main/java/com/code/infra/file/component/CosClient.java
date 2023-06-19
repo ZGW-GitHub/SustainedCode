@@ -17,8 +17,17 @@
 
 package com.code.infra.file.component;
 
+import com.code.infra.file.common.util.UploadUtil;
+import com.code.infra.file.config.CosConfig;
+import com.qcloud.cos.model.ObjectMetadata;
+import com.qcloud.cos.transfer.TransferManager;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * @author Snow
@@ -28,5 +37,39 @@ import org.springframework.stereotype.Component;
 @Component
 public class CosClient {
 
+	@Resource
+	private TransferManager transferManager;
+
+	@Resource
+	private CosConfig cosConfig;
+
+	public void upload(List<MultipartFile> files) {
+		for (MultipartFile file : files) {
+			upload(file);
+		}
+	}
+
+	public void upload(File file) {
+		String fileKey = UploadUtil.generateKey();
+
+		try {
+			transferManager.upload(cosConfig.getBucketName(), fileKey, file);
+		} catch (Exception e) {
+			log.error("【 腾讯云文件上传 】file: {}, 发生异常: {}", file.getName(), e.getMessage(), e);
+		}
+	}
+
+	public void upload(MultipartFile file) {
+		String fileKey = UploadUtil.generateKey();
+
+		try {
+			ObjectMetadata objectMetadata = new ObjectMetadata();
+			objectMetadata.setContentLength(file.getSize());
+
+			transferManager.upload(cosConfig.getBucketName(), fileKey, file.getInputStream(), objectMetadata);
+		} catch (Exception e) {
+			log.error("【 腾讯云文件上传 】file: {}, 发生异常: {}", file.getName(), e.getMessage(), e);
+		}
+	}
 
 }

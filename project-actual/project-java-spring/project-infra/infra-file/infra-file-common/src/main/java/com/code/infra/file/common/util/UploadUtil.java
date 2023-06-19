@@ -15,14 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.file.common;
+package com.code.infra.file.common.util;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/19 15:50
+ * @date 2023/6/19 16:42
  */
 @Slf4j
-public class Demo {
+public class UploadUtil {
+
+	public static String generateKey() {
+		return IdUtil.fastSimpleUUID();
+	}
+
 }

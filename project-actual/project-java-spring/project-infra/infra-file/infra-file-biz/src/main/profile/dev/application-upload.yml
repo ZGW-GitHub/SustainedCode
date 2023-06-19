@@ -1,0 +1,7 @@
+infra:
+  file:
+    cos:
+      accessKey: ${external.infra.file.cos.accessKey}
+      secretKey: ${external.infra.file.cos.secretKey}
+      region: ${external.infra.file.cos.region}
+      bucketName: ${external.infra.file.cos.bucketName}
