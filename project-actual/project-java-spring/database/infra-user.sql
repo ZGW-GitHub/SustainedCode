@@ -16,6 +16,7 @@
  */
 
 BEGIN;
+# 开启事务
 
 # 创建数据库：infra_user
 create database if not exists `infra_user`;
@@ -27,9 +28,10 @@ create table `user_info`
 (
     `id`         bigint(20) unsigned not null auto_increment comment '主键' primary key,
     `record_no`  bigint(20) unsigned not null default 0 comment '唯一键',
-    `name`       varchar(10)         not null default '' comment '用户名',
     `account`    varchar(32)         not null default '' comment '用户账号',
     `password`   varchar(32)         not null default '' comment '用户密码',
+    `nickname` varchar(10) not null default '' comment '昵称',
+    `avatar`   varchar(32) not null default '' comment '头像',
     `is_del`     tinyint(1) unsigned not null default 0 comment '已删除',
     `creator`    bigint(20) unsigned not null default 0 comment '创建人',
     `created_at` datetime            not null default CURRENT_TIMESTAMP comment '创建时间',
@@ -39,4 +41,4 @@ create table `user_info`
     key inx_account (account)
 );
 
-COMMIT;
+COMMIT; # 提交事务
