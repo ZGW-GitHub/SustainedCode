@@ -30,7 +30,8 @@ biz:
     mvc:
       # 供前端调用的 API
       api: api 接口
-        domain: reqVO 、respVO
+        request: reqVO
+        response: respVO
         impl: 
       # 存储相关
       dal:
