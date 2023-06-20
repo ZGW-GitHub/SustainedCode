@@ -36,7 +36,7 @@ public class BaseDO {
 
 	private String recordNo;
 
-	private Boolean delete;
+	private Boolean isDel;
 
 	@TableField(fill = FieldFill.INSERT)
 	private String creator;

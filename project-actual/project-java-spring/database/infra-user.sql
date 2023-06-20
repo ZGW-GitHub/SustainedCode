@@ -26,17 +26,17 @@ use `infra_user`;
 drop table if exists `user_info`;
 create table `user_info`
 (
-    `id`         bigint(20) unsigned not null auto_increment comment '主键' primary key,
-    `record_no`  bigint(20) unsigned not null default 0 comment '唯一键',
-    `account`    varchar(32)         not null default '' comment '用户账号',
-    `password`   varchar(32)         not null default '' comment '用户密码',
-    `nickname` varchar(10) not null default '' comment '昵称',
-    `avatar`   varchar(32) not null default '' comment '头像',
-    `is_del` tinyint(1) unsigned not null default 0 comment '逻辑删除',
-    `creator`    bigint(20) unsigned not null default 0 comment '创建人',
-    `created_at` datetime            not null default CURRENT_TIMESTAMP comment '创建时间',
-    `updater`    bigint(20) unsigned not null default 0 comment '更新人',
-    `updated_at` datetime            not null default '1000-01-01 00:00:00' on update CURRENT_TIMESTAMP comment '更新时间',
+    `id`          bigint(20) unsigned not null auto_increment comment '主键' primary key,
+    `record_no`   bigint(20) unsigned not null default 0 comment '唯一键',
+    `account`     varchar(32)         not null default '' comment '用户账号',
+    `password`    varchar(32)         not null default '' comment '用户密码',
+    `nickname`    varchar(10)         not null default '' comment '昵称',
+    `avatar`      varchar(32)         not null default '' comment '头像',
+    `is_del`      tinyint(1) unsigned not null default 0 comment '逻辑删除',
+    `creator`     bigint(20) unsigned not null default 0 comment '创建人',
+    `create_time` datetime            not null default CURRENT_TIMESTAMP comment '创建时间',
+    `updater`     bigint(20) unsigned not null default 0 comment '更新人',
+    `update_time` datetime            not null default '1000-01-01 00:00:00' on update CURRENT_TIMESTAMP comment '更新时间',
     constraint uk_record_no unique (record_no),
     key inx_account (account)
 );
