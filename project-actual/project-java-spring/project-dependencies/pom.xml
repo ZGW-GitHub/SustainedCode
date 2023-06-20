@@ -45,6 +45,7 @@
 		<rocketmq.version>4.9.4</rocketmq.version>
 		<rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 		<mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
+		<mybatis-plus-generator.version>3.5.3.1</mybatis-plus-generator.version>
 		<druid-starter.version>1.2.11</druid-starter.version>
 		<xxl-job.version>2.4.0</xxl-job.version>
 
@@ -106,6 +107,12 @@
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-boot-starter</artifactId>
 				<version>${mybatis-plus-starter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-generator</artifactId>
+				<version>${mybatis-plus-generator.version}</version>
 			</dependency>
 
 			<dependency>
