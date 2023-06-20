@@ -19,7 +19,7 @@ package com.code.service.template.mvc.api.impl;
 
 import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.api.TemplateApi;
-import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
+import com.code.service.template.mvc.api.request.TemplateCreateReqVO;
 import com.code.service.template.mvc.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

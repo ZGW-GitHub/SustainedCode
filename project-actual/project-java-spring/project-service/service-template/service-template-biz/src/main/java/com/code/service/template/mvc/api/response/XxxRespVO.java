@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api.domain.response;
+package com.code.service.template.mvc.api.response;
 
 import lombok.extern.slf4j.Slf4j;
 

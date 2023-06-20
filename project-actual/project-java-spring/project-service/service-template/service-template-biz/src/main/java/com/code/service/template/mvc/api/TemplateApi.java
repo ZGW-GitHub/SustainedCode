@@ -18,7 +18,7 @@
 package com.code.service.template.mvc.api;
 
 import com.code.framework.web.api.annotation.Api;
-import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
+import com.code.service.template.mvc.api.request.TemplateCreateReqVO;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 

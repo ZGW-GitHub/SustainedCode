@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api.domain.request;
+package com.code.service.template.mvc.api.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

@@ -17,7 +17,7 @@
 
 package com.code.service.template.convert;
 
-import com.code.service.template.mvc.api.domain.request.TemplateCreateReqVO;
+import com.code.service.template.mvc.api.request.TemplateCreateReqVO;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
 import com.code.service.template.mvc.service.model.TemplateDetailRespModel;
