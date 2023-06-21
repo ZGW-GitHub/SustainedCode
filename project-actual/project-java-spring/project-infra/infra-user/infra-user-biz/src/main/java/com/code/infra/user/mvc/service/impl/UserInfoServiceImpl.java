@@ -15,42 +15,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mybatis.domain;
+package com.code.infra.user.mvc.service.impl;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.Data;
+import com.code.infra.user.mvc.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.LocalDateTime;
 
 /**
  * @author Snow
- * @date 2023/6/12 17:38
+ * @date 2023/6/21 15:22
  */
-@Data
 @Slf4j
-public class BaseDO {
-
-	@TableId(value = "id", type = IdType.AUTO)
-	private Long id;
-
-	private String recordNo;
-
-	private Boolean isDel;
-
-	@TableField(fill = FieldFill.INSERT)
-	private String creator;
-
-	@TableField(fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
-
-	@TableField(fill = FieldFill.UPDATE)
-	private String updater;
-
-	@TableField(fill = FieldFill.UPDATE)
-	private LocalDateTime updateTime;
-
+public class UserInfoServiceImpl implements UserInfoService {
 }

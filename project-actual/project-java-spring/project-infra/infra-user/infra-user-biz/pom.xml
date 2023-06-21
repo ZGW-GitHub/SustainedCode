@@ -16,10 +16,16 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<cos.version>5.6.133</cos.version>
+		<framework-starter-mybatis.version>1.0.0-SNAPSHOT</framework-starter-mybatis.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-starter-mybatis</artifactId>
+			<version>${framework-starter-mybatis.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>infra-user-common</artifactId>
