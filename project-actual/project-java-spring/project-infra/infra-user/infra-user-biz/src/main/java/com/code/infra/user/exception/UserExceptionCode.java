@@ -15,9 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.exception.code;
+package com.code.infra.user.exception;
 
 import com.code.framework.basic.exception.BizException;
+import com.code.framework.basic.exception.code.ExceptionCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -37,40 +38,10 @@ import java.util.function.Supplier;
  */
 @Getter
 @AllArgsConstructor
-public enum BizExceptionCode implements ExceptionCode<BizException> {
+public enum UserExceptionCode implements ExceptionCode<BizException> {
 
-	/**
-	 * 通用错误码
-	 */
-	COMMON_ERROR(400, "服务器繁忙，请稍后重试"),
-
-	/**
-	 * RuntimeException
-	 */
-	RUNTIME_EXCEPTION(401, "服务器繁忙，请稍后重试"),
-
-	NESTED_RUNTIME_EXCEPTION(110000, "嵌套 RuntimeException"),
-
-	/**
-	 * 系统异常
-	 */
-	LIMIT_ERROR(110001, "访问过于频繁，请稍后再试"),
-	ILLEGAL_REQUEST(110002, "非法请求，请重新刷新页面操作"),
-
-	TRACE_EXCEPTION(111001, "Trace 异常"),
-	TRACE_CONTEXT_EXIST_EXCEPTION(111002, "当前线程已有 TraceContext ，不能新建 TraceContext"),
-	TRACE_CONTEXT_NOT_EXIST_EXCEPTION(111002, "当前线程没有 TraceContext"),
-
-	/**
-	 * 参数异常
-	 */
-	PARAMS_ERROR(4001, "参数异常"),
-	VALIDATION_EXCEPTION(4002, "验证异常"),
-
-	/**
-	 * 定时任务
-	 */
-	BAD_XXL_JOB_HANDLER(2001, "定时任务配置错误");
+	USER_NOT_EXIST(130001, "用户不存在"),
+	;
 
 	private final int                    code;
 	private final String                 message;

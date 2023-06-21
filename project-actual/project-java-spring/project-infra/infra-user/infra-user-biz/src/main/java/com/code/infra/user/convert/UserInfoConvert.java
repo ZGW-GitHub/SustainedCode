@@ -15,23 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service;
+package com.code.infra.user.convert;
 
-import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
+
+import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:20
+ * @date 2023/6/21 15:48
  */
-public interface UserInfoService {
+@Mapper
+public interface UserInfoConvert {
 
-	/**
-	 * 查找用户信息
-	 *
-	 * @param reqModel req
-	 * @return {@link UserInfoDetailRespModel}
-	 */
-	UserInfoDetailRespModel findUserInfo(UserInfoDetailReqModel reqModel);
+	UserInfoConvert INSTANCE = Mappers.getMapper(UserInfoConvert.class);
+
+	UserInfoDetailRespModel doToModel(UserInfoDO userInfoDO);
 
 }

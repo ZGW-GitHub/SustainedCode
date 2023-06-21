@@ -15,23 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service;
+package com.code.infra.user.mvc.api.domain;
 
-import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
-import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:20
+ * @date 2023/6/21 16:16
  */
-public interface UserInfoService {
+@Slf4j
+@Data
+public class LoginResp {
 
 	/**
-	 * 查找用户信息
-	 *
-	 * @param reqModel req
-	 * @return {@link UserInfoDetailRespModel}
+	 * 用户账号
 	 */
-	UserInfoDetailRespModel findUserInfo(UserInfoDetailReqModel reqModel);
+	private String account;
+
+	/**
+	 * 昵称
+	 */
+	private String nickname;
+
+	/**
+	 * 头像
+	 */
+	private String avatar;
 
 }

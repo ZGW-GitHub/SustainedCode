@@ -15,23 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service;
+package com.code.infra.user.mvc.api;
 
-import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
-import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import com.code.infra.user.mvc.api.domain.LoginReq;
+import com.code.infra.user.mvc.api.domain.LoginResp;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:20
+ * @date 2023/6/21 16:14
  */
-public interface UserInfoService {
+@Validated
+public interface UserInfoApi {
 
 	/**
-	 * 查找用户信息
+	 * 登录
 	 *
-	 * @param reqModel req
-	 * @return {@link UserInfoDetailRespModel}
+	 * @param loginReq 登录请求
+	 * @return {@link LoginResp}
 	 */
-	UserInfoDetailRespModel findUserInfo(UserInfoDetailReqModel reqModel);
+	LoginResp login(LoginReq loginReq);
 
 }

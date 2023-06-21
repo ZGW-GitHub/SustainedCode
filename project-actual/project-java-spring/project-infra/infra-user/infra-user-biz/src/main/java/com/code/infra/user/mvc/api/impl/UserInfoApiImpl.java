@@ -15,23 +15,40 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service;
+package com.code.infra.user.mvc.api.impl;
 
+import com.code.infra.user.mvc.api.UserInfoApi;
+import com.code.infra.user.mvc.api.domain.LoginReq;
+import com.code.infra.user.mvc.api.domain.LoginResp;
+import com.code.infra.user.mvc.service.UserInfoService;
 import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
 import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:20
+ * @date 2023/6/21 16:18
  */
-public interface UserInfoService {
+@Slf4j
+@Component
+public class UserInfoApiImpl implements UserInfoApi {
+
+	@Resource
+	private UserInfoService userInfoService;
 
 	/**
-	 * 查找用户信息
+	 * 登录
 	 *
-	 * @param reqModel req
-	 * @return {@link UserInfoDetailRespModel}
+	 * @param loginReq 登录请求
+	 * @return {@link LoginResp}
 	 */
-	UserInfoDetailRespModel findUserInfo(UserInfoDetailReqModel reqModel);
+	@Override
+	public LoginResp login(LoginReq loginReq) {
+		UserInfoDetailRespModel userInfo = userInfoService.findUserInfo(new UserInfoDetailReqModel().setAccount(loginReq.getAccount()));
+
+		return new LoginResp();
+	}
 
 }

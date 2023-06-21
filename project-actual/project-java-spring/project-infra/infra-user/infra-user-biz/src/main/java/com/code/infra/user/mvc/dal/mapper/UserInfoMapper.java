@@ -21,10 +21,20 @@ import com.code.framework.mybatis.mapper.BaseMapper;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Optional;
+
 /**
  * @author Snow
  * @date 2023/6/21 15:20
  */
 @Mapper
 public interface UserInfoMapper extends BaseMapper<UserInfoDO> {
+
+	default Optional<UserInfoDO> findByAccount(String account) {
+		return lambdaChainQueryWrapper()
+				.eq(UserInfoDO::getAccount, account)
+				.last(" limit 1 ")
+				.oneOpt();
+	}
+
 }
