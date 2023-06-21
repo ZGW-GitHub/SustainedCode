@@ -14,7 +14,7 @@ common:
 facade:
   com.code.xxx:
     facade: rpc 接口
-      dto: reqDTO 、respDTO
+      dto: req 、resp
 
 integration:
   com.code.xxx:
@@ -30,8 +30,8 @@ biz:
     mvc:
       # 供前端调用的 API
       api: api 接口
-        request: reqVO
-        response: respVO
+        request: req
+        response: resp
         impl: 
       # 存储相关
       dal:
@@ -39,12 +39,19 @@ biz:
         mapper: 
         redis: redis 操作
       service: service 接口
-        model: reqModel 、respModel
+        model: reqDTO 、respDTO
         impl: 
-      biz: biz 接口(service公共逻辑)
-        model: reqModel 、respModel
+      biz: biz 接口(service/facade公共逻辑)
+        model: reqDTO 、respDTO
         impl:
 ```
+
+说明：
+
+1. service :
+   - 只做数据查询操作，业务逻辑交给 apiImpl 、facadeImpl
+   - 可共用的业务逻辑写到 biz 中
+2. api
 
 ### 模型
 

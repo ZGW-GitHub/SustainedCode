@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: service_template
+  main:
+    allow-circular-references: true
+  aop:
+    auto: false
+    proxy-target-class: false
   config:
     import:
       - classpath:application-datasource.yml
@@ -15,5 +20,3 @@ spring:
       - classpath:application-xxljob.yml
       # - classpath:application-mq-kafka.yml
       # - classpath:application-mq-rocketmq.yml
-  main:
-    allow-circular-references: true

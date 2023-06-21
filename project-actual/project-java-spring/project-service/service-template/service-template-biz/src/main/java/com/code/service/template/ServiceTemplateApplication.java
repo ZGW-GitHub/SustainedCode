@@ -12,7 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 @Slf4j
 @EnableDubbo
-@SpringBootApplication
+@SpringBootApplication()
 public class ServiceTemplateApplication {
 	public static void main(String[] args) {
 
@@ -21,7 +21,9 @@ public class ServiceTemplateApplication {
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			log.info("run ShutdownHook before ...");
 
-			context.close();
+			if (context.isActive()) {
+				context.close();
+			}
 
 			log.info("run ShutdownHook after ...");
 		}));

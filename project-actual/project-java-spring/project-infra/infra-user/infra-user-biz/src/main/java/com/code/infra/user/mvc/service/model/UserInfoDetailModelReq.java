@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @Accessors(chain = true)
-public class UserInfoDetailReqModel {
+public class UserInfoDetailModelReq {
 
 	private String account;
 

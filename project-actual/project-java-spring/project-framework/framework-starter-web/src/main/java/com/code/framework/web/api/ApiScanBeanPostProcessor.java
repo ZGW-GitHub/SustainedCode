@@ -22,7 +22,6 @@ import com.code.framework.web.api.exception.ApiExceptionCode;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
@@ -36,7 +35,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class ApiScanBeanPostProcessor implements BeanPostProcessor, Ordered {
+public class ApiScanBeanPostProcessor implements BeanPostProcessor {
 
 	@Resource
 	private ApiContainer apiContainer;
@@ -53,7 +52,7 @@ public class ApiScanBeanPostProcessor implements BeanPostProcessor, Ordered {
 		for (Method method : methods) {
 			Api apiAnno = AnnotationUtils.findAnnotation(method, Api.class);
 			if (Objects.isNull(apiAnno)) {
-				return bean;
+				continue;
 			}
 
 			int parameterCount = method.getParameterCount();
@@ -67,17 +66,17 @@ public class ApiScanBeanPostProcessor implements BeanPostProcessor, Ordered {
 			ApiDescriptor apiDescriptor = new ApiDescriptor(api, version, method, beanName);
 
 			if (apiContainer.containsKey(apiDescriptor.identification())) {
-				throw ApiExceptionCode.API_SCAN_EXCEPTION_REPEAT.exception();
+				throw ApiExceptionCode.API_SCAN_EXCEPTION_REPEAT.exception(apiDescriptor.identification());
 			}
 			apiContainer.put(apiDescriptor.identification(), apiDescriptor);
-			log.info("【 API 加载 】API[ {} ]，加载成功，apiDescriptor : {}", api, apiDescriptor);
+			log.info("【 API 加载 】加载成功: {}", apiDescriptor.identification());
 		}
 		return bean;
 	}
 
-	@Override
-	public int getOrder() {
-		return 0;
-	}
+	// @Override
+	// public int getOrder() {
+	// 	return Integer.MIN_VALUE;
+	// }
 
 }

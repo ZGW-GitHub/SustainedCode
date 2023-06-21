@@ -24,6 +24,7 @@ import com.code.service.template.mvc.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Snow
@@ -40,6 +41,7 @@ public class TemplateApiImpl implements TemplateApi {
 		return "test";
 	}
 
+	@Transactional
 	public String save(TemplateCreateReqVO createReqVO) {
 		return templateService.save(TemplateConvert.INSTANCE.voToModel(createReqVO));
 	}

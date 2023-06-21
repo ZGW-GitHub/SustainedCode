@@ -22,7 +22,7 @@ import com.code.infra.user.exception.UserExceptionCode;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
+import com.code.infra.user.mvc.service.model.UserInfoDetailModelReq;
 import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * @return {@link UserInfoDetailRespModel}
 	 */
 	@Override
-	public UserInfoDetailRespModel findUserInfo(UserInfoDetailReqModel reqModel) {
+	public UserInfoDetailRespModel findUserInfo(UserInfoDetailModelReq reqModel) {
 		Optional<UserInfoDO> userInfoDO = userInfoMapper.findByAccount(reqModel.getAccount());
 
 		return userInfoDO.map(UserInfoConvert.INSTANCE::doToModel).orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);

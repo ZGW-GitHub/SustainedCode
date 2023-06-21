@@ -21,7 +21,7 @@ import com.code.infra.user.mvc.api.UserInfoApi;
 import com.code.infra.user.mvc.api.domain.LoginReq;
 import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
+import com.code.infra.user.mvc.service.model.UserInfoDetailModelReq;
 import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -46,9 +46,10 @@ public class UserInfoApiImpl implements UserInfoApi {
 	 */
 	@Override
 	public LoginResp login(LoginReq loginReq) {
-		UserInfoDetailRespModel userInfo = userInfoService.findUserInfo(new UserInfoDetailReqModel().setAccount(loginReq.getAccount()));
+		UserInfoDetailModelReq userInfoDetailReq = new UserInfoDetailModelReq().setAccount(loginReq.getAccount());
+		UserInfoDetailRespModel userInfo = userInfoService.findUserInfo(userInfoDetailReq);
 
-		return new LoginResp();
+
 	}
 
 }

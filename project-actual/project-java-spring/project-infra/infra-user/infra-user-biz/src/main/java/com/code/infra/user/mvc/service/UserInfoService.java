@@ -17,7 +17,7 @@
 
 package com.code.infra.user.mvc.service;
 
-import com.code.infra.user.mvc.service.model.UserInfoDetailReqModel;
+import com.code.infra.user.mvc.service.model.UserInfoDetailModelReq;
 import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
 
 /**
@@ -32,6 +32,6 @@ public interface UserInfoService {
 	 * @param reqModel req
 	 * @return {@link UserInfoDetailRespModel}
 	 */
-	UserInfoDetailRespModel findUserInfo(UserInfoDetailReqModel reqModel);
+	UserInfoDetailRespModel findUserInfo(UserInfoDetailModelReq reqModel);
 
 }
