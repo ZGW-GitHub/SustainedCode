@@ -18,10 +18,11 @@
 package com.code.service.template.mvc.service;
 
 import cn.hutool.core.util.IdUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.framework.basic.domain.page.PageResp;
+import com.code.framework.basic.util.InvokeUtil;
 import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
+import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
 import com.code.service.template.mvc.service.domain.TemplateCreateBO;
 import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
@@ -31,8 +32,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author 愆凡
@@ -61,10 +60,7 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	public PageResp<TemplateDetailDTO> page(TemplatePageBO pageBO) {
-		Page<TemplateDO> page = templateMapper.page(pageBO);
-		List<TemplateDetailDTO> templateDetailDTOList = TemplateConvert.INSTANCE.doToDTO(page.getRecords());
-
-		return PageResp.of(page.getTotal(), templateDetailDTOList);
+		return InvokeUtil.invokePage(pageBO, TemplateDetailDTO.class, templateMapper::page, TemplatePageQuery.class);
 	}
 
 }

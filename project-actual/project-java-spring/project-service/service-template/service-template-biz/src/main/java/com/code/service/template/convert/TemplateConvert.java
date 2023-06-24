@@ -21,6 +21,7 @@ import com.code.service.template.mvc.api.domain.TemplateCreateReq;
 import com.code.service.template.mvc.api.domain.TemplateDetailResp;
 import com.code.service.template.mvc.api.domain.TemplatePageReq;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
+import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
 import com.code.service.template.mvc.service.domain.TemplateCreateBO;
 import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
 import com.code.service.template.mvc.service.domain.TemplatePageBO;
@@ -51,5 +52,7 @@ public interface TemplateConvert {
 	TemplateDetailResp dtoToResp(TemplateDetailDTO templateDetailDTO);
 
 	List<TemplateDetailResp> dtoToResp(List<TemplateDetailDTO> templateDetailDTOList);
+
+	TemplatePageQuery boToQuery(TemplatePageBO pageBO);
 
 }

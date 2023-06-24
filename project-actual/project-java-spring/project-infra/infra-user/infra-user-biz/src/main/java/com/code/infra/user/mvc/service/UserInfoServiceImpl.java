@@ -19,6 +19,8 @@ package com.code.infra.user.mvc.service;
 
 import com.code.infra.user.convert.UserInfoConvert;
 import com.code.infra.user.framework.exception.UserExceptionCode;
+import com.code.infra.user.mvc.api.domain.LoginReq;
+import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
 import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
@@ -51,6 +53,25 @@ public class UserInfoServiceImpl implements UserInfoService {
 		Optional<UserInfoDO> userInfoDO = userInfoMapper.findByAccount(userInfoDetailBO.getAccount());
 
 		return userInfoDO.map(UserInfoConvert.INSTANCE::doToModel).orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
+	}
+
+	/**
+	 * 登录
+	 *
+	 * @param loginReq 登录请求
+	 *
+	 * @return {@link LoginResp}
+	 */
+	@Override
+	public LoginResp login(LoginReq loginReq) {
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(loginReq.getAccount());
+		userInfoDOOpt.orElseThrow(UserExceptionCode.USER_ACCOUNT_OR_PASSWORD_INCORRECT::exception);
+
+		// userInfoDOOpt.map(userInfoDO -> {
+		// 	UserInfoConvert.INSTANCE.doToResp()
+		// })
+
+		return null;
 	}
 
 }

@@ -18,19 +18,16 @@
 package com.code.service.template.mvc.api;
 
 import com.code.framework.basic.domain.page.PageResp;
-import com.code.service.template.convert.TemplateConvert;
+import com.code.framework.basic.util.InvokeUtil;
 import com.code.service.template.mvc.api.domain.TemplateCreateReq;
 import com.code.service.template.mvc.api.domain.TemplateDetailResp;
 import com.code.service.template.mvc.api.domain.TemplatePageReq;
 import com.code.service.template.mvc.service.TemplateService;
 import com.code.service.template.mvc.service.domain.TemplateCreateBO;
-import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
 import com.code.service.template.mvc.service.domain.TemplatePageBO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author Snow
@@ -50,17 +47,12 @@ public class TemplateApiImpl implements TemplateApi {
 
 	@Override
 	public String save(TemplateCreateReq createReq) {
-		TemplateCreateBO templateCreateBO = TemplateConvert.INSTANCE.reqToBO(createReq);
-		return templateService.save(templateCreateBO);
+		return InvokeUtil.invoke(createReq, templateService::save, TemplateCreateBO.class);
 	}
 
 	@Override
 	public PageResp<TemplateDetailResp> page(TemplatePageReq templatePageReq) {
-		TemplatePageBO templatePageBO = TemplateConvert.INSTANCE.reqToBO(templatePageReq);
-		PageResp<TemplateDetailDTO> pageResp = templateService.page(templatePageBO);
-
-		List<TemplateDetailResp> templateDetailRespList = TemplateConvert.INSTANCE.dtoToResp(pageResp.getRecords());
-		return PageResp.of(pageResp.getTotal(), templateDetailRespList);
+		return InvokeUtil.invokePage(templatePageReq, TemplateDetailResp.class, templateService::page, TemplatePageBO.class);
 	}
 
 }

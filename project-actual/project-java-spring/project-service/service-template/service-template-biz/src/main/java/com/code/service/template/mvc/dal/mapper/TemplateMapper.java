@@ -18,9 +18,10 @@
 package com.code.service.template.mvc.dal.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.code.framework.basic.domain.page.PageResp;
 import com.code.framework.mybatis.mapper.BaseMapper;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
-import com.code.service.template.mvc.service.domain.TemplatePageBO;
+import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -36,8 +37,11 @@ public interface TemplateMapper extends BaseMapper<TemplateDO> {
 		return chainQueryWrapper().list();
 	}
 
-	default Page<TemplateDO> page(TemplatePageBO pageBO) {
-		return chainQueryWrapper().page(new Page<>(pageBO.currentPage(), pageBO.pageSize()));
+	default PageResp<TemplateDO> page(TemplatePageQuery pageQuery) {
+		Page<TemplateDO> page = chainQueryWrapper()
+				.page(new Page<>(pageQuery.currentPage(), pageQuery.pageSize()));
+
+		return PageResp.of(page.getTotal(), page.getRecords());
 	}
 
 }

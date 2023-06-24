@@ -15,34 +15,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service;
+package com.code.service.template.mvc.dal.domain.query;
 
-import com.code.infra.user.mvc.api.domain.LoginReq;
-import com.code.infra.user.mvc.api.domain.LoginResp;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
+import com.code.framework.basic.domain.page.PageReq;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:20
+ * @date 2023/6/24 20:13
  */
-public interface UserInfoService {
+@Slf4j
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class TemplatePageQuery extends PageReq {
 
-	/**
-	 * 查找用户信息
-	 *
-	 * @param userInfoDetailBO userInfoDetailBO
-	 * @return {@link UserInfoDetailDTO}
-	 */
-	UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO);
-
-	/**
-	 * 登录
-	 *
-	 * @param loginReq 登录请求
-	 *
-	 * @return {@link LoginResp}
-	 */
-	LoginResp login(LoginReq loginReq);
+	private String name;
 
 }

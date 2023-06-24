@@ -20,8 +20,6 @@ package com.code.infra.user.mvc.api;
 import com.code.infra.user.mvc.api.domain.LoginReq;
 import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -45,10 +43,7 @@ public class UserInfoApiImpl implements UserInfoApi {
 	 */
 	@Override
 	public LoginResp login(LoginReq loginReq) {
-		UserInfoDetailBO userInfoDetailReq = new UserInfoDetailBO().setAccount(loginReq.getAccount());
-		UserInfoDetailDTO userInfo = userInfoService.findUserInfo(userInfoDetailReq);
-
-		return new LoginResp();
+		return userInfoService.login(loginReq);
 	}
 
 }
