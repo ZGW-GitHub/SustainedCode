@@ -56,9 +56,8 @@ biz:
    - 直接调用 service
 3. service [ BO/DTO ]:
    - 业务逻辑
-   - 可共用的业务逻辑在 biz 中抽成方法
 4. biz [ BO/DTO ]:
-   - 通用业务逻辑
+   - 复杂业务逻辑
 5. mapper [ DO/XxxQuery/XxxPOJO ]:
    - 数据库操作
 6. client [ req/resp ]:
