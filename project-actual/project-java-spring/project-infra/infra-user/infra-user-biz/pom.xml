@@ -16,10 +16,17 @@
 	<packaging>jar</packaging>
 
 	<properties>
+		<framework-starter-web.version>1.0.0-SNAPSHOT</framework-starter-web.version>
 		<framework-starter-mybatis.version>1.0.0-SNAPSHOT</framework-starter-mybatis.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-starter-web</artifactId>
+			<version>${framework-starter-web.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-starter-mybatis</artifactId>

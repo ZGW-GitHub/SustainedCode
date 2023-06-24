@@ -17,8 +17,8 @@
 
 package com.code.infra.user.mvc.service;
 
-import com.code.infra.user.mvc.service.model.UserInfoDetailModelReq;
-import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 
 /**
  * @author Snow
@@ -30,8 +30,8 @@ public interface UserInfoService {
 	 * 查找用户信息
 	 *
 	 * @param reqModel req
-	 * @return {@link UserInfoDetailRespModel}
+	 * @return {@link UserInfoDetailDTO}
 	 */
-	UserInfoDetailRespModel findUserInfo(UserInfoDetailModelReq reqModel);
+	UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO);
 
 }

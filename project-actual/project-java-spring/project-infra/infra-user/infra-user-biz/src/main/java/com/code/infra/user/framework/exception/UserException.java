@@ -15,36 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.api.exception;
+package com.code.infra.user.framework.exception;
 
-import com.code.framework.basic.exception.code.ExceptionCode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.code.framework.basic.exception.Exception;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.function.Supplier;
-
 /**
- * ApiExceptionCode : 12xxxx
- *
- * @author Snow
- * @date 2023/5/21 15:25
+ * @author 愆凡
+ * @date 2022/6/13 21:48
  */
 @Slf4j
-@Getter
-@AllArgsConstructor
-public enum ApiExceptionCode implements ExceptionCode<ApiException> {
-
-	API_SCAN_EXCEPTION_PARAM_MORE_THAN_ONE(120001, "API 参数个数大于 1"),
-	API_SCAN_EXCEPTION_REPEAT(120002, "API 重复"),
-	API_INVOKE_EXCEPTION_API_NOT_EXIST(120101, "API 不存在");
-
-	private final int    code;
-	private final String message;
-
-	@Override
-	public Supplier<ApiException> exceptionSupplier() {
-		return ApiException::new;
-	}
+public class UserException extends Exception {
 
 }

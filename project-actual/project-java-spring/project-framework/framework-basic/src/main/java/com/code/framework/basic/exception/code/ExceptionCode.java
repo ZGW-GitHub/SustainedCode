@@ -38,7 +38,7 @@ public interface ExceptionCode<E extends Exception> {
 
 	String getMessage();
 
-	Supplier<E> getSupplier();
+	Supplier<E> exceptionSupplier();
 
 	default E exception() {
 		return exception(getMessage());
@@ -47,7 +47,7 @@ public interface ExceptionCode<E extends Exception> {
 	default E exception(String msgFormat, Object... args) {
 		String msg = (args != null && args.length > 0) ? String.format(msgFormat, args) : msgFormat;
 
-		E exception = getSupplier().get();
+		E exception = exceptionSupplier().get();
 		exception.setCode(getCode());
 		exception.setMessage(msg);
 		return exception;

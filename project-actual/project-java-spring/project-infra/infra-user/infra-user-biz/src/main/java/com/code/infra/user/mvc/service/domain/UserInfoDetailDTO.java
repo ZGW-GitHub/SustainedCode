@@ -15,21 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service.model;
+package com.code.infra.user.mvc.service.domain;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:53
+ * @date 2023/6/21 15:50
  */
 @Slf4j
 @Data
-@Accessors(chain = true)
-public class UserInfoDetailModelReq {
+public class UserInfoDetailDTO {
 
-	private String account;
 
 }

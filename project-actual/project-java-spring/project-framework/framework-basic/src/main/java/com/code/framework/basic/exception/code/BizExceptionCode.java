@@ -72,8 +72,12 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 	 */
 	BAD_XXL_JOB_HANDLER(2001, "定时任务配置错误");
 
-	private final int                    code;
-	private final String                 message;
-	private final Supplier<BizException> supplier = BizException::new;
+	private final int    code;
+	private final String message;
+
+	@Override
+	public Supplier<BizException> exceptionSupplier() {
+		return BizException::new;
+	}
 
 }

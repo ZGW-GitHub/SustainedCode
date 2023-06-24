@@ -23,9 +23,12 @@ integration:
 
 biz:
   com.code.xxx:
+    framework:
+      config:
+      configuration:
+      exception:
     convert:
     facade.impl:
-    framework:
     mvc:
       api:
         domain: req 、resp

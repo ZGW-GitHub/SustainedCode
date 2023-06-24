@@ -15,9 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.exception;
+package com.code.infra.user.framework.exception;
 
-import com.code.framework.basic.exception.BizException;
 import com.code.framework.basic.exception.code.ExceptionCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,13 +37,17 @@ import java.util.function.Supplier;
  */
 @Getter
 @AllArgsConstructor
-public enum UserExceptionCode implements ExceptionCode<BizException> {
+public enum UserExceptionCode implements ExceptionCode<UserException> {
 
 	USER_NOT_EXIST(130001, "用户不存在"),
 	;
 
-	private final int                    code;
-	private final String                 message;
-	private final Supplier<BizException> supplier = BizException::new;
+	private final int    code;
+	private final String message;
+
+	@Override
+	public Supplier<UserException> exceptionSupplier() {
+		return UserException::new;
+	}
 
 }

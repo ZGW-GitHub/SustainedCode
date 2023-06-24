@@ -15,15 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service.impl;
+package com.code.infra.user.mvc.service;
 
 import com.code.infra.user.convert.UserInfoConvert;
-import com.code.infra.user.exception.UserExceptionCode;
+import com.code.infra.user.framework.exception.UserExceptionCode;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
-import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.model.UserInfoDetailModelReq;
-import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,11 +44,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * 查找用户信息
 	 *
 	 * @param reqModel req
-	 * @return {@link UserInfoDetailRespModel}
+	 * @return {@link UserInfoDetailDTO}
 	 */
 	@Override
-	public UserInfoDetailRespModel findUserInfo(UserInfoDetailModelReq reqModel) {
-		Optional<UserInfoDO> userInfoDO = userInfoMapper.findByAccount(reqModel.getAccount());
+	public UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO) {
+		Optional<UserInfoDO> userInfoDO = userInfoMapper.findByAccount(userInfoDetailBO.getAccount());
 
 		return userInfoDO.map(UserInfoConvert.INSTANCE::doToModel).orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
 	}

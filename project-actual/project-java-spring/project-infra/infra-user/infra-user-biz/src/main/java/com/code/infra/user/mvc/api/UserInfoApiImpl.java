@@ -15,14 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api.impl;
+package com.code.infra.user.mvc.api;
 
-import com.code.infra.user.mvc.api.UserInfoApi;
 import com.code.infra.user.mvc.api.domain.LoginReq;
 import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.model.UserInfoDetailModelReq;
-import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -46,10 +45,10 @@ public class UserInfoApiImpl implements UserInfoApi {
 	 */
 	@Override
 	public LoginResp login(LoginReq loginReq) {
-		UserInfoDetailModelReq userInfoDetailReq = new UserInfoDetailModelReq().setAccount(loginReq.getAccount());
-		UserInfoDetailRespModel userInfo = userInfoService.findUserInfo(userInfoDetailReq);
+		UserInfoDetailBO userInfoDetailReq = new UserInfoDetailBO().setAccount(loginReq.getAccount());
+		UserInfoDetailDTO userInfo = userInfoService.findUserInfo(userInfoDetailReq);
 
-
+		return new LoginResp();
 	}
 
 }

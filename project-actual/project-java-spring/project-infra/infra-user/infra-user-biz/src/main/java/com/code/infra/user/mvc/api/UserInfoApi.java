@@ -17,6 +17,7 @@
 
 package com.code.infra.user.mvc.api;
 
+import com.code.framework.web.api.annotation.Api;
 import com.code.infra.user.mvc.api.domain.LoginReq;
 import com.code.infra.user.mvc.api.domain.LoginResp;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +35,7 @@ public interface UserInfoApi {
 	 * @param loginReq 登录请求
 	 * @return {@link LoginResp}
 	 */
+	@Api("user.login")
 	LoginResp login(LoginReq loginReq);
 
 }

@@ -19,7 +19,7 @@ package com.code.infra.user.convert;
 
 
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
-import com.code.infra.user.mvc.service.model.UserInfoDetailRespModel;
+import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -32,6 +32,6 @@ public interface UserInfoConvert {
 
 	UserInfoConvert INSTANCE = Mappers.getMapper(UserInfoConvert.class);
 
-	UserInfoDetailRespModel doToModel(UserInfoDO userInfoDO);
+	UserInfoDetailDTO doToModel(UserInfoDO userInfoDO);
 
 }
