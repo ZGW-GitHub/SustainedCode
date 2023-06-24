@@ -48,7 +48,7 @@ biz:
 
 #### 说明：
 
-操作：create 、modify 、remove
+操作：find 、list 、page 、save 、update 、remove
 
 1. api [ req/resp ]:
    - 直接调用 service

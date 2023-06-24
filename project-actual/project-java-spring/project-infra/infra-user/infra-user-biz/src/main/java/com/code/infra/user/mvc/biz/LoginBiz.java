@@ -15,37 +15,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api;
+package com.code.infra.user.mvc.biz;
 
-import com.code.framework.basic.util.InvokeUtil;
-import com.code.infra.user.mvc.api.domain.LoginReq;
-import com.code.infra.user.mvc.api.domain.LoginResp;
-import com.code.infra.user.mvc.biz.LoginBiz;
 import com.code.infra.user.mvc.biz.domain.LoginBO;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import com.code.infra.user.mvc.biz.domain.LoginDTO;
 
 /**
  * @author Snow
- * @date 2023/6/21 16:18
+ * @date 2023/6/24 22:23
  */
-@Slf4j
-@Component
-public class UserInfoApiImpl implements UserInfoApi {
-
-	@Resource
-	private LoginBiz loginBiz;
+public interface LoginBiz {
 
 	/**
 	 * 登录
 	 *
-	 * @param loginReq 登录请求
-	 * @return {@link LoginResp}
+	 * @param loginBO 登录请求
+	 *
+	 * @return {@link LoginDTO}
 	 */
-	@Override
-	public LoginResp login(LoginReq loginReq) {
-		return InvokeUtil.invoke(loginReq, LoginResp.class, loginBiz::login, LoginBO.class);
-	}
+	LoginDTO login(LoginBO loginBO);
 
 }

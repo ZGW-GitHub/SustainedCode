@@ -17,8 +17,6 @@
 
 package com.code.infra.user.mvc.service;
 
-import com.code.infra.user.mvc.api.domain.LoginReq;
-import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
 import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 
@@ -35,14 +33,5 @@ public interface UserInfoService {
 	 * @return {@link UserInfoDetailDTO}
 	 */
 	UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO);
-
-	/**
-	 * 登录
-	 *
-	 * @param loginReq 登录请求
-	 *
-	 * @return {@link LoginResp}
-	 */
-	LoginResp login(LoginReq loginReq);
 
 }
