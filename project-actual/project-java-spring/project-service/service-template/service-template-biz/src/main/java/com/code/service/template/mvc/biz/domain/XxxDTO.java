@@ -15,14 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api.response;
+package com.code.service.template.mvc.biz.domain;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:57
+ * @date 2023/6/22 11:37
  */
 @Slf4j
-public class XxxRespVO {
+public class XxxDTO {
 }

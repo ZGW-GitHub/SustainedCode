@@ -15,27 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api.request;
+package com.code.service.template.mvc.service.domain;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import com.code.framework.basic.domain.page.PageReq;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
- * @author 愆凡
- * @date 2022/6/12 18:27
+ * @author Snow
+ * @date 2023/6/24 13:11
  */
 @Slf4j
 @Data
-@Accessors(chain = true)
-public class TemplateCreateReqVO {
+@EqualsAndHashCode(callSuper = true)
+public class TemplatePageBO extends PageReq implements Serializable {
 
-	@NotNull
+	@Serial
+	private static final long serialVersionUID = -2951598600881910143L;
+
 	private String name;
-
-	@Min(value = 0, message = "年龄需大于 0")
-	private Integer age;
 
 }

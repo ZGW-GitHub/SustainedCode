@@ -15,21 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.service.model;
+package com.code.service.template.mvc.biz;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/25 23:05
+ * @date 2023/6/19 15:11
  */
 @Slf4j
-@Data
-public class TemplateCreateReqModel {
-
-	private String name;
-
-	private Integer age;
-
+public class TemplateBizImpl {
 }

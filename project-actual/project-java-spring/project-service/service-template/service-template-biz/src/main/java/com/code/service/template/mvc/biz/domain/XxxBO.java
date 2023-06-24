@@ -15,30 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api;
+package com.code.service.template.mvc.biz.domain;
 
-import com.code.framework.basic.domain.page.PageResp;
-import com.code.framework.web.api.annotation.Api;
-import com.code.service.template.mvc.api.domain.TemplateCreateReq;
-import com.code.service.template.mvc.api.domain.TemplateDetailResp;
-import com.code.service.template.mvc.api.domain.TemplatePageReq;
-import jakarta.validation.Valid;
-import org.springframework.validation.annotation.Validated;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/20 19:34
+ * @date 2023/6/22 11:36
  */
-@Validated
-public interface TemplateApi {
-
-	@Api("template.test")
-	String test();
-
-	@Api("template.save")
-	String save(@Valid TemplateCreateReq reqVO);
-
-	@Api("template.page")
-	PageResp<TemplateDetailResp> page(TemplatePageReq templatePageReq);
-
+@Slf4j
+public class XxxBO {
 }

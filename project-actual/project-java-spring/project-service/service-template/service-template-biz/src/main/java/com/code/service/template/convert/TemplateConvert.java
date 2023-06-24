@@ -17,10 +17,13 @@
 
 package com.code.service.template.convert;
 
-import com.code.service.template.mvc.api.request.TemplateCreateReqVO;
+import com.code.service.template.mvc.api.domain.TemplateCreateReq;
+import com.code.service.template.mvc.api.domain.TemplateDetailResp;
+import com.code.service.template.mvc.api.domain.TemplatePageReq;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
-import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
-import com.code.service.template.mvc.service.model.TemplateDetailRespModel;
+import com.code.service.template.mvc.service.domain.TemplateCreateBO;
+import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
+import com.code.service.template.mvc.service.domain.TemplatePageBO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -35,12 +38,18 @@ public interface TemplateConvert {
 
 	TemplateConvert INSTANCE = Mappers.getMapper(TemplateConvert.class);
 
-	TemplateCreateReqModel voToModel(TemplateCreateReqVO createReqVO);
+	TemplateCreateBO reqToBO(TemplateCreateReq createReq);
 
-	TemplateDO modelToDo(TemplateCreateReqModel createReqModel);
+	TemplateDO boToDo(TemplateCreateBO createBO);
 
-	TemplateDetailRespModel doToModel(TemplateDO templateDO);
+	TemplateDetailDTO doToDTO(TemplateDO templateDO);
 
-	List<TemplateDetailRespModel> doToModel(List<TemplateDO> templateDOList);
+	List<TemplateDetailDTO> doToDTO(List<TemplateDO> templateDOList);
+
+	TemplatePageBO reqToBO(TemplatePageReq templatePageReq);
+
+	TemplateDetailResp dtoToResp(TemplateDetailDTO templateDetailDTO);
+
+	List<TemplateDetailResp> dtoToResp(List<TemplateDetailDTO> templateDetailDTOList);
 
 }

@@ -15,14 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.biz.model;
+package com.code.service.template.mvc.api.domain;
 
+import com.code.framework.basic.domain.page.PageReq;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * @author Snow
- * @date 2023/6/19 15:12
+ * @date 2023/6/24 13:07
  */
 @Slf4j
-public class XxxReqModel {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class TemplatePageReq extends PageReq implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7708085343162252675L;
+
+	private String name;
+
 }

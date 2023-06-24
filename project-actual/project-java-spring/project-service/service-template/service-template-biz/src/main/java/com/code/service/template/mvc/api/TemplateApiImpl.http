@@ -12,5 +12,14 @@ Content-Type: application/json; charset=UTF-8
 
 {
   "api": "template.save",
-  "content": "{\"name\":\"测试\",\"age\":16}"
+  "content": "{\"name\":\"测试3\",\"age\":16}"
+}
+
+### page
+POST http://127.0.0.1:65301/gateway
+Content-Type: application/json; charset=UTF-8
+
+{
+  "api": "template.page",
+  "content": "{\"name\":\"测试\"}"
 }

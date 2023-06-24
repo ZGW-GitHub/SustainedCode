@@ -38,7 +38,7 @@ public class BaseMetaObjectHandler implements MetaObjectHandler {
 
 	@Override
 	public void insertFill(MetaObject metaObject) {
-		log.info("start insert fill ....");
+		log.debug("start insert fill ....");
 
 		TraceUserInfo userInfo = JSONUtil.toBean(TraceContextHelper.getInfo(TraceContextKeyEnum.USER_INFO), TraceUserInfo.class);
 
@@ -51,7 +51,7 @@ public class BaseMetaObjectHandler implements MetaObjectHandler {
 
 	@Override
 	public void updateFill(MetaObject metaObject) {
-		log.info("start update fill ....");
+		log.debug("start update fill ....");
 
 		TraceUserInfo userInfo = JSONUtil.toBean(TraceContextHelper.getInfo(TraceContextKeyEnum.USER_INFO), TraceUserInfo.class);
 

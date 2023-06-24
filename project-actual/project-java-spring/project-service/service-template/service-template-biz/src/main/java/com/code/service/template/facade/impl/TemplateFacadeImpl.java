@@ -5,7 +5,6 @@ import com.code.service.template.mvc.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 愆凡
@@ -19,7 +18,6 @@ public class TemplateFacadeImpl implements TemplateFacade {
 	private TemplateService templateService;
 
 	@Override
-	@Transactional
 	public void test() {
 
 	}

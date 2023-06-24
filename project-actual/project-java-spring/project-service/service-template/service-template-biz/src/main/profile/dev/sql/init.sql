@@ -24,7 +24,8 @@ CREATE TABLE project_actual.template
     `record_no`   VARCHAR(50) NOT NULL UNIQUE COMMENT '唯一键',
     `name`        VARCHAR(10)          DEFAULT NULL COMMENT '姓名',
     `age`         INT(5)               DEFAULT NULL COMMENT '年龄',
-    `delete`      TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '逻辑删除',
+
+    `is_del` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
     `creator`     VARCHAR(30) NOT NULL COMMENT '创建人',
     `create_time` DATETIME             DEFAULT NOW() COMMENT '创建时间',
     `updater`     VARCHAR(30)          DEFAULT NULL COMMENT '更新人',

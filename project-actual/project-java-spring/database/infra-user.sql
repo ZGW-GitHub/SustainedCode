@@ -19,7 +19,7 @@ BEGIN;
 # 开启事务
 
 # 创建数据库：infra_user
-create database if not exists `infra_user`;
+create database if not exists `infra_user` charset utf8;
 use `infra_user`;
 
 # 创建用户表

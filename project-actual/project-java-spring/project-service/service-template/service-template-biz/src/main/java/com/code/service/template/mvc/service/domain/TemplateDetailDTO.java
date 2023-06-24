@@ -15,10 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.service.model;
+package com.code.service.template.mvc.service.domain;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * @author Snow
@@ -26,7 +29,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Data
 @Slf4j
-public class TemplateDetailRespModel {
+public class TemplateDetailDTO implements Serializable {
 
+	@Serial
+	private static final long serialVersionUID = 5748836657730568657L;
+
+	private String  name;
+	private Integer age;
 
 }

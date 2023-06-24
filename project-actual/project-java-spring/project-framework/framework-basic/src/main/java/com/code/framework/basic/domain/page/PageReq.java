@@ -18,8 +18,6 @@
 package com.code.framework.basic.domain.page;
 
 import jakarta.validation.constraints.Min;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -27,8 +25,6 @@ import java.io.Serializable;
  * @author Snow
  * @date 2023/5/19 11:40
  */
-@Setter
-@Getter
 public class PageReq implements Serializable {
 
 	/**
@@ -51,12 +47,16 @@ public class PageReq implements Serializable {
 		return pageSize;
 	}
 
+	public void setCurrentPage(long currentPage) {
+		this.currentPage = currentPage < 1 ? 1 : currentPage;
+	}
+
+	public void setPageSize(long pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	public long offset() {
-		long current = this.currentPage;
-		if (current <= 1L) {
-			return 0L;
-		}
-		return Math.max((current - 1) * this.pageSize, 0L);
+		return Math.max((this.currentPage - 1) * this.pageSize, 0L);
 	}
 
 }

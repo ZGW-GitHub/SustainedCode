@@ -17,7 +17,10 @@
 
 package com.code.service.template.mvc.service;
 
-import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
+import com.code.framework.basic.domain.page.PageResp;
+import com.code.service.template.mvc.service.domain.TemplateCreateBO;
+import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
+import com.code.service.template.mvc.service.domain.TemplatePageBO;
 import org.springframework.context.ApplicationContextAware;
 
 /**
@@ -26,6 +29,8 @@ import org.springframework.context.ApplicationContextAware;
  */
 public interface TemplateService extends ApplicationContextAware {
 
-	String save(TemplateCreateReqModel createReqModel);
+	String save(TemplateCreateBO createReqModel);
+
+	PageResp<TemplateDetailDTO> page(TemplatePageBO templatePageBO);
 
 }

@@ -15,49 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.basic.domain.page;
+package com.code.service.template.mvc.api.domain;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
-import java.util.List;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * @author Snow
- * @date 2023/5/19 11:28
+ * @date 2023/6/24 13:06
  */
+@Slf4j
 @Data
-@Accessors(chain = true)
-public class PageResp<T> {
+public class TemplateDetailResp implements Serializable {
 
-	private static final PageResp EMPTY = new PageResp<>();
+	@Serial
+	private static final long serialVersionUID = 3625228158318395797L;
 
-	/**
-	 * 总数
-	 */
-	private long total = 0;
-
-	/**
-	 * 查询数据列表
-	 */
-	private List<T> records = Collections.emptyList();
-
-	private PageResp() {
-	}
-
-	private PageResp(long total, List<T> records) {
-		this.total = total;
-		this.records = records;
-	}
-
-	public static <T> PageResp<T> of(long total, List<T> records) {
-		return new PageResp<>(total, records);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> PageResp<T> empty() {
-		return (PageResp<T>) EMPTY;
-	}
+	private String  name;
+	private Integer age;
 
 }

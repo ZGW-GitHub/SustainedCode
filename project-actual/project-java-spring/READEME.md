@@ -13,45 +13,51 @@ common:
 
 facade:
   com.code.xxx:
-    facade: rpc 接口
-      dto: req 、resp
+    facade:
+      domain: param 、result
 
 integration:
   com.code.xxx:
     client: client 接口
-      dimain: param 、result
-      impl:
+      dimain: req 、resp
 
 biz:
   com.code.xxx:
-    convert: 转换器
-    facade.impl: rpcImpl
+    convert:
+    facade.impl:
     job: 
     mvc:
-      # 供前端调用的 API
-      api: api 接口
-        request: req
-        response: resp
-        impl: 
-      # 存储相关
+      api:
+        domain: req 、resp
+      service: 
+        domain: BO 、DTO
+      biz:
+        domain: BO 、DTO
       dal:
-        domain: DO 、POJO
+        domain: 
+          dos: DO
+          pojo: Query 、POJO
         mapper: 
         redis: redis 操作
-      service: service 接口
-        model: reqDTO 、respDTO
-        impl: 
-      biz: biz 接口(service/facade公共逻辑)
-        model: reqDTO 、respDTO
-        impl:
 ```
 
-说明：
+#### 说明：
 
-1. service :
-   - 只做数据查询操作，业务逻辑交给 apiImpl 、facadeImpl
-   - 可共用的业务逻辑写到 biz 中
-2. api
+操作：create 、modify 、remove
+
+1. api [ req/resp ]:
+   - 直接调用 service
+2. facade [ param/result ]:
+   - 直接调用 service
+3. service [ BO/DTO ]:
+   - 业务逻辑
+   - 可共用的业务逻辑在 biz 中抽成方法
+4. biz [ BO/DTO ]:
+   - 通用业务逻辑
+5. mapper [ DO/XxxQuery/XxxPOJO ]:
+   - 数据库操作
+6. client [ req/resp ]:
+   - 调用 rpc
 
 ### 模型
 

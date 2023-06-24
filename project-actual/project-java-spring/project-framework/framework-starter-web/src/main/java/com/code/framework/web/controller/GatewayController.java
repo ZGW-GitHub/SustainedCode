@@ -44,9 +44,9 @@ public class GatewayController {
 	public GatewayResponse<?> gateway(@RequestBody GatewayRequest gatewayRequest) throws Throwable {
 		try {
 			// 1、调用 API
-			log.debug("【 Gateway 请求 】request : {}", gatewayRequest);
+			log.info("【 Gateway 请求 】request : {}", gatewayRequest);
 			Object result = apiInvoker.invoke(gatewayRequest.getApi(), gatewayRequest.getVersion(), gatewayRequest.getContent());
-			log.debug("【 Gateway 响应 】request : {} , response : {}", gatewayRequest, result);
+			log.info("【 Gateway 响应 】request : {} , response : {}", gatewayRequest, result);
 
 			// 2、返回 response
 			return GatewayResponse.success(result);

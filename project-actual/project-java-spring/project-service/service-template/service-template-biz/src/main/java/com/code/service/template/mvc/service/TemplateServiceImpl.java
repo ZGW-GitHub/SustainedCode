@@ -15,21 +15,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.service.impl;
+package com.code.service.template.mvc.service;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.code.framework.basic.domain.page.PageResp;
 import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
-import com.code.service.template.mvc.service.TemplateService;
-import com.code.service.template.mvc.service.model.TemplateCreateReqModel;
-import com.code.service.template.mvc.service.model.TemplateDetailRespModel;
+import com.code.service.template.mvc.service.domain.TemplateCreateBO;
+import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
+import com.code.service.template.mvc.service.domain.TemplatePageBO;
 import jakarta.annotation.Resource;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,9 +49,8 @@ public class TemplateServiceImpl implements TemplateService {
 	private TemplateMapper templateMapper;
 
 	@Override
-	@Transactional
-	public String save(TemplateCreateReqModel createReqModel) {
-		TemplateDO templateDO = TemplateConvert.INSTANCE.modelToDo(createReqModel);
+	public String save(TemplateCreateBO createBO) {
+		TemplateDO templateDO = TemplateConvert.INSTANCE.boToDo(createBO);
 		templateDO.setRecordNo(IdUtil.fastSimpleUUID());
 		templateMapper.insert(templateDO);
 
@@ -59,10 +59,12 @@ public class TemplateServiceImpl implements TemplateService {
 		return templateDO.getRecordNo();
 	}
 
-	public List<TemplateDetailRespModel> page() {
-		List<TemplateDO> templateDOList = templateMapper.page();
+	@Override
+	public PageResp<TemplateDetailDTO> page(TemplatePageBO pageBO) {
+		Page<TemplateDO> page = templateMapper.page(pageBO);
+		List<TemplateDetailDTO> templateDetailDTOList = TemplateConvert.INSTANCE.doToDTO(page.getRecords());
 
-		return TemplateConvert.INSTANCE.doToModel(templateDOList);
+		return PageResp.of(page.getTotal(), templateDetailDTOList);
 	}
 
 }
