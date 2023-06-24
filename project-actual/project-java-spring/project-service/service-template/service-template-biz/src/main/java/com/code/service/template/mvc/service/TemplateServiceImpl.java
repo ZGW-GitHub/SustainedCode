@@ -19,8 +19,8 @@ package com.code.service.template.mvc.service;
 
 import cn.hutool.core.util.IdUtil;
 import com.code.framework.basic.domain.page.PageResp;
+import com.code.framework.basic.util.BeanUtil;
 import com.code.framework.basic.util.InvokeUtil;
-import com.code.service.template.convert.TemplateConvert;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
@@ -49,7 +49,7 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	public String save(TemplateCreateBO createBO) {
-		TemplateDO templateDO = TemplateConvert.INSTANCE.boToDo(createBO);
+		TemplateDO templateDO = BeanUtil.map(createBO, TemplateDO.class);
 		templateDO.setRecordNo(IdUtil.fastSimpleUUID());
 		templateMapper.insert(templateDO);
 
