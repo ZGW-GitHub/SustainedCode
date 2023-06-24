@@ -25,7 +25,7 @@ biz:
   com.code.xxx:
     convert:
     facade.impl:
-    job: 
+    framework:
     mvc:
       api:
         domain: req 、resp
@@ -39,6 +39,8 @@ biz:
           pojo: Query 、POJO
         mapper: 
         redis: redis 操作
+    job: 
+    util:
 ```
 
 #### 说明：
