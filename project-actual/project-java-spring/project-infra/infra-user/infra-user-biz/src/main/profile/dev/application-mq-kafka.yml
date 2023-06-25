@@ -1,0 +1,5 @@
+mq:
+  kafka:
+    bootstrap-servers: ${kafka.brokers}
+    topic:
+      testTopic: test

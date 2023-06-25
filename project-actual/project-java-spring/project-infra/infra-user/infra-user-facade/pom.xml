@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>infra-user</artifactId>
+		<groupId>com.code</groupId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>infra-user-facade</artifactId>
+	<version>${infra-user-facade.version}</version>
+
+	<packaging>jar</packaging>
+
+	<properties>
+		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
+	</properties>
+
+	<dependencies>
+		<!-- Dubbo -->
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>infra-user-common</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

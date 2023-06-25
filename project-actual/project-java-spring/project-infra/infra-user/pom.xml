@@ -18,10 +18,12 @@
 	<modules>
 		<module>infra-user-common</module>
 		<module>infra-user-biz</module>
+		<module>infra-user-facade</module>
 	</modules>
 
 	<properties>
 		<infra-user.version>2.0.0-SNAPSHOT</infra-user.version>
+		<infra-user-facade.version>3.2.1-SNAPSHOT</infra-user-facade.version>
 	</properties>
 
 	<dependencyManagement>

@@ -22,6 +22,26 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-starter-web</artifactId>
 			<version>${framework-starter-web.version}</version>
@@ -34,13 +54,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
+			<groupId>com.code</groupId>
+			<artifactId>infra-user-common</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>infra-user-common</artifactId>
+			<artifactId>service-template-facade</artifactId>
 		</dependency>
 	</dependencies>
 

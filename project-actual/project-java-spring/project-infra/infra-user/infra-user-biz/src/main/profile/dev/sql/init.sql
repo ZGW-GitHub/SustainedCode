@@ -29,8 +29,8 @@ create table `user_info`
     `id`          bigint(20) unsigned not null auto_increment comment '主键' primary key,
     `record_no`   bigint(20) unsigned not null default 0 comment '唯一键',
     `account`     varchar(32)         not null default '' comment '用户账号',
-    `password` varchar(64) not null default '' comment '用户密码',
-    `salt`     varchar(32) not null default '' comment '盐',
+    `password`    varchar(64)         not null default '' comment '用户密码',
+    `salt`        varchar(32)         not null default '' comment '盐',
     `nickname`    varchar(10)         not null default '' comment '昵称',
     `avatar`      varchar(32)         not null default '' comment '头像',
 
