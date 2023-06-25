@@ -60,7 +60,7 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	public PageResp<TemplateDetailDTO> page(TemplatePageBO pageBO) {
-		return InvokeUtil.invokePage(pageBO, TemplateDetailDTO.class, templateMapper::page, TemplatePageQuery.class);
+		return InvokeUtil.invokePage(pageBO, TemplateDetailDTO::new, templateMapper::page, TemplatePageQuery::new);
 	}
 
 }

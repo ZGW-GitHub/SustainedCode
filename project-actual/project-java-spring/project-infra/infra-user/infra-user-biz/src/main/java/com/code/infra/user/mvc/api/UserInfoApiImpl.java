@@ -17,7 +17,7 @@
 
 package com.code.infra.user.mvc.api;
 
-import com.code.framework.basic.util.InvokeFastUtil;
+import com.code.framework.basic.util.InvokeUtil;
 import com.code.infra.user.mvc.api.domain.LoginReq;
 import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.biz.LoginBiz;
@@ -45,7 +45,7 @@ public class UserInfoApiImpl implements UserInfoApi {
 	 */
 	@Override
 	public LoginResp login(LoginReq loginReq) {
-		return InvokeFastUtil.invoke(loginReq, LoginResp::new, loginBiz::login, LoginBO::new);
+		return InvokeUtil.invoke(loginReq, LoginResp::new, loginBiz::login, LoginBO::new);
 	}
 
 }

@@ -37,94 +37,94 @@ public class InvokeUtil {
 	/**
 	 * 方法调用（入参转化，出参不转化）
 	 *
-	 * @param param            原始入参
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用目标方法的入参类型
-	 *
+	 * @param param               原始入参
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用目标方法的入参类型
 	 * @return {@link R}
 	 */
-	public static <P, R> R invoke(Object param, Function<P, R> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P, R> R invoke(Object param, Function<P, R> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+
 		return invoke.apply(invokeParam);
 	}
 
 	/**
 	 * 方法调用（出入参转化）
 	 *
-	 * @param param            原始入参
-	 * @param resultClass      最终的出参类型
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用的目标方法的入参类型
-	 *
+	 * @param param               原始入参
+	 * @param resultSupplier      最终的出参对象 Supplier
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用的目标方法的入参对象 Supplier
 	 * @return {@link R}
 	 */
-	public static <P, H, R> R invoke(Object param, Class<R> resultClass, Function<P, H> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P, H, R> R invoke(Object param, Supplier<R> resultSupplier, Function<P, H> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+
 		H invokeResult = invoke.apply(invokeParam);
 
-		return BeanUtil.map(invokeResult, resultClass);
+		return BeanUtil.copyProperties(invokeResult, resultSupplier.get());
 	}
 
 	/**
 	 * 方法调用（入参转化，出参不转化）
 	 *
-	 * @param param            原始入参
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用目标方法的入参类型
-	 *
+	 * @param param               原始入参
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用目标方法的入参类型
 	 * @return {@link R}
 	 */
-	public static <P, R> List<R> invokeList(Object param, Function<P, List<R>> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P, R> List<R> invokeList(Object param, Function<P, List<R>> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+
 		return invoke.apply(invokeParam);
 	}
 
 	/**
 	 * 方法调用（出入参转化）
 	 *
-	 * @param param            原始入参
-	 * @param resultClass      最终的出参类型
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用的目标方法的入参类型
-	 *
+	 * @param param               原始入参
+	 * @param resultSupplier      最终的出参对象 Supplier
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用的目标方法的入参对象 Supplier
 	 * @return {@link List}<{@link R}>
 	 */
-	public static <P, H, R> List<R> invokeList(Object param, Class<R> resultClass, Function<P, List<H>> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P, H, R> List<R> invokeList(Object param, Supplier<R> resultSupplier, Function<P, List<H>> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+
 		List<H> invokeResult = invoke.apply(invokeParam);
 
-		return BeanUtil.mapList(invokeResult, resultClass);
+		return BeanUtil.copyProperties(invokeResult, resultSupplier);
 	}
 
 	/**
 	 * 方法调用（入参转化，出参不转化）
 	 *
-	 * @param param            原始入参
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用的目标方法的入参类型
-	 *
+	 * @param param               原始入参
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用的目标方法的入参对象 Supplier
 	 * @return {@link PageResp}<{@link R}>
 	 */
-	public static <P, R> PageResp<R> invokePage(Object param, Function<P, PageResp<R>> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P, R> PageResp<R> invokePage(Object param, Function<P, PageResp<R>> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+
 		return invoke.apply(invokeParam);
 	}
 
 	/**
 	 * 方法调用（出入参转化）
 	 *
-	 * @param param            原始入参
-	 * @param resultClass      最终的出参类型
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用的目标方法的入参类型
-	 *
+	 * @param param               原始入参
+	 * @param resultSupplier      最终的出参对象 Supplier
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用的目标方法的入参对象 Supplier
 	 * @return {@link PageResp}<{@link R}>
 	 */
-	public static <P, H, R> PageResp<R> invokePage(Object param, Class<R> resultClass, Function<P, PageResp<H>> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P, H, R> PageResp<R> invokePage(Object param, Supplier<R> resultSupplier, Function<P, PageResp<H>> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+
 		PageResp<H> invokeResult = invoke.apply(invokeParam);
 
-		return PageResp.of(invokeResult.getTotal(), BeanUtil.mapList(invokeResult.getRecords(), resultClass));
+		return PageResp.of(invokeResult.getTotal(), BeanUtil.copyProperties(invokeResult.getRecords(), resultSupplier));
 	}
 
 	// ------------------------------------------------- 有入参，无出参 --------------------------------------------------
@@ -132,12 +132,12 @@ public class InvokeUtil {
 	/**
 	 * 方法调用（入参转化，无出参）
 	 *
-	 * @param param            原始入参
-	 * @param invoke           目标方法调用函数
-	 * @param invokeParamClass 调用目标方法的入参类型
+	 * @param param               原始入参
+	 * @param invoke              目标方法调用函数
+	 * @param invokeParamSupplier 调用目标方法的入参类型
 	 */
-	public static <P> void invoke(Object param, Consumer<P> invoke, Class<P> invokeParamClass) {
-		P invokeParam = BeanUtil.map(param, invokeParamClass);
+	public static <P> void invoke(Object param, Consumer<P> invoke, Supplier<P> invokeParamSupplier) {
+		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
 
 		invoke.accept(invokeParam);
 	}
@@ -148,30 +148,28 @@ public class InvokeUtil {
 	 * 调用
 	 * 方法调用（无入参，出参转化）
 	 *
-	 * @param resultClass 最终的出参类型
-	 * @param invoke      目标方法调用函数
-	 *
+	 * @param resultSupplier 最终的出参对象 Supplier
+	 * @param invoke         目标方法调用函数
 	 * @return {@link R}
 	 */
-	public static <R> R invoke(Class<R> resultClass, Supplier<R> invoke) {
+	public static <R> R invoke(Supplier<R> resultSupplier, Supplier<R> invoke) {
 		R invokeResult = invoke.get();
 
-		return BeanUtil.map(invokeResult, resultClass);
+		return BeanUtil.copyProperties(invokeResult, resultSupplier.get());
 	}
 
 	/**
 	 * 调用列表
 	 * 方法调用（无入参，出参转化）
 	 *
-	 * @param resultClass 最终的出参类型
-	 * @param invoke      目标方法调用函数
-	 *
+	 * @param resultSupplier 最终的出参对象 Supplier
+	 * @param invoke         目标方法调用函数
 	 * @return {@link List}<{@link R}>
 	 */
-	public static <R> List<R> invokeList(Class<R> resultClass, Supplier<List<R>> invoke) {
+	public static <R> List<R> invokeList(Supplier<R> resultSupplier, Supplier<List<R>> invoke) {
 		List<R> invokeResult = invoke.get();
 
-		return BeanUtil.mapList(invokeResult, resultClass);
+		return BeanUtil.copyProperties(invokeResult, resultSupplier);
 	}
 
 }
