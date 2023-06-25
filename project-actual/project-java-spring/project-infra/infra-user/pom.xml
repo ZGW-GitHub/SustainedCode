@@ -36,6 +36,12 @@
 
 			<dependency>
 				<groupId>com.code</groupId>
+				<artifactId>infra-user-facade</artifactId>
+				<version>${infra-user-facade.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.code</groupId>
 				<artifactId>infra-user-biz</artifactId>
 				<version>${infra-user.version}</version>
 			</dependency>
