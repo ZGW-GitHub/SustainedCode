@@ -15,9 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api;
+package com.code.infra.user.mvc.api.impl;
 
 import com.code.framework.basic.util.InvokeUtil;
+import com.code.infra.user.mvc.api.UserApi;
 import com.code.infra.user.mvc.api.domain.LoginReq;
 import com.code.infra.user.mvc.api.domain.LoginResp;
 import com.code.infra.user.mvc.api.domain.RegisterReq;

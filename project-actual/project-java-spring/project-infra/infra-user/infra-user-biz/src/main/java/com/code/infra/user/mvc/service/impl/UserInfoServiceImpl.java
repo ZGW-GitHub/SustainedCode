@@ -15,12 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service;
+package com.code.infra.user.mvc.service.impl;
 
 import com.code.framework.basic.util.BeanUtil;
 import com.code.infra.user.framework.exception.UserExceptionCode;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
+import com.code.infra.user.mvc.service.UserInfoService;
 import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
 import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
 import jakarta.annotation.Resource;

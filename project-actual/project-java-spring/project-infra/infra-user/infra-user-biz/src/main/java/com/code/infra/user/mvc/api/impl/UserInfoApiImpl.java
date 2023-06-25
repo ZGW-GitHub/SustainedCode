@@ -15,8 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api;
+package com.code.infra.user.mvc.api.impl;
 
+import com.code.infra.user.mvc.api.UserInfoApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

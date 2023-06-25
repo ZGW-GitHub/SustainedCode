@@ -15,11 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.biz;
+package com.code.infra.user.mvc.biz.impl;
 
 import com.code.framework.basic.util.BeanUtil;
 import com.code.framework.basic.util.PasswordUtil;
 import com.code.infra.user.framework.exception.UserExceptionCode;
+import com.code.infra.user.mvc.biz.UserBiz;
 import com.code.infra.user.mvc.biz.domain.LoginBO;
 import com.code.infra.user.mvc.biz.domain.LoginDTO;
 import com.code.infra.user.mvc.biz.domain.RegisterBO;
