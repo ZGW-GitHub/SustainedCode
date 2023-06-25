@@ -76,7 +76,7 @@ public class GatewayResponse<T> implements Serializable {
 		return error(exceptionCode, exceptionCode.getMessage());
 	}
 
-	private static <T> GatewayResponse<T> error(ExceptionCode exceptionCode, String message) {
+	public static <T> GatewayResponse<T> error(ExceptionCode exceptionCode, String message) {
 		GatewayResponse<T> result = new GatewayResponse<>();
 		result.code = exceptionCode.getCode();
 		result.message = message;
@@ -88,7 +88,7 @@ public class GatewayResponse<T> implements Serializable {
 		return error(exception, exception.getMessage());
 	}
 
-	private static <T> GatewayResponse<T> error(Exception exception, String message) {
+	public static <T> GatewayResponse<T> error(Exception exception, String message) {
 		GatewayResponse<T> result = new GatewayResponse<>();
 		result.code = exception.getCode();
 		result.message = message;
