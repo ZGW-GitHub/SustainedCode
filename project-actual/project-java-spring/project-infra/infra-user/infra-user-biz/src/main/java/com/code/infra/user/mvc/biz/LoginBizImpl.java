@@ -61,7 +61,7 @@ public class LoginBizImpl implements LoginBiz {
 		// 用户名密码正确
 		// TODO
 
-		return BeanUtil.map(userInfoDO, LoginDTO.class);
+		return BeanUtil.map(userInfoDO, LoginDTO::new);
 	}
 
 }

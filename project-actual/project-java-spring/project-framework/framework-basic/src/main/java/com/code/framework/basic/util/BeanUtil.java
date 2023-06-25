@@ -19,10 +19,8 @@ package com.code.framework.basic.util;
 
 import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
@@ -34,42 +32,20 @@ import java.util.function.Supplier;
 @Slf4j
 public class BeanUtil {
 
-	public static <S, T> T map(S source, Class<T> targetClass) {
-		if (null == source) {
-			return null;
-		} else {
-			T target = BeanUtils.instantiateClass(targetClass);
-			copyProperties(source, target);
-			return target;
-		}
-	}
-
-	public static <S, T> List<T> mapList(Collection<S> sourceList, Class<T> targetClass) {
-		if (sourceList == null) {
-			return null;
-		}
-
-		List<T> targetList = Lists.newArrayList();
-		for (S source : sourceList) {
-			T target = map(source, targetClass);
-			targetList.add(target);
-		}
-		return targetList;
-	}
-
-	public static <S, T> T copyProperties(S source, T target, String... ignoreProperties) {
+	public static <S, T> T map(S source, Supplier<T> targetSupplier, String... ignoreProperties) {
+		T target = targetSupplier.get();
 		if (null != source && null != target) {
 			BeanUtils.copyProperties(source, target, ignoreProperties);
 		}
 		return target;
 	}
 
-	public static <S, T> List<T> copyProperties(List<S> sourceList, Supplier<T> targetSuppler, String... ignoreProperties) {
+	public static <S, T> List<T> mapList(List<S> sourceList, Supplier<T> targetSuppler, String... ignoreProperties) {
 		if (CollUtil.isEmpty(sourceList)) {
 			return Collections.emptyList();
 		}
 
-		return sourceList.stream().map(source -> copyProperties(source, targetSuppler.get())).toList();
+		return sourceList.stream().map(source -> map(source, targetSuppler, ignoreProperties)).toList();
 	}
 
 }

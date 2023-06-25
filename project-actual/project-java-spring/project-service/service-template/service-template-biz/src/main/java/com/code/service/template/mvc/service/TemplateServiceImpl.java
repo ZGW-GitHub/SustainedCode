@@ -17,9 +17,9 @@
 
 package com.code.service.template.mvc.service;
 
-import cn.hutool.core.util.IdUtil;
 import com.code.framework.basic.domain.page.PageResp;
 import com.code.framework.basic.util.BeanUtil;
+import com.code.framework.basic.util.IdGenerator;
 import com.code.framework.basic.util.InvokeUtil;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
@@ -49,8 +49,8 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	public String save(TemplateCreateBO createBO) {
-		TemplateDO templateDO = BeanUtil.map(createBO, TemplateDO.class);
-		templateDO.setRecordNo(IdUtil.fastSimpleUUID());
+		TemplateDO templateDO = BeanUtil.map(createBO, TemplateDO::new);
+		templateDO.setRecordNo(IdGenerator.recordNo());
 		templateMapper.insert(templateDO);
 
 		// applicationContext.publishEvent(new RocketSendEvent(new TestMessage()));

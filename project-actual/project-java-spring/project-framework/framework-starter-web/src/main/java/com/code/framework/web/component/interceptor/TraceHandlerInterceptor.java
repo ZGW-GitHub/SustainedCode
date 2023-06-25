@@ -51,7 +51,7 @@ public class TraceHandlerInterceptor implements HandlerInterceptor {
 		// 1、生成/获取 traceId
 		String traceId = request.getParameter(TraceContextKeyEnum.TRACE_ID.getName());
 		if (StrUtil.isBlank(traceId)) {
-			traceId = IdGenerator.generateTraceId();
+			traceId = IdGenerator.traceId();
 		}
 
 		// 2、为日志设置 traceId

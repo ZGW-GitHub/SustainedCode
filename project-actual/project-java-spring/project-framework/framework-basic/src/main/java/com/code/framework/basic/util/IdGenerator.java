@@ -27,12 +27,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IdGenerator {
 
-	public static String generateTraceId() {
+	public static String traceId() {
 		return "trace$" + IdUtil.fastSimpleUUID();
 	}
 
-	public static String generateJobId() {
+	public static String jobId() {
 		return "job$" + IdUtil.fastSimpleUUID();
+	}
+
+	public static String recordNo() {
+		return IdUtil.getSnowflakeNextIdStr();
 	}
 
 }

@@ -17,7 +17,7 @@
 
 package com.code.infra.user.mvc.service;
 
-import com.code.infra.user.convert.UserInfoConvert;
+import com.code.framework.basic.util.BeanUtil;
 import com.code.infra.user.framework.exception.UserExceptionCode;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
@@ -48,9 +48,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO) {
-		Optional<UserInfoDO> userInfoDO = userInfoMapper.findByAccount(userInfoDetailBO.getAccount());
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(userInfoDetailBO.getAccount());
 
-		return userInfoDO.map(UserInfoConvert.INSTANCE::doToModel).orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
+		return userInfoDOOpt
+				.map(userInfoDO -> BeanUtil.map(userInfoDO, UserInfoDetailDTO::new))
+				.orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
 	}
 
 }

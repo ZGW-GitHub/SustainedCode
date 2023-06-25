@@ -43,7 +43,7 @@ public class InvokeUtil {
 	 * @return {@link R}
 	 */
 	public static <P, R> R invoke(Object param, Function<P, R> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		return invoke.apply(invokeParam);
 	}
@@ -58,11 +58,11 @@ public class InvokeUtil {
 	 * @return {@link R}
 	 */
 	public static <P, H, R> R invoke(Object param, Supplier<R> resultSupplier, Function<P, H> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		H invokeResult = invoke.apply(invokeParam);
 
-		return BeanUtil.copyProperties(invokeResult, resultSupplier.get());
+		return BeanUtil.map(invokeResult, resultSupplier);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class InvokeUtil {
 	 * @return {@link R}
 	 */
 	public static <P, R> List<R> invokeList(Object param, Function<P, List<R>> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		return invoke.apply(invokeParam);
 	}
@@ -89,11 +89,11 @@ public class InvokeUtil {
 	 * @return {@link List}<{@link R}>
 	 */
 	public static <P, H, R> List<R> invokeList(Object param, Supplier<R> resultSupplier, Function<P, List<H>> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		List<H> invokeResult = invoke.apply(invokeParam);
 
-		return BeanUtil.copyProperties(invokeResult, resultSupplier);
+		return BeanUtil.mapList(invokeResult, resultSupplier);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class InvokeUtil {
 	 * @return {@link PageResp}<{@link R}>
 	 */
 	public static <P, R> PageResp<R> invokePage(Object param, Function<P, PageResp<R>> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		return invoke.apply(invokeParam);
 	}
@@ -120,11 +120,11 @@ public class InvokeUtil {
 	 * @return {@link PageResp}<{@link R}>
 	 */
 	public static <P, H, R> PageResp<R> invokePage(Object param, Supplier<R> resultSupplier, Function<P, PageResp<H>> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		PageResp<H> invokeResult = invoke.apply(invokeParam);
 
-		return PageResp.of(invokeResult.getTotal(), BeanUtil.copyProperties(invokeResult.getRecords(), resultSupplier));
+		return PageResp.of(invokeResult.getTotal(), BeanUtil.mapList(invokeResult.getRecords(), resultSupplier));
 	}
 
 	// ------------------------------------------------- 有入参，无出参 --------------------------------------------------
@@ -137,7 +137,7 @@ public class InvokeUtil {
 	 * @param invokeParamSupplier 调用目标方法的入参类型
 	 */
 	public static <P> void invoke(Object param, Consumer<P> invoke, Supplier<P> invokeParamSupplier) {
-		P invokeParam = BeanUtil.copyProperties(param, invokeParamSupplier.get());
+		P invokeParam = BeanUtil.map(param, invokeParamSupplier);
 
 		invoke.accept(invokeParam);
 	}
@@ -155,7 +155,7 @@ public class InvokeUtil {
 	public static <R> R invoke(Supplier<R> resultSupplier, Supplier<R> invoke) {
 		R invokeResult = invoke.get();
 
-		return BeanUtil.copyProperties(invokeResult, resultSupplier.get());
+		return BeanUtil.map(invokeResult, resultSupplier);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class InvokeUtil {
 	public static <R> List<R> invokeList(Supplier<R> resultSupplier, Supplier<List<R>> invoke) {
 		List<R> invokeResult = invoke.get();
 
-		return BeanUtil.copyProperties(invokeResult, resultSupplier);
+		return BeanUtil.mapList(invokeResult, resultSupplier);
 	}
 
 }

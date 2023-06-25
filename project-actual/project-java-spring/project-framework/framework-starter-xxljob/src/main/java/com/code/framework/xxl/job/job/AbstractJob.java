@@ -63,7 +63,7 @@ public abstract class AbstractJob<D> extends IJobHandler {
 	@Override
 	public final void execute() {
 		TraceContextHelper.startTrace();
-		TraceContextHelper.addInfo(TraceContextKeyEnum.JOB_ID, IdGenerator.generateJobId());
+		TraceContextHelper.addInfo(TraceContextKeyEnum.JOB_ID, IdGenerator.jobId());
 		MDCUtil.setTraceId(TraceContextHelper.getInfo(TraceContextKeyEnum.JOB_ID));
 
 		startTime = System.currentTimeMillis();
