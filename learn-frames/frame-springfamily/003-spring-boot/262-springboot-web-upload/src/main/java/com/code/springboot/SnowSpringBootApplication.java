@@ -17,9 +17,18 @@
 
 package com.code.springboot;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+
 /**
  * @author Snow
  * @date 2023/6/12 15:33
  */
+@SpringBootApplication
 public class SnowSpringBootApplication {
+	public static void main(String[] args) {
+
+		new SpringApplicationBuilder(SnowSpringBootApplication.class).run(args);
+
+	}
 }
