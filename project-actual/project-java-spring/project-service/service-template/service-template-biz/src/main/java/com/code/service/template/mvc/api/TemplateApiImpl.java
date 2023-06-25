@@ -18,7 +18,7 @@
 package com.code.service.template.mvc.api;
 
 import com.code.framework.basic.domain.page.PageResp;
-import com.code.framework.basic.util.InvokeUtil;
+import com.code.framework.basic.util.InvokeFastUtil;
 import com.code.service.template.mvc.api.domain.TemplateCreateReq;
 import com.code.service.template.mvc.api.domain.TemplateDetailResp;
 import com.code.service.template.mvc.api.domain.TemplatePageReq;
@@ -47,12 +47,12 @@ public class TemplateApiImpl implements TemplateApi {
 
 	@Override
 	public String save(TemplateCreateReq createReq) {
-		return InvokeUtil.invoke(createReq, templateService::save, TemplateCreateBO.class);
+		return InvokeFastUtil.invoke(createReq, templateService::save, TemplateCreateBO::new);
 	}
 
 	@Override
 	public PageResp<TemplateDetailResp> page(TemplatePageReq templatePageReq) {
-		return InvokeUtil.invokePage(templatePageReq, TemplateDetailResp.class, templateService::page, TemplatePageBO.class);
+		return InvokeFastUtil.invokePage(templatePageReq, TemplateDetailResp::new, templateService::page, TemplatePageBO::new);
 	}
 
 }

@@ -17,12 +17,15 @@
 
 package com.code.framework.basic.util;
 
+import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * @author Snow
@@ -54,10 +57,19 @@ public class BeanUtil {
 		return targetList;
 	}
 
-	public static <S, T> void copyProperties(S source, T target, String... ignoreProperties) {
+	public static <S, T> T copyProperties(S source, T target, String... ignoreProperties) {
 		if (null != source && null != target) {
 			BeanUtils.copyProperties(source, target, ignoreProperties);
 		}
+		return target;
+	}
+
+	public static <S, T> List<T> copyProperties(List<S> sourceList, Supplier<T> targetSuppler, String... ignoreProperties) {
+		if (CollUtil.isEmpty(sourceList)) {
+			return Collections.emptyList();
+		}
+
+		return sourceList.stream().map(source -> copyProperties(source, targetSuppler.get())).toList();
 	}
 
 }
