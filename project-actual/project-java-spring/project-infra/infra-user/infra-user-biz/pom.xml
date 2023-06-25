@@ -60,7 +60,7 @@
 
 		<dependency>
 			<groupId>com.code</groupId>
-			<artifactId>service-template-facade</artifactId>
+			<artifactId>infra-user-facade</artifactId>
 		</dependency>
 	</dependencies>
 
