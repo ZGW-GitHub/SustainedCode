@@ -15,15 +15,34 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api;
+package com.code.infra.user.mvc.biz;
 
-import org.springframework.validation.annotation.Validated;
+import com.code.infra.user.mvc.biz.domain.LoginBO;
+import com.code.infra.user.mvc.biz.domain.LoginDTO;
+import com.code.infra.user.mvc.biz.domain.RegisterBO;
+import com.code.infra.user.mvc.biz.domain.RegisterDTO;
 
 /**
  * @author Snow
- * @date 2023/6/21 16:14
+ * @date 2023/6/24 22:23
  */
-@Validated
-public interface UserInfoApi {
+public interface UserBiz {
+
+	/**
+	 * 登录
+	 *
+	 * @param loginBO 登录请求
+	 *
+	 * @return {@link LoginDTO}
+	 */
+	LoginDTO login(LoginBO loginBO);
+
+	/**
+	 * 注册
+	 *
+	 * @param registerBO registerBO
+	 * @return {@link RegisterDTO}
+	 */
+	RegisterDTO register(RegisterBO registerBO);
 
 }

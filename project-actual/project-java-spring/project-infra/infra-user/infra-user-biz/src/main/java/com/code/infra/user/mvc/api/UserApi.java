@@ -17,13 +17,36 @@
 
 package com.code.infra.user.mvc.api;
 
+import com.code.framework.web.api.annotation.Api;
+import com.code.infra.user.mvc.api.domain.LoginReq;
+import com.code.infra.user.mvc.api.domain.LoginResp;
+import com.code.infra.user.mvc.api.domain.RegisterReq;
+import com.code.infra.user.mvc.api.domain.RegisterResp;
 import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Snow
- * @date 2023/6/21 16:14
+ * @date 2023/6/25 17:09
  */
 @Validated
-public interface UserInfoApi {
+public interface UserApi {
+
+	/**
+	 * 登录
+	 *
+	 * @param loginReq 登录请求
+	 * @return {@link LoginResp}
+	 */
+	@Api("user.login")
+	LoginResp login(LoginReq loginReq);
+
+	/**
+	 * 注册
+	 *
+	 * @param registerReq 注册申请
+	 * @return {@link RegisterResp}
+	 */
+	@Api("user.register")
+	RegisterResp register(RegisterReq registerReq);
 
 }

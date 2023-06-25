@@ -40,7 +40,8 @@ import java.util.function.Supplier;
 public enum UserExceptionCode implements ExceptionCode<UserException> {
 
 	USER_NOT_EXIST(130001, "用户不存在"),
-	USER_ACCOUNT_OR_PASSWORD_INCORRECT(130002, "账号或密码错误"),
+	USER_EXIST(130001, "用户已存在"),
+	USER_ACCOUNT_OR_PASSWORD_INCORRECT(130003, "账号或密码错误"),
 	;
 
 	private final int    code;

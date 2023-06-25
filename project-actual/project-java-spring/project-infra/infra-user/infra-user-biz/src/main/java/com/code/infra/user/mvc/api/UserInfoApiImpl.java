@@ -17,12 +17,6 @@
 
 package com.code.infra.user.mvc.api;
 
-import com.code.framework.basic.util.InvokeUtil;
-import com.code.infra.user.mvc.api.domain.LoginReq;
-import com.code.infra.user.mvc.api.domain.LoginResp;
-import com.code.infra.user.mvc.biz.LoginBiz;
-import com.code.infra.user.mvc.biz.domain.LoginBO;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -33,19 +27,5 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class UserInfoApiImpl implements UserInfoApi {
-
-	@Resource
-	private LoginBiz loginBiz;
-
-	/**
-	 * 登录
-	 *
-	 * @param loginReq 登录请求
-	 * @return {@link LoginResp}
-	 */
-	@Override
-	public LoginResp login(LoginReq loginReq) {
-		return InvokeUtil.invoke(loginReq, LoginResp::new, loginBiz::login, LoginBO::new);
-	}
 
 }

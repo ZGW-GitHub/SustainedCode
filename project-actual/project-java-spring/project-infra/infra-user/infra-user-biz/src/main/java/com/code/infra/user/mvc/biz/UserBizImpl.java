@@ -22,10 +22,13 @@ import com.code.framework.basic.util.PasswordUtil;
 import com.code.infra.user.framework.exception.UserExceptionCode;
 import com.code.infra.user.mvc.biz.domain.LoginBO;
 import com.code.infra.user.mvc.biz.domain.LoginDTO;
+import com.code.infra.user.mvc.biz.domain.RegisterBO;
+import com.code.infra.user.mvc.biz.domain.RegisterDTO;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -34,7 +37,8 @@ import java.util.Optional;
  * @date 2023/6/24 22:23
  */
 @Slf4j
-public class LoginBizImpl implements LoginBiz {
+@Service
+public class UserBizImpl implements UserBiz {
 
 	@Resource
 	private UserInfoMapper userInfoMapper;
@@ -62,6 +66,28 @@ public class LoginBizImpl implements LoginBiz {
 		// TODO
 
 		return BeanUtil.map(userInfoDO, LoginDTO::new);
+	}
+
+	/**
+	 * 注册
+	 *
+	 * @param registerBO registerBO
+	 * @return {@link RegisterDTO}
+	 */
+	@Override
+	public RegisterDTO register(RegisterBO registerBO) {
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(registerBO.getAccount());
+		if (userInfoDOOpt.isPresent()) {
+			throw UserExceptionCode.USER_EXIST.exception();
+		}
+
+		UserInfoDO userInfoDO = BeanUtil.map(registerBO, UserInfoDO::new);
+		String salt = PasswordUtil.generateSalt();
+		userInfoDO.setSalt(salt);
+		userInfoDO.setPassword(PasswordUtil.encode(registerBO.getPassword(), salt));
+		userInfoMapper.insert(userInfoDO);
+
+		return new RegisterDTO();
 	}
 
 }

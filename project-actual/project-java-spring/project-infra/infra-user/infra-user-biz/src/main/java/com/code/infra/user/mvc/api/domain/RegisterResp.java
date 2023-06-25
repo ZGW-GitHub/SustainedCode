@@ -15,24 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.biz;
+package com.code.infra.user.mvc.api.domain;
 
-import com.code.infra.user.mvc.biz.domain.LoginBO;
-import com.code.infra.user.mvc.biz.domain.LoginDTO;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/24 22:23
+ * @date 2023/6/25 17:12
  */
-public interface LoginBiz {
-
-	/**
-	 * 登录
-	 *
-	 * @param loginBO 登录请求
-	 *
-	 * @return {@link LoginDTO}
-	 */
-	LoginDTO login(LoginBO loginBO);
-
+@Slf4j
+@Data
+public class RegisterResp {
 }

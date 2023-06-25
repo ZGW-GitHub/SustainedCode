@@ -15,15 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api;
+package com.code.infra.user.mvc.biz.domain;
 
-import org.springframework.validation.annotation.Validated;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/21 16:14
+ * @date 2023/6/25 17:14
  */
-@Validated
-public interface UserInfoApi {
+@Slf4j
+@Data
+public class RegisterBO {
+
+	private String account;
+
+	private String password;
 
 }
