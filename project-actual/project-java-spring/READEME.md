@@ -32,14 +32,18 @@ biz:
     mvc:
       api:
         domain: req 、resp
-      service: 
-        domain: BO 、DTO
+        impl:
       biz:
         domain: BO 、DTO
+        impl:
+      service: 
+        domain: BO 、DTO
+        impl:
       dal:
         domain: 
           dos: DO
-          pojo: Query 、POJO
+          pojo: POJO
+          query: Query
         mapper: 
         redis: redis 操作
     job: 
