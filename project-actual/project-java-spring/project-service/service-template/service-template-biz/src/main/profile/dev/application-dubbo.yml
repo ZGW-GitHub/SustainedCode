@@ -6,10 +6,10 @@ dubbo:
     multiple: true
   registry:
     address: nacos://${nacos.server-addr}?namespace=${nacos.namespace.dev}
-    group: SUSTAINED_CODE
+    group: PROJECT_JAVA_SPRING
   metadata-report:
     address: nacos://${nacos.server-addr}?namespace=${nacos.namespace.dev.metadata-report}
-    group: SUSTAINED_CODE
+    group: PROJECT_JAVA_SPRING
   config-center:
     address: ${dubbo.registry.address}
   protocol:

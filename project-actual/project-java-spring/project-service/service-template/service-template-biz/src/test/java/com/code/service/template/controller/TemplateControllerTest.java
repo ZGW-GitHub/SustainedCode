@@ -2,7 +2,7 @@ package com.code.service.template.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.code.framework.web.controller.GatewayController;
-import com.code.service.template.mvc.api.domain.TemplateCreateReq;
+import com.code.service.template.mvc.api.domain.TemplateSaveReq;
 import com.code.service.template.mvc.service.TemplateService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ class TemplateControllerTest {
 
 	@Test
 	void save() throws Exception {
-		TemplateCreateReq reqVO = new TemplateCreateReq();
+		TemplateSaveReq reqVO = new TemplateSaveReq();
 
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders
 						.post("/goodsInfo/save")

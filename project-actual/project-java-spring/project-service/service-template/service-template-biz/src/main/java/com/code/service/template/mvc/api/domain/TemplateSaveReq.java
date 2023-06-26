@@ -15,14 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.biz;
+package com.code.service.template.mvc.api.domain;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Snow
- * @date 2023/6/19 15:11
+ * @author 愆凡
+ * @date 2022/6/12 18:27
  */
 @Slf4j
-public class TemplateBizImpl {
+@Data
+@Accessors(chain = true)
+public class TemplateSaveReq {
+
+	@NotNull
+	private String name;
+
+	@Min(value = 0, message = "年龄需大于 0")
+	private Integer age;
+
 }

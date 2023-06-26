@@ -19,9 +19,9 @@ package com.code.service.template.mvc.api;
 
 import com.code.framework.basic.domain.page.PageResp;
 import com.code.framework.web.api.annotation.Api;
-import com.code.service.template.mvc.api.domain.TemplateCreateReq;
 import com.code.service.template.mvc.api.domain.TemplateDetailResp;
 import com.code.service.template.mvc.api.domain.TemplatePageReq;
+import com.code.service.template.mvc.api.domain.TemplateSaveReq;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
@@ -36,7 +36,7 @@ public interface TemplateApi {
 	String test();
 
 	@Api("template.save")
-	String save(@Valid TemplateCreateReq reqVO);
+	String save(@Valid TemplateSaveReq templateSaveReq);
 
 	@Api("template.page")
 	PageResp<TemplateDetailResp> page(TemplatePageReq templatePageReq);

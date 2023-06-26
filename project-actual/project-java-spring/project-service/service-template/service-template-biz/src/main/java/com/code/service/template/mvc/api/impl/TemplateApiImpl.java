@@ -15,13 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.api;
+package com.code.service.template.mvc.api.impl;
 
 import com.code.framework.basic.domain.page.PageResp;
 import com.code.framework.basic.util.InvokeUtil;
-import com.code.service.template.mvc.api.domain.TemplateCreateReq;
+import com.code.service.template.mvc.api.TemplateApi;
 import com.code.service.template.mvc.api.domain.TemplateDetailResp;
 import com.code.service.template.mvc.api.domain.TemplatePageReq;
+import com.code.service.template.mvc.api.domain.TemplateSaveReq;
 import com.code.service.template.mvc.service.TemplateService;
 import com.code.service.template.mvc.service.domain.TemplateCreateBO;
 import com.code.service.template.mvc.service.domain.TemplatePageBO;
@@ -46,7 +47,7 @@ public class TemplateApiImpl implements TemplateApi {
 	}
 
 	@Override
-	public String save(TemplateCreateReq createReq) {
+	public String save(TemplateSaveReq createReq) {
 		return InvokeUtil.invoke(createReq, templateService::save, TemplateCreateBO::new);
 	}
 

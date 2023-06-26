@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.mvc.service;
+package com.code.service.template.mvc.service.impl;
 
 import com.code.framework.basic.domain.page.PageResp;
 import com.code.framework.basic.util.BeanUtil;
@@ -24,6 +24,7 @@ import com.code.framework.basic.util.InvokeUtil;
 import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
+import com.code.service.template.mvc.service.TemplateService;
 import com.code.service.template.mvc.service.domain.TemplateCreateBO;
 import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
 import com.code.service.template.mvc.service.domain.TemplatePageBO;

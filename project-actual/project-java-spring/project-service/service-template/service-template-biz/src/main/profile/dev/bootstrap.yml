@@ -11,8 +11,8 @@ spring:
             group: COMMON
             refresh: true
           - data-id: application-mq-kafka.yml
-            group: SERVICE_GOODS
+            group: SERVICE_TEMPLATE
             refresh: true
           - data-id: application-mq-rocketmq.yml
-            group: SERVICE_GOODS
+            group: SERVICE_TEMPLATE
             refresh: true
