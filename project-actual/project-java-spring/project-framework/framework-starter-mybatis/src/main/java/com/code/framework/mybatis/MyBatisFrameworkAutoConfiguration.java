@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Snow
  * @date 2023/5/26 18:04
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ComponentScan("com.code.framework.mybatis")
 public class MyBatisFrameworkAutoConfiguration {
 }
