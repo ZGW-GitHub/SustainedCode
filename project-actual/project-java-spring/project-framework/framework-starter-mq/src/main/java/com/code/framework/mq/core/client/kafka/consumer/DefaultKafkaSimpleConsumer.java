@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Setter
 @Component
-public class DefaultKafkaConsumer extends AbstractKafkaConsumer<String, String> {
+public class DefaultKafkaSimpleConsumer extends KafkaSimpleConsumer<String, String> {
 
 	@Override
 	protected void handleMessage(KafkaConsumer<String, String> consumer) {

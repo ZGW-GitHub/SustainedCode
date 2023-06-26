@@ -1,7 +1,7 @@
 package com.code.framework.mq.core.client.kafka.producer;
 
 import com.code.framework.mq.config.KafkaConfig;
-import com.code.framework.mq.core.client.MqClientBuilder;
+import com.code.framework.mq.core.client.MqClient;
 import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.Properties;
  */
 @Slf4j
 @Getter
-public abstract class AbstractKafkaProducer<K, V> implements MqClientBuilder<KafkaProducer<K, V>, KafkaConfig.KafkaProducerConfig> {
+public abstract class AbstractKafkaProducer<K, V> implements MqClient<KafkaProducer<K, V>, KafkaConfig.KafkaProducerConfig> {
 
 	@Resource
 	private KafkaConfig kafkaConfig;

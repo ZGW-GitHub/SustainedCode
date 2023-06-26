@@ -2,7 +2,7 @@ package com.code.framework.mq.core.client.rocketmq.consumer;
 
 import com.code.framework.basic.exception.code.BizExceptionCode;
 import com.code.framework.mq.config.RocketMQConfig;
-import com.code.framework.mq.core.client.MqClientBuilder;
+import com.code.framework.mq.core.client.MqClient;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -15,7 +15,7 @@ import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
  * @date 2022/6/16 16:46
  */
 @Slf4j
-public abstract class AbstractRocketConsumer implements MqClientBuilder<DefaultMQPushConsumer, RocketMQConfig.RocketMQConsumerConfig> {
+public abstract class AbstractRocketConsumer implements MqClient<DefaultMQPushConsumer, RocketMQConfig.RocketMQConsumerConfig> {
 
 	@Resource
 	private RocketMQConfig rocketMQConfig;
