@@ -1,0 +1,1 @@
+logInvokerListener=com.code.framework.dubbo.component.listener.LogInvokerListener
