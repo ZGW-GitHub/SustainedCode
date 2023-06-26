@@ -1,10 +1,11 @@
 package com.code.framework.mq.core.client.kafka.consumer;
 
+import com.code.framework.mq.config.KafkaConfig;
 import com.code.framework.mq.core.client.MqClientBuilder;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.Deserializer;
 
 import java.util.Properties;
 
@@ -13,48 +14,37 @@ import java.util.Properties;
  * @date 2022/6/16 15:31
  */
 @Slf4j
-public abstract class AbstractKafkaConsumer<K, V> implements MqClientBuilder<KafkaConsumer<K, V>> {
+public abstract class AbstractKafkaConsumer<K, V> implements MqClientBuilder<KafkaConsumer<K, V>, KafkaConfig.KafkaConsumerConfig> {
+
+	@Resource
+	private KafkaConfig kafkaConfig;
 
 	private KafkaConsumer<K, V> client;
 
 	@Override
 	public final void afterSingletonsInstantiated() {
-		// 1、构建客户端
-		builderClient();
+		KafkaConfig.KafkaConsumerConfig kafkaConsumerConfig = kafkaConfig.getConsumer().get(clientId());
 
-		// 2、配置订阅
-		subscribeConfig(client);
+		// 1、构建客户端
+		builderClient(kafkaConsumerConfig);
 
 		// 3、消费消息
 		handleMessage(client);
 	}
 
 	@Override
-	public final void builderClient() {
+	public final void builderClient(KafkaConfig.KafkaConsumerConfig kafkaConsumerConfig) {
 		Properties properties = new Properties();
-		loadDefaultProperties(properties);
-		customClient(properties);
-		serializerConfig(properties);
+		properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConsumerConfig.getBootstrapServer());
+		properties.put(ConsumerConfig.CLIENT_ID_CONFIG, clientId());
+		properties.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaConsumerConfig.getGroupId());
+		properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, kafkaConsumerConfig.getKeySerializer());
+		properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, kafkaConsumerConfig.getValueSerializer());
 
 		client = new KafkaConsumer<>(properties);
+
+		client.subscribe(kafkaConsumerConfig.getSubscribe());
 	}
-
-	private void loadDefaultProperties(Properties properties) {
-		properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-	}
-
-	protected abstract void customClient(Properties properties);
-
-	private void serializerConfig(Properties properties) {
-		properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, getKeySerializer().getName());
-		properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, getValueSerializer().getName());
-	}
-
-	protected abstract Class<? extends Deserializer<K>> getKeySerializer();
-
-	protected abstract Class<? extends Deserializer<K>> getValueSerializer();
-
-	protected abstract void subscribeConfig(KafkaConsumer<K, V> consumer);
 
 	protected abstract void handleMessage(KafkaConsumer<K, V> consumer);
 

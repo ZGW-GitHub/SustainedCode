@@ -15,20 +15,46 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mq.configuration;
+package com.code.framework.mq.config;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
 /**
- * @author 愆凡
- * @date 2022/7/6 17:16
+ * @author Snow
+ * @date 2023/6/26 15:44
  */
 @Slf4j
-@Configuration
-@ComponentScan("com.code.framework.mq.core")
-public class MqFrameworkAutoConfiguration {
+@Data
+@Configuration(proxyBeanMethods = false)
+@ConfigurationProperties("framework.mq.rocketmq")
+public class RocketMQConfig {
 
+	private Map<String, RocketMQProducerConfig> producer;
+
+	private Map<String, RocketMQConsumerConfig> consumer;
+
+	@Data
+	public static class RocketMQProducerConfig {
+		private String nameSrv;
+		private String group;
+		private String topic;
+	}
+
+	@Data
+	public static class RocketMQConsumerConfig {
+		private String nameSrv;
+		private String group;
+
+		private String subscribe;
+		private String subExpression;
+		private String messageModel;
+
+		private String consumeFromWhere;
+	}
 
 }

@@ -1,7 +1,9 @@
 package com.code.framework.mq.core.client.rocketmq.producer;
 
 import com.code.framework.basic.exception.code.BizExceptionCode;
+import com.code.framework.mq.config.RocketMQConfig;
 import com.code.framework.mq.core.client.MqClientBuilder;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -11,13 +13,18 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
  * @date 2022/6/16 16:46
  */
 @Slf4j
-public abstract class AbstractRocketProducer implements MqClientBuilder<DefaultMQProducer> {
+public abstract class AbstractRocketProducer implements MqClientBuilder<DefaultMQProducer, RocketMQConfig.RocketMQProducerConfig> {
+
+	@Resource
+	private RocketMQConfig rocketMQConfig;
 
 	private DefaultMQProducer client;
 
 	@Override
 	public final void afterSingletonsInstantiated() {
-		builderClient();
+		RocketMQConfig.RocketMQProducerConfig producerConfig = rocketMQConfig.getProducer().get(clientId());
+
+		builderClient(producerConfig);
 
 		try {
 			client.start();
@@ -29,18 +36,11 @@ public abstract class AbstractRocketProducer implements MqClientBuilder<DefaultM
 	}
 
 	@Override
-	public final void builderClient() {
+	public final void builderClient(RocketMQConfig.RocketMQProducerConfig producerConfig) {
 		client = new DefaultMQProducer();
-
-		customClient(client);
+		client.setNamesrvAddr(producerConfig.getNameSrv());
+		client.setProducerGroup(producerConfig.getGroup());
 	}
-
-	/**
-	 * 自定义客户端
-	 *
-	 * @param client 客户端
-	 */
-	protected abstract void customClient(DefaultMQProducer client);
 
 	@Override
 	public final DefaultMQProducer client() {
