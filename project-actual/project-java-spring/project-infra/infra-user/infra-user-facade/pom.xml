@@ -16,16 +16,15 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<framework-starter-dubbo.version>1.0.0-SNAPSHOT</framework-starter-dubbo.version>
 		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.code</groupId>
-			<artifactId>framework-starter-dubbo</artifactId>
-			<version>${framework-starter-dubbo.version}</version>
-		</dependency>
+		<!-- Dubbo -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>org.apache.dubbo</groupId> -->
+		<!-- 	<artifactId>dubbo-spring-boot-starter</artifactId> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>com.code</groupId>
