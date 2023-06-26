@@ -17,16 +17,12 @@
 
 	<properties>
 		<framework-starter-web.version>1.0.0-SNAPSHOT</framework-starter-web.version>
+		<framework-starter-dubbo.version>1.0.0-SNAPSHOT</framework-starter-dubbo.version>
 		<framework-starter-mybatis.version>1.0.0-SNAPSHOT</framework-starter-mybatis.version>
 		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -46,6 +42,12 @@
 			<groupId>com.code</groupId>
 			<artifactId>framework-starter-web</artifactId>
 			<version>${framework-starter-web.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-starter-dubbo</artifactId>
+			<version>${framework-starter-dubbo.version}</version>
 		</dependency>
 
 		<dependency>
