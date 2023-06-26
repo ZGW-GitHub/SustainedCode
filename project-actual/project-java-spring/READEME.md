@@ -53,7 +53,9 @@ biz:
 
 #### 说明：
 
-操作：find 、list 、page 、save 、update 、remove
+实体命名：query 、page 、detail 、save 、update 、delete
+
+方法命名：find 、list 、page 、save 、update 、delete
 
 1. api [ req/resp ]:
    - 直接调用 service

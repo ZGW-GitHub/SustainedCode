@@ -24,8 +24,8 @@ import com.code.service.template.mvc.api.domain.TemplateDetailResp;
 import com.code.service.template.mvc.api.domain.TemplatePageReq;
 import com.code.service.template.mvc.api.domain.TemplateSaveReq;
 import com.code.service.template.mvc.service.TemplateService;
-import com.code.service.template.mvc.service.domain.TemplateCreateBO;
 import com.code.service.template.mvc.service.domain.TemplatePageBO;
+import com.code.service.template.mvc.service.domain.TemplateSaveBO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -48,7 +48,7 @@ public class TemplateApiImpl implements TemplateApi {
 
 	@Override
 	public String save(TemplateSaveReq createReq) {
-		return InvokeUtil.invoke(createReq, templateService::save, TemplateCreateBO::new);
+		return InvokeUtil.invoke(createReq, templateService::save, TemplateSaveBO::new);
 	}
 
 	@Override

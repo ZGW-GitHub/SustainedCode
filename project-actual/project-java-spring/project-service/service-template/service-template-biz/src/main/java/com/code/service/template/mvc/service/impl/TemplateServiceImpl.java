@@ -25,9 +25,9 @@ import com.code.service.template.mvc.dal.domain.dos.TemplateDO;
 import com.code.service.template.mvc.dal.domain.query.TemplatePageQuery;
 import com.code.service.template.mvc.dal.mapper.TemplateMapper;
 import com.code.service.template.mvc.service.TemplateService;
-import com.code.service.template.mvc.service.domain.TemplateCreateBO;
 import com.code.service.template.mvc.service.domain.TemplateDetailDTO;
 import com.code.service.template.mvc.service.domain.TemplatePageBO;
+import com.code.service.template.mvc.service.domain.TemplateSaveBO;
 import jakarta.annotation.Resource;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +49,7 @@ public class TemplateServiceImpl implements TemplateService {
 	private TemplateMapper templateMapper;
 
 	@Override
-	public String save(TemplateCreateBO createBO) {
+	public String save(TemplateSaveBO createBO) {
 		TemplateDO templateDO = BeanUtil.map(createBO, TemplateDO::new);
 		templateDO.setRecordNo(IdGenerator.recordNo());
 		templateMapper.insert(templateDO);

@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-public class TemplateCreateBO {
+public class TemplateSaveBO {
 
 	private String name;
 
