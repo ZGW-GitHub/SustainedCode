@@ -12,9 +12,10 @@
 
 	<modules>
 		<module>framework-basic</module>
-		<module>framework-starter-mq</module>
 		<module>framework-starter-web</module>
 		<module>framework-starter-mybatis</module>
+		<module>framework-starter-dubbo</module>
+		<module>framework-starter-mq</module>
 		<module>framework-starter-xxljob</module>
 	</modules>
 
