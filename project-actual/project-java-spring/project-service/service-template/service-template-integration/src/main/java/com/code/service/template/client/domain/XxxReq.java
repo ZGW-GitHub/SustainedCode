@@ -15,14 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.service.template.client.domain.param;
+package com.code.service.template.client.domain;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/5/19 21:35
+ * @date 2023/6/26 09:43
  */
 @Slf4j
-public class XxxParam {
+public class XxxReq {
 }

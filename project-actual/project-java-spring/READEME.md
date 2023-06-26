@@ -18,7 +18,8 @@ facade:
 
 integration:
   com.code.xxx:
-    client: client 接口
+    client:
+      impl:
       dimain: req 、resp
 
 biz:
@@ -31,14 +32,14 @@ biz:
     facade.impl:
     mvc:
       api:
+        impl:
         domain: req 、resp
-        impl:
       biz:
-        domain: BO 、DTO
         impl:
+        domain: BO 、DTO
       service: 
-        domain: BO 、DTO
         impl:
+        domain: BO 、DTO
       dal:
         domain: 
           dos: DO
