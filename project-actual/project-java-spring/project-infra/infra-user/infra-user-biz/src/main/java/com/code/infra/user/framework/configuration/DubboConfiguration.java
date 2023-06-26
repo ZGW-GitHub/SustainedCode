@@ -15,22 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user;
+package com.code.infra.user.framework.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2023/6/19 16:03
+ * @date 2023/6/26 10:31
  */
 @Slf4j
-@SpringBootApplication
-public class InfraUserApplication {
-	public static void main(String[] args) {
-
-		new SpringApplicationBuilder(InfraUserApplication.class).run(args);
-
-	}
+@EnableDubbo(scanBasePackages = "com.code.infra.user.facade")
+@Configuration(proxyBeanMethods = false)
+public class DubboConfiguration {
 }
