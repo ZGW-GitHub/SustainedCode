@@ -28,5 +28,16 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class UserInfoDetailDTO {
 
+	private String account;
+
+	/**
+	 * 昵称
+	 */
+	private String nickname;
+
+	/**
+	 * 头像
+	 */
+	private String avatar;
 
 }

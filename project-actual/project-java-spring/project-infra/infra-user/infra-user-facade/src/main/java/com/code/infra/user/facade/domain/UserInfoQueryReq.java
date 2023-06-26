@@ -15,24 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user;
+package com.code.infra.user.facade.domain;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * @author Snow
- * @date 2023/6/19 16:03
+ * @date 2023/6/26 09:46
  */
 @Slf4j
-@EnableDubbo
-@SpringBootApplication
-public class InfraUserApplication {
-	public static void main(String[] args) {
+@Data
+public class UserInfoQueryReq implements Serializable {
 
-		new SpringApplicationBuilder(InfraUserApplication.class).run(args);
+	@Serial
+	private static final long serialVersionUID = 2075982394358965445L;
 
-	}
+	private String account;
+
 }

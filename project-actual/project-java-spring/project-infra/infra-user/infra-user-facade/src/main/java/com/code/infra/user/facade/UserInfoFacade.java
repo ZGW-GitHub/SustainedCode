@@ -15,24 +15,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user;
+package com.code.infra.user.facade;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import com.code.infra.user.facade.domain.UserInfoDetailResp;
+import com.code.infra.user.facade.domain.UserInfoQueryReq;
 
 /**
  * @author Snow
- * @date 2023/6/19 16:03
+ * @date 2023/6/26 09:45
  */
-@Slf4j
-@EnableDubbo
-@SpringBootApplication
-public class InfraUserApplication {
-	public static void main(String[] args) {
+public interface UserInfoFacade {
 
-		new SpringApplicationBuilder(InfraUserApplication.class).run(args);
+	UserInfoDetailResp userInfo(UserInfoQueryReq userInfoQueryReq);
 
-	}
 }
