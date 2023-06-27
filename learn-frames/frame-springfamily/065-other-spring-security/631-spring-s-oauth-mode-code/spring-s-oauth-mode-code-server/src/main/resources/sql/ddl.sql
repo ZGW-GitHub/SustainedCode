@@ -15,6 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+BEGIN;
+
+CREATE DATABASE IF NOT EXISTS `frame_spring_security`;
+USE `frame_spring_security`;
+
 -- 保存注册的客户端
 CREATE TABLE oauth2_registered_client
 (
@@ -92,3 +97,5 @@ CREATE TABLE sys_user
     PRIMARY KEY (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+COMMIT;
