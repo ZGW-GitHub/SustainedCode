@@ -1,0 +1,14 @@
+server:
+  port: 65000
+spring:
+  application:
+    name: oauth_mode_code_server
+  config:
+    import:
+      - classpath:application-datasource.yml
+      - classpath:application-mybatis-plus.yml
+      - classpath:application-h2.yml
+      - classpath:application-security.yml
+      - classpath:application-oauth.yml
+      - classpath:application-jwt.yml
+      - classpath:application-log.yml
