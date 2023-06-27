@@ -22,7 +22,6 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -32,9 +31,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -59,11 +56,6 @@ public class SecurityConfiguration {
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.formLogin(withDefaults())
 				.logout(withDefaults());
-
-		// 异常处理
-		httpSecurity.exceptionHandling((exceptions) -> exceptions
-				.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("http://127.0.0.1:65001"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML))
-		);
 
 		return httpSecurity.build();
 	}
