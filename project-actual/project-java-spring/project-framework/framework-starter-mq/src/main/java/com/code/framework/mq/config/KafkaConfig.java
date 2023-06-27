@@ -42,6 +42,7 @@ public class KafkaConfig {
 	@Data
 	public static class KafkaProducerConfig {
 		private String bootstrapServer;
+		private String clientId;
 		private String keySerializer;
 		private String valueSerializer;
 
@@ -51,6 +52,7 @@ public class KafkaConfig {
 	@Data
 	public static class KafkaConsumerConfig {
 		private String bootstrapServer;
+		private String clientId;
 		private String groupId;
 		private String keySerializer;
 		private String valueSerializer;

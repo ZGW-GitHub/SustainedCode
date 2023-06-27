@@ -2,7 +2,6 @@ package com.code.framework.mq.core.client.kafka.consumer;
 
 import com.code.framework.mq.config.KafkaConfig;
 import com.code.framework.mq.core.client.MqClient;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -16,15 +15,12 @@ import java.util.Properties;
 @Slf4j
 public class KafkaSimpleConsumer<K, V> implements MqClient<KafkaConsumer<K, V>, KafkaConfig.KafkaConsumerConfig> {
 
-	@Resource
-	private KafkaConfig kafkaConfig;
-
-	private KafkaConsumer<K, V> client;
+	private final KafkaConsumer<K, V> client;
 
 	public KafkaSimpleConsumer(KafkaConfig.KafkaConsumerConfig consumerConfig) {
 		Properties properties = new Properties();
-		properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, consumerConfig.getBootstrapServer());
 		properties.put(ConsumerConfig.CLIENT_ID_CONFIG, consumerConfig.getClientId());
+		properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, consumerConfig.getBootstrapServer());
 		properties.put(ConsumerConfig.GROUP_ID_CONFIG, consumerConfig.getGroupId());
 		properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, consumerConfig.getKeySerializer());
 		properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, consumerConfig.getValueSerializer());
@@ -32,26 +28,6 @@ public class KafkaSimpleConsumer<K, V> implements MqClient<KafkaConsumer<K, V>, 
 		client = new KafkaConsumer<>(properties);
 
 		client.subscribe(consumerConfig.getSubscribe());
-	}
-
-	@Override
-	public final void afterSingletonsInstantiated() {
-		KafkaConfig.KafkaConsumerConfig kafkaConsumerConfig = kafkaConfig.getConsumer().get(clientId());
-
-		// 1、构建客户端
-		builderClient(kafkaConsumerConfig);
-
-		// 3、消费消息
-		handleMessage(client);
-	}
-
-	@Override
-	public final void builderClient(KafkaConfig.KafkaConsumerConfig kafkaConsumerConfig) {
-
-	}
-
-	protected void handleMessage(KafkaConsumer<K, V> consumer) {
-
 	}
 
 	public final KafkaConsumer<K, V> client() {
