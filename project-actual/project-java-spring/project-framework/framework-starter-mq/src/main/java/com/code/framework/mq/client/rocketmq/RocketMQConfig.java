@@ -40,21 +40,23 @@ public class RocketMQConfig {
 
 	@Data
 	public static class RocketMQProducerConfig {
-		private String nameSrv;
+		private String namesrv;
 		private String group;
 		private String topic;
 	}
 
 	@Data
 	public static class RocketMQConsumerConfig {
-		private String nameSrv;
+		private String namesrv;
 		private String group;
 
 		private String subscribe;
 		private String subExpression;
 		private String messageModel;
 
-		private String consumeFromWhere;
+		private Boolean orderlyConsumption;
+		private String  messageListener;
+		private String  consumeFromWhere;
 	}
 
 }

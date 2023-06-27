@@ -1,5 +1,0 @@
-mq:
-  rocketmq:
-    name-server: ${rocketmq.namesrv}
-    topic:
-      testTopic: test2

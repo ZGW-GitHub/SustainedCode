@@ -19,6 +19,7 @@
 		<framework-starter-web.version>1.0.0-SNAPSHOT</framework-starter-web.version>
 		<framework-starter-dubbo.version>1.0.0-SNAPSHOT</framework-starter-dubbo.version>
 		<framework-starter-mybatis.version>1.0.0-SNAPSHOT</framework-starter-mybatis.version>
+		<framework-starter-mq.version>1.0.0-SNAPSHOT</framework-starter-mq.version>
 		<framework-starter-xxljob.version>1.0.0-SNAPSHOT</framework-starter-xxljob.version>
 	</properties>
 
@@ -54,6 +55,12 @@
 			<groupId>com.code</groupId>
 			<artifactId>framework-starter-mybatis</artifactId>
 			<version>${framework-starter-mybatis.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.code</groupId>
+			<artifactId>framework-starter-mq</artifactId>
+			<version>${framework-starter-mq.version}</version>
 		</dependency>
 
 		<dependency>

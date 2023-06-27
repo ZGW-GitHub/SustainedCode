@@ -1,0 +1,8 @@
+framework:
+  mq:
+    rocketmq:
+      producer:
+        clientOne:
+          namesrv: ${rocketmq.namesrv}
+          group: testOne
+          topic: testA

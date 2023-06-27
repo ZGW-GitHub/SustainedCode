@@ -13,6 +13,6 @@ spring:
           - data-id: application-mq-kafka.yml
             group: SERVICE_GOODS
             refresh: true
-          - data-id: application-mq-rocketmq.yml
+          - data-id: application-mq.yml
             group: SERVICE_GOODS
             refresh: true

@@ -70,6 +70,14 @@ public enum BizExceptionCode implements ExceptionCode<BizException> {
 	UTIL_BEAN_MAP_EXCEPTION(112001, "BeanUtil#map 异常，source 为 null"),
 
 	/**
+	 * MQ 异常
+	 */
+	MQ_ROCKETMQ_CREATE_FAIL(113001, "RocketMQ 创建失败"),
+	MQ_ROCKETMQ_START_FAIL(113002, "RocketMQ 启动失败"),
+	MQ_KAFKA_CREATE_FAIL(113003, "Kafka 创建失败"),
+	MQ_KAFKA_START_FAIL(113004, "Kafka 启动失败"),
+
+	/**
 	 * 参数异常
 	 */
 	PARAMS_ERROR(4001, "参数异常"),

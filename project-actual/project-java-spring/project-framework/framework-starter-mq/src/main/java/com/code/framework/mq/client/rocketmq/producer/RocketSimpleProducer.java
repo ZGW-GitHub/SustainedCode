@@ -37,7 +37,7 @@ public class RocketSimpleProducer implements MqClient<DefaultMQProducer, RocketM
 
 	public RocketSimpleProducer(RocketMQConfig.RocketMQProducerConfig producerConfig) {
 		client = new DefaultMQProducer();
-		client.setNamesrvAddr(producerConfig.getNameSrv());
+		client.setNamesrvAddr(producerConfig.getNamesrv());
 		client.setProducerGroup(producerConfig.getGroup());
 
 		this.producerConfig = producerConfig;
@@ -46,10 +46,10 @@ public class RocketSimpleProducer implements MqClient<DefaultMQProducer, RocketM
 	public DefaultMQProducer start() {
 		try {
 			client.start();
-			log.debug("------ RocketMQ ------ Producer 启动成功, config : {}", producerConfig);
+			log.debug("------ RocketMQ ------ Producer 启动成功, 配置: {}", producerConfig);
 		} catch (MQClientException e) {
-			log.error("------ RocketMQ ------ Producer 启动失败, config : {}", producerConfig, e);
-			throw BizExceptionCode.COMMON_ERROR.exception();
+			log.error("------ RocketMQ ------ Producer 启动失败, 配置: {}", producerConfig, e);
+			throw BizExceptionCode.MQ_KAFKA_START_FAIL.exception();
 		}
 
 		return client;
