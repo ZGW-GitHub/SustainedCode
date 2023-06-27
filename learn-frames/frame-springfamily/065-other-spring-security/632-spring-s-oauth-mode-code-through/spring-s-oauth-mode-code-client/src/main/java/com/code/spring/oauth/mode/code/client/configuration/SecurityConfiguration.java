@@ -46,6 +46,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(configurer -> configurer
 						.requestMatchers("/favicon.ico").permitAll()
 						.anyRequest().authenticated())
+				// .requestCache(configurer -> configurer.requestCache(new CookieRequestCache()))
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.logout(withDefaults());
 
