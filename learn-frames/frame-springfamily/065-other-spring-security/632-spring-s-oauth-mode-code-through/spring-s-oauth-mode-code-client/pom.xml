@@ -23,7 +23,7 @@
 
 	<parent>
 		<groupId>com.code</groupId>
-		<artifactId>631-spring-s-oauth-mode-code</artifactId>
+		<artifactId>632-spring-s-oauth-mode-code-through</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
