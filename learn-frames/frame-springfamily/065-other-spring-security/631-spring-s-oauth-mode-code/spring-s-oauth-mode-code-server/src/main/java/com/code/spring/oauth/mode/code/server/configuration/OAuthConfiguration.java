@@ -82,7 +82,6 @@ public class OAuthConfiguration {
 				.authorizeHttpRequests(configurer -> configurer
 						.anyRequest().authenticated())
 				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-				// .oauth2ResourceServer(configurer -> configurer.jwt(withDefaults()))
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.apply(oAuth2AuthorizationServerConfigurer);
 
