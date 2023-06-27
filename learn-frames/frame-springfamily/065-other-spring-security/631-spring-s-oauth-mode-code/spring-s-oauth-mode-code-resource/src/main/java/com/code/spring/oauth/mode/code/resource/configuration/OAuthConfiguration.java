@@ -57,7 +57,9 @@ public class OAuthConfiguration {
 				.jwt(jwtConfigurer -> jwtConfigurer
 						.decoder(customJwtDecoder))
 				.accessDeniedHandler(customAccessDeniedHandler)
-				.authenticationEntryPoint(customAuthenticationEntryPoint).jwt(withDefaults()));
+				.authenticationEntryPoint(customAuthenticationEntryPoint)
+				.jwt(withDefaults())
+		);
 	}
 
 }
