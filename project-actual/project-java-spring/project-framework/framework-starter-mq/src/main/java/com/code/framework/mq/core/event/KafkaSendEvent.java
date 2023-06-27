@@ -1,7 +1,7 @@
 package com.code.framework.mq.core.event;
 
 import com.code.framework.mq.core.convert.KafkaTopicConvert;
-import com.code.framework.mq.core.message.KafkaMessage;
+import com.code.framework.mq.message.KafkaMessage;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 

@@ -15,46 +15,51 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.mq.config;
+package com.code.framework.mq.client.kafka;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author Snow
- * @date 2023/6/26 15:44
+ * @date 2023/6/26 13:41
  */
 @Slf4j
 @Data
 @Configuration(proxyBeanMethods = false)
-@ConfigurationProperties("framework.mq.rocketmq")
-public class RocketMQConfig {
+@ConfigurationProperties("framework.mq.kafka")
+public class KafkaConfig {
 
-	private Map<String, RocketMQProducerConfig> producer;
+	private Map<String, KafkaProducerConfig> producer;
 
-	private Map<String, RocketMQConsumerConfig> consumer;
+	private Map<String, KafkaConsumerConfig> consumer;
 
 	@Data
-	public static class RocketMQProducerConfig {
-		private String nameSrv;
-		private String group;
+	public static class KafkaProducerConfig {
+		private String bootstrapServer;
+		private String clientId;
+		private String keySerializer;
+		private String valueSerializer;
+
 		private String topic;
 	}
 
 	@Data
-	public static class RocketMQConsumerConfig {
-		private String nameSrv;
-		private String group;
+	public static class KafkaConsumerConfig {
+		private String bootstrapServer;
+		private String clientId;
+		private String groupId;
+		private String keySerializer;
+		private String valueSerializer;
 
-		private String subscribe;
-		private String subExpression;
-		private String messageModel;
+		private List<String> subscribe;
 
-		private String consumeFromWhere;
+		private String autoOffsetReset;
 	}
 
 }

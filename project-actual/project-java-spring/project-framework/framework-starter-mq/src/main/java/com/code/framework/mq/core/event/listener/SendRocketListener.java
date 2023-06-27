@@ -2,7 +2,7 @@ package com.code.framework.mq.core.event.listener;
 
 import com.code.framework.mq.core.client.rocketmq.producer.DefaultRocketProducer;
 import com.code.framework.mq.core.event.RocketSendEvent;
-import com.code.framework.mq.core.message.RocketMessage;
+import com.code.framework.mq.message.RocketMessage;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQBrokerException;

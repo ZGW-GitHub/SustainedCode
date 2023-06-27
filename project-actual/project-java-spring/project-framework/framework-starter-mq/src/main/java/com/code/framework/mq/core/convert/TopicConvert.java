@@ -1,6 +1,6 @@
 package com.code.framework.mq.core.convert;
 
-import com.code.framework.mq.core.message.MqMessage;
+import com.code.framework.mq.message.MqMessage;
 
 /**
  * @author 愆凡

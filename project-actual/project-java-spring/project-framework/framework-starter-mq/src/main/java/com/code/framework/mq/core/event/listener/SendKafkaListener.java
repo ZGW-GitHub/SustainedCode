@@ -2,7 +2,7 @@ package com.code.framework.mq.core.event.listener;
 
 import com.code.framework.mq.core.client.kafka.producer.DefaultKafkaProducer;
 import com.code.framework.mq.core.event.KafkaSendEvent;
-import com.code.framework.mq.core.message.KafkaMessage;
+import com.code.framework.mq.message.KafkaMessage;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;

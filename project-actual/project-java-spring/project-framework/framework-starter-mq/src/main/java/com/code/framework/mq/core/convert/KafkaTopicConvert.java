@@ -1,6 +1,6 @@
 package com.code.framework.mq.core.convert;
 
-import com.code.framework.mq.core.message.KafkaMessage;
+import com.code.framework.mq.message.KafkaMessage;
 
 /**
  * @author 愆凡

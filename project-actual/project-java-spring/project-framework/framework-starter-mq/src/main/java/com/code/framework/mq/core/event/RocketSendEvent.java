@@ -1,7 +1,7 @@
 package com.code.framework.mq.core.event;
 
 import com.code.framework.mq.core.convert.RocketTopicConvert;
-import com.code.framework.mq.core.message.RocketMessage;
+import com.code.framework.mq.message.RocketMessage;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 

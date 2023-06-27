@@ -1,6 +1,6 @@
 package com.code.framework.mq.core.convert;
 
-import com.code.framework.mq.core.message.RocketMessage;
+import com.code.framework.mq.message.RocketMessage;
 
 /**
  * @author 愆凡
