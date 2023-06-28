@@ -1,6 +1,0 @@
-logging:
-  level:
-    com.code: debug
-    org.springframework.web: trace
-    org.springframework.security: trace
-    org.springframework.security.oauth2: debug

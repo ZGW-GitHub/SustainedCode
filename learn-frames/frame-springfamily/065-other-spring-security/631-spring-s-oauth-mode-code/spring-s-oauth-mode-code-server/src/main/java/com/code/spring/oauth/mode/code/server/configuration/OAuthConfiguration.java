@@ -137,7 +137,7 @@ public class OAuthConfiguration {
 		// 客户端配置
 		ClientSettings clientSettings = ClientSettings.builder()
 				// 是否需要用户授权确认
-				.requireAuthorizationConsent(true)
+				.requireAuthorizationConsent(false)
 				.build();
 
 		// http://notuptoyou.com:65000/oauth2/authorize?client_id=demo-client&response_type=code&scope=read%20write&redirect_uri=http://127.0.0.1:65001/login/oauth2/code/first-registration

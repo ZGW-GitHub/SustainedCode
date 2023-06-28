@@ -1,5 +1,0 @@
-spring:
-  jwt:
-    custom:
-      keystore:
-        public-key-location: ${public-key.dir}
