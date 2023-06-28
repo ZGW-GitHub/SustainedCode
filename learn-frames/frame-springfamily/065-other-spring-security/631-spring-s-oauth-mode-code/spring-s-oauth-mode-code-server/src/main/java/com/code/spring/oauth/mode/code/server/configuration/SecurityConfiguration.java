@@ -53,7 +53,8 @@ public class SecurityConfiguration {
 						// .requestMatchers("/h2/**").authenticated()
 						.anyRequest().permitAll())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.formLogin(withDefaults())
+				.formLogin(configurer -> configurer
+						.loginPage("/login"))
 				.logout(withDefaults());
 
 		return httpSecurity.build();
