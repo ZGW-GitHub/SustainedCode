@@ -40,7 +40,10 @@ public class SecurityConfig {
 	@Value("#{'${spring.security.custom.default-user.roles}'.split(',')}")
 	private List<String> defaultUserRoles;
 
-	@Value("${spring.security.custom.login-provider-url}")
+	@Value("#{'${spring.security.custom.login.basic-url}' + '${spring.security.custom.login.provider-url}'}")
 	private String loginProviderUrl;
+
+	@Value("#{'${spring.security.custom.login.basic-url}' + '${spring.security.custom.login.success-url}'}")
+	private String loginSuccessUrl;
 
 }

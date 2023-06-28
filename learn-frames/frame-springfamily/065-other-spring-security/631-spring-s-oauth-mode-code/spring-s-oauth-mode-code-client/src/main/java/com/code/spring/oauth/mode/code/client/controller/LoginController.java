@@ -36,4 +36,9 @@ public class LoginController {
 		return "login";
 	}
 
+	@GetMapping(path = "index")
+	public String loginSuccessPage() {
+		return "index";
+	}
+
 }

@@ -36,14 +36,24 @@ public class LoginController {
 	@Resource
 	private SecurityConfig securityConfig;
 
-	private String redirectUrl;
+	private String loginProviderUrl;
+
+	private String loginSuccessUrl;
 
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
 	public String loginPage(HttpServletRequest request) {
-		if (redirectUrl == null) {
-			redirectUrl = "redirect:" + securityConfig.getLoginProviderUrl();
+		if (loginProviderUrl == null) {
+			loginProviderUrl = "redirect:" + securityConfig.getLoginProviderUrl();
 		}
-		return redirectUrl;
+		return loginProviderUrl;
+	}
+
+	@GetMapping("/")
+	public String loginSuccess() {
+		if (loginSuccessUrl == null) {
+			loginSuccessUrl = "redirect:" + securityConfig.getLoginSuccessUrl();
+		}
+		return loginSuccessUrl;
 	}
 
 }

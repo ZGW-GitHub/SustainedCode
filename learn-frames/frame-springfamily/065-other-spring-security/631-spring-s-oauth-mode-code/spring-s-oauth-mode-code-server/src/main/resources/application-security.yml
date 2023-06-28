@@ -5,4 +5,7 @@ spring:
         name: snow
         password: 666666
         roles: USER
-      login-provider-url: http://127.0.0.1:65001/login
+      login:
+        basic-url: http://127.0.0.1:65001
+        provider-url: /login
+        success-url: /oauth2/authorization/first-registration

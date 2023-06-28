@@ -44,8 +44,7 @@ public class SecurityConfiguration {
 
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						.requestMatchers("/favicon.ico").permitAll()
-						.requestMatchers("/login").permitAll()
+						.requestMatchers("/favicon.ico", "/login", "/index").permitAll()
 						.anyRequest().authenticated())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.logout(withDefaults());
