@@ -15,10 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.oauth.mode.code.server.controller;
+package com.code.spring.oauth.mode.code.client.controller;
 
-import com.code.spring.oauth.mode.code.server.config.SecurityConfig;
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -33,17 +31,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 
-	@Resource
-	private SecurityConfig securityConfig;
-
-	private String redirectUrl;
-
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
 	public String loginPage(HttpServletRequest request) {
-		if (redirectUrl == null) {
-			redirectUrl = "redirect:" + securityConfig.getLoginProviderUrl();
-		}
-		return redirectUrl;
+		return "login";
 	}
 
 }
