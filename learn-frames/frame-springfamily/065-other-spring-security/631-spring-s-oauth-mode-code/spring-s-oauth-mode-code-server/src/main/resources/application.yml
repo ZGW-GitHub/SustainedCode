@@ -8,6 +8,6 @@ spring:
       - classpath:application-datasource.yml
       - classpath:application-mybatis-plus.yml
       - classpath:application-security.yml
-      - classpath:application-oauth.yml
-      - classpath:application-jwt.yml
+      - classpath:application-s-oauth.yml
+      - classpath:application-s-jwt.yml
       - classpath:application-log.yml
