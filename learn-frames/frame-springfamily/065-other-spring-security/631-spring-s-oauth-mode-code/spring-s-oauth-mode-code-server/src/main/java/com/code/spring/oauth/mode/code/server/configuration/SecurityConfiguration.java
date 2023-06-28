@@ -31,7 +31,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -51,8 +50,8 @@ public class SecurityConfiguration {
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						.anyRequest().authenticated()) // 授权中心提供其它服务时设置
-				// .anyRequest().denyAll()) // 授权中心不提供其它服务时设置
+						// .requestMatchers("/h2/**").authenticated()
+						.anyRequest().permitAll())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.formLogin(withDefaults())
 				.logout(withDefaults());
@@ -70,15 +69,20 @@ public class SecurityConfiguration {
 				.password(securityConfig.getDefaultUserPassword())
 				.passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
 				.roles(securityConfig.getDefaultUserRoles().toArray(new String[0]))
-				//.authorities("SCOPE_userinfo")
+				// .authorities("SCOPE_userinfo")
 				.build();
 
 		return new InMemoryUserDetailsManager(user);
 	}
 
-	@Bean
-	WebSecurityCustomizer webSecurityCustomizer() {
-		return webSecurity -> webSecurity.ignoring().requestMatchers(new AntPathRequestMatcher("/h2/**"));
-	}
+	/**
+	 * 也会生成一个 SecurityFilterChain
+	 *
+	 * @return {@link WebSecurityCustomizer}
+	 */
+	// @Bean
+	// WebSecurityCustomizer webSecurityCustomizer() {
+	// 	return webSecurity -> webSecurity.ignoring().requestMatchers(new AntPathRequestMatcher("/h2/**"));
+	// }
 
 }
