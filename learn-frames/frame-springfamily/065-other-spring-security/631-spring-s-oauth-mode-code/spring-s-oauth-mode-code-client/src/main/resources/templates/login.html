@@ -20,6 +20,8 @@
 <!doctype html>
 <html lang="zh">
 <head>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.js"></script>
+
     <meta charset="UTF-8">
     <title>Login</title>
 
@@ -95,13 +97,22 @@
 <body>
 <div id="login">
     <h1>Login</h1>
-    <form method="post" th:action="@{http://notuptoyou.com:65000/login}">
+    <form id="loginForm" method="post" th:action="@{http://notuptoyou.com:65000/login}">
         <label>
-            <input type="text" required="required" placeholder="用户名" name="username"/>
-            <input type="password" required="required" placeholder="密码" name="password"/>
+            <input id="username" type="text" required="required" placeholder="用户名" name="username"/>
+            <input id="password" type="password" required="required" placeholder="密码" name="password"/>
         </label>
-        <button class="but" type="submit">登录</button>
+        <button class="but" type="button" onclick="submitLogin()">登录</button>
     </form>
 </div>
 </body>
 </html>
+
+<script>
+    function submitLogin() {
+        let username = $("input[id='username']").val();
+        let password = $("input[id='password']").val();
+
+
+    }
+</script>
