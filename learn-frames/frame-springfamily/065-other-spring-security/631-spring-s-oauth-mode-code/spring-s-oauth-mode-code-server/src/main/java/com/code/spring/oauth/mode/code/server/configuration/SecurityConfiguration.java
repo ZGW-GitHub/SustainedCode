@@ -25,7 +25,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -51,10 +50,11 @@ public class SecurityConfiguration {
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						// .requestMatchers("/h2/**").authenticated()
+						.requestMatchers("/test", "/currentUser", "/currentSession").authenticated()
 						.anyRequest().permitAll())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.csrf(AbstractHttpConfigurer::disable)
+				.csrf(configurer -> configurer.ignoringRequestMatchers("/login"))
+				.cors(withDefaults())
 				.formLogin(configurer -> configurer
 						.loginPage("/login")
 						// .failureHandler((request, response, exception) -> {

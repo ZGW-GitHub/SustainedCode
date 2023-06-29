@@ -47,6 +47,8 @@ public class SecurityConfiguration {
 						.requestMatchers("/favicon.ico", "/login", "/index").permitAll()
 						.anyRequest().authenticated())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.cors(withDefaults())
+				.csrf(withDefaults())
 				.logout(withDefaults());
 
 		// 执行 OAuth 相关的配置

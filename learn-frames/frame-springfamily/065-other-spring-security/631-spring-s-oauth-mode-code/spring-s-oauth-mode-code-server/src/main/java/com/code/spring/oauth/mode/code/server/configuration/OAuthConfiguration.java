@@ -82,6 +82,7 @@ public class OAuthConfiguration {
 				.authorizeHttpRequests(configurer -> configurer
 						.anyRequest().authenticated())
 				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+				.cors(withDefaults())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.apply(oAuth2AuthorizationServerConfigurer);
 
