@@ -15,12 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-DROP TABLE IF EXISTS sys_user;
-CREATE TABLE sys_user
-(
-    `id`       INT(11)     NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `username` VARCHAR(30) NOT NULL COMMENT '姓名',
-    `password` VARCHAR(30) NOT NULL COMMENT '密码',
-    PRIMARY KEY (id)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+package com.code.spring.security.controller;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Snow
+ * @date 2023/6/29 11:13
+ */
+@Slf4j
+@RestController
+public class LoginController {
+
+	public String login() {
+		return "a";
+	}
+
+}

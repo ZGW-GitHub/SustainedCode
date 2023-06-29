@@ -27,7 +27,7 @@
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>400-spring-s-jwt-hello-world</artifactId>
+	<artifactId>400-spring-s-jwt-actual</artifactId>
 
 	<packaging>jar</packaging>
 

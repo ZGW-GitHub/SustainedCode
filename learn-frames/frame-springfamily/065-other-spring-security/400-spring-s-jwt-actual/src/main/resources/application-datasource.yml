@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:frame_spring_security;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    url: ${mysql.url}/frame_spring_security?${mysql.url.params}
     username: ${mysql.username}
     password: ${mysql.password}
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource

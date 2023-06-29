@@ -15,26 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.security.controller;
+BEGIN;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+USE `frame_spring_security`;
 
-/**
- * @author Snow
- * @date 2023/4/30 11:47
- */
-@RestController
-public class DemoController {
+INSERT INTO sys_user(username, password)
+VALUES ('snow', '666666');
 
-	@RequestMapping("sysUser")
-	public String sysUser() {
-		return "hello spring security !";
-	}
-
-	@RequestMapping("visitor")
-	public String visitor() {
-		return "hello visitor !";
-	}
-
-}
+COMMIT;

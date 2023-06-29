@@ -20,9 +20,14 @@ package com.code.spring.security.dal.dos;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author Snow
@@ -31,7 +36,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @TableName("sys_user")
-public class SysUser implements Serializable {
+public class SysUser implements UserDetails, Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -5625175115874392926L;
@@ -39,5 +44,50 @@ public class SysUser implements Serializable {
 	private Integer id;
 	private String  username;
 	private String  password;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Collections.singleton(new SimpleGrantedAuthority("roleOne"));
+	}
+
+	/**
+	 * 账号是否未过期
+	 *
+	 * @return boolean
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	/**
+	 * 账号是否未锁定
+	 *
+	 * @return boolean
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	/**
+	 * 密码是否未过期
+	 *
+	 * @return boolean
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	/**
+	 * 账号是否激活
+	 *
+	 * @return boolean
+	 */
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 }

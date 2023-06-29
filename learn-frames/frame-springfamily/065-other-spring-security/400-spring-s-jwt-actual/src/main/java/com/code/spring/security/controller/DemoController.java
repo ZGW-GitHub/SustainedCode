@@ -15,5 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-INSERT INTO sys_user(username, password)
-VALUES ('123456', '123456');
+package com.code.spring.security.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Snow
+ * @date 2023/4/30 11:47
+ */
+@RestController
+public class DemoController {
+
+	@RequestMapping("one")
+	public String one() {
+		return "one";
+	}
+
+	@RequestMapping("two")
+	public String two() {
+		return "two";
+	}
+
+}
