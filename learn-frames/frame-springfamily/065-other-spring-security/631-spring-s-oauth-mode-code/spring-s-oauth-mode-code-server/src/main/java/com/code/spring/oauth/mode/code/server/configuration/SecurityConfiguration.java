@@ -53,7 +53,7 @@ public class SecurityConfiguration {
 						.requestMatchers("/test", "/currentUser", "/currentSession").authenticated()
 						.anyRequest().permitAll())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.csrf(configurer -> configurer.ignoringRequestMatchers("/login"))
+				.csrf(withDefaults())
 				.cors(withDefaults())
 				.formLogin(configurer -> configurer
 						.loginPage("/login")

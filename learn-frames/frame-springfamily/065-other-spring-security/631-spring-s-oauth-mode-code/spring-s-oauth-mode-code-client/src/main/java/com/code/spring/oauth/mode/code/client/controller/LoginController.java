@@ -17,9 +17,7 @@
 
 package com.code.spring.oauth.mode.code.client.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -30,11 +28,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class LoginController {
-
-	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
-	public String loginPage(HttpServletRequest request) {
-		return "login";
-	}
 
 	@GetMapping(path = "index")
 	public String loginSuccessPage() {
