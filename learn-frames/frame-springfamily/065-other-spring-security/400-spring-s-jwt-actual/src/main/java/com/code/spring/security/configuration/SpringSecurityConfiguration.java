@@ -17,19 +17,19 @@
 
 package com.code.spring.security.configuration;
 
+import cn.hutool.core.util.StrUtil;
+import com.code.spring.security.component.security.CustomAuthenticationProvider;
 import com.code.spring.security.dal.dos.SysUser;
 import com.code.spring.security.service.SysUserService;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -69,7 +69,7 @@ public class SpringSecurityConfiguration {
 						.loginPage("/userLifecycle/loginPage")
 						.loginProcessingUrl("/userLifecycle/login"))
 				.cors(withDefaults())
-				.csrf(withDefaults())
+				.csrf(configurer -> configurer.ignoringRequestMatchers("/userLifecycle/**"))
 				.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 登录后还会跳转到登录页
 		;
 
@@ -78,8 +78,8 @@ public class SpringSecurityConfiguration {
 
 	@Bean
 	UserDetailsService userDetailsService() {
-		return username -> {
-			SysUser sysUser = sysUserService.findByAccount(username);
+		return account -> {
+			SysUser sysUser = sysUserService.findByAccount(account);
 			if (Objects.isNull(sysUser)) {
 				throw new UsernameNotFoundException("用户不存在！");
 			}
@@ -95,12 +95,7 @@ public class SpringSecurityConfiguration {
 	 */
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		// 设置获取用户信息的 service
-		authProvider.setUserDetailsService(userDetailsService());
-		// 设置密码加密器
-		authProvider.setPasswordEncoder(passwordEncoder());
-		return authProvider;
+		return new CustomAuthenticationProvider(userDetailsService(), passwordEncoder());
 	}
 
 	/**
@@ -110,7 +105,18 @@ public class SpringSecurityConfiguration {
 	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		// 不需要编码，存储时已经加密了
+		return new PasswordEncoder() {
+			@Override
+			public String encode(CharSequence rawPassword) {
+				return rawPassword.toString();
+			}
+
+			@Override
+			public boolean matches(CharSequence rawPassword, String encodedPassword) {
+				return StrUtil.equals(rawPassword, encodedPassword);
+			}
+		};
 	}
 
 }

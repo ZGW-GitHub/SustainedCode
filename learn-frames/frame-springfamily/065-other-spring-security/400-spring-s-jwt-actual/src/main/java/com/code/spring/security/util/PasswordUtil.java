@@ -20,6 +20,7 @@ package com.code.spring.security.util;
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.crypto.SecureUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
@@ -66,6 +67,17 @@ public class PasswordUtil {
 
 	public static boolean check(String publicPassword, String salt, String privatePassword) {
 		return privatePassword.equals(encode(publicPassword, salt));
+	}
+
+	@Test
+	void test() {
+		String salt = PasswordUtil.generateSalt();
+		String password = PasswordUtil.encode("666666", salt);
+		System.err.println(salt);
+		System.err.println(password);
+
+		System.err.println("1: " + PasswordUtil.check("666666", salt, password));
+		System.err.println("2: " + PasswordUtil.check("6666666", salt, password));
 	}
 
 }

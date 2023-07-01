@@ -36,9 +36,9 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysUserMapper sysUserMapper;
 
 	@Override
-	public SysUser findByAccount(String username) {
+	public SysUser findByAccount(String account) {
 		return ChainWrappers.lambdaQueryChain(sysUserMapper)
-				.eq(SysUser::getUsername, username)
+				.eq(SysUser::getAccount, account)
 				.orderByDesc(SysUser::getId)
 				.last("limit 1")
 				.one();

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.security.component.filter;
+package com.code.spring.security.component.servlet.filter;
 
 import jakarta.servlet.*;
 import lombok.extern.slf4j.Slf4j;
