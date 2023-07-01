@@ -26,8 +26,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author Snow
@@ -42,12 +42,30 @@ public class SysUser implements UserDetails, Serializable {
 	private static final long serialVersionUID = -5625175115874392926L;
 
 	private Integer id;
-	private String  username;
-	private String  password;
+
+	/**
+	 * 用户账号
+	 */
+	private String account;
+
+	/**
+	 * 用户密码
+	 */
+	private String password;
+
+	/**
+	 * 盐
+	 */
+	private String salt;
+
+	@Override
+	public String getUsername() {
+		return account;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singleton(new SimpleGrantedAuthority("roleOne"));
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"));
 	}
 
 	/**

@@ -15,19 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-BEGIN;
+package com.code.spring.security.controller.domain;
 
-CREATE DATABASE IF NOT EXISTS `frame_spring_security`;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
-DROP TABLE IF EXISTS sys_user;
-CREATE TABLE sys_user
-(
-    `id`       INT(11)     NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `account`  varchar(32) not null default '' comment '用户账号',
-    `password` varchar(64) not null default '' comment '用户密码',
-    `salt`     varchar(32) not null default '' comment '盐',
-    PRIMARY KEY (id)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+/**
+ * @author Snow
+ * @date 2023/7/1 16:10
+ */
+@Slf4j
+@Data
+public class UserRegisterReq {
 
-COMMIT;
+	private String account;
+
+	private String password;
+
+	private String captcha;
+
+}

@@ -15,21 +15,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.security.controller;
+package com.code.spring.security.controller.domain;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Snow
- * @date 2023/6/29 11:13
+ * @date 2023/7/1 16:16
  */
 @Slf4j
-@RestController
-public class LoginController {
+@Data
+@Accessors(chain = true)
+public class UserRegisterResp {
 
-	public String login() {
-		return "a";
-	}
+	private String account;
+
+	private String token;
+
+	private String refreshToken;
 
 }
