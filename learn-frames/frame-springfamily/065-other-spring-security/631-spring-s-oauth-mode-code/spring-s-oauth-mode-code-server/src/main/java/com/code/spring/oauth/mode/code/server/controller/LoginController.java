@@ -17,8 +17,6 @@
 
 package com.code.spring.oauth.mode.code.server.controller;
 
-import com.code.spring.oauth.mode.code.server.config.SecurityConfig;
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -33,27 +31,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 
-	@Resource
-	private SecurityConfig securityConfig;
-
-	private String loginProviderUrl;
-
-	private String loginSuccessUrl;
-
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
 	public String loginPage(HttpServletRequest request) {
-		if (loginProviderUrl == null) {
-			loginProviderUrl = "redirect:" + securityConfig.getLoginProviderUrl();
-		}
-		return loginProviderUrl;
+		return "login";
 	}
 
-	@GetMapping("/")
+	@GetMapping("index")
 	public String loginSuccess() {
-		if (loginSuccessUrl == null) {
-			loginSuccessUrl = "redirect:" + securityConfig.getLoginSuccessUrl();
-		}
-		return loginSuccessUrl;
+		return "index";
 	}
 
 }
