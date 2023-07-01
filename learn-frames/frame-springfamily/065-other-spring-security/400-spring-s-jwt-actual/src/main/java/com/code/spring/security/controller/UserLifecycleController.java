@@ -19,6 +19,7 @@ package com.code.spring.security.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
+import cn.hutool.json.JSONObject;
 import com.code.spring.security.controller.domain.UserRegisterReq;
 import com.code.spring.security.controller.domain.UserRegisterResp;
 import com.code.spring.security.dal.dos.SysUser;
@@ -31,6 +32,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,16 +78,26 @@ public class UserLifecycleController {
 				.setRefreshToken(JwtUtil.generateRefreshToken(sysUser));
 	}
 
-	@GetMapping(path = "loginPage", produces = MediaType.TEXT_HTML_VALUE)
+	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
 	public String loginPage() {
 		return "login";
 	}
 
 	@ResponseBody
-	@PostMapping("login")
+	@RequestMapping("loginSuccess")
 	public String login() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (!(principal instanceof SysUser sysUser)) {
+			throw new RuntimeException("登录信息异常");
+		}
 
-		return "a";
+		String token = JwtUtil.generateToken(sysUser);
+		String refreshToken = JwtUtil.generateRefreshToken(sysUser);
+
+		JSONObject result = new JSONObject();
+		result.set("token", token);
+		result.set("refreshToken", refreshToken);
+		return result.toString();
 	}
 
 	@ResponseBody

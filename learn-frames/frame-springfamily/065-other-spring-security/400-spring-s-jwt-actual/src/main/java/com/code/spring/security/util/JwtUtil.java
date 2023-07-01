@@ -17,12 +17,14 @@
 
 package com.code.spring.security.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.code.spring.security.dal.dos.SysUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.security.Key;
@@ -41,7 +43,7 @@ public class JwtUtil {
 	/**
 	 * 加密盐值
 	 */
-	private static final String SECRET_KEY = "demo";
+	private static final String SECRET_KEY = "demodemodemodemodemodemodemodemodemodemodemodemodemodemodemodemo";
 
 	/**
 	 * Token 失效时间
@@ -63,7 +65,12 @@ public class JwtUtil {
 	 * @return String
 	 */
 	public static String extractUsername(String token) {
-		return extractClaim(token, Claims::getSubject);
+		try {
+			return extractClaim(token, Claims::getSubject);
+		} catch (SignatureException e) {
+			log.warn("token 解析异常：{}", token);
+		}
+		return StrUtil.EMPTY;
 	}
 
 	/**

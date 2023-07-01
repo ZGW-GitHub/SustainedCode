@@ -1,0 +1,15 @@
+### one
+POST 127.0.0.1:60000/resource/one
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJpc1JlZnJlc2hUb2tlbiI6ZmFsc2UsInN1YiI6InNub3ciLCJpYXQiOjE2ODgyMjY4NTcsImV4cCI6MTY4ODIzNDA1N30.Bi5G9kRtt47m6n5SG3BrYgwwNdUQBEB6GHf6f--iY_w
+Content-Type: application/json
+
+{
+}
+
+### two
+POST 127.0.0.1:60000/resource/two
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJpc1JlZnJlc2hUb2tlbiI6ZmFsc2UsInN1YiI6InNub3ciLCJpYXQiOjE2ODgyMjY4NTcsImV4cCI6MTY4ODIzNDA1N30.Bi5G9kRtt47m6n5SG3BrYgwwNdUQBEB6GHf6f--iY_w
+Content-Type: application/json
+
+{
+}

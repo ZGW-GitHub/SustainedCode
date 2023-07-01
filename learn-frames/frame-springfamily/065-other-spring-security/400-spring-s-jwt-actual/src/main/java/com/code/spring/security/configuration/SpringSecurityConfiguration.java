@@ -19,6 +19,7 @@ package com.code.spring.security.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.code.spring.security.component.security.CustomAuthenticationProvider;
+import com.code.spring.security.component.servlet.filter.TokenFilter;
 import com.code.spring.security.dal.dos.SysUser;
 import com.code.spring.security.service.SysUserService;
 import jakarta.annotation.Resource;
@@ -32,6 +33,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Objects;
 
@@ -62,14 +64,20 @@ public class SpringSecurityConfiguration {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(config -> config
 						.requestMatchers("/favicon.ico", "/assets/**").permitAll()
-						.requestMatchers("/index", "/error").permitAll()
+						.requestMatchers("/", "/index", "/error").permitAll()
 						.requestMatchers("/userLifecycle/*").permitAll()
+						.requestMatchers("/resource/one").hasAuthority("ROLE_USER")
+						.requestMatchers("/resource/two").hasAuthority("ROLE_NONE")
+						// .requestMatchers("/resource/one").hasRole("ROLE_USER")
+						// .requestMatchers("/resource/two").hasRole("ROLE_NONE")
 						.anyRequest().authenticated())
+				.addFilterBefore(new TokenFilter(sysUserService), UsernamePasswordAuthenticationFilter.class)
 				.formLogin(configurer -> configurer
-						.loginPage("/userLifecycle/loginPage")
-						.loginProcessingUrl("/userLifecycle/login"))
+						.loginPage("/userLifecycle/login")
+						.loginProcessingUrl("/userLifecycle/login")
+						.successForwardUrl("/userLifecycle/loginSuccess"))
 				.cors(withDefaults())
-				.csrf(configurer -> configurer.ignoringRequestMatchers("/userLifecycle/**"))
+				.csrf(configurer -> configurer.ignoringRequestMatchers("/userLifecycle/**", "/resource/**"))
 				.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 登录后还会跳转到登录页
 		;
 

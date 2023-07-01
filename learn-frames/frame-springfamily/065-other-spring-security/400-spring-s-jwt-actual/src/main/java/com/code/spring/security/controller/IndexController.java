@@ -17,24 +17,22 @@
 
 package com.code.spring.security.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Snow
- * @date 2023/4/30 11:47
+ * @date 2023/7/1 21:16
  */
-@RestController
-public class DemoController {
+@Slf4j
+@Controller
+public class IndexController {
 
-	@RequestMapping("one")
-	public String one() {
-		return "one";
-	}
-
-	@RequestMapping("two")
-	public String two() {
-		return "two";
+	@GetMapping("/")
+	public String index() {
+		System.err.println("index");
+		return "index";
 	}
 
 }
