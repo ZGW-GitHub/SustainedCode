@@ -44,7 +44,7 @@ public class SecurityConfiguration {
 
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
-						.requestMatchers("/favicon.ico", "/login", "/index").permitAll()
+						.requestMatchers("/favicon.ico", "/index").permitAll()
 						.anyRequest().authenticated())
 				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.cors(withDefaults())
