@@ -25,8 +25,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 /**
  * 资源服务器配置
  *
@@ -58,7 +56,6 @@ public class OAuthConfiguration {
 						.decoder(customJwtDecoder))
 				.accessDeniedHandler(customAccessDeniedHandler)
 				.authenticationEntryPoint(customAuthenticationEntryPoint)
-				.jwt(withDefaults())
 		);
 	}
 
