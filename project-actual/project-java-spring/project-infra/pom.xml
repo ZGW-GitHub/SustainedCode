@@ -28,7 +28,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>infra-authorization</module>
 		<module>infra-user</module>
 		<module>infra-file</module>
 	</modules>
