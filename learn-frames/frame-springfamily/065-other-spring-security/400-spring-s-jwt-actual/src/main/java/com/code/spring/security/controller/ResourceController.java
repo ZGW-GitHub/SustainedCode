@@ -34,11 +34,13 @@ public class ResourceController {
 
 	@RequestMapping("one")
 	public String one() {
+		System.err.println("one 收到请求");
 		return "one";
 	}
 
 	@RequestMapping("two")
 	public String two() {
+		System.err.println("two 收到请求");
 		return "two";
 	}
 

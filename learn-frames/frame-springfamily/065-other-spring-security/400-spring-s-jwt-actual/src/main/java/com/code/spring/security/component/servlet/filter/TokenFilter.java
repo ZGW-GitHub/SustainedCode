@@ -92,6 +92,8 @@ public class TokenFilter extends OncePerRequestFilter {
 		} else {
 			log.warn("【 TokenFilter 】SecurityContextHolder Context 不为空. token : {}, Context : {}", token, SecurityContextHolder.getContext().getAuthentication());
 		}
+
+		filterChain.doFilter(request, response);
 	}
 
 	private static void writeResponse(HttpServletRequest request, HttpServletResponse response) throws IOException {
