@@ -48,15 +48,16 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>5.2.3</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- 	<groupId>org.webjars</groupId> -->
+		<!-- 	<artifactId>webjars-locator-core</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- 	<groupId>org.webjars</groupId> -->
+		<!-- 	<artifactId>bootstrap</artifactId> -->
+		<!-- 	<version>5.2.3</version> -->
+		<!-- </dependency> -->
 
 		<!-- jasypt 密码加密组件 -->
 		<dependency>
@@ -73,7 +74,6 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<version>${jwt.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>

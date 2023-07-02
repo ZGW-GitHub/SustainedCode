@@ -74,8 +74,8 @@ public class UserLifecycleController {
 
 		return new UserRegisterResp()
 				.setAccount(userRegisterReq.getAccount())
-				.setToken(JwtUtil.generateToken(sysUser))
-				.setRefreshToken(JwtUtil.generateRefreshToken(sysUser));
+				.setToken(JwtUtil.generateToken(sysUser.getAccount()))
+				.setRefreshToken(JwtUtil.generateRefreshToken(sysUser.getAccount()));
 	}
 
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
@@ -91,8 +91,8 @@ public class UserLifecycleController {
 			throw new RuntimeException("登录信息异常");
 		}
 
-		String token = JwtUtil.generateToken(sysUser);
-		String refreshToken = JwtUtil.generateRefreshToken(sysUser);
+		String token = JwtUtil.generateToken(sysUser.getAccount());
+		String refreshToken = JwtUtil.generateRefreshToken(sysUser.getAccount());
 
 		JSONObject result = new JSONObject();
 		result.set("token", token);

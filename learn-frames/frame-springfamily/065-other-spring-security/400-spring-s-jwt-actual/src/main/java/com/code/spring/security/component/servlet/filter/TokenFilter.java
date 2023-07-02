@@ -53,6 +53,7 @@ public class TokenFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		if (!request.getServletPath().contains("/resource")) {
+			log.debug("【 TokenFilter 】该请求[{}]无需 token", request.getServletPath());
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -62,32 +63,34 @@ public class TokenFilter extends OncePerRequestFilter {
 
 		// 如果不存在 Token ，则继续执行过滤器链，过滤器链会返回重定向登录页
 		if (StrUtil.isBlank(token)) {
+			log.debug("【 TokenFilter 】token 为空");
 			filterChain.doFilter(request, response);
 			return;
 		}
 
-		String username = JwtUtil.extractUsername(token);
-		if (StrUtil.isBlank(username)) {
+		if (!JwtUtil.isTokenValid(token, false)) {
+			log.debug("【 TokenFilter 】token 非法");
 			writeResponse(request, response);
 			return;
 		}
 
+		String account = JwtUtil.extractSubject(token);
+
 		// SecurityContextHolder 中的 Authentication 为空时，才进行处理
 		if (SecurityContextHolder.getContext().getAuthentication() == null) {
 			// 获取用户信息 TODO 放入 redis 缓存，减少 mysql 压力（注意：mysql 、redis 数据一致性）
-			SysUser sysUser = sysUserService.findByAccount(username);
+			SysUser sysUser = sysUserService.findByAccount(account);
 
 			// TODO 从 redis 中查询 token 是否存在（ 以判断是不是历史且未过期的 token ），格式：key: account 、value(hash): token:xxx,userInfo:xxx
-
-			if (!JwtUtil.isTokenValid(token, sysUser, false)) {
-				writeResponse(request, response);
-				return;
-			}
 
 			// 如果 token 有效，将用户信息存储到 SecurityContextHolder，方便后续使用
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(sysUser, null, sysUser.getAuthorities());
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			log.debug("【 TokenFilter 】SecurityContextHolder Context 为空. 设置 Context : {}", authentication);
+		} else {
+			log.warn("【 TokenFilter 】SecurityContextHolder Context 不为空. token : {}, Context : {}", token, SecurityContextHolder.getContext().getAuthentication());
 		}
 	}
 
