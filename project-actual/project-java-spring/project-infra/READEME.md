@@ -8,19 +8,12 @@
 ``` yaml
 common:
   com.code.xxx:
-    mvc:
-      dal.domain.enums: 实体类相关枚举
+    dal.domain.enums: 实体类相关枚举
 
 facade:
   com.code.xxx:
     facade:
       domain: param 、result
-
-integration:
-  com.code.xxx:
-    client:
-      impl:
-      dimain: req 、resp
 
 biz:
   com.code.xxx:
@@ -28,26 +21,23 @@ biz:
       config:
       configuration:
       exception:
-    convert:
     facade.impl:
-    mvc:
-      api:
-        impl:
-        domain: req 、resp
-      biz:
-        impl:
-        domain: BO 、DTO
-      service: 
-        impl:
-        domain: BO 、DTO
-      dal:
-        domain: 
-          dos: DO
-          pojo: POJO
-          query: Query
-        mapper: 
-        redis: redis 操作
-    job: 
+    controller:
+      domain: req 、resp
+    service: 
+      impl:
+      domain: BO 、DTO
+    biz:
+      impl:
+      domain: BO 、DTO
+    dal:
+      domain: 
+        dos: DO
+        pojo: POJO
+        query: Query
+      mapper: 
+      redis: redis 操作
+    job:
     util:
 ```
 
@@ -57,7 +47,7 @@ biz:
 
 方法命名：find 、list 、page 、save 、update 、delete
 
-1. api [ req/resp ]:
+1. controller [ req/resp ]:
    - 直接调用 service
 2. facade [ param/result ]:
    - 直接调用 service
@@ -69,18 +59,3 @@ biz:
    - 数据库操作
 6. client [ req/resp ]:
    - 调用 rpc
-
-### 模型
-
-```
-/**
- * Api                  XxxReqVO / XxxRespVO
- * Facade               XxxReqDTO / XxxRespDTO
- * Service / Biz        XxxReqModel / XxxRespModel
- * Mapper               XxxDO or XxxPOJO
- * 
- * Client               XxxParam / XxxResult
- */
-```
-
-Model 、
