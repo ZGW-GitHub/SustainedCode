@@ -39,7 +39,7 @@ import java.util.function.Function;
  * @date 2023/6/29 10:41
  */
 @Slf4j
-public class JwtUtil {
+public class JWTUtil {
 
 	/**
 	 * 加密盐值
@@ -57,25 +57,6 @@ public class JwtUtil {
 	private static final long REFRESH_TOKEN_EXPIRATION = 24 * 60 * 60 * 1000;
 
 	private static final String IS_REFRESH_TOKEN = "isRefreshToken";
-
-	/**
-	 * 从 Token 中获取 account
-	 *
-	 * @param token Token
-	 *
-	 * @return String
-	 */
-	public static String extractSubject(String token) {
-		return extractClaim(token, Claims::getSubject);
-	}
-
-	/**
-	 * 从 Token 中获取数据
-	 */
-	public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-		final Claims claims = extractAllClaims(token);
-		return claimsResolver.apply(claims);
-	}
 
 	/**
 	 * 生成 Token ，仅包含用户信息，无其它额外信息
@@ -135,43 +116,6 @@ public class JwtUtil {
 				.compact();
 	}
 
-	public static void revokeToken(String account) {
-		// TODO 删除 redis 中的 token
-	}
-
-	/**
-	 * 验证 Token 是否有效
-	 *
-	 * @param token Token
-	 *
-	 * @return boolean
-	 */
-	public static boolean isTokenValid(String token, Boolean isRefreshToken) {
-		// TODO 检查 token 在 redis 中是否存在
-
-		final Claims claims = extractAllClaims(token);
-		if (claims.get(IS_REFRESH_TOKEN, Boolean.class) != isRefreshToken) {
-			return false;
-		}
-
-		final String subject = claims.get(Claims.SUBJECT, String.class);
-		return StrUtil.isNotBlank(subject) && !isTokenExpired(token);
-	}
-
-	/**
-	 * 判断 Token 是否过期
-	 */
-	private static boolean isTokenExpired(String token) {
-		return extractExpiration(token).before(new Date());
-	}
-
-	/**
-	 * 从 Token 中获取失效时间
-	 */
-	private static Date extractExpiration(String token) {
-		return extractClaim(token, Claims::getExpiration);
-	}
-
 	/**
 	 * 从 Token 中获取所有数据
 	 */
@@ -198,6 +142,51 @@ public class JwtUtil {
 	private static Key getSignInKey() {
 		byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
 		return Keys.hmacShaKeyFor(keyBytes);
+	}
+
+	public static void revokeToken(String account) {
+		// TODO 删除 redis 中的 token
+	}
+
+	/**
+	 * 从 Token 中获取 account
+	 */
+	public static String extractSubject(String token) {
+		return extractClaim(token, Claims::getSubject);
+	}
+
+	/**
+	 * 从 Token 中获取数据
+	 */
+	public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+		final Claims claims = extractAllClaims(token);
+		return claimsResolver.apply(claims);
+	}
+
+	/**
+	 * 验证 Token 是否有效
+	 *
+	 * @param token Token
+	 *
+	 * @return boolean
+	 */
+	public static boolean isTokenValid(String token, Boolean isRefreshToken) {
+		// TODO 检查 token 在 redis 中是否存在
+
+		final Claims claims = extractAllClaims(token);
+		if (claims.get(IS_REFRESH_TOKEN, Boolean.class) != isRefreshToken) {
+			return false;
+		}
+
+		final String subject = claims.get(Claims.SUBJECT, String.class);
+		return StrUtil.isNotBlank(subject) && !isTokenExpired(token);
+	}
+
+	/**
+	 * 判断 Token 是否过期
+	 */
+	private static boolean isTokenExpired(String token) {
+		return extractClaim(token, Claims::getExpiration).before(new Date());
 	}
 
 }

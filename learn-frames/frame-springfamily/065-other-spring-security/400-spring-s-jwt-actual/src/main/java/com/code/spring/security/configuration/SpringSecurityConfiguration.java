@@ -17,9 +17,11 @@
 
 package com.code.spring.security.configuration;
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.code.spring.security.component.security.CustomAuthenticationProvider;
 import com.code.spring.security.component.servlet.filter.TokenFilter;
+import com.code.spring.security.config.SecurityConfig;
 import com.code.spring.security.dal.dos.SysUser;
 import com.code.spring.security.service.SysUserService;
 import jakarta.annotation.Resource;
@@ -50,6 +52,9 @@ public class SpringSecurityConfiguration {
 	@Resource
 	private SysUserService sysUserService;
 
+	@Resource
+	private SecurityConfig securityConfig;
+
 	/**
 	 * Security 过滤器链
 	 *
@@ -63,15 +68,13 @@ public class SpringSecurityConfiguration {
 	SecurityFilterChain sysUserSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(config -> config
-						.requestMatchers("/favicon.ico", "/assets/**").permitAll()
-						.requestMatchers("/", "/index", "/error").permitAll()
-						.requestMatchers("/userLifecycle/*").permitAll()
+						.requestMatchers(ArrayUtil.toArray(securityConfig.getWhiteList(), String.class)).permitAll()
 						// .requestMatchers("/resource/one").hasAuthority("ROLE_USER")
 						// .requestMatchers("/resource/two").hasAuthority("ROLE_NONE")
 						.requestMatchers("/resource/one").hasRole("USER")
 						.requestMatchers("/resource/two").hasRole("NONE")
 						.anyRequest().authenticated())
-				.addFilterBefore(new TokenFilter(sysUserService), UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(new TokenFilter(sysUserService, securityConfig), UsernamePasswordAuthenticationFilter.class)
 				.formLogin(configurer -> configurer
 						.loginPage("/userLifecycle/login")
 						.loginProcessingUrl("/userLifecycle/login")

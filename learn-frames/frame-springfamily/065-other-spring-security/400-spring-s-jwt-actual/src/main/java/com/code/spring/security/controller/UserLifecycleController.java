@@ -25,7 +25,7 @@ import com.code.spring.security.controller.domain.UserRegisterResp;
 import com.code.spring.security.dal.dos.SysUser;
 import com.code.spring.security.dal.mapper.SysUserMapper;
 import com.code.spring.security.service.SysUserService;
-import com.code.spring.security.util.JwtUtil;
+import com.code.spring.security.util.JWTUtil;
 import com.code.spring.security.util.PasswordUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -74,8 +74,8 @@ public class UserLifecycleController {
 
 		return new UserRegisterResp()
 				.setAccount(userRegisterReq.getAccount())
-				.setToken(JwtUtil.generateToken(sysUser.getAccount()))
-				.setRefreshToken(JwtUtil.generateRefreshToken(sysUser.getAccount()));
+				.setToken(JWTUtil.generateToken(sysUser.getAccount()))
+				.setRefreshToken(JWTUtil.generateRefreshToken(sysUser.getAccount()));
 	}
 
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
@@ -91,8 +91,8 @@ public class UserLifecycleController {
 			throw new RuntimeException("登录信息异常");
 		}
 
-		String token = JwtUtil.generateToken(sysUser.getAccount());
-		String refreshToken = JwtUtil.generateRefreshToken(sysUser.getAccount());
+		String token = JWTUtil.generateToken(sysUser.getAccount());
+		String refreshToken = JWTUtil.generateRefreshToken(sysUser.getAccount());
 
 		JSONObject result = new JSONObject();
 		result.set("token", token);

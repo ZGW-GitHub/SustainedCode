@@ -18,9 +18,10 @@
 package com.code.spring.security.component.servlet.filter;
 
 import cn.hutool.core.util.StrUtil;
+import com.code.spring.security.config.SecurityConfig;
 import com.code.spring.security.dal.dos.SysUser;
 import com.code.spring.security.service.SysUserService;
-import com.code.spring.security.util.JwtUtil;
+import com.code.spring.security.util.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,11 +32,13 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Snow
@@ -46,13 +49,16 @@ public class TokenFilter extends OncePerRequestFilter {
 
 	private final SysUserService sysUserService;
 
-	public TokenFilter(SysUserService sysUserService) {
+	private final SecurityConfig securityConfig;
+
+	public TokenFilter(SysUserService sysUserService, SecurityConfig securityConfig) {
 		this.sysUserService = sysUserService;
+		this.securityConfig = securityConfig;
 	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		if (!request.getServletPath().contains("/resource")) {
+		if (isWhiteListResource(request)) {
 			log.debug("【 TokenFilter 】该请求[{}]无需 token", request.getServletPath());
 			filterChain.doFilter(request, response);
 			return;
@@ -68,13 +74,13 @@ public class TokenFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		if (!JwtUtil.isTokenValid(token, false)) {
+		if (!JWTUtil.isTokenValid(token, false)) {
 			log.debug("【 TokenFilter 】token 非法");
 			writeResponse(request, response);
 			return;
 		}
 
-		String account = JwtUtil.extractSubject(token);
+		String account = JWTUtil.extractSubject(token);
 
 		// SecurityContextHolder 中的 Authentication 为空时，才进行处理
 		if (SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -94,6 +100,14 @@ public class TokenFilter extends OncePerRequestFilter {
 		}
 
 		filterChain.doFilter(request, response);
+	}
+
+	private boolean isWhiteListResource(HttpServletRequest request) {
+		final List<String> whiteList = securityConfig.getWhiteList();
+		for (String white : whiteList) {
+			return new AntPathRequestMatcher(white).matcher(request).isMatch();
+		}
+		return false;
 	}
 
 	private static void writeResponse(HttpServletRequest request, HttpServletResponse response) throws IOException {
