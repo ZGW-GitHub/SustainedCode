@@ -17,13 +17,8 @@
 
 package com.code.service.template.mq;
 
-import com.code.framework.mq.client.rocketmq.RocketMQConfig;
-import com.code.framework.mq.client.rocketmq.producer.RocketSimpleProducer;
 import com.code.service.template.ServiceTemplateApplicationTest;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author Snow
@@ -32,13 +27,5 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 public class RocketMQTest extends ServiceTemplateApplicationTest {
 
-	@Resource
-	private RocketMQConfig rocketMQConfig;
-
-	@Test
-	void rocketMqTest() {
-		RocketMQConfig.RocketMQProducerConfig producerConfig = rocketMQConfig.getProducer().get("");
-		DefaultMQProducer defaultMQProducer = new RocketSimpleProducer(producerConfig).start();
-	}
 
 }
