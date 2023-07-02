@@ -15,9 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api.domain;
+package com.code.infra.user.mvc.controller.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,10 +27,22 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-public class LoginReq {
+@Accessors(chain = true)
+public class LoginResp {
 
+	/**
+	 * 用户账号
+	 */
 	private String account;
 
-	private String password;
+	/**
+	 * 昵称
+	 */
+	private String nickname;
+
+	/**
+	 * 头像
+	 */
+	private String avatar;
 
 }

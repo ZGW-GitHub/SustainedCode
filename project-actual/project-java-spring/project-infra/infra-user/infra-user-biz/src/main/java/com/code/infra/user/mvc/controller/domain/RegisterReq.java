@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api.domain;
+package com.code.infra.user.mvc.controller.domain;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

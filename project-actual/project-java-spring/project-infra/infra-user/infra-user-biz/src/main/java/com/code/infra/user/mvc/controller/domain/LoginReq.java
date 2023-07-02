@@ -15,16 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.api.domain;
+package com.code.infra.user.mvc.controller.domain;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/25 17:12
+ * @date 2023/6/21 16:16
  */
 @Slf4j
 @Data
-public class RegisterResp {
+public class LoginReq {
+
+	private String account;
+
+	private String password;
+
 }

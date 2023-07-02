@@ -22,21 +22,22 @@ biz:
       configuration:
       exception:
     facade.impl:
-    controller:
-      domain: req 、resp
-    service: 
-      impl:
-      domain: BO 、DTO
-    biz:
-      impl:
-      domain: BO 、DTO
-    dal:
-      domain: 
-        dos: DO
-        pojo: POJO
-        query: Query
-      mapper: 
-      redis: redis 操作
+    mvc:
+      controller:
+        domain: req 、resp
+      service: 
+        impl:
+        domain: BO 、DTO
+      biz:
+        impl:
+        domain: BO 、DTO
+      dal:
+        domain: 
+          dos: DO
+          pojo: POJO
+          query: Query
+        mapper: 
+        redis: redis 操作
     job:
     util:
 ```
@@ -53,7 +54,7 @@ biz:
    - 直接调用 service
 3. service [ BO/DTO ]:
    - 业务逻辑
-4. biz [ BO/DTO ]:
+4. manager [ BO/DTO ]:
    - 复杂业务逻辑
 5. mapper [ DO/XxxQuery/XxxPOJO ]:
    - 数据库操作
