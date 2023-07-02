@@ -17,12 +17,9 @@
 
 package com.code.infra.file.mvc.service;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * @author Snow
  * @date 2023/7/2 20:56
  */
-@Slf4j
 public interface DemoService {
 }
