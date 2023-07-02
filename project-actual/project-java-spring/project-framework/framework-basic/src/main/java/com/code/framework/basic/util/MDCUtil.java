@@ -32,6 +32,10 @@ public class MDCUtil {
 		MDC.put(TraceContextKeyEnum.TRACE_ID.getName(), traceId);
 	}
 
+	public static String getTraceId() {
+		return MDC.get(TraceContextKeyEnum.TRACE_ID.getName());
+	}
+
 	public static void removeTraceId() {
 		MDC.remove(TraceContextKeyEnum.TRACE_ID.getName());
 	}
