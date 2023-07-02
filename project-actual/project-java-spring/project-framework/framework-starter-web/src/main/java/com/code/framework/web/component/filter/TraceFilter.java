@@ -15,39 +15,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.framework.web.component.interceptor;
+package com.code.framework.web.component.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.code.framework.basic.trace.context.TraceContextHelper;
 import com.code.framework.basic.trace.context.TraceContextKeyEnum;
 import com.code.framework.basic.util.IdGenerator;
 import com.code.framework.basic.util.MDCUtil;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
 
 /**
  * @author Snow
- * @date 2023/6/13 19:44
+ * @date 2023/7/1 21:48
  */
 @Slf4j
 @Component
-public class TraceHandlerInterceptor implements HandlerInterceptor {
+public class TraceFilter extends OncePerRequestFilter {
 
-	/**
-	 * 处理请求前执行
-	 *
-	 * @param request  请求
-	 * @param response 响应
-	 * @param handler  处理程序
-	 *
-	 * @return boolean
-	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		// 1、生成/获取 traceId
 		String traceId = request.getParameter(TraceContextKeyEnum.TRACE_ID.getName());
 		if (StrUtil.isBlank(traceId)) {
@@ -60,34 +54,11 @@ public class TraceHandlerInterceptor implements HandlerInterceptor {
 		// 3、创建 TraceContext 并设置 traceId
 		TraceContextHelper.startTrace(traceId);
 
-		return true;
-	}
+		// 4、继续执行 Filter 链
+		filterChain.doFilter(request, response);
 
-	/**
-	 * 处理请求后执行
-	 *
-	 * @param request      请求
-	 * @param response     响应
-	 * @param handler      处理程序
-	 * @param modelAndView 模型和视图
-	 */
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-
-	}
-
-	/**
-	 * 渲染视图后执行
-	 *
-	 * @param request  请求
-	 * @param response 响应
-	 * @param handler  处理程序
-	 * @param ex       异常
-	 */
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+		// 5、清除 traceId
 		MDCUtil.removeTraceId();
-		TraceContextHelper.clear();
 	}
 
 }

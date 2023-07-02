@@ -17,8 +17,7 @@
 
 package com.code.framework.web.configuration;
 
-import com.code.framework.web.component.interceptor.LogHandlerInterceptor;
-import com.code.framework.web.component.interceptor.TraceHandlerInterceptor;
+import com.code.framework.web.component.interceptor.TimingHandlerInterceptor;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -34,15 +33,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class HandlerInterceptorConfiguration implements WebMvcConfigurer {
 
 	@Resource
-	private TraceHandlerInterceptor traceHandlerInterceptor;
-
-	@Resource
-	private LogHandlerInterceptor logHandlerInterceptor;
+	private TimingHandlerInterceptor timingHandlerInterceptor;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(traceHandlerInterceptor);
-		registry.addInterceptor(logHandlerInterceptor);
+		registry.addInterceptor(timingHandlerInterceptor);
 	}
 
 }

@@ -17,6 +17,7 @@
 
 package com.code.framework.web.component.interceptor;
 
+import cn.hutool.core.date.DateUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Slf4j
 @Component
-public class LogHandlerInterceptor implements HandlerInterceptor {
+public class TimingHandlerInterceptor implements HandlerInterceptor {
 
 	/**
 	 * 处理请求前执行
@@ -38,11 +39,12 @@ public class LogHandlerInterceptor implements HandlerInterceptor {
 	 * @param request  请求
 	 * @param response 响应
 	 * @param handler  处理程序
+	 *
 	 * @return boolean
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		log.debug("处理请求：{}, 入参：{}", "todo", "todo");
+		request.setAttribute("startTime", DateUtil.current());
 
 		return true;
 	}
@@ -57,7 +59,8 @@ public class LogHandlerInterceptor implements HandlerInterceptor {
 	 */
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-
+		Long startTime = (Long) request.getAttribute("startTime");
+		log.debug("【 执行耗时 】postHandle : {}", DateUtil.current() - startTime);
 	}
 
 	/**
@@ -70,7 +73,8 @@ public class LogHandlerInterceptor implements HandlerInterceptor {
 	 */
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-
+		Long startTime = (Long) request.getAttribute("startTime");
+		log.debug("【 执行耗时 】afterCompletion : {}", DateUtil.current() - startTime);
 	}
 
 }
