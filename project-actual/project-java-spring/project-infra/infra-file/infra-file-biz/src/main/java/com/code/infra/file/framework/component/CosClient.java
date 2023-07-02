@@ -15,10 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.file.component;
+package com.code.infra.file.framework.component;
 
 import com.code.infra.file.common.util.UploadUtil;
-import com.code.infra.file.config.CosConfig;
+import com.code.infra.file.framework.config.CosConfig;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.transfer.TransferManager;
 import jakarta.annotation.Resource;

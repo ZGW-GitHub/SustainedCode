@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.file.configuration;
+package com.code.infra.file.framework.configuration;
 
-import com.code.infra.file.config.CosConfig;
+import com.code.infra.file.framework.config.CosConfig;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;

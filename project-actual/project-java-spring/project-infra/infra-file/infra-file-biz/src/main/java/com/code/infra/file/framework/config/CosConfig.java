@@ -15,28 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.file.controller;
+package com.code.infra.file.framework.config;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Snow
- * @date 2023/6/15 17:09
+ * @date 2023/6/19 15:21
  */
 @Slf4j
-@RestController
-@RequestMapping("file")
-public class UploadController {
+@Data
+@Configuration
+@ConfigurationProperties("infra.file.cos")
+public class CosConfig {
 
-	@PostMapping("upload")
-	public String upload(List<MultipartFile> files) {
-		return "SUCCESS";
-	}
+	private String accessKey;
+
+	private String secretKey;
+
+	private String region;
+
+	private String bucketName;
 
 }
