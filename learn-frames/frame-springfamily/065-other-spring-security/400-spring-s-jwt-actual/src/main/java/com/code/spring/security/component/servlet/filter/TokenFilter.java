@@ -105,7 +105,9 @@ public class TokenFilter extends OncePerRequestFilter {
 	private boolean isWhiteListResource(HttpServletRequest request) {
 		final List<String> whiteList = securityConfig.getWhiteList();
 		for (String white : whiteList) {
-			return new AntPathRequestMatcher(white).matcher(request).isMatch();
+			if (new AntPathRequestMatcher(white).matcher(request).isMatch()) {
+				return true;
+			}
 		}
 		return false;
 	}
