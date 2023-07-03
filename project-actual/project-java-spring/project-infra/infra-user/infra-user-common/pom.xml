@@ -16,10 +16,35 @@
 	<packaging>jar</packaging>
 
 	<properties>
+		<jwt.version>0.11.5</jwt.version>
+		<jasypt.version>3.0.5</jasypt.version>
 		<framework-basic.version>1.0.0-SNAPSHOT</framework-basic.version>
 	</properties>
 
 	<dependencies>
+		<!-- jasypt 密码加密组件 start -->
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>${jasypt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>${jwt.version}</version>
+		</dependency>
+		<!-- jasypt 密码加密组件 end -->
+
 		<dependency>
 			<groupId>com.code</groupId>
 			<artifactId>framework-basic</artifactId>

@@ -22,12 +22,12 @@ import com.code.infra.user.framework.exception.UserExceptionCode;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
+import com.code.infra.user.mvc.service.domain.*;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -45,6 +45,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * 查找用户信息
 	 *
 	 * @param reqModel req
+	 *
 	 * @return {@link UserInfoDetailDTO}
 	 */
 	@Override
@@ -53,6 +54,45 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return userInfoDOOpt
 				.map(userInfoDO -> BeanUtil.map(userInfoDO, UserInfoDetailDTO::new))
+				.orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
+	}
+
+	/**
+	 * 查询认证所需信息
+	 *
+	 * @param userAuthBO 查询入参
+	 *
+	 * @return {@link UserAuthDTO}
+	 */
+	@Override
+	public UserAuthDTO findAuthInfo(UserAuthBO userAuthBO) {
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(userAuthBO.getAccount());
+
+		return userInfoDOOpt
+				.map(userInfoDO -> {
+					UserAuthDTO userAuthDTO = BeanUtil.map(userInfoDO, UserAuthDTO::new);
+					userAuthDTO.setGrantedAuthority(Arrays.asList("ROLE_ADMIN", "ROLE_USER"));
+					return userAuthDTO;
+				}).orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
+	}
+
+	/**
+	 * 查询需要存储到 token 的信息
+	 *
+	 * @param tokenInfoBO 查询入参
+	 *
+	 * @return {@link TokenInfoDTO}
+	 */
+	@Override
+	public TokenInfoDTO findTokenInfo(TokenInfoBO tokenInfoBO) {
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(tokenInfoBO.getAccount());
+
+		return userInfoDOOpt
+				.map(userInfoDO -> {
+					TokenInfoDTO tokenInfoDTO = BeanUtil.map(userInfoDO, TokenInfoDTO::new);
+					tokenInfoDTO.setGrantedAuthority(Arrays.asList("ROLE_ADMIN", "ROLE_USER"));
+					return tokenInfoDTO;
+				})
 				.orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
 	}
 

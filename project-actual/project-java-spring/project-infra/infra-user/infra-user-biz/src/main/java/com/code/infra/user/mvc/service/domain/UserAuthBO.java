@@ -23,26 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:50
+ * @date 2023/7/3 20:57
  */
 @Slf4j
 @Data
 @Accessors(chain = true)
-public class UserInfoDetailDTO {
+public class UserAuthBO {
 
-	/**
-	 * 账号
-	 */
 	private String account;
-
-	/**
-	 * 昵称
-	 */
-	private String nickname;
-
-	/**
-	 * 头像
-	 */
-	private String avatar;
 
 }

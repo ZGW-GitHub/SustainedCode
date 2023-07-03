@@ -17,8 +17,7 @@
 
 package com.code.infra.user.mvc.service;
 
-import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
+import com.code.infra.user.mvc.service.domain.*;
 
 /**
  * @author Snow
@@ -33,5 +32,23 @@ public interface UserInfoService {
 	 * @return {@link UserInfoDetailDTO}
 	 */
 	UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO);
+
+	/**
+	 * 查询认证所需信息
+	 *
+	 * @param userAuthBO 查询入参
+	 *
+	 * @return {@link UserAuthDTO}
+	 */
+	UserAuthDTO findAuthInfo(UserAuthBO userAuthBO);
+
+	/**
+	 * 查询需要存储到 token 的信息
+	 *
+	 * @param tokenInfoBO 查询入参
+	 *
+	 * @return {@link TokenInfoDTO}
+	 */
+	TokenInfoDTO findTokenInfo(TokenInfoBO tokenInfoBO);
 
 }

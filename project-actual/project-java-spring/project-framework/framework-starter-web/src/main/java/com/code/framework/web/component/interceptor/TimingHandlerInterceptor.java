@@ -60,7 +60,7 @@ public class TimingHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
 		Long startTime = (Long) request.getAttribute("startTime");
-		log.debug("【 执行耗时 】postHandle : {}", DateUtil.current() - startTime);
+		log.debug("【 执行耗时 】请求: {}, postHandle : {}", request.getServletPath(), DateUtil.current() - startTime);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class TimingHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 		Long startTime = (Long) request.getAttribute("startTime");
-		log.debug("【 执行耗时 】afterCompletion : {}", DateUtil.current() - startTime);
+		log.debug("【 执行耗时 】请求: {}, afterCompletion : {}", request.getServletPath(), DateUtil.current() - startTime);
 	}
 
 }

@@ -27,6 +27,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -38,6 +40,7 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class TraceFilter extends OncePerRequestFilter {
 
 	@Override
@@ -50,15 +53,22 @@ public class TraceFilter extends OncePerRequestFilter {
 
 		// 2、为日志设置 traceId
 		MDCUtil.setTraceId(traceId);
+		log.debug("开始 trace ... , 请求: {}", request.getServletPath());
 
 		// 3、创建 TraceContext 并设置 traceId
 		TraceContextHelper.startTrace(traceId);
 
-		// 4、继续执行 Filter 链
-		filterChain.doFilter(request, response);
+		try {
+			// 4、继续执行 Filter 链
+			filterChain.doFilter(request, response);
+		} finally {
+			// 5、清除 TraceContext
+			TraceContextHelper.clear();
 
-		// 5、清除 traceId
-		MDCUtil.removeTraceId();
+			log.debug("清除 trace ... , 请求: {}", request.getServletPath());
+			// 6、清除日志的 traceId
+			MDCUtil.removeTraceId();
+		}
 	}
 
 }

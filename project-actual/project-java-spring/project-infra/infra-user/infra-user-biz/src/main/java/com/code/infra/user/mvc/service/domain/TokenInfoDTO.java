@@ -18,17 +18,17 @@
 package com.code.infra.user.mvc.service.domain;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:50
+ * @date 2023/7/3 21:11
  */
 @Slf4j
 @Data
-@Accessors(chain = true)
-public class UserInfoDetailDTO {
+public class TokenInfoDTO {
 
 	/**
 	 * 账号
@@ -36,13 +36,8 @@ public class UserInfoDetailDTO {
 	private String account;
 
 	/**
-	 * 昵称
+	 * 授予的权限
 	 */
-	private String nickname;
-
-	/**
-	 * 头像
-	 */
-	private String avatar;
+	private List<String> grantedAuthority;
 
 }

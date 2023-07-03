@@ -15,34 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service.domain;
+package com.code.infra.user.mvc.controller;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:50
+ * @date 2023/7/1 21:16
  */
 @Slf4j
-@Data
-@Accessors(chain = true)
-public class UserInfoDetailDTO {
+@Controller
+public class IndexController {
 
-	/**
-	 * 账号
-	 */
-	private String account;
-
-	/**
-	 * 昵称
-	 */
-	private String nickname;
-
-	/**
-	 * 头像
-	 */
-	private String avatar;
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
 
 }

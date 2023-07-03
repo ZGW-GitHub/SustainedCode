@@ -53,10 +53,13 @@ public class ResultExceptionHandler {
 	 */
 	@ExceptionHandler(Throwable.class)
 	public GatewayResponse<Void> exceptionHandler(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
+		// 1、获取 rootThrowable
 		Throwable rootThrowable = ExceptionUtil.getRootCause(throwable);
 
+		// 2、打印日志
 		log.error("【 异常拦截 】>>>>>> 异常类型：{}", rootThrowable.getClass().getSimpleName());
 
+		// 3、处理异常
 		return doExceptionHandler(request, response, rootThrowable, throwable);
 	}
 

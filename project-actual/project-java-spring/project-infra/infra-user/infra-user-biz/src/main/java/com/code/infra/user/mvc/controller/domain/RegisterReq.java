@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/25 17:12
+ * @date 2023/7/1 16:10
  */
 @Slf4j
 @Data
@@ -31,5 +31,7 @@ public class RegisterReq {
 	private String account;
 
 	private String password;
+
+	private String captcha;
 
 }

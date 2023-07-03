@@ -18,5 +18,6 @@ spring:
       - classpath:application-log.yml
       - classpath:application-management.yml
       - classpath:application-xxljob.yml
+      - classpath:application-security.yml
       # - classpath:application-mq-kafka.yml
       # - classpath:application-mq-rocketmq.yml

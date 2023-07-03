@@ -15,34 +15,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.mvc.service.domain;
+package com.code.infra.user.framework.config;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Snow
- * @date 2023/6/21 15:50
+ * @date 2023/7/2 13:17
  */
 @Slf4j
 @Data
-@Accessors(chain = true)
-public class UserInfoDetailDTO {
+@Configuration(proxyBeanMethods = false)
+public class SecurityConfig {
 
-	/**
-	 * 账号
-	 */
-	private String account;
+	@Value("${spring.security.custom.whiteList}")
+	private List<String> whiteList;
 
-	/**
-	 * 昵称
-	 */
-	private String nickname;
-
-	/**
-	 * 头像
-	 */
-	private String avatar;
+	public List<String> getWhiteList() {
+		return whiteList.stream().distinct().collect(Collectors.toList());
+	}
 
 }

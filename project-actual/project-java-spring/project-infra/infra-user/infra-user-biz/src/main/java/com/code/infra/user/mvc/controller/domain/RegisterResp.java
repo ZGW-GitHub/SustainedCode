@@ -18,13 +18,22 @@
 package com.code.infra.user.mvc.controller.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/6/25 17:12
+ * @date 2023/7/1 16:16
  */
 @Slf4j
 @Data
+@Accessors(chain = true)
 public class RegisterResp {
+
+	private String account;
+
+	private String token;
+
+	private String refreshToken;
+
 }

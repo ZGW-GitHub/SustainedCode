@@ -1,0 +1,4 @@
+spring:
+  security:
+    custom:
+      whiteList: "/favicon.ico,/assets/**,/,/index,/error,/userLifecycle/*"
