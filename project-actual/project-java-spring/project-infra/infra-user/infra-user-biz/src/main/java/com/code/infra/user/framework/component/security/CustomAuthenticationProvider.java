@@ -131,10 +131,10 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 		}
 
 		// TODO 获取 redis 缓存的验证码
-		String captchaCache = username + "cache";
-		if (!StrUtil.equals(captchaCache, captcha)) {
-			throw UserExceptionCode.CAPTCHA_INCORRECT_INPUT.exception();
-		}
+		// String captchaCache = username + "cache";
+		// if (!StrUtil.equals(captchaCache, captcha)) {
+		// 	throw UserExceptionCode.CAPTCHA_INCORRECT_INPUT.exception();
+		// }
 	}
 
 	private static UsernamePasswordAuthenticationToken encodeAuthenticationRequestPassword(String presentedPassword, UserDetails user, String username) {

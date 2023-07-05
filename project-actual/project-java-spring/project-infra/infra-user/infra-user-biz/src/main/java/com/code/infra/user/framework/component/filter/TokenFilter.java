@@ -35,7 +35,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -98,7 +97,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
 			// 如果 token 有效，将用户信息存储到 SecurityContextHolder，方便后续使用
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(tokenInfoPOJO, null, grantedAuthorityList);
-			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+			authentication.setDetails(tokenInfoDTO);
 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
