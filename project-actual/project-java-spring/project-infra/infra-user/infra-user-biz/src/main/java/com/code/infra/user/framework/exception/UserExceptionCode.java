@@ -42,6 +42,8 @@ public enum UserExceptionCode implements ExceptionCode<UserException> {
 	USER_NOT_EXIST(130001, "用户不存在"),
 	USER_EXIST(130001, "用户已存在"),
 	USER_ACCOUNT_OR_PASSWORD_INCORRECT(130003, "账号或密码错误"),
+	CAPTCHA_VALIDATION_EXCEPTION(131001, "验证码验证异常"),
+	CAPTCHA_INCORRECT_INPUT(131002, "验证码验证异常"),
 	;
 
 	private final int    code;

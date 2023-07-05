@@ -17,8 +17,11 @@
 
 package com.code.infra.user.framework.component.security;
 
+import cn.hutool.core.util.StrUtil;
 import com.code.framework.basic.util.PasswordUtil;
+import com.code.infra.user.framework.exception.UserExceptionCode;
 import com.code.infra.user.mvc.service.domain.UserAuthDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,6 +34,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * @author Snow
@@ -52,6 +58,9 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 		}
 
 		String username = determineUsername(authentication);
+
+		// 校验验证码
+		validationCaptcha(username);
 
 		boolean cacheWasUsed = true;
 		UserDetails user = getUserCache().getUserFromCache(username);
@@ -105,6 +114,27 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 		}
 
 		return createSuccessAuthentication(principalToReturn, authentication, user);
+	}
+
+	private void validationCaptcha(String username) {
+		// 获取当前request
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		if (requestAttributes == null) {
+			throw UserExceptionCode.CAPTCHA_VALIDATION_EXCEPTION.exception("无法获取当前 request");
+		}
+		HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+
+		// 获取参数中的验证码
+		String captcha = request.getParameter("captcha");
+		if (StrUtil.isEmpty(captcha)) {
+			throw UserExceptionCode.CAPTCHA_VALIDATION_EXCEPTION.exception("验证码为空");
+		}
+
+		// TODO 获取 redis 缓存的验证码
+		String captchaCache = username + "cache";
+		if (!StrUtil.equals(captchaCache, captcha)) {
+			throw UserExceptionCode.CAPTCHA_INCORRECT_INPUT.exception();
+		}
 	}
 
 	private static UsernamePasswordAuthenticationToken encodeAuthenticationRequestPassword(String presentedPassword, UserDetails user, String username) {
