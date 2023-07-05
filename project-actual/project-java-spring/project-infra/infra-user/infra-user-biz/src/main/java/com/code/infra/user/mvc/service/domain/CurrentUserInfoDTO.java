@@ -21,15 +21,35 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 /**
  * @author Snow
- * @date 2023/7/3 20:57
+ * @date 2023/7/5 22:36
  */
 @Slf4j
 @Data
 @Accessors(chain = true)
-public class UserAuthBO {
+public class CurrentUserInfoDTO {
 
+	/**
+	 * 用户信息 ID
+	 */
+	private String recordId;
+
+	/**
+	 * 账户
+	 */
 	private String account;
+
+	/**
+	 * 授予的权限
+	 */
+	private List<String> grantedAuthority;
+
+	/**
+	 * 令牌
+	 */
+	private String token;
 
 }

@@ -23,8 +23,8 @@ import com.code.infra.user.framework.component.filter.TokenFilter;
 import com.code.infra.user.framework.component.security.CustomAuthenticationProvider;
 import com.code.infra.user.framework.config.SecurityConfig;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.domain.UserAuthBO;
-import com.code.infra.user.mvc.service.domain.UserAuthDTO;
+import com.code.infra.user.mvc.service.domain.AuthInfoBO;
+import com.code.infra.user.mvc.service.domain.AuthInfoDTO;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -91,7 +91,7 @@ public class SecurityConfiguration {
 	@Bean
 	UserDetailsService userDetailsService() {
 		return account -> {
-			UserAuthDTO authInfoDTO = userInfoService.findAuthInfo(new UserAuthBO().setAccount(account));
+			AuthInfoDTO authInfoDTO = userInfoService.findAuthInfo(new AuthInfoBO().setAccount(account));
 			if (Objects.isNull(authInfoDTO)) {
 				throw new UsernameNotFoundException("用户不存在！");
 			}

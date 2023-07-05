@@ -20,7 +20,7 @@ package com.code.infra.user.framework.component.security;
 import cn.hutool.core.util.StrUtil;
 import com.code.framework.basic.util.PasswordUtil;
 import com.code.infra.user.framework.exception.UserExceptionCode;
-import com.code.infra.user.mvc.service.domain.UserAuthDTO;
+import com.code.infra.user.mvc.service.domain.AuthInfoDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -51,9 +51,9 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 	}
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		Assert.isInstanceOf(UsernamePasswordAuthenticationToken.class, authentication, () -> this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.onlySupports", "Only UsernamePasswordAuthenticationToken is supported"));
-		if (!(authentication instanceof UsernamePasswordAuthenticationToken upAuthentication)) {
+	public Authentication authenticate(Authentication originalAuthentication) throws AuthenticationException {
+		Assert.isInstanceOf(UsernamePasswordAuthenticationToken.class, originalAuthentication, () -> this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.onlySupports", "Only UsernamePasswordAuthenticationToken is supported"));
+		if (!(originalAuthentication instanceof UsernamePasswordAuthenticationToken authentication)) {
 			throw new AuthenticationServiceException("Authentication 类型错误");
 		}
 
@@ -67,7 +67,7 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 		if (user == null) {
 			cacheWasUsed = false;
 			try {
-				user = retrieveUser(username, upAuthentication);
+				user = retrieveUser(username, authentication);
 			} catch (UsernameNotFoundException ex) {
 				log.debug("Failed to find user '" + username + "'");
 
@@ -81,11 +81,11 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 		}
 
 		// 对 authentication 中的密码进行编码
-		upAuthentication = encodeAuthenticationRequestPassword(upAuthentication.getCredentials().toString(), user, username);
+		authentication = encodeAuthenticationRequestPassword(authentication.getCredentials().toString(), user, username);
 
 		try {
 			getPreAuthenticationChecks().check(user);
-			additionalAuthenticationChecks(user, upAuthentication);
+			additionalAuthenticationChecks(user, authentication);
 		} catch (AuthenticationException ex) {
 			if (!cacheWasUsed) {
 				throw ex;
@@ -93,13 +93,13 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 
 			// There was a problem, so try again after checking we're using latest data (i.e. not from the cache)
 			cacheWasUsed = false;
-			user = retrieveUser(username, upAuthentication);
+			user = retrieveUser(username, authentication);
 
 			// 对 authentication 中的密码进行编码
-			upAuthentication = encodeAuthenticationRequestPassword(upAuthentication.getCredentials().toString(), user, username);
+			authentication = encodeAuthenticationRequestPassword(authentication.getCredentials().toString(), user, username);
 
 			getPreAuthenticationChecks().check(user);
-			additionalAuthenticationChecks(user, upAuthentication);
+			additionalAuthenticationChecks(user, authentication);
 		}
 
 		getPostAuthenticationChecks().check(user);
@@ -108,12 +108,8 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 			getUserCache().putUserInCache(user);
 		}
 
-		Object principalToReturn = user;
-		if (isForcePrincipalAsString()) {
-			principalToReturn = user.getUsername();
-		}
-
-		return createSuccessAuthentication(principalToReturn, authentication, user);
+		authentication.setDetails(user);
+		return createSuccessAuthentication(authentication.getPrincipal(), authentication, user);
 	}
 
 	private void validationCaptcha(String username) {
@@ -138,11 +134,11 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 	}
 
 	private static UsernamePasswordAuthenticationToken encodeAuthenticationRequestPassword(String presentedPassword, UserDetails user, String username) {
-		if (!(user instanceof UserAuthDTO userAuthDTO)) {
+		if (!(user instanceof AuthInfoDTO authInfoDTO)) {
 			throw new AuthenticationServiceException("UserDetails 类型错误");
 		}
 
-		return UsernamePasswordAuthenticationToken.unauthenticated(username, PasswordUtil.encode(presentedPassword, userAuthDTO.getSalt()));
+		return UsernamePasswordAuthenticationToken.unauthenticated(username, PasswordUtil.encode(presentedPassword, authInfoDTO.getSalt()));
 	}
 
 	private String determineUsername(Authentication authentication) {

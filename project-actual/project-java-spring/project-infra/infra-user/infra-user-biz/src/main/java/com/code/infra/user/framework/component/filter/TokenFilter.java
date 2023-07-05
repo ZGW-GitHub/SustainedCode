@@ -18,12 +18,10 @@
 package com.code.infra.user.framework.component.filter;
 
 import cn.hutool.core.util.StrUtil;
-import com.code.framework.basic.util.BeanUtil;
 import com.code.infra.user.framework.config.SecurityConfig;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.domain.TokenInfoBO;
-import com.code.infra.user.mvc.service.domain.TokenInfoDTO;
-import com.code.infra.user.pojo.TokenInfoPOJO;
+import com.code.infra.user.mvc.service.domain.CurrentUserInfoBO;
+import com.code.infra.user.mvc.service.domain.CurrentUserInfoDTO;
 import com.code.infra.user.util.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -88,16 +86,15 @@ public class TokenFilter extends OncePerRequestFilter {
 		// SecurityContextHolder 中的 Authentication 为空时，才进行处理
 		if (SecurityContextHolder.getContext().getAuthentication() == null) {
 			// 获取用户信息 TODO 放入 redis 缓存，减少 mysql 压力（注意：mysql 、redis 数据一致性）
-
-			TokenInfoDTO tokenInfoDTO = userInfoService.findTokenInfo(new TokenInfoBO().setAccount(account));
-			List<SimpleGrantedAuthority> grantedAuthorityList = tokenInfoDTO.getGrantedAuthority().stream().map(SimpleGrantedAuthority::new).toList();
-			TokenInfoPOJO tokenInfoPOJO = BeanUtil.map(tokenInfoDTO, TokenInfoPOJO::new);
-
 			// TODO 从 redis 中查询 token 是否存在（ 以判断是不是历史且未过期的 token ），格式：key: account 、value(hash): token:xxx,userInfo:xxx
 
+			CurrentUserInfoDTO currentUserInfoDTO = userInfoService.findCurrentUserInfo(new CurrentUserInfoBO().setAccount(account));
+			currentUserInfoDTO.setToken(token);
+
 			// 如果 token 有效，将用户信息存储到 SecurityContextHolder，方便后续使用
-			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(tokenInfoPOJO, null, grantedAuthorityList);
-			authentication.setDetails(tokenInfoDTO);
+			List<SimpleGrantedAuthority> grantedAuthorityList = currentUserInfoDTO.getGrantedAuthority().stream().map(SimpleGrantedAuthority::new).toList();
+			UsernamePasswordAuthenticationToken authentication = UsernamePasswordAuthenticationToken.authenticated(account, null, grantedAuthorityList);
+			authentication.setDetails(currentUserInfoDTO);
 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 

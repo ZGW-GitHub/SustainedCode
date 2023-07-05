@@ -60,20 +60,36 @@ public class UserInfoServiceImpl implements UserInfoService {
 	/**
 	 * 查询认证所需信息
 	 *
-	 * @param userAuthBO 查询入参
+	 * @param authInfoBO 查询入参
 	 *
-	 * @return {@link UserAuthDTO}
+	 * @return {@link AuthInfoDTO}
 	 */
 	@Override
-	public UserAuthDTO findAuthInfo(UserAuthBO userAuthBO) {
-		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(userAuthBO.getAccount());
+	public AuthInfoDTO findAuthInfo(AuthInfoBO authInfoBO) {
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(authInfoBO.getAccount());
 
 		return userInfoDOOpt
 				.map(userInfoDO -> {
-					UserAuthDTO userAuthDTO = BeanUtil.map(userInfoDO, UserAuthDTO::new);
-					userAuthDTO.setGrantedAuthority(Arrays.asList("ROLE_ADMIN", "ROLE_USER"));
-					return userAuthDTO;
+					AuthInfoDTO authInfoDTO = BeanUtil.map(userInfoDO, AuthInfoDTO::new);
+					authInfoDTO.setGrantedAuthority(Arrays.asList("ROLE_ADMIN", "ROLE_USER"));
+					return authInfoDTO;
 				}).orElseThrow(UserExceptionCode.USER_NOT_EXIST::exception);
+	}
+
+	/**
+	 * 查询当前用户信息
+	 *
+	 * @param currentUserInfoBO 查询入参
+	 *
+	 * @return {@link CurrentUserInfoDTO}
+	 */
+	@Override
+	public CurrentUserInfoDTO findCurrentUserInfo(CurrentUserInfoBO currentUserInfoBO) {
+		Optional<UserInfoDO> userInfoDOOpt = userInfoMapper.findByAccount(currentUserInfoBO.getAccount());
+
+		return userInfoDOOpt
+				.map(userInfoDO -> BeanUtil.map(userInfoDO, CurrentUserInfoDTO::new))
+				.orElse(new CurrentUserInfoDTO());
 	}
 
 	/**

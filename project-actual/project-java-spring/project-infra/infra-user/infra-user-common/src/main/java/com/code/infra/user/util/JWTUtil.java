@@ -18,16 +18,18 @@
 package com.code.infra.user.util;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTPayload;
+import com.code.infra.user.pojo.TokenInfoPOJO;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.impl.DefaultClaims;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -61,20 +63,9 @@ public class JWTUtil {
 	 *
 	 * @return {@link String}
 	 */
-	public static String generateToken(String account) {
-		return generateToken(account, new HashMap<>());
-	}
-
-	/**
-	 * 生成 Token ，有额外信息
-	 *
-	 * @param extraClaims 额外的数据
-	 * @param account     用户账号
-	 *
-	 * @return String
-	 */
-	public static String generateToken(String account, Map<String, Object> extraClaims) {
-		return buildToken(account, extraClaims, TOKEN_EXPIRATION);
+	public static String generateToken(TokenInfoPOJO tokenInfoPOJO) {
+		tokenInfoPOJO.setRefreshToken(false);
+		return buildToken(tokenInfoPOJO, TOKEN_EXPIRATION);
 	}
 
 	/**
@@ -84,8 +75,9 @@ public class JWTUtil {
 	 *
 	 * @return String
 	 */
-	public static String generateRefreshToken(String account) {
-		return buildToken(account, new HashMap<>(), REFRESH_TOKEN_EXPIRATION);
+	public static String generateRefreshToken(TokenInfoPOJO tokenInfoPOJO) {
+		tokenInfoPOJO.setRefreshToken(true);
+		return buildToken(tokenInfoPOJO, REFRESH_TOKEN_EXPIRATION);
 	}
 
 	/**
@@ -97,27 +89,41 @@ public class JWTUtil {
 	 *
 	 * @return String
 	 */
-	private static String buildToken(String account, Map<String, Object> extraClaims, long expiration) {
-		extraClaims.put(IS_REFRESH_TOKEN, expiration == REFRESH_TOKEN_EXPIRATION);
-
+	private static String buildToken(TokenInfoPOJO tokenInfoPOJO, long expiration) {
 		// TODO 将生成的 token 存储到 redis
+
+		tokenInfoPOJO
+				.setSubject(tokenInfoPOJO.getAccount()) // 主体数据
+				.setIssuedAt(new Date(System.currentTimeMillis())) // 设置发布时间
+				.setExpiration(new Date(System.currentTimeMillis() + expiration)); // 设置过期时间
 
 		return Jwts
 				.builder()
-				.setClaims(extraClaims) // body
-				.setSubject(account) // 主体数据
-				.setIssuedAt(new Date(System.currentTimeMillis())) // 设置发布时间
-				.setExpiration(new Date(System.currentTimeMillis() + expiration)) // 设置过期时间
+				.setPayload(JSONUtil.toJsonStr(tokenInfoPOJO)) // body
 				.signWith(getSignInKey(), SignatureAlgorithm.HS256) // 设置摘要算法
 				.compact();
+	}
+
+	public static void main(String[] args) {
+		TokenInfoPOJO tokenInfoPOJO = new TokenInfoPOJO();
+		tokenInfoPOJO.setAccount("123");
+		String token = generateToken(tokenInfoPOJO);
+		extractAllClaims(token);
 	}
 
 	/**
 	 * 从 Token 中获取所有数据
 	 */
-	private static Claims extractAllClaims(String token) {
+	private static TokenInfoPOJO extractAllClaims(String token) {
+		JWTPayload payload = cn.hutool.jwt.JWTUtil.parseToken(token).setSigner(SignatureAlgorithm.HS256.getValue(), getSignInKey()).getPayload();
+		JSONObject claimsJson = payload.getClaimsJson();
+		System.err.println(claimsJson);
+
+		JWT.of(token).setKey(getSignInKey().getEncoded()).getPayloads();
+		cn.hutool.jwt.JWTUtil.parseToken(token).getPayloads();
+
 		try {
-			return Jwts
+			return (TokenInfoPOJO) Jwts
 					.parserBuilder()
 					.setSigningKey(getSignInKey())
 					.build()
@@ -129,7 +135,7 @@ public class JWTUtil {
 			log.debug("【 JWTUtil 】token 过期：{}", token);
 		}
 
-		return new DefaultClaims();
+		return new TokenInfoPOJO();
 	}
 
 	/**

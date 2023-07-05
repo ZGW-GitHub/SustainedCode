@@ -20,15 +20,15 @@ package com.code.infra.user.mvc.controller;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.json.JSONObject;
+import com.code.framework.basic.util.BeanUtil;
 import com.code.framework.basic.util.PasswordUtil;
 import com.code.infra.user.mvc.controller.domain.RegisterReq;
 import com.code.infra.user.mvc.controller.domain.RegisterResp;
 import com.code.infra.user.mvc.dal.domain.dos.UserInfoDO;
 import com.code.infra.user.mvc.dal.mapper.UserInfoMapper;
 import com.code.infra.user.mvc.service.UserInfoService;
-import com.code.infra.user.mvc.service.domain.UserAuthDTO;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailBO;
-import com.code.infra.user.mvc.service.domain.UserInfoDetailDTO;
+import com.code.infra.user.mvc.service.domain.*;
+import com.code.infra.user.pojo.TokenInfoPOJO;
 import com.code.infra.user.util.JWTUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -75,10 +75,13 @@ public class UserLifecycleController {
 				.setPassword(PasswordUtil.encode(registerReq.getPassword(), salt));
 		sysUserMapper.insert(userInfoDO);
 
+		TokenInfoDTO tokenInfoDTO = userInfoService.findTokenInfo(new TokenInfoBO().setAccount(registerReq.getAccount()));
+		TokenInfoPOJO tokenInfoPOJO = BeanUtil.map(tokenInfoDTO, TokenInfoPOJO::new);
+
 		return new RegisterResp()
 				.setAccount(registerReq.getAccount())
-				.setToken(JWTUtil.generateToken(userInfoDO.getAccount()))
-				.setRefreshToken(JWTUtil.generateRefreshToken(userInfoDO.getAccount()));
+				.setToken(JWTUtil.generateToken(tokenInfoPOJO))
+				.setRefreshToken(JWTUtil.generateRefreshToken(tokenInfoPOJO));
 	}
 
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
@@ -89,13 +92,16 @@ public class UserLifecycleController {
 	@ResponseBody
 	@RequestMapping("loginSuccess")
 	public String login() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (!(principal instanceof UserAuthDTO userAuthDTO)) {
+		Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+		if (!(details instanceof AuthInfoDTO authInfoDTO)) {
 			throw new RuntimeException("认证中的用户信息类型不正确");
 		}
 
-		String token = JWTUtil.generateToken(userAuthDTO.getAccount());
-		String refreshToken = JWTUtil.generateRefreshToken(userAuthDTO.getAccount());
+		TokenInfoDTO tokenInfoDTO = userInfoService.findTokenInfo(new TokenInfoBO().setAccount(authInfoDTO.getAccount()));
+		TokenInfoPOJO tokenInfoPOJO = BeanUtil.map(tokenInfoDTO, TokenInfoPOJO::new);
+
+		String token = JWTUtil.generateToken(tokenInfoPOJO);
+		String refreshToken = JWTUtil.generateRefreshToken(tokenInfoPOJO);
 
 		JSONObject result = new JSONObject();
 		result.set("token", token);

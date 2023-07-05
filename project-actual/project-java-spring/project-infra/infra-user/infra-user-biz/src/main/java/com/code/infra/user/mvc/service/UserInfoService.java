@@ -34,13 +34,22 @@ public interface UserInfoService {
 	UserInfoDetailDTO findUserInfo(UserInfoDetailBO userInfoDetailBO);
 
 	/**
-	 * 查询认证所需信息
+	 * 查询认证时所需的信息
 	 *
-	 * @param userAuthBO 查询入参
+	 * @param authInfoBO 查询入参
 	 *
-	 * @return {@link UserAuthDTO}
+	 * @return {@link AuthInfoDTO}
 	 */
-	UserAuthDTO findAuthInfo(UserAuthBO userAuthBO);
+	AuthInfoDTO findAuthInfo(AuthInfoBO authInfoBO);
+
+	/**
+	 * 查询当前用户信息
+	 *
+	 * @param currentUserInfoBO 查询入参
+	 *
+	 * @return {@link CurrentUserInfoDTO}
+	 */
+	CurrentUserInfoDTO findCurrentUserInfo(CurrentUserInfoBO currentUserInfoBO);
 
 	/**
 	 * 查询需要存储到 token 的信息

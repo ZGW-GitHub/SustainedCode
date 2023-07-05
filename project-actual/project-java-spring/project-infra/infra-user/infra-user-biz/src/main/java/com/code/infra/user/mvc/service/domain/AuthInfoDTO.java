@@ -35,7 +35,7 @@ import java.util.List;
 @Slf4j
 @Data
 @Accessors(chain = true)
-public class UserAuthDTO implements UserDetails, Serializable {
+public class AuthInfoDTO implements UserDetails, Serializable {
 
 	/**
 	 * 用户账号

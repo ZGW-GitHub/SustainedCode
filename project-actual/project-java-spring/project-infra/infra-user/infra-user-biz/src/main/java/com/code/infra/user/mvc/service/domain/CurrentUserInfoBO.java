@@ -15,25 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.infra.user.pojo;
+package com.code.infra.user.mvc.service.domain;
 
-import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Snow
- * @date 2023/7/3 20:36
+ * @date 2023/7/3 20:57
  */
 @Slf4j
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
-public class TokenInfoPOJO extends DefaultClaims {
-
-	private Boolean refreshToken;
+public class CurrentUserInfoBO {
 
 	private String account;
 
