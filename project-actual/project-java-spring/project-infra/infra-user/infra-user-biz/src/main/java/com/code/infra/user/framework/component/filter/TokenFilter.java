@@ -22,6 +22,7 @@ import com.code.infra.user.framework.config.SecurityConfig;
 import com.code.infra.user.mvc.service.UserInfoService;
 import com.code.infra.user.mvc.service.domain.CurrentUserInfoBO;
 import com.code.infra.user.mvc.service.domain.CurrentUserInfoDTO;
+import com.code.infra.user.pojo.TokenInfoPOJO;
 import com.code.infra.user.util.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -75,13 +76,14 @@ public class TokenFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		if (!JWTUtil.isTokenValid(token, false)) {
+		TokenInfoPOJO tokenInfoPOJO = JWTUtil.extractToken(token);
+		if (!tokenInfoPOJO.isValid()) {
 			log.debug("【 TokenFilter 】token 非法");
 			writeResponse(request, response);
 			return;
 		}
 
-		String account = JWTUtil.extractSubject(token);
+		String account = tokenInfoPOJO.subject();
 
 		// SecurityContextHolder 中的 Authentication 为空时，才进行处理
 		if (SecurityContextHolder.getContext().getAuthentication() == null) {

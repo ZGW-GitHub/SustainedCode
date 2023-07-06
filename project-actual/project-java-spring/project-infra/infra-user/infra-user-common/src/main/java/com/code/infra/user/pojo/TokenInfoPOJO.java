@@ -17,9 +17,10 @@
 
 package com.code.infra.user.pojo;
 
-import io.jsonwebtoken.impl.DefaultClaims;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import io.jsonwebtoken.Claims;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,11 +31,36 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
-public class TokenInfoPOJO extends DefaultClaims {
+public class TokenInfoPOJO {
+
+	private JSONObject payloadJson;
 
 	private Boolean refreshToken;
 
-	private String account;
+	public String subject() {
+		return payloadJson.getStr(Claims.SUBJECT, StrUtil.EMPTY);
+	}
+
+	/**
+	 * 验证 Token 是否有效
+	 *
+	 * @return boolean
+	 */
+	public boolean isValid() {
+		// TODO 检查 token 在 redis 中是否存在
+		if (refreshToken) {
+			return false;
+		}
+
+		return StrUtil.isNotBlank(subject()) && !isExpired();
+	}
+
+	/**
+	 * 判断 Token 是否过期
+	 */
+	private boolean isExpired() {
+		long expiration = payloadJson.getLong(Claims.EXPIRATION, Long.MIN_VALUE);
+		return System.currentTimeMillis() > expiration;
+	}
 
 }

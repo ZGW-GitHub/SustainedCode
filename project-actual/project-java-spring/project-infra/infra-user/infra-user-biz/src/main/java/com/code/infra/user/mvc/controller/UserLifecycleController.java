@@ -80,8 +80,8 @@ public class UserLifecycleController {
 
 		return new RegisterResp()
 				.setAccount(registerReq.getAccount())
-				.setToken(JWTUtil.generateToken(tokenInfoPOJO))
-				.setRefreshToken(JWTUtil.generateRefreshToken(tokenInfoPOJO));
+				.setToken(JWTUtil.generateToken(tokenInfoPOJO, registerReq.getAccount()))
+				.setRefreshToken(JWTUtil.generateRefreshToken(tokenInfoPOJO, registerReq.getAccount()));
 	}
 
 	@GetMapping(path = "login", produces = MediaType.TEXT_HTML_VALUE)
@@ -100,8 +100,8 @@ public class UserLifecycleController {
 		TokenInfoDTO tokenInfoDTO = userInfoService.findTokenInfo(new TokenInfoBO().setAccount(authInfoDTO.getAccount()));
 		TokenInfoPOJO tokenInfoPOJO = BeanUtil.map(tokenInfoDTO, TokenInfoPOJO::new);
 
-		String token = JWTUtil.generateToken(tokenInfoPOJO);
-		String refreshToken = JWTUtil.generateRefreshToken(tokenInfoPOJO);
+		String token = JWTUtil.generateToken(tokenInfoPOJO, authInfoDTO.getAccount());
+		String refreshToken = JWTUtil.generateRefreshToken(tokenInfoPOJO, authInfoDTO.getAccount());
 
 		JSONObject result = new JSONObject();
 		result.set("token", token);
