@@ -14,6 +14,7 @@ spring:
       - classpath:application-datasource.yml
       - classpath:application-datasource-druid.yml
       - classpath:application-mybatis.yml
+      - classpath:application-redis.yml
       - classpath:application-dubbo.yml
       - classpath:application-log.yml
       - classpath:application-management.yml
