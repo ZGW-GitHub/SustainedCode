@@ -17,6 +17,7 @@
 
 package com.code.infra.user.pojo;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import io.jsonwebtoken.Claims;
@@ -60,7 +61,7 @@ public class TokenInfoPOJO {
 	 */
 	private boolean isExpired() {
 		long expiration = payloadJson.getLong(Claims.EXPIRATION, Long.MIN_VALUE);
-		return System.currentTimeMillis() > expiration;
+		return DateUtil.currentSeconds() > expiration;
 	}
 
 }
