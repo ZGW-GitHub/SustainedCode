@@ -1,0 +1,11 @@
+server:
+  port: 65001
+spring:
+  application:
+    name: oauth_mode_code_client
+  config:
+    import:
+      - classpath:application-datasource.yml
+      - classpath:application-mybatis-plus.yml
+      - classpath:application-s-oauth.yml
+      - classpath:application-log.yml
