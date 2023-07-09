@@ -43,14 +43,6 @@ public class DemoController {
 	@Resource
 	private OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
 
-	/**
-	 * 防止 404
-	 */
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
-
 	@GetMapping("currentUser")
 	public String oidcIdToken() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

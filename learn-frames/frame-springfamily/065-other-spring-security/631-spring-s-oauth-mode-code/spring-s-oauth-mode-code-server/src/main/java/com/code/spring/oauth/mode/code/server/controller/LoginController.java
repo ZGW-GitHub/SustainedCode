@@ -36,8 +36,13 @@ public class LoginController {
 		return "login";
 	}
 
+	@GetMapping("/")
+	public String root() {
+		return "index";
+	}
+
 	@GetMapping("index")
-	public String loginSuccess() {
+	public String index() {
 		return "index";
 	}
 

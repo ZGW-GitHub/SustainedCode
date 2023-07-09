@@ -27,10 +27,18 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Slf4j
 @Controller
-public class LoginController {
+public class LifecycleController {
 
-	@GetMapping(path = "index")
-	public String loginSuccessPage() {
+	/**
+	 * 防止 404
+	 */
+	@GetMapping("/")
+	public String root() {
+		return "index";
+	}
+
+	@GetMapping("index")
+	public String index() {
 		return "index";
 	}
 
