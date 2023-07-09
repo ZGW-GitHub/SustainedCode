@@ -5,6 +5,6 @@ spring:
     name: oauth_mode_code_resource
   config:
     import:
-      - classpath:application-jwt.yml
-      - classpath:application-oauth.yml
+      - classpath:application-s-jwt.yml
+      - classpath:application-s-oauth.yml
       - classpath:application-log.yml
