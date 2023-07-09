@@ -25,10 +25,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2023/6/2 09:31
  */
 @SpringBootApplication
-public class SpringOAuthModeCodeClient {
+public class SpringOAuthModeCodeClientResource {
 	public static void main(String[] args) {
 
-		new SpringApplicationBuilder(SpringOAuthModeCodeClient.class).run(args);
+		new SpringApplicationBuilder(SpringOAuthModeCodeClientResource.class).run(args);
 
 	}
 }

@@ -15,34 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.oauth.mode.code.client.configuration;
+package com.code.spring.oauth.mode.code.client.config;
 
-import jakarta.annotation.Resource;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * @author Snow
- * @date 2023/6/4 12:18
+ * @date 2023/6/4 15:56
  */
 @Slf4j
-@Configuration
-public class OAuthConfiguration {
+@Data
+@Configuration(proxyBeanMethods = false)
+public class OAuthConfig {
 
-	@Resource
-	private JwtDecoder customJwtDecoder;
-
-	public void configByHttpSecurity(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.oauth2ResourceServer(configurer -> configurer
-						.jwt(jwtConfigurer -> jwtConfigurer
-								.decoder(customJwtDecoder)))
-				.oauth2Login(configurer -> configurer
-						.loginPage("/oauth2/authorization/first-registration"))
-				.oauth2Client(withDefaults());
-	}
+	/**
+	 * 授权服务器地址
+	 */
+	@Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+	private String issuer;
 
 }

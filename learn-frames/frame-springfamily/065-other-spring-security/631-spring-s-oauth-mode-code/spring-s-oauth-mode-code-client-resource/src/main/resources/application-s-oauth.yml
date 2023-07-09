@@ -17,3 +17,6 @@ spring:
           # 服务提供地址
           demo-provider:
             issuer-uri: http://notuptoyou.com:65000
+      resourceserver:
+        jwt:
+          issuer-uri: http://notuptoyou.com:65000

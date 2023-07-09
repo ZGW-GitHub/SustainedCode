@@ -72,8 +72,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
 						.requestMatchers("/one/aaa").hasAnyAuthority("SCOPE_read", "SCOPE_all")
 						.requestMatchers("/one/bbb").hasAnyAuthority("SCOPE_write", "SCOPE_all")
-						.anyRequest()
-						.authenticated())
+						.anyRequest().authenticated())
 				.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
 						.accessDeniedHandler(customAccessDeniedHandler)
 						.authenticationEntryPoint(customAuthenticationEntryPoint))

@@ -51,11 +51,13 @@ public class OAuthConfiguration {
 	private JwtDecoder customJwtDecoder;
 
 	public void configForHttpSecurity(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.oauth2ResourceServer(configurer -> configurer
-				.jwt(jwtConfigurer -> jwtConfigurer
-						.decoder(customJwtDecoder))
-				.accessDeniedHandler(customAccessDeniedHandler)
-				.authenticationEntryPoint(customAuthenticationEntryPoint)
+		httpSecurity.oauth2ResourceServer(configurer -> {
+					configurer
+							.jwt(jwtConfigurer -> jwtConfigurer
+									.decoder(customJwtDecoder))
+							.accessDeniedHandler(customAccessDeniedHandler)
+							.authenticationEntryPoint(customAuthenticationEntryPoint);
+				}
 		);
 	}
 
