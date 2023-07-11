@@ -47,6 +47,8 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 	public static final String  SPRING_SECURITY_CONTEXT_KEY = "security:context:%s";
 	public static final Integer DEFAULT_TIMEOUT_SECONDS     = 5 * 60 * 1000;
 
+	private final String defaultNonce = "666";
+
 	@Resource
 	private RedissonClient redissonClient;
 
@@ -66,7 +68,9 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 
 		String nonce = request.getHeader(SPRING_SECURITY_AUTH_HEADER);
 		if (ObjectUtils.isEmpty(nonce)) {
-			return;
+			// TODO
+			nonce = defaultNonce;
+			// return;
 		}
 
 		// 如果当前的 context 是空的，则移除
@@ -86,10 +90,9 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 
 		String nonce = request.getHeader(SPRING_SECURITY_AUTH_HEADER);
 		if (ObjectUtils.isEmpty(nonce)) {
-			nonce = request.getParameter(SPRING_SECURITY_AUTH_HEADER);
-			if (ObjectUtils.isEmpty(nonce)) {
-				return false;
-			}
+			// TODO
+			nonce = defaultNonce;
+			// return false;
 		}
 
 		// 检验当前请求是否有认证信息
@@ -109,7 +112,9 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 
 		String nonce = request.getHeader(SPRING_SECURITY_AUTH_HEADER);
 		if (ObjectUtils.isEmpty(nonce)) {
-			return null;
+			// TODO
+			nonce = defaultNonce;
+			// return null;
 		}
 
 		// 根据缓存 id 获取认证信息
