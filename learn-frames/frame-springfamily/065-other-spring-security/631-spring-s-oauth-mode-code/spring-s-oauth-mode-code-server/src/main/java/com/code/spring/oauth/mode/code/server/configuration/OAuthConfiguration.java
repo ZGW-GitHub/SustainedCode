@@ -18,6 +18,7 @@
 package com.code.spring.oauth.mode.code.server.configuration;
 
 import cn.hutool.core.util.IdUtil;
+import com.code.spring.oauth.mode.code.common.component.RedisSecurityContextRepository;
 import com.code.spring.oauth.mode.code.server.config.OAuthConfig;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import jakarta.annotation.Resource;
@@ -30,6 +31,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationConsentService;
@@ -68,6 +70,9 @@ public class OAuthConfiguration {
 	@Resource
 	private JWKSource jwkSource;
 
+	@Resource
+	private RedisSecurityContextRepository redisSecurityContextRepository;
+
 	/**
 	 * 授权配置
 	 */
@@ -81,9 +86,11 @@ public class OAuthConfiguration {
 		httpSecurity.securityMatcher(endpointsMatcher)
 				.authorizeHttpRequests(configurer -> configurer
 						.anyRequest().authenticated())
+				.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.securityContext(configurer -> configurer
+						.securityContextRepository(redisSecurityContextRepository))
 				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
 				.cors(withDefaults())
-				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.apply(oAuth2AuthorizationServerConfigurer);
 
 		// 异常处理

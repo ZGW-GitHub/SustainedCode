@@ -1,0 +1,9 @@
+# Redisson 配置：https://github.com/redisson/redisson/tree/master/redisson-spring-boot-starter#readme
+spring:
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
+      password: ${redis.password}
+      timeout: 10000
+      database: 0

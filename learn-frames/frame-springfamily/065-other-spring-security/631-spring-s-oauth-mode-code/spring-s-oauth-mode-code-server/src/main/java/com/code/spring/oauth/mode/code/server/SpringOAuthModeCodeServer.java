@@ -24,7 +24,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @author Snow
  * @date 2023/6/2 09:32
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.code.spring.oauth.mode.code")
 public class SpringOAuthModeCodeServer {
 	public static void main(String[] args) {
 

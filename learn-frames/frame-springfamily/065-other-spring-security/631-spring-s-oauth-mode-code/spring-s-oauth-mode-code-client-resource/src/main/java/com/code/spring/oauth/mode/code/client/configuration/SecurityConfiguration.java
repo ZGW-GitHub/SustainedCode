@@ -17,11 +17,13 @@
 
 package com.code.spring.oauth.mode.code.client.configuration;
 
+import com.code.spring.oauth.mode.code.common.component.RedisSecurityContextRepository;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -37,6 +39,9 @@ public class SecurityConfiguration {
 	@Resource
 	private OAuthConfiguration oAuthConfiguration;
 
+	@Resource
+	private RedisSecurityContextRepository redisSecurityContextRepository;
+
 	@Bean
 	SecurityFilterChain oAuthSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		// AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
@@ -48,7 +53,9 @@ public class SecurityConfiguration {
 						.requestMatchers("/one/aaa").hasAnyAuthority("SCOPE_read", "SCOPE_all")
 						.requestMatchers("/one/bbb").hasAnyAuthority("SCOPE_write", "SCOPE_all")
 						.anyRequest().authenticated())
-				// .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.securityContext(configurer -> configurer
+						.securityContextRepository(redisSecurityContextRepository))
 				.cors(withDefaults())
 				.csrf(withDefaults())
 				.logout(withDefaults());

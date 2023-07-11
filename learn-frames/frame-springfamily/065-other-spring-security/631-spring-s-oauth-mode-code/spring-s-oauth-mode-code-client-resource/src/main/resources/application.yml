@@ -7,6 +7,7 @@ spring:
     import:
       - classpath:application-datasource.yml
       - classpath:application-mybatis.yml
+      - classpath:application-redis.yml
       - classpath:application-s-jwt.yml
       - classpath:application-s-oauth.yml
       - classpath:application-log.yml

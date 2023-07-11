@@ -32,6 +32,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>spring-s-oauth-mode-code-common</module>
 		<module>spring-s-oauth-mode-code-server</module>
 		<module>spring-s-oauth-mode-code-client</module>
 		<module>spring-s-oauth-mode-code-resource</module>
@@ -41,6 +42,17 @@
 	<properties>
 		<spring-boot.version>3.1.0</spring-boot.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
+		<redisson-starter.version>3.22.1</redisson-starter.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson-spring-boot-starter</artifactId>
+				<version>${redisson-starter.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>
