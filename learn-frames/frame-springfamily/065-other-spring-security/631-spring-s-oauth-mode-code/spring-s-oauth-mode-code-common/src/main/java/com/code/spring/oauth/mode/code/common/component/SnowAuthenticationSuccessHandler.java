@@ -22,25 +22,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
  * @author Snow
- * @date 2023/7/11 13:58
+ * @date 2023/7/11 13:48
  */
 @Slf4j
-public class LoginFailureHandler implements AuthenticationFailureHandler {
+public class SnowAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-		// 登录失败，写回401与具体的异常
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 		JSONObject result = new JSONObject();
-		result.set("code", 401);
-		result.set("data", "Fail");
+		result.set("code", 200);
+		result.set("data", "SUCCESS");
 
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
