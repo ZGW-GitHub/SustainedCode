@@ -31,6 +31,12 @@ export default defineConfig({
                 target: 'http://127.0.0.1:65001',
                 changeOrigin: true,
                 // rewrite: path => path.replace(/^\/gateway/,'')
+            },
+            '/auth': {
+                // 后端服务地址
+                target: 'http://127.0.0.1:65001',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/auth/, '')
             }
         }
     },

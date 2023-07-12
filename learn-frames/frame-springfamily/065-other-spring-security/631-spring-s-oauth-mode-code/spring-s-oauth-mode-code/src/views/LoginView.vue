@@ -47,6 +47,7 @@
 import {reactive, ref} from 'vue'
 import type {FormInstance, FormRules} from 'element-plus'
 import {templateSave, templateTest} from '@/request/api'
+import {login} from "@/request/auth";
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -78,7 +79,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
-      console.log('submit!')
+      login({
+        username: ruleForm.account,
+        password: ruleForm.password
+      });
     } else {
       console.log('error submit!')
       return false

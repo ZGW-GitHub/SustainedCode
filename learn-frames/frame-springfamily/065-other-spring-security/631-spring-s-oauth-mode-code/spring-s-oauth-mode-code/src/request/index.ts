@@ -55,7 +55,8 @@ const auth = axios.create({
 	baseURL: baseURL,
 	timeout: 5000,
 	headers: {
-		"Content-type": "application/json;charset=utf-8"
+		"Content-type": "application/json;charset=utf-8",
+		"nonce": "666"
 	}
 })
 

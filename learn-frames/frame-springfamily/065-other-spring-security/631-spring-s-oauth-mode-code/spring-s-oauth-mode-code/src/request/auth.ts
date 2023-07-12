@@ -20,7 +20,7 @@ import {auth} from "@/request/index";
 // 登录接口
 export function login() {
     return auth({
-        url: "/gateway/login",
+        url: "/auth/login",
         method: "POST",
     })
 }
