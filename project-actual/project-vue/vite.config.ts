@@ -28,7 +28,7 @@ export default defineConfig({
         proxy: {
             '/gateway': {
                 // 后端服务地址
-                target: 'http://127.0.0.1:65001',
+                target: 'http://127.0.0.1:65301',
                 changeOrigin: true,
                 // rewrite: path => path.replace(/^\/gateway/,'')
             }
