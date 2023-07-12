@@ -1,0 +1,11 @@
+spring:
+  oauth:
+    custom:
+      server:
+        issuer: http://notuptoyou.com:65000
+        default-registration-client:
+          client-id: demo-client
+          client-secret: 123456
+          client-name: Demo客户端
+          scopes: openid,read,write
+          redirect-uris: http://127.0.0.1:65001/login/oauth2/code/first-registration,http://127.0.0.1:65001/authorized

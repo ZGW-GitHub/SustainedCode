@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: ${mysql.url}/frame_spring_security?${mysql.url.params}
+    username: ${mysql.username}
+    password: ${mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
