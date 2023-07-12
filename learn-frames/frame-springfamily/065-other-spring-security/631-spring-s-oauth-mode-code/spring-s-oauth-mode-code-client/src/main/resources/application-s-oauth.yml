@@ -16,4 +16,4 @@ spring:
         provider:
           # 服务提供地址
           demo-provider:
-            issuer-uri: http://notuptoyou.com:65000
+            issuer-uri: http://notuptoyou.com:65001
