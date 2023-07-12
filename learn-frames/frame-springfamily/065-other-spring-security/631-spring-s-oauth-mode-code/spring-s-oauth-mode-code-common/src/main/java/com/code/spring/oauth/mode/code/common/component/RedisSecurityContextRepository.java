@@ -17,7 +17,6 @@
 
 package com.code.spring.oauth.mode.code.common.component;
 
-import cn.hutool.core.util.StrUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisSecurityContextRepository implements SecurityContextRepository {
 
 	public static final String  SPRING_SECURITY_AUTH_HEADER = "nonce";
-	public static final String  SPRING_SECURITY_CONTEXT_KEY = "security:context:{}";
+	public static final String  SPRING_SECURITY_CONTEXT_KEY = "security:context:%s";
 	public static final Integer DEFAULT_TIMEOUT_SECONDS     = 5 * 60 * 1000;
 
 	private final String defaultNonce = "666";
@@ -127,7 +126,7 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 	}
 
 	private String getSpringSecurityContextKey(String nonce) {
-		return StrUtil.format(SPRING_SECURITY_CONTEXT_KEY, nonce);
+		return SPRING_SECURITY_CONTEXT_KEY.formatted(nonce);
 	}
 
 }
