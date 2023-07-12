@@ -1,5 +1,5 @@
 server:
-  port: 65000
+  port: 65001
 spring:
   application:
     name: oauth_mode_code_server
