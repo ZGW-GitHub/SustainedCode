@@ -1,0 +1,9 @@
+### 登录
+POST http://notuptoyou.com:65001/login
+Content-Type: application/x-www-form-urlencoded
+
+username = snow &
+password = 666666 &
+nonce = 666
+
+### 总结：Server、Client 用 Session 访问，Resource 用 accessToken 访问

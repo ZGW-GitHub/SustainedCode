@@ -17,6 +17,7 @@
 
 package com.code.spring.oauth.mode.code.server.configuration;
 
+import com.code.spring.oauth.mode.code.server.component.RedisSecurityContextRepository;
 import com.code.spring.oauth.mode.code.server.config.SecurityConfig;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -46,14 +48,20 @@ public class SecurityConfiguration {
 	@Resource
 	private SecurityConfig securityConfig;
 
+	@Resource
+	private RedisSecurityContextRepository securityContextRepository;
+
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher("/**")
 				.authorizeHttpRequests(configurer -> configurer
 						.requestMatchers("/test", "/currentUser", "/currentSession").authenticated()
 						.anyRequest().permitAll())
-				.csrf(withDefaults())
+				.csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/login")))
 				.cors(withDefaults())
+				.securityContext(configurer -> configurer
+						.securityContextRepository(securityContextRepository))
+				// .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.formLogin(configurer -> configurer
 						.loginPage("/login")
 						// .failureHandler((request, response, exception) -> {

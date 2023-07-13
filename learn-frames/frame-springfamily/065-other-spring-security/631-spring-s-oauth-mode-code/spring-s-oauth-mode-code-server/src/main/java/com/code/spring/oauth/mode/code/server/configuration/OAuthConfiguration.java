@@ -45,6 +45,7 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.time.Duration;
@@ -83,10 +84,11 @@ public class OAuthConfiguration {
 		httpSecurity.securityMatcher(endpointsMatcher)
 				.authorizeHttpRequests(configurer -> configurer
 						.anyRequest().authenticated())
-				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher, new AntPathRequestMatcher("/login")))
 				.cors(withDefaults())
 				.securityContext(configurer -> configurer
 						.securityContextRepository(securityContextRepository))
+				// .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.exceptionHandling(configurer -> configurer
 						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
 				.apply(oAuth2AuthorizationServerConfigurer);

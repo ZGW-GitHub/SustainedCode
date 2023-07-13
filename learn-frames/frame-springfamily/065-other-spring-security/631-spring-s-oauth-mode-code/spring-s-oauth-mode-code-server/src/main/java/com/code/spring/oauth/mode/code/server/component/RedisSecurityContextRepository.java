@@ -20,6 +20,7 @@ package com.code.spring.oauth.mode.code.server.component;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
@@ -32,6 +33,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,7 +46,7 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 
 	public static final String  SPRING_SECURITY_AUTH_HEADER = "nonce";
 	public static final String  SPRING_SECURITY_CONTEXT_KEY = "security:context:%s";
-	public static final Integer DEFAULT_TIMEOUT_SECONDS     = 5 * 60 * 1000;
+	public static final Integer DEFAULT_TIMEOUT_SECONDS     = 30 * 60 * 1000;
 
 	private final String defaultNonce = "666";
 
@@ -56,14 +58,14 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 	@Override
 	@SuppressWarnings("all")
 	public SecurityContext loadContext(HttpRequestResponseHolder requestResponseHolder) {
-		log.debug("【 SecurityContextRepository 】获取 context");
+		log.debug("【 SecurityContextRepository 】获取 context, sessionId: {}", getSessionId(requestResponseHolder.getRequest()));
 
 		return readSecurityContextFromRedis(requestResponseHolder.getRequest());
 	}
 
 	@Override
 	public void saveContext(SecurityContext context, HttpServletRequest request, HttpServletResponse response) {
-		log.debug("【 SecurityContextRepository 】保存 context");
+		log.debug("【 SecurityContextRepository 】保存 context, sessionId: {}", getSessionId(request));
 
 		String nonce = request.getHeader(SPRING_SECURITY_AUTH_HEADER);
 		if (ObjectUtils.isEmpty(nonce)) {
@@ -85,7 +87,7 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 
 	@Override
 	public boolean containsContext(HttpServletRequest request) {
-		log.debug("【 SecurityContextRepository 】是否存在 context");
+		log.debug("【 SecurityContextRepository 】是否存在 context, sessionId: {}", getSessionId(request));
 
 		String nonce = request.getHeader(SPRING_SECURITY_AUTH_HEADER);
 		if (ObjectUtils.isEmpty(nonce)) {
@@ -127,6 +129,10 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
 
 	private String getSpringSecurityContextKey(String nonce) {
 		return SPRING_SECURITY_CONTEXT_KEY.formatted(nonce);
+	}
+
+	private String getSessionId(HttpServletRequest request) {
+		return Optional.ofNullable(request.getSession(false)).map(HttpSession::getId).orElse("null");
 	}
 
 }

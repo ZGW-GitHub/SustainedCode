@@ -99,8 +99,9 @@
     <h1>Login</h1>
     <form id="loginForm" method="post" th:action="@{/login}">
         <label>
-            <input id="username" type="text" required="required" placeholder="用户名" name="username"/>
-            <input id="password" type="password" required="required" placeholder="密码" name="password"/>
+            <input id="username" name="username" type="text" required="required" placeholder="用户名"/>
+            <input id="password" name="password" type="password" required="required" placeholder="密码"/>
+            <input id="nonce" name="nonce" type="hidden" value="666">
         </label>
         <button class="but" type="submit">登录</button>
     </form>
