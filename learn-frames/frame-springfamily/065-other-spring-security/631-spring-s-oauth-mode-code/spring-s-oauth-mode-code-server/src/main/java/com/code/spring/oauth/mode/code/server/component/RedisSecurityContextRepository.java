@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.code.spring.oauth.mode.code.common.component;
+package com.code.spring.oauth.mode.code.server.component;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

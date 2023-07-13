@@ -18,6 +18,7 @@
 package com.code.spring.oauth.mode.code.server.configuration;
 
 import cn.hutool.core.util.IdUtil;
+import com.code.spring.oauth.mode.code.server.component.RedisSecurityContextRepository;
 import com.code.spring.oauth.mode.code.server.config.OAuthConfig;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import jakarta.annotation.Resource;
@@ -66,6 +67,9 @@ public class OAuthConfiguration {
 	@Resource
 	private JWKSource jwkSource;
 
+	@Resource
+	private RedisSecurityContextRepository securityContextRepository;
+
 	/**
 	 * 授权配置
 	 */
@@ -81,6 +85,8 @@ public class OAuthConfiguration {
 						.anyRequest().authenticated())
 				.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
 				.cors(withDefaults())
+				.securityContext(configurer -> configurer
+						.securityContextRepository(securityContextRepository))
 				.exceptionHandling(configurer -> configurer
 						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
 				.apply(oAuth2AuthorizationServerConfigurer);
